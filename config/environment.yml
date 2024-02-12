@@ -1,0 +1,21 @@
+server:
+  hostname: ${ hostname }
+  port: 1234
+
+globs:
+  base: '../'
+
+  clean:
+    - ../tmp/**/*
+
+  scripts:
+    input: ../scripts/*.{coffee,js,cjs,mjs}
+    output: ../tmp/public/js
+
+  styles:
+    input: ../styles/*.{css,styl}
+    output: ../tmp/public/css
+
+  templates:
+    input: ../templates/**/*.{html,slim}
+    output: ../tmp/public
