@@ -1,6 +1,6 @@
 import { $ } from "zx"
 import PluginError from "plugin-error"
-import TaskPipe from "../utils/task-pipe.coffee"
+import TaskPipe from "./task.coffee"
 
 class SlimPipe extends TaskPipe
   @newInstance: (options = {}) =>
