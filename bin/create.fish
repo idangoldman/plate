@@ -1,5 +1,14 @@
 #!/usr/bin/fish
 
+# function setup_project_structure --description 'Create a basic project structure'
+#     create_directories
+#     create_files
+#     copy_template_files
+#     setup_node
+#     setup_ruby
+#     initial_commit
+# end
+
 function setup_project_structure --description 'Create a basic project structure'
     # Create directories
     mkdir -p assets config scripts styles tasks templates tmp utils
