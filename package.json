@@ -1,0 +1,23 @@
+{
+  "name": "blah-plate",
+  "description": "A simple boilerplate for web development",
+  "author": "Idan Goldman",
+  "license": "MIT",
+  "version": "0.0.1",
+  "bin": "bin/cmd.fish",
+  "keywords": [
+    "boilerplate",
+    "coffeescript",
+    "css",
+    "development",
+    "gulp",
+    "html",
+    "javascript",
+    "nix",
+    "python",
+    "ruby",
+    "slim",
+    "stylus",
+    "web"
+  ],
+}

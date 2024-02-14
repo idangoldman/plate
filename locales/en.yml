@@ -1,0 +1,32 @@
+en:
+  meta:
+    author:
+    background_color: "#fff"
+    description:
+    language: en
+    publisher:
+    publisher_initials:
+    robots: index, follow
+    theme_color: "#000"
+    url: https://...
+    version: 0.0.1
+
+  social:
+    - name: GitHub
+      link: https://github.com/
+
+    - name: LinkedIn
+      link: https://linkedin.com/in/
+
+  frontmatter_properties:
+    - author
+    - date
+    - description
+    - language
+    - permalink
+    - published
+    - robots
+    - summary
+    - tags
+    - title
+    - version

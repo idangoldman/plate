@@ -2,7 +2,7 @@
 require "slim"
 require "json"
 require "slim/translate"
-require_relative "slim_helpers"
+require_relative "slim-helpers"
 
 begin
   locals = ARGV[0] ? JSON.parse(ARGV[0]) : {}

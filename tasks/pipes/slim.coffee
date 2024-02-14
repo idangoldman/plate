@@ -11,7 +11,7 @@ class SlimPipe extends TaskPipe
       locals = JSON.stringify options.locals || {}
       slimContents = contents
 
-      { stdout, stderr } = await $"echo #{slimContents} | ruby ../utils/slim-to-html.rb #{locals}".quiet()
+      { stdout, stderr } = await $"echo #{slimContents} | ruby ../utils/templates/slim.rb #{locals}".quiet()
 
       if stderr
         throw new Error stderr
