@@ -10,30 +10,28 @@ import yaml from "js-yaml";
 import PluginError from "plugin-error"
 import TaskPipe from "./task.coffee"
 
-class SplitMdIntoJsonAndHtmlPipe extends TaskPipe
+class ContentDataFromMD extends TaskPipe
   @newInstance: (options = {}) =>
-    new @ "split-md-into-json-and-html-pipe", options
+    new @ "content-data-from-md", options
 
   transpile: (filePath, contents, options = {}) ->
     try
       processedFile = remark()
-        .use(remarkFrontmatter)
-        .use(() => (tree, treeFile) => {
-          visit(tree, "yaml", (node, index, parent) => {
-            parent.children.splice(index, 1);
-            treeFile.frontmatter = yaml.load(node.value);
-          })
-        })
-        .use(remarkParse)
-        .use(remarkRehype)
-        .use(rehypeStringify)
-        .processSync(contents)
+        .use remarkFrontmatter
+        .use () => (tree, treeFile) =>
+          visit tree, "yaml", (node, index, parent) =>
+            parent.children.splice(index, 1)
+            treeFile.frontmatter = yaml.load(node.value)
+        .use remarkParse
+        .use remarkRehype
+        .use rehypeStringify
+        .processSync contents
 
       # file.data = processedFile.frontmatter;
       # filePath = filePath.replace(/\.md$/, ".html")
     catch error
-      throw new PluginError "slim-pipe", "Transpilation failed: #{error.message}", { showStack: true }
+      throw new PluginError "content-data-from-md", "Transpilation failed: #{error.message}", { showStack: true }
 
     return { filePath, contents }
 
-export default SplitMdIntoJsonAndHtmlPipe.newInstance
+export default ContentDataFromMD.newInstance

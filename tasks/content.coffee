@@ -1,8 +1,8 @@
 import { globs } from "../config/environment.yml"
 import gulp from "gulp"
-import splitMdIntoJsonAndHtml from "./pipes/split-md-into-json-and-html.coffee"
+import ContentDataFromMD from "./pipes/content-data-from-md.coffee"
 
 export default Content = () ->
   gulp.src globs.content.input
-    .pipe splitMdIntoJsonAndHtml()
+    .pipe ContentDataFromMD()
     .pipe gulp.dest globs.content.output
