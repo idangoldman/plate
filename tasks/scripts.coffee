@@ -1,6 +1,7 @@
-import { globs } from "../config/environment.yml"
 import coffee from "gulp-coffee"
 import gulp from "gulp"
+
+{ globs } = PLATE_ENV
 
 export default Scripts = () ->
   gulp.src globs.scripts.input

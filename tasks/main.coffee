@@ -1,17 +1,15 @@
-import { serve } from "./dev-server.coffee"
-import assets from "./assets.coffee"
-import clean from "./clean.coffee"
-import env from "../config/environment.yml"
+import { Serve } from "./dev-server.coffee"
+import Assets from "./assets.coffee"
+import Clean from "./clean.coffee"
 import gulp from "gulp"
-import scripts from "./scripts.coffee"
-import styles from "./styles.coffee"
-import templates from "./templates.coffee"
-import watch from "./watch.coffee"
+import Scripts from "./scripts.coffee"
+import Styles from "./styles.coffee"
+import Templates from "./templates.coffee"
+import Watch from "./watch.coffee"
 
-
-export build = gulp.series(clean, gulp.parallel(assets, styles, scripts, templates))
-export dev = gulp.series(build, gulp.parallel(serve, watch))
+export Build = gulp.series(Clean, gulp.parallel(Assets, Styles, Scripts, Templates))
+export Dev = gulp.series(build, gulp.parallel(Serve, Watch))
 
 export default (done) ->
-  console.log env
+  console.log PLATE_ENV
   done()

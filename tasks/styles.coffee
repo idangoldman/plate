@@ -1,6 +1,7 @@
-import { globs } from "../config/environment.yml"
 import gulp from "gulp"
 import stylus from "gulp-stylus"
+
+{ globs } = PLATE_ENV
 
 export default Styles = () ->
   gulp.src globs.styles.input

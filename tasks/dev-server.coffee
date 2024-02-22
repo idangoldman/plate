@@ -1,5 +1,6 @@
-import { globs, server } from "../config/environment.yml"
 import browserSync from "browser-sync"
+
+{ globs, server } = PLATE_ENV
 
 export Serve = (done) ->
   browserSync.init

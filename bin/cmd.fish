@@ -2,6 +2,7 @@
 
 node --trace-warnings \
   --import ./utils/loaders/register.mjs \
+  --import ./utils/global-plate-env.mjs \
   ./node_modules/gulp/bin/gulp \
-    --gulpfile ./config/gulpfile.mjs \
-    $argv
+  --gulpfile ./config/gulpfile.mjs \
+  $argv
