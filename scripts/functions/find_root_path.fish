@@ -1,10 +1,10 @@
 #!/usr/bin/fish
 
 function find_root_path --argument path
-    set -l parts (string split -m 1 'node_modules' -- $path)
+    set -l separator node_modules
 
-    if set -q parts[1]
-        echo $parts[1]
+    if string match --quiet --regex --ignore-case $separator $path
+        echo (string split -m 1 $separator -- $path)[1]
         return
     end
 
