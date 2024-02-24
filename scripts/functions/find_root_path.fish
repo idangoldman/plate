@@ -1,6 +1,6 @@
 #!/usr/bin/fish
 
-function find_project_root --argument path
+function find_root_path --argument path
     set -l parts (string split -m 1 'node_modules' -- $path)
 
     if set -q parts[1]
@@ -8,5 +8,5 @@ function find_project_root --argument path
         return
     end
 
-    find_package_root $path
+    find_package_path $path
 end

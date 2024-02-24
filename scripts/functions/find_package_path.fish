@@ -1,6 +1,6 @@
 #!/usr/bin/fish
 
-function find_package_root --argument path
+function find_package_path --argument path
     set -l current_path $path
 
     while test -n $current_path
