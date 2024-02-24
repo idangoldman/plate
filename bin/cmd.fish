@@ -1,16 +1,15 @@
 #!/usr/bin/env fish
 
-set -l plate_fish_functions ../utils/scripts/functions
+# Set up package fish shell environment
+source ../scripts/setup.fish
 
-if not contains $plate_fish_functions $fish_function_path
-    set -gx fish_function_path $plate_fish_functions $fish_function_path
-end
+# Run gulp
+set -l globals $PLATE_PACKAGE_ROOT/globals.mjs
+set -l gulpfile $PLATE_PACKAGE_ROOT/config/gulpfile.mjs
+set -l registry $PLATE_PACKAGE_ROOT/loaders/registry.mjs
 
-set_env_vars
-
-node --trace-warnings \
-    --import $PLATE_PACKAGE_ROOT/utils/loaders/register.mjs \
-    --import $PLATE_PACKAGE_ROOT/utils/global-plate-env.mjs \
-    $PLATE_PACKAGE_ROOT/node_modules/gulp/bin/gulp \
-    --gulpfile $PLATE_PACKAGE_ROOT/config/gulpfile.mjs \
-    $argv
+node --trace-warnings
+  --import   registry \
+  --import   globals  \
+  --gulpfile gulpfile \
+  $argv

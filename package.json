@@ -4,7 +4,7 @@
   "author": "Idan Goldman",
   "license": "MIT",
   "version": "0.0.1",
-  "bin": "bin/cmd.fish",
+  "bin": "./bin/cmd.fish",
   "keywords": [
     "boilerplate",
     "coffeescript",
@@ -25,7 +25,6 @@
     "pnpm": "8.15.3"
   },
   "dependencies": {
-    "@hotwired/turbo": "8.0.2",
     "browser-sync": "3.0.2",
     "coffeescript": "2.7.0",
     "del": "7.1.0",

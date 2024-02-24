@@ -5,9 +5,6 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
-  '@hotwired/turbo':
-    specifier: 8.0.2
-    version: 8.0.2
   browser-sync:
     specifier: 3.0.2
     version: 3.0.2
@@ -79,11 +76,6 @@ packages:
       tslib: 2.6.2
     dev: false
     optional: true
-
-  /@hotwired/turbo@8.0.2:
-    resolution: {integrity: sha512-3K6QZkwWfosAV8zuM5bY+kKF02jp1lMQGsWfSE6wXdZBRBP3ah+Vj26YNqYtkEomBwRWA0QKhZgyJP7xOQkVEg==}
-    engines: {node: '>= 14'}
-    dev: false
 
   /@img/sharp-darwin-arm64@0.33.2:
     resolution: {integrity: sha512-itHBs1rPmsmGF9p4qRe++CzCgd+kFYktnsoR1sbIAfsRMrJZau0Tt1AH9KVnufc2/tU02Gf6Ibujx+15qRE03w==}
