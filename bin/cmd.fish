@@ -11,4 +11,10 @@ set -l gulp_bin $PLATE_PKG/../gulp/bin/gulp.js
 set -l gulp_file $PLATE_PKG/config/gulpfile.mjs
 set -l registry $PLATE_PKG/loaders/registry.mjs
 
-node --trace-warnings --import $registry --import $globals $gulp_bin --gulpfile $gulp_file $argv
+node --trace-warnings \
+  --import $registry \
+  --import $globals \
+  $gulp_bin \
+  --cwd $PLATE_ROOT \
+  --gulpfile $gulp_file \
+  $argv
