@@ -1,8 +1,7 @@
-// Copy of https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze
-// Usage: import deepFreezeMerge from './utils/deep-freeze.mjs'
-
 import merge from "lodash/merge.js";
+import path from "node:path";
 
+// Copy of https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze
 export function deepFreeze(object) {
   const propNames = Reflect.ownKeys(object);
 
@@ -19,4 +18,17 @@ export function deepFreeze(object) {
 
 export function deepFreezeMerge(...objects) {
   return deepFreeze(merge({}, ...objects));
+}
+
+export async function importEnvironmentFile(...paths) {
+  const ABSOLUTE_PATH = path.join(...paths);
+  let environtmentFile = undefined;
+
+  try {
+    environtmentFile = (await import(ABSOLUTE_PATH)).default;
+  } catch (e) {
+    console.warn(`No environment file found at ${ABSOLUTE_PATH}`);
+  } finally {
+    return environtmentFile;
+  }
 }
