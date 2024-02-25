@@ -7,12 +7,12 @@ export async function load(url, context, nextLoad) {
   if (extensionsRegex.test(url)) {
     const rawSource = await readFile(new URL(url), "utf8");
     const data = yaml.load(rawSource.toString());
-    const jsonExport = JSON.stringify(data, null, 2);
+    const defaultExport = JSON.stringify(data, null, 2);
 
     return {
-      format: "json",
+      format: "module",
       shortCircuit: true,
-      source: jsonExport,
+      source: `export default ${defaultExport};`,
     };
   }
 
