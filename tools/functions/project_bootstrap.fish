@@ -1,6 +1,6 @@
 #!/usr/bin/fish
 
-function setup_project_structure --description 'Create a basic project structure'
+function project_bootstrap --description 'Create a basic project structure'
     # Create directories
     mkdir -p assets config scripts styles tasks templates tmp utils
 

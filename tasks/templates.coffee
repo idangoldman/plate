@@ -1,5 +1,5 @@
 import gulp from "gulp"
-import slim from "./pipes/slim.coffee"
+import slim from "~/tasks/pipes/slim.coffee"
 
 globs = PLATE_ENV.globs.templates
 

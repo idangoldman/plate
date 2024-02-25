@@ -1,8 +1,8 @@
-import { Reload } from "./dev-server.coffee"
+import { Reload } from "~/tasks/dev-server.coffee"
 import gulp from "gulp"
-import Scripts from "./scripts.coffee"
-import Styles from "./styles.coffee"
-import Templates from "./templates.coffee"
+import Scripts from "~/tasks/scripts.coffee"
+import Styles from "~/tasks/styles.coffee"
+import Templates from "~/tasks/templates.coffee"
 
 { globs } = PLATE_ENV
 

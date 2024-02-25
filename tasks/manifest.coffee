@@ -1,6 +1,6 @@
 import gulp from 'gulp'
 import favicons from 'gulp-favicons'
-import locale from '../locales/en.yml'
+import locale from '~/locales/en.yml'
 
 globs = PLATE_ENV.globs.manifest
 

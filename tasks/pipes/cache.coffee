@@ -1,6 +1,6 @@
 import PluginError from "plugin-error"
+import TaskPipe from "~/tasks/pipes/task.coffee"
 import YAML from "js-yaml"
-import TaskPipe from "./task.coffee"
 
 class CachePipe extends TaskPipe
   @newInstance: (options = {}) =>

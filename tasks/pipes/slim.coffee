@@ -1,6 +1,7 @@
 import { $ } from "zx"
 import PluginError from "plugin-error"
-import TaskPipe from "./task.coffee"
+import TaskPipe from "~/tasks/pipes/task.coffee"
+import path from "node:path"
 
 class SlimPipe extends TaskPipe
   @newInstance: (options = {}) =>
@@ -11,7 +12,10 @@ class SlimPipe extends TaskPipe
       locals = JSON.stringify options.locals || {}
       slimContents = contents
 
-      { stdout, stderr } = await $"echo #{slimContents} | ruby ../utils/templates/slim.rb #{locals}".quiet()
+      # TODO: Use the `slimrb` gem inside a fish script instead of the `ruby slim.rb` command,
+      # might be faster and more reliable. 🤷‍♂️
+      $.cwd = path.join(PLATE_PKG, "tools", "templates");
+      { stdout, stderr } = await $"echo #{slimContents} | ruby slim.rb #{locals}".quiet()
 
       if stderr
         throw new Error stderr

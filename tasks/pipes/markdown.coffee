@@ -8,7 +8,7 @@ import remarkRehype from "remark-rehype";
 import yaml from "js-yaml";
 
 import PluginError from "plugin-error"
-import TaskPipe from "./task.coffee"
+import TaskPipe from "~/tasks/pipes/task.coffee"
 
 class MarkdownPipe extends TaskPipe
   @newInstance: (options = {}) =>
