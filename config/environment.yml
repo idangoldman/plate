@@ -10,13 +10,13 @@ globs:
     - ../tmp/**/*
 
   scripts:
-    input: ../scripts/*.{coffee,js,cjs,mjs}
-    output: ../tmp/public/js
+    src: ../scripts/*.{coffee,js,cjs,mjs}
+    dest: ../tmp/public/js
 
   styles:
-    input: ../styles/*.{css,styl}
-    output: ../tmp/public/css
+    src: ../styles/*.{css,styl}
+    dest: ../tmp/public/css
 
   templates:
-    input: ../templates/**/*.{html,slim}
-    output: ../tmp/public
+    src: ../templates/**/*.{html,slim}
+    dest: ../tmp/public

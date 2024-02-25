@@ -8,7 +8,7 @@ import Templates from "./templates.coffee"
 import Watch from "./watch.coffee"
 
 export Build = gulp.series(Clean, gulp.parallel(Assets, Styles, Scripts, Templates))
-export Dev = gulp.series(build, gulp.parallel(Serve, Watch))
+export Dev = gulp.series(Build, gulp.parallel(Serve, Watch))
 
 export default (done) ->
   console.log PLATE_ENV

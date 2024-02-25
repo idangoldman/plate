@@ -1,7 +1,8 @@
 import gulp from 'gulp'
 import favicons from 'gulp-favicons'
-import env from '../config/environment.yml'
 import locale from '../locales/en.yml'
+
+globs = PLATE_ENV.globs.manifest
 
 WEB_MANIFEST =
   appDescription: locale.en.meta.description
@@ -32,7 +33,7 @@ WEB_MANIFEST =
   version: locale.en.meta.version
 
 export default Manifest = (done) ->
-  gulp.src env.globs.manifest.input
+  gulp.src globs.src
     .pipe favicons WEB_MANIFEST
-    .pipe gulp.dest env.globs.manifest.output
+    .pipe gulp.dest globs.dest
   done()

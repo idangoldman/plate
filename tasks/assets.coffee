@@ -1,7 +1,10 @@
 import gulp from "gulp"
 
-{ globs } = PLATE_ENV
+globs = {
+  base: PLATE_ENV.globs.base,
+  PLATE_ENV.globs.assets...
+}
 
 export default Assets = ->
-  gulp.src globs.assets.input, { base: globs.base }
-    .pipe gulp.dest globs.assets.output
+  gulp.src globs.src, { base: globs.base }
+    .pipe gulp.dest globs.dest

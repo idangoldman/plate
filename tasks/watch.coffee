@@ -7,7 +7,7 @@ import Templates from "./templates.coffee"
 { globs } = PLATE_ENV
 
 export default Watch = () ->
-  gulp.watch(globs.styles.input, gulp.series(Styles, Reload))
-  gulp.watch(globs.scripts.input, gulp.series(Scripts, Reload))
-  gulp.watch(globs.templates.input, gulp.series(Templates, Reload))
+  gulp.watch(globs.styles.src, gulp.series(Styles, Reload))
+  gulp.watch(globs.scripts.src, gulp.series(Scripts, Reload))
+  gulp.watch(globs.templates.src, gulp.series(Templates, Reload))
   return

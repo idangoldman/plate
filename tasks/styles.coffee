@@ -1,9 +1,9 @@
 import gulp from "gulp"
 import stylus from "gulp-stylus"
 
-{ globs } = PLATE_ENV
+globs = PLATE_ENV.globs.styles
 
 export default Styles = () ->
-  gulp.src globs.styles.input
+  gulp.src globs.src
     .pipe stylus()
-    .pipe gulp.dest globs.styles.output
+    .pipe gulp.dest globs.dest

@@ -1,9 +1,9 @@
 import gulp from "gulp"
-import ContentDataFromMD from "./pipes/content-data-from-md.coffee"
+import Markdown from "./pipes/markdown.coffee"
 
-{ globs } = PLATE_ENV
+globs = PLATE_ENV.globs.content
 
 export default Content = () ->
-  gulp.src globs.content.input
-    .pipe ContentDataFromMD()
-    .pipe gulp.dest globs.content.output
+  gulp.src globs.src
+    .pipe Markdown()
+    .pipe gulp.dest globs.dest
