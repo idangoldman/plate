@@ -1,3 +1,4 @@
+import fs from "node:fs";
 import merge from "lodash/merge.js";
 import path from "node:path";
 
@@ -30,5 +31,14 @@ export async function importEnvironmentFile(...paths) {
     console.warn(`No environment file found at ${ABSOLUTE_PATH}`);
   } finally {
     return environtmentFile;
+  }
+}
+
+export function fileExists(filePath) {
+  try {
+    fs.access(filePath, fs.constants.F_OK);
+    return true;
+  } catch {
+    return false;
   }
 }
