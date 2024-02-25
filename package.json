@@ -3,7 +3,7 @@
   "description": "A simple boilerplate for web development",
   "author": "Idan Goldman",
   "license": "MIT",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "bin": {
     "plate": "./bin/cmd.fish"
   },
