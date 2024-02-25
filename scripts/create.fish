@@ -30,6 +30,7 @@ function setup_project_structure --description 'Create a basic project structure
 
     # Use latest pnpm version
     corepack use pnpm@latest
+    # pnpm store prune
 
     # Update node and pnpm versions in package.json
     set node_version (node --version | string replace v '')
