@@ -1,4 +1,4 @@
-import fs from "node:fs";
+import fs from "node:fs/promises";
 import merge from "lodash/merge.js";
 import path from "node:path";
 
@@ -34,9 +34,9 @@ export async function importEnvironmentFile(...paths) {
   }
 }
 
-export function fileExists(filePath) {
+export async function fileExists(filePath) {
   try {
-    fs.access(filePath, fs.constants.F_OK);
+    await fs.access(filePath, fs.constants.F_OK);
     return true;
   } catch {
     return false;

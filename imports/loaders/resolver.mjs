@@ -8,7 +8,7 @@ export async function resolve(specifier, context, nextResolve) {
     if (PLATE_ROOT !== PLATE_PKG) {
       const rootPath = specifier.replace(/^~/, PLATE_ROOT);
 
-      if (fileExists(rootPath)) {
+      if (await fileExists(rootPath)) {
         updatedSpecifier = rootPath;
       }
     }

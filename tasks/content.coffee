@@ -1,4 +1,3 @@
-import gulp from "gulp"
 import Markdown from "~/tasks/pipes/markdown.coffee"
 
 globs = PLATE_ENV.globs.content

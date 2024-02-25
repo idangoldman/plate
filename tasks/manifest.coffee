@@ -1,6 +1,5 @@
-import gulp from 'gulp'
-import favicons from 'gulp-favicons'
-import locale from '~/locales/en.yml'
+import favicons from "gulp-favicons"
+import locale from "~/locales/en.yml"
 
 globs = PLATE_ENV.globs.manifest
 
@@ -12,7 +11,7 @@ WEB_MANIFEST =
   background: locale.en.meta.background_color
   developerName: locale.en.meta.author
   developerURL: locale.en.meta.url
-  html: 'manifest.html',
+  html: "manifest.html",
   display: "standalone"
   icons:
     android: true

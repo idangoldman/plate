@@ -1,4 +1,3 @@
-import gulp from "gulp"
 import stylus from "gulp-stylus"
 
 globs = PLATE_ENV.globs.styles

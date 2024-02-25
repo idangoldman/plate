@@ -1,5 +1,3 @@
-import gulp from "gulp"
-
 globs = PLATE_ENV.globs.assets
 
 export default Assets = ->

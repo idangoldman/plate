@@ -1,7 +1,6 @@
 import { Serve } from "~/tasks/dev-server.coffee"
 import Assets from "~/tasks/assets.coffee"
 import Clean from "~/tasks/clean.coffee"
-import gulp from "gulp"
 import Scripts from "~/tasks/scripts.coffee"
 import Styles from "~/tasks/styles.coffee"
 import Templates from "~/tasks/templates.coffee"
