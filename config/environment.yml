@@ -6,8 +6,24 @@ server:
 globs:
   base: '../'
 
+  assets:
+    src: ../assets/**/*
+    dest: ../tmp/public
+
   clean:
     - ../tmp/**/*
+
+  content:
+    src: ../content/**/*.md
+    dest: ../tmp/content
+
+  locales:
+    src: ../locales/*.yml
+    dest: ../tmp/locales
+
+  manifest:
+    src: ../images/favicon.svg
+    dest: ../tmp/public/manifest
 
   scripts:
     src: ../scripts/*.{coffee,js,cjs,mjs}
