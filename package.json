@@ -4,7 +4,9 @@
   "author": "Idan Goldman",
   "license": "MIT",
   "version": "0.0.1",
-  "bin": "./bin/cmd.fish",
+  "bin": {
+    "plate": "./bin/cmd.fish"
+  },
   "keywords": [
     "boilerplate",
     "coffeescript",

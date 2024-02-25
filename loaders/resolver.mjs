@@ -4,7 +4,7 @@ import path from "node:path";
 // TODO: Replace with a more robust check for the ~/tasks directory
 export async function resolve(specifier, context, defaultResolve) {
   if (specifier.includes("~/tasks/main.coffee")) {
-    const { PLATE_PKG, PLATE_ROOT } = process.env;
+    const { PLATE_ROOT, PLATE_PKG } = process.env;
     let updatedSpecifier = path.join(PLATE_PKG, "tasks", "main.coffee");
 
     if (PLATE_ROOT !== PLATE_PKG) {
