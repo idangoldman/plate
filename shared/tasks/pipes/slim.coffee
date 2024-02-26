@@ -25,6 +25,7 @@ class SlimPipe extends TaskPipe
 
     catch error
       throw new PluginError "slim-pipe", "Transpilation failed: #{error.message}", { showStack: true }
+      @pipeError filePath, error
 
     return { filePath, contents }
 

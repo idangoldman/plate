@@ -14,7 +14,7 @@ class MarkdownPipe extends TaskPipe
   @newInstance: (options = {}) =>
     new @ "markdown-pipe", options
 
-  transpile: (filePath, contents, options = {}) ->
+  transpile: (file, contents, options = {}) ->
     try
       processedFile = remark()
         .use remarkFrontmatter
@@ -26,12 +26,16 @@ class MarkdownPipe extends TaskPipe
         .use remarkRehype
         .use rehypeStringify
         .processSync contents
+      console.log processedFile.value
 
-      # file.data = processedFile.frontmatter;
-      # filePath = filePath.replace(/\.md$/, ".html")
+      return
+        data:
+          frontmatter: processedFile.frontmatter
+          html: processedFile.value
+
     catch error
-      throw new PluginError "markdown-pipe", "Transpilation failed: #{error.message}", { showStack: true }
+      @pipeError file.path, error.message
+      return { file, contents }
 
-    return { filePath, contents }
 
 export default MarkdownPipe.newInstance

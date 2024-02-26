@@ -16,26 +16,33 @@ export default class TaskPipe extends Transform
       return
 
     if file.isStream()
-      # done null, file
-      done new PluginError @name, 'Streams are not supported!', { fileName: file.path }
+      @pipeError file.path, 'Streams are not supported!'
       return
 
     try
       contents = file.contents.toString()
-      filePath = file.path
 
-      @transpile(filePath, contents, @options).then (transpiled) =>
+      @transpile(file, contents, @options).then (transpiled) ->
         if transpiled.contents
           file.contents = Buffer.from transpiled.contents
 
-        if transpiled.filePath
-          file.path = transpiled.filePath
+        if transpiled.data
+          file.data = { file.data..., transpiled.data...}
+
+        if transpiled.file
+          file = { file..., transpiled.file...}
 
         done null, file
 
     catch error
-      done new PluginError @name, error, { fileName: file.path, showStack: true }
+      @pipeError file.path, error.message
       return
 
   transpile: (file, contents, options) ->
-    throw new PluginError @name, 'Transpile method not implemented', { fileName: file.path }
+    @pipeError file.path, "Transpile method not implemented in #{@name}"
+
+  pipeError: (file, message = '') ->
+    if message
+      message = "Pipe transfomation failed: #{message}"
+
+    throw new PluginError @name, message, { fileName: file.path, showStack: false }
