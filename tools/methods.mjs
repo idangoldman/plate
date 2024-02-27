@@ -42,3 +42,27 @@ export async function fileExists(filePath) {
     return false;
   }
 }
+
+const SNAKE_CASE_REGEX = new RegExp("[_]([a-z])", "gi");
+const REMOVABLE_CHARACTERS = new RegExp("_+", "gi");
+function snakeToCamel(str) {
+  return str
+    .replace(SNAKE_CASE_REGEX, (match, group1) => group1.toUpperCase())
+    .replace(REMOVABLE_CHARACTERS, "");
+}
+
+export function transformKeysFromSnakeToCamel(obj) {
+  if (Array.isArray(obj)) {
+    return obj.map(transformKeysFromSnakeToCamel);
+  }
+
+  if (obj && typeof obj === "object") {
+    return Object.entries(obj).reduce((newObject, [key, value]) => {
+      newObject[snakeToCamel(key)] = transformKeysFromSnakeToCamel(value);
+      return newObject;
+    }, {});
+  }
+
+  return obj;
+};
+
