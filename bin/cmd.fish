@@ -7,7 +7,7 @@ set -gx PLATE_ROOT (pwd -P)
 # Run gulp
 set -l gulp_bin $PLATE_PKG/../gulp/bin/gulp.js
 set -l gulp_file $PLATE_PKG/gulpfile.mjs
-set -l registry $PLATE_PKG/common/registry.mjs
+set -l registry $PLATE_PKG/imports/registry.mjs
 
 node --trace-warnings \
   --import $registry \
