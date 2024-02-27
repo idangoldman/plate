@@ -1,5 +1,4 @@
 import { $ } from "zx"
-import PluginError from "plugin-error"
 import TaskPipe from "~/tasks/pipes/task.coffee"
 import path from "node:path"
 
@@ -24,8 +23,7 @@ class SlimPipe extends TaskPipe
       filePath = filePath.replace(/\.slim$/, ".html")
 
     catch error
-      throw new PluginError "slim-pipe", "Transpilation failed: #{error.message}", { showStack: true }
-      @pipeError filePath, error
+      @pipeError filePath, error.message
 
     return { filePath, contents }
 

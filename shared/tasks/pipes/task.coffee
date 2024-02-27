@@ -1,14 +1,14 @@
-import PluginError from 'plugin-error'
-import { Transform } from 'node:stream'
+import PluginError from "plugin-error"
+import { Transform } from "node:stream"
 
 export default class TaskPipe extends Transform
   @newInstance: (options = {}) =>
     # new @ "name-pipe", options
-    new PluginError 'task-pipe', 'newInstance method not implemented'
+    new PluginError "task-pipe", "newInstance method not implemented"
 
-  constructor: (name = '', @options = {}) ->
+  constructor: (name = "", @options = {}) ->
     super { objectMode: true }
-    @name = name || 'task-pipe'
+    @name = name || "task-pipe"
 
   _transform: (file, encoding, done) ->
     unless file.isBuffer() or !file.isNull()
@@ -16,23 +16,14 @@ export default class TaskPipe extends Transform
       return
 
     if file.isStream()
-      @pipeError file.path, 'Streams are not supported!'
+      @pipeError file.path, "Streams are not supported!"
       return
 
     try
       contents = file.contents.toString()
 
       @transpile(file, contents, @options).then (transpiled) ->
-        if transpiled.contents
-          file.contents = Buffer.from transpiled.contents
-
-        if transpiled.data
-          file.data = { file.data..., transpiled.data...}
-
-        if transpiled.file
-          file = { file..., transpiled.file...}
-
-        done null, file
+        done null, @processTranspiledFile(file, transpiled)
 
     catch error
       @pipeError file.path, error.message
@@ -41,7 +32,19 @@ export default class TaskPipe extends Transform
   transpile: (file, contents, options) ->
     @pipeError file.path, "Transpile method not implemented in #{@name}"
 
-  pipeError: (file, message = '') ->
+  processTranspiledFile: (original, transpiled) ->
+    if transpiled.contents
+      original.contents = Buffer.from transpiled.contents
+
+    if transpiled.data
+      original.data = { original.data..., transpiled.data...}
+
+    if transpiled.file
+      original = { original..., transpiled.file...}
+
+    original
+
+  pipeError: (file, message = "") ->
     if message
       message = "Pipe transfomation failed: #{message}"
 
