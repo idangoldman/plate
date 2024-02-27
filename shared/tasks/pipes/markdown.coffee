@@ -26,7 +26,7 @@ class MarkdownPipe extends TaskPipe
         .use rehypeStringify
         .processSync contents
 
-      data:
+      Promise.resolve data:
         frontmatter: processedFile.frontmatter
         html: processedFile.value
 

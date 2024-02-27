@@ -22,7 +22,7 @@ export default class TaskPipe extends Transform
     try
       contents = file.contents.toString()
 
-      @transpile(file, contents, @options).then (transpiled) ->
+      @transpile(file, contents, @options).then (transpiled) =>
         done null, @processTranspiledFile(file, transpiled)
 
     catch error
@@ -48,4 +48,4 @@ export default class TaskPipe extends Transform
     if message
       message = "Pipe transfomation failed: #{message}"
 
-    throw new PluginError @name, message, { fileName: file.path, showStack: false }
+    throw new PluginError @name, message, { fileName: file.path, showStack: true }
