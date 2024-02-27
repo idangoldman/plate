@@ -25,7 +25,7 @@ class PrettyURLs extends TaskPipe
 
   patternToRegex: (pattern) ->
     STR_REGEX = pattern.split("/").map (part) ->
-      if part.startsWith(":")
+      if part.startsWith ":"
         name = part.slice(1).replace("*", "")
         "(?<#{name}>.+)"
       else if part is "*"
@@ -37,13 +37,13 @@ class PrettyURLs extends TaskPipe
     new RegExp "^#{STR_REGEX}$"
 
   generateURL: (permalink = "", params = {}) ->
-    permalink.replace(/:(\w+)/g, (match, param) -> params[param])
-      .replace("*", "")
-      .replace(".md", "")
+    permalink
+      .replace /:(\w+)/g, (match, param) => params[param]
+      .replace "*", ""
 
   cleanFileRoute: (filePath) ->
     filePath
       .replace "#{PLATE_ROOT}/content", ""
-      .replace /\.md$/, ""
+      .replace /(\.[^.]*)$/, ""
 
 export default PrettyURLs.newInstance

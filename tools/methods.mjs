@@ -64,5 +64,4 @@ export function transformKeysFromSnakeToCamel(obj) {
   }
 
   return obj;
-};
-
+}

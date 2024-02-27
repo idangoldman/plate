@@ -20,7 +20,7 @@ class SlimPipe extends TaskPipe
         throw new Error stderr
 
       contents = stdout
-      filePath = filePath.replace(/\.slim$/, ".html")
+      filePath = filePath.replace(/(\.[^.]*)$/, ".html")
 
     catch error
       @pipeError filePath, error.message

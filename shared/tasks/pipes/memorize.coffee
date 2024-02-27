@@ -10,7 +10,7 @@ class MemorizePipe extends TaskPipe
       content: contents
       data: file.data... || {}
 
-    file.path = file.path.replace(/\.[a-z]{2,5}$/i, ".yml")
+    file.path = file.path.replace(/(\.[^.]*)$/, ".yml")
 
     return { file, contents: memorized }
 
