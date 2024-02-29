@@ -44,6 +44,6 @@ class PrettyURLs extends TaskPipe
   cleanFileRoute: (filePath) ->
     filePath
       .replace "#{PLATE_ROOT}/content", ""
-      .replace /(\.[^.]*)$/, ""
+      .replace /((\/content)?(\.[^.]+))$/i, ""
 
 export default PrettyURLs.newInstance

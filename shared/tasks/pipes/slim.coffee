@@ -7,23 +7,19 @@ class SlimPipe extends TaskPipe
     new @ "slim-pipe", options
 
   transpile: (filePath, contents, options = {}) ->
-    try
-      locals = JSON.stringify options.locals || {}
-      slimContents = contents
+    locals = JSON.stringify options.locals || {}
+    slimContents = contents
 
-      # TODO: Use the `slimrb` gem inside a fish script instead of the `ruby slim.rb` command,
-      # might be faster and more reliable. 🤷‍♂️
-      $.cwd = path.join(PLATE_PKG, "tools", "templates");
-      { stdout, stderr } = await $"echo #{slimContents} | ruby slim.rb #{locals}".quiet()
+    # TODO: Use the `slimrb` gem inside a fish script instead of the `ruby slim.rb` command,
+    # might be faster and more reliable. 🤷‍♂️
+    $.cwd = path.join(PLATE_PKG, "tools", "templates");
+    { stdout, stderr } = await $"echo #{slimContents} | ruby slim.rb #{locals}".quiet()
 
-      if stderr
-        throw new Error stderr
+    if stderr
+      throw new Error stderr
 
-      contents = stdout
-      filePath = filePath.replace(/(\.[^.]*)$/, ".html")
-
-    catch error
-      @pipeError filePath, error.message
+    contents = stdout
+    filePath = filePath.replace(/(\.[^.]*)$/, ".html")
 
     return { filePath, contents }
 

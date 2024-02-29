@@ -26,7 +26,7 @@ export default class TaskPipe extends Transform
         done null, @processTranspiledFile(file, transpiled)
 
     catch error
-      @pipeError file.path, error.message
+      @pipeError file.path, error
       return
 
   transpile: (file, contents, options) ->
@@ -45,7 +45,4 @@ export default class TaskPipe extends Transform
     original
 
   pipeError: (file, message = "") ->
-    if message
-      message = "Pipe transfomation failed: #{message}"
-
     throw new PluginError @name, message, { fileName: file.path, showStack: true }
