@@ -1,4 +1,4 @@
-import { BaseRemarkPlugin } from "@/tools/remark/base.coffee"
+import BaseRemarkPlugin from "@/tools/remark/base.coffee"
 import yaml from "js-yaml"
 
 class FrontmatterRemarkPlugin extends BaseRemarkPlugin

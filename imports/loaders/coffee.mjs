@@ -6,7 +6,11 @@ export async function load(url, context, nextLoad) {
   if (extensionsRegex.test(url)) {
     const format = "module";
     const { source: rawSource } = await nextLoad(url, { ...context, format });
-    const transformedSource = coffeescript.compile(rawSource.toString(), url);
+    const transformedSource = coffeescript.compile(rawSource.toString(), {
+      filename: url,
+      inlineMap: true,
+      sourceMap: false,
+    });
 
     return {
       format,

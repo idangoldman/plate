@@ -45,4 +45,4 @@ export default class TaskPipe extends Transform
     original
 
   pipeError: (file, message = "") ->
-    throw new PluginError @name, message, { fileName: file.path, showStack: true }
+    throw new PluginError @name, message, { fileName: file.path, showStack: true, showProperties: true}

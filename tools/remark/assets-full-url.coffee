@@ -1,4 +1,5 @@
-import { BaseRemarkPlugin } from "@/tools/remark/base.coffee"
+import BaseRemarkPlugin from "@/tools/remark/base.coffee"
+import { URL } from "node:url"
 import yaml from "js-yaml"
 
 class AssetsFullUrlRemarkPlugin extends BaseRemarkPlugin
