@@ -1,4 +1,3 @@
-import fs from "node:fs/promises";
 import merge from "lodash/merge.js";
 import path from "node:path";
 
@@ -31,15 +30,6 @@ export async function importEnvironmentFile(...paths) {
     console.warn(`No environment file found at ${ABSOLUTE_PATH}`);
   } finally {
     return environtmentFile;
-  }
-}
-
-export async function fileExists(filePath) {
-  try {
-    await fs.access(filePath, fs.constants.F_OK);
-    return true;
-  } catch {
-    return false;
   }
 }
 

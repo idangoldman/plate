@@ -1,4 +1,4 @@
-import { deepFreezeMerge, importEnvironmentFile } from "../tools/methods.mjs";
+import { deepFreezeMerge, importEnvironmentFile } from "@/tools/methods.mjs";
 import gulp from "gulp";
 
 global.PLATE_ENV  = {};

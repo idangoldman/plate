@@ -1,5 +1,5 @@
 import { readFile } from "node:fs/promises"
-import { transformKeysFromSnakeToCamel } from "../../tools/methods.mjs"
+import { transformKeysFromSnakeToCamel } from "@/tools/methods.mjs"
 import yaml from "js-yaml"
 
 const extensionsRegex = /\.(yml|yaml)$/
