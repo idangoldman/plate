@@ -6,7 +6,9 @@ import remarkFrontmatter from "remark-frontmatter"
 import remarkParse from "remark-parse"
 import remarkRehype from "remark-rehype"
 import TaskPipe from "~/tasks/pipes/task.coffee"
-import yaml from "js-yaml"
+
+import FrontmatterRemarkPlugin from "@/tools/remark/frontmatter.coffee"
+import AssetsFullUrlRemarkPlugin from "@/tools/remark/assets-full-url.coffee"
 
 class MarkdownPipe extends TaskPipe
   @newInstance: (options = {}) =>
@@ -14,30 +16,17 @@ class MarkdownPipe extends TaskPipe
 
   transpile: (file, contents, options = {}) ->
     processedFile = remark()
-      .use remarkFrontmatter
-      # TODO: Remark frontmatter plugin
-      # INFO: Remove the frontmatter from the tree and add it to the file object
-      .use () => (tree, treeFile) =>
-        visit tree, "yaml", (node, index, parent) =>
-          parent.children.splice(index, 1)
-          treeFile.frontmatter = yaml.load(node.value)
-      .use () => (tree, treeFile) =>
-        visit tree, "image", (node) =>
-          node.url = @generateImageURL node.url, file.data.permalink
-      .use remarkParse
-      .use remarkRehype
-      .use rehypeStringify
-      .processSync contents
+        .use remarkFrontmatter
+        .use FrontmatterRemarkPlugin
+        .use AssetsFullUrlRemarkPlugin
+        .use remarkParse
+        .use remarkRehype
+        .use rehypeStringify
+      .processSync file
 
     Promise.resolve data:
-      frontmatter: processedFile.frontmatter
+      assets: processedFile.data?.assets || []
+      frontmatter: processedFile.data?.frontmatter || {}
       html: processedFile.value
-
-
-  generateImageURL: (relativePath, permalink) ->
-    return relativePath if relativePath.startsWith("http")
-
-    imageBaseURL = "http://#{PLATE_ENV.server.hostname}/#{permalink}"
-    new URL(relativePath, imageBaseURL).href.replace("http://", "//")
 
 export default MarkdownPipe.newInstance
