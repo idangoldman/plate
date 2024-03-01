@@ -6,7 +6,7 @@ class PrettyURLs extends TaskPipe
   @newInstance: (options = {}) =>
     new @ "pretty-urls-pipe", options
 
-  transpile: (file, contents, options = {}) ->
+  transpile: ({ file }) ->
     fileRoute = @cleanFileRoute file.path
 
     data =

@@ -3,18 +3,27 @@ import { URL } from "node:url"
 import yaml from "js-yaml"
 
 class AssetsFullUrlRemarkPlugin extends BaseRemarkPlugin
-  type = ["image"]
+  type: ["image"]
 
-  process: ({node, index, parent, file}) ->
-    node.url = @generateFullURL node.url, file.data.permalink
+  process: ({ node, file, options }) ->
+    # If the URL is already a full URL, don't do anything
+    return if node.url.startsWith("http")
 
-    file.data["assets"] = [] unless file.data["assets"]
-    file.data["assets"].push node.url
+    # Generate the new URL
+    newURL = @generateURL node.url, options.permalink
 
-  generateFullURL: (relativePath, permalink) ->
-    return relativePath if relativePath.startsWith("http")
+    # Add the new URL to the assets list
+    file["assets"] = [] unless file["assets"]
+    file["assets"].push [node.url, newURL.pathname]
 
-    imageBaseURL = "http://#{PLATE_ENV.server.hostname}/#{permalink}"
-    new URL(relativePath, imageBaseURL).href.replace("http://", "//")
+    # Update the node URL
+    node.url = newURL.href
 
-export default new AssetsFullUrlRemarkPlugin()
+  generateURL: (relativePath, permalink) ->
+    relativePath = "#{permalink}/#{relativePath}"
+    imageBaseURL = "http://#{PLATE_ENV.server.hostname}/"
+
+    new URL(relativePath, imageBaseURL)
+
+export default new AssetsFullUrlRemarkPlugin().use
+

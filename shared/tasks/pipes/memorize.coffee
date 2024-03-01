@@ -5,7 +5,7 @@ class MemorizePipe extends TaskPipe
   @newInstance: (options = {}) =>
     new @ "memorize-pipe", options
 
-  transpile: (file, contents, options = {}) ->
+  transpile: ({ file, contents }) ->
     memorized = YAML.dump
       content: contents
       data: file.data... || {}

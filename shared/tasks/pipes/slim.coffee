@@ -6,8 +6,8 @@ class SlimPipe extends TaskPipe
   @newInstance: (options = {}) =>
     new @ "slim-pipe", options
 
-  transpile: (filePath, contents, options = {}) ->
-    locals = JSON.stringify options.locals || {}
+  transpile: ({ file, contents }) ->
+    locals = JSON.stringify @options.locals || {}
     slimContents = contents
 
     # TODO: Use the `slimrb` gem inside a fish script instead of the `ruby slim.rb` command,
@@ -19,8 +19,8 @@ class SlimPipe extends TaskPipe
       throw new Error stderr
 
     contents = stdout
-    filePath = filePath.replace(/(\.[^.]*)$/, ".html")
+    file.path = file.path.replace(/(\.[^.]*)$/, ".html")
 
-    return { filePath, contents }
+    return { file, contents }
 
 export default SlimPipe.newInstance

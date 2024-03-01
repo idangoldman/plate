@@ -12,19 +12,19 @@ class MarkdownPipe extends TaskPipe
   @newInstance: (options = {}) =>
     new @ "markdown-pipe", options
 
-  transpile: (file, contents, options = {}) ->
+  transpile: ({ file, contents }) ->
     processedFile = remark()
         .use remarkFrontmatter
         .use FrontmatterRemarkPlugin
-        .use AssetsFullUrlRemarkPlugin
+        .use AssetsFullUrlRemarkPlugin, { permalink: file.data.permalink }
         .use remarkParse
         .use remarkRehype
         .use rehypeStringify
-      .processSync file
+      .processSync contents
 
     Promise.resolve data:
-      assets: processedFile.data?.assets || []
-      frontmatter: processedFile.data?.frontmatter || {}
+      assets: processedFile.assets || []
+      frontmatter: processedFile.frontmatter || {}
       html: processedFile.value
 
 export default MarkdownPipe.newInstance

@@ -1,22 +1,24 @@
 import { visit } from "unist-util-visit"
 
 class BaseRemarkPlugin
-  constructor: (@type = "") ->
+  constructor: () ->
     if @process is BaseRemarkPlugin::process
       throw new Error("Child classes must implement the process method.")
 
-    return @constructor.plugin
-
-  process: ({node, index, parent, file}) ->
+  process: ({ node, index, parent, file, options }) ->
     throw new Error("process method must be implemented by subclasses.")
 
-  plugin: ->
-    (tree, file) =>
-      visit tree, (node, index, parent) =>
-        if @hasType node.type
-          file.data = {} unless file.data
-          @process(node: node, index: index, parent: parent, file: file)
-        return
+  use: (options) => (tree, file) =>
+    visit tree, (node, index, parent) =>
+      if @hasType node.type
+        @process
+          file: file,
+          index: index,
+          node: node,
+          options: options,
+          parent: parent
+      return
+    return
 
   hasType: (nodeType) ->
     @type = [ @type ] unless Array.isArray @type

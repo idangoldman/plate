@@ -22,14 +22,14 @@ export default class TaskPipe extends Transform
     try
       contents = file.contents.toString()
 
-      @transpile(file, contents, @options).then (transpiled) =>
+      @transpile({ file, contents, @options }).then (transpiled) =>
         done null, @processTranspiledFile(file, transpiled)
 
     catch error
       @pipeError file.path, error
       return
 
-  transpile: (file, contents, options) ->
+  transpile: ({ file, contents, options }) ->
     @pipeError file.path, "Transpile method not implemented in #{@name}"
 
   processTranspiledFile: (original, transpiled) ->
