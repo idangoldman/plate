@@ -14,7 +14,7 @@ class AssetsFullUrlRemarkPlugin extends BaseRemarkPlugin
 
     # Add the new URL to the assets list
     file["assets"] = [] unless file["assets"]
-    file["assets"].push [node.url, newURL.pathname]
+    file["assets"].push newURL.pathname
 
     # Update the node URL
     node.url = newURL.href
