@@ -16,14 +16,14 @@ class MarkdownPipe extends TaskPipe
 
   transpile: ({ file, contents }) ->
     processedFile = remark()
-        .use remarkFrontmatter
         .use remarkParse
+        .use remarkFrontmatter
         .use FrontmatterRemarkPlugin
         .use AssetsFullUrlRemarkPlugin, { permalink: file.data.permalink }
         .use ExcerptRemarkPlugin
         # .use () => (tree, file) =>
         #   visit tree, (node, index, parent) =>
-        #     console.log node
+        #     console.log node.type
         #   return
         .use remarkRehype
         .use rehypeStringify

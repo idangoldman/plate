@@ -1,38 +1,57 @@
 import BaseRemarkPlugin from "@/tools/remark/base.coffee"
+import { h } from "hastscript"
 
-# HTML_COMMENT_REGEX = new RegExp "<!--\s*(?<comment>.+)\s*-->", "gm"
-HTML_COMMENT_REGEX = new RegExp "<!--\s*(?<comment>\S+.*?)\s*-->", "gm"
+HTML_COMMENT_REGEX = new RegExp "<!--\\s*(?<comment>\\S+.*?)\\s*-->", "gm"
+HTML_HEADING_TAGNAME_REGEX = new RegExp "^h[1-6])$", "gm"
 
 class ExcerptRemarkPlugin extends BaseRemarkPlugin
   type: "html"
-  excerpt: ""
-  excerptIndex: -1
   identifiers: [
-    "EXCERPT",
-    "INTRO",
+    "EXCERPT"
+    "INTRO"
     "READMORE"
-    "SUMMARY",
-    "TLDR",
+    "SUMMARY"
+    "TLDR"
   ]
 
-  process: ({ node, index, parent, file }) ->
-    if @excerptIndex is -1 && @hasExcerpt node.value
-      @excerptIndex = index
-      # console.log parent.children.splice(index, 1)
+  process: ({ node, index, parent, file, options }) ->
+    if @hasExcerpt node.value
+      startIndex = @findStartIndex index, parent.children
+      sectionNodes = parent.children.slice startIndex, index
+      sectionClassName = "excerpt--#{@slugify @getExcerpt(node.value)}"
+
+      excerptNode = h "section", { className: sectionClassName }, sectionNodes
+      parent.children.splice startIndex, index - startIndex, excerptNode
+
+  getExcerpt: (value) ->
+    try
+      foundIdentifier = value.matchAll(HTML_COMMENT_REGEX).next().value.groups.comment
+
+      if @identifiers.includes foundIdentifier.toUpperCase()
+        return foundIdentifier
+
+      throw new Error
+    catch error
+      return undefined
 
   hasExcerpt: (value) ->
-    console.log value, [...value.matchAll(HTML_COMMENT_REGEX)]
-    try
-      comment = [...value.matchAll(HTML_COMMENT_REGEX)]
-      console.log comment[0].groups.comment
+    @getExcerpt(value) isnt undefined
 
-      if @identifiers.includes comment.toUpperCase()
-        @excerpt = comment
-        return true
+  findStartIndex: (index, siblings) ->
+    for siblingIndex in [(endIndex - 1)..0] by -1
+      sibling = siblings[siblingIndex]
 
-      throw new Error "No match"
-    catch error
-      return false
+      if sibling.type is "html" or HTML_HEADING_TAGNAME_REGEX.test(sibling.tagName) or siblingIndex is 0
+        startIndex = siblingIndex
+        break
 
+    startIndex
+
+  slugify: (value) ->
+    value.toLowerCase()
+      .replace /\s+/g, "-"
+      .replace /[^a-z0-9-]/ig, ""
+      .replace /-+/g, "-"
+      .replace /^-|-$/g, ""
 
 export default new ExcerptRemarkPlugin().use
