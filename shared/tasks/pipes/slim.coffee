@@ -10,8 +10,6 @@ class SlimPipe extends TaskPipe
     locals = JSON.stringify @options.locals || {}
     slimContents = contents
 
-    # TODO: Use the `slimrb` gem inside a fish script instead of the `ruby slim.rb` command,
-    # might be faster and more reliable. 🤷‍♂️
     $.cwd = path.join(PLATE_PKG, "tools", "templates");
     { stdout, stderr } = await $"echo #{slimContents} | ruby slim.rb #{locals}".quiet()
 
