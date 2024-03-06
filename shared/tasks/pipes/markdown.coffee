@@ -32,7 +32,7 @@ class MarkdownPipe extends TaskPipe
         .use rehypeStringify
       .processSync contents
 
-    console.log processedFile
+    # console.log processedFile
 
     Promise.resolve data:
       assets: processedFile.assets || []
