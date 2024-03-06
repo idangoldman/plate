@@ -1,4 +1,5 @@
 import { visit } from "unist-util-visit"
+import { inspect } from "unist-util-inspect"
 
 class BaseRemarkPlugin
   constructor: () ->
@@ -10,7 +11,7 @@ class BaseRemarkPlugin
 
   use: (options) => (tree, file) =>
     visit tree, (node, index, parent) =>
-      if @hasType node.type
+      if parent isnt undefined and @hasType node.type
         @process
           file: file,
           index: index,
