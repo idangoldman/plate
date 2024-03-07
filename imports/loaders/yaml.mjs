@@ -2,7 +2,7 @@ import { readFile } from "node:fs/promises"
 import { transformKeysFromSnakeToCamel } from "@/tools/methods.mjs"
 import yaml from "js-yaml"
 
-const extensionsRegex = /\.(yml|yaml)$/
+const extensionsRegex = /\.ya?ml$/
 
 export async function load(url, context, nextLoad) {
   if (extensionsRegex.test(url)) {

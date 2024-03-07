@@ -10,10 +10,11 @@ class MemorizePipe extends TaskPipe
     new @ "memorize-pipe", options
 
   _transform: (file, encoding, next) =>
-    console.log "Transforming #{@name}"
-    next null, file
+    MemorizePipe.fileCheck file, next
 
-  transpile: ({ file, contents }) ->
+    console.log "Transforming #{@name}"
+    next()
+
     # cachedFilePath = file.path.replace FILE_EXTENSION_REGEX, FILE_CACHE_EXTENSION
 
     # if cachedContents = @loadFromCache cachedFilePath
@@ -21,7 +22,6 @@ class MemorizePipe extends TaskPipe
     # else
     #   cachedContents = @saveToCache cachedFilePath, file.data
     #   Promise.resolve contents: cachedContents
-    Promise.resolve file: file
 
   saveToCache: ( filePath, contents ) ->
     @cache[filePath] = contents

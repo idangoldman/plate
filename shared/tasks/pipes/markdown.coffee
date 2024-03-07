@@ -1,15 +1,15 @@
-import { visit } from "unist-util-visit"
 import { inspect } from "unist-util-inspect"
 import { remark } from "remark"
+import { visit } from "unist-util-visit"
 import rehypeStringify from "rehype-stringify"
 import remarkFrontmatter from "remark-frontmatter"
 import remarkParse from "remark-parse"
 import remarkRehype from "remark-rehype"
 
-import TaskPipe from "~/tasks/pipes/task.coffee"
 import AssetsFullUrlRemarkPlugin from "@/tools/remark/assets-full-url.coffee"
-import FrontmatterRemarkPlugin from "@/tools/remark/frontmatter.coffee"
 import ExcerptRemarkPlugin from "@/tools/remark/excerpt.coffee"
+import FrontmatterRemarkPlugin from "@/tools/remark/frontmatter.coffee"
+import TaskPipe from "~/tasks/pipes/task.coffee"
 
 class MarkdownPipe extends TaskPipe
   @newInstance: (options = {}) =>
@@ -34,9 +34,11 @@ class MarkdownPipe extends TaskPipe
 
     # console.log processedFile
 
-    Promise.resolve data:
-      assets: processedFile.assets || []
-      frontmatter: processedFile.frontmatter || {}
-      html: processedFile.value
+    Promise.resolve
+      contents: processedFile.value
+      data:
+        assets: processedFile.assets || []
+        frontmatter: processedFile.frontmatter || {}
+        html: processedFile.value
 
 export default MarkdownPipe.newInstance

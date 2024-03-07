@@ -10,13 +10,7 @@ export default class TaskPipe extends Transform
     super { objectMode: true }
     @name = name || "task-pipe"
 
-  _flush: (next) =>
-    console.log "Flushing #{@name}"
-    next()
-
-  _transform: (file, encoding, next) ->
-    console.log "Transforming #{@name}"
-
+  @fileCheck: (file, next) =>
     unless file.isBuffer() or !file.isNull()
       next null, file
       return
@@ -24,6 +18,9 @@ export default class TaskPipe extends Transform
     if file.isStream()
       @pipeError file.path, "Streams are not supported!"
       return
+
+  _transform: (file, encoding, next) ->
+    TaskPipe.fileCheck file, next
 
     try
       contents = file.contents.toString()
@@ -43,10 +40,10 @@ export default class TaskPipe extends Transform
       original.contents = Buffer.from transpiled.contents
 
     if transpiled.data
-      original.data = { original.data..., transpiled.data...}
+      original.data = merge original.data, transpiled.data
 
     if transpiled.file
-      original = { original..., transpiled.file...}
+      original = merge original, transpiled.file
 
     original
 

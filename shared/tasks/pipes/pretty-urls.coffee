@@ -21,7 +21,10 @@ class PrettyURLs extends TaskPipe
         data.permalink = @generateURL(details.permalink, patternMatched.groups)
         break
 
-    Promise.resolve { data }
+    Promise.resolve
+      data: data
+      file:
+        path: file.path.replace /\.md$/, ".html"
 
   patternToRegex: (pattern) ->
     STR_REGEX = pattern.split("/").map (part) ->
@@ -44,6 +47,6 @@ class PrettyURLs extends TaskPipe
   cleanFileRoute: (filePath) ->
     filePath
       .replace "#{PLATE_ROOT}/content", ""
-      .replace /((\/content)?(\.[^.]+))$/i, ""
+      .replace /((\/index)?(\.[^.]+))$/i, ""
 
 export default PrettyURLs.newInstance
