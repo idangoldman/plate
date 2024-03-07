@@ -1,25 +1,28 @@
 import TaskPipe from "~/tasks/pipes/task.coffee"
 import YAML from "js-yaml"
 
+FILE_EXTENSION_REGEX = /(\.[^.]*)$/
+FILE_CACHE_EXTENSION = ".yml"
+
 class MemorizePipe extends TaskPipe
   @cache: {}
   @newInstance: (options = {}) =>
     new @ "memorize-pipe", options
 
   transpile: ({ file, contents }) ->
-    # if @loadFromCache({ file }).contents is contents
-    #   Promise.resolve file: file, contents: contents
+    # cachedFilePath = file.path.replace FILE_EXTENSION_REGEX, FILE_CACHE_EXTENSION
+
+    # if cachedContents = @loadFromCache cachedFilePath
+    #   Promise.resolve contents: cachedContents
     # else
-    #   @saveToCache { file, contents }
-    #   Promise.resolve file: file, contents: contents
+    #   cachedContents = @saveToCache cachedFilePath, file.data
+    #   Promise.resolve contents: cachedContents
+    Promise.resolve file: file
 
-    # contents = YAML.dump file.data
-    # file.path = file.path.replace(/(\.[^.]*)$/, ".yml")
+  saveToCache: ( filePath, contents ) ->
+    @cache[filePath] = contents
 
-  @saveToCache: ({ file, contents }) ->
-    @cache[file.path] = contents
-
-  @loadFromCache: ({ file }) ->
-    @cache[file.path] || {}
+  loadFromCache: ( filePath ) ->
+    @cache[filePath] or null
 
 export default MemorizePipe.newInstance

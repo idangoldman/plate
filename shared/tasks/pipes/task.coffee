@@ -10,6 +10,10 @@ export default class TaskPipe extends Transform
     super { objectMode: true }
     @name = name || "task-pipe"
 
+  _flush: (done) ->
+    console.log "Flushing #{@name}"
+    done()
+
   _transform: (file, encoding, done) ->
     unless file.isBuffer() or !file.isNull()
       done null, file
