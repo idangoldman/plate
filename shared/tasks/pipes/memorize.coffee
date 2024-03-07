@@ -9,6 +9,10 @@ class MemorizePipe extends TaskPipe
   @newInstance: (options = {}) =>
     new @ "memorize-pipe", options
 
+  _transform: (file, encoding, next) =>
+    console.log "Transforming #{@name}"
+    next null, file
+
   transpile: ({ file, contents }) ->
     # cachedFilePath = file.path.replace FILE_EXTENSION_REGEX, FILE_CACHE_EXTENSION
 

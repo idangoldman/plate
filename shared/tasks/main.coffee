@@ -9,6 +9,6 @@ import Watch from "~/tasks/watch.coffee"
 export Build = gulp.series(Clean, gulp.parallel(Assets, Styles, Scripts, Templates))
 export Dev = gulp.series(Build, gulp.parallel(Serve, Watch))
 
-export default (done) ->
+export default (next) ->
   console.log PLATE_ENV
-  done()
+  next()

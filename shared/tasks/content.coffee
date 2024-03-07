@@ -1,12 +1,12 @@
-import MarkdownPipe from "~/tasks/pipes/markdown.coffee"
-import PrettyURLsPipe from "~/tasks/pipes/pretty-urls.coffee"
-import MemorizePipe from "~/tasks/pipes/memorize.coffee"
+import Markdown from "~/tasks/pipes/markdown.coffee"
+import PrettyURLs from "~/tasks/pipes/pretty-urls.coffee"
+import Memorize from "~/tasks/pipes/memorize.coffee"
 
 globs = PLATE_ENV.globs.content
 
 export default Content = () ->
   gulp.src globs.src
-    .pipe PrettyURLsPipe()
-    .pipe MarkdownPipe()
-    .pipe MemorizePipe()
+    .pipe Memorize()
+    .pipe PrettyURLs()
+    .pipe Markdown()
     .pipe gulp.dest globs.dest

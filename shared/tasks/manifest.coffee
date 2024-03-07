@@ -31,8 +31,8 @@ WEB_MANIFEST =
   theme_color: locale.en.meta.theme_color
   version: locale.en.meta.version
 
-export default Manifest = (done) ->
+export default Manifest = (next) ->
   gulp.src globs.src
     .pipe favicons WEB_MANIFEST
     .pipe gulp.dest globs.dest
-  done()
+  next()

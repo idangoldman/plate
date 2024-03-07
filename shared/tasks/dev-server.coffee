@@ -2,12 +2,12 @@ import browserSync from "browser-sync"
 
 { globs, server } = PLATE_ENV
 
-export Serve = (done) ->
+export Serve = (next) ->
   browserSync.init
     server: globs.public
     port: server.port
-  done()
+  next()
 
-export Reload = (done) ->
+export Reload = (next) ->
   browserSync.reload()
-  done()
+  next()
