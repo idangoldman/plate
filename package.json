@@ -37,7 +37,6 @@
     "gulp-rename": "^2.0.0",
     "gulp-stylus": "3.0.1",
     "hastscript": "^9.0.0",
-    "js-yaml": "4.1.0",
     "lodash": "4.17.21",
     "plugin-error": "2.0.1",
     "rehype-stringify": "10.0.0",
@@ -48,6 +47,8 @@
     "the-new-css-reset": "1.11.2",
     "unist-util-inspect": "^8.0.0",
     "unist-util-visit": "5.0.0",
+    "vinyl": "^3.0.0",
+    "yaml": "^2.4.1",
     "zx": "7.2.3"
   },
   "packageManager": "pnpm@8.15.4+sha256.cea6d0bdf2de3a0549582da3983c70c92ffc577ff4410cbf190817ddc35137c2"

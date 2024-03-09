@@ -21,7 +21,6 @@ export default class TaskPipe extends Transform
       return
 
   _transform: (file, encoding, next) ->
-    console.log "TASK Transforming #{@name}"
     TaskPipe.fileCheck file, next
 
     try

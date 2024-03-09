@@ -3,6 +3,7 @@ import path from "node:path"
 import TaskPipe from "~/tasks/pipes/task.coffee"
 
 routes = PLATE_ENV.contentRoutes
+globs = PLATE_ENV.globs.content
 
 class PrettyURLs extends TaskPipe
   @newInstance: (options = {}) =>
@@ -14,7 +15,7 @@ class PrettyURLs extends TaskPipe
     defaultData =
       layout: "not-found"
       permalink: "/404"
-      tmpFile: file.path
+      tmpPath: path.join globs.dest, file.path
 
     Promise.resolve
       data: @getRouteData filePath, defaultData
