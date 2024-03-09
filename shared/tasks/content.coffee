@@ -7,7 +7,7 @@ import PrettyURLs from "~/tasks/pipes/pretty-urls.coffee"
 
 globs = PLATE_ENV.globs.content
 
-export default Content = () ->
+export default Content = (next) ->
   gulp.src globs.src, { base: '.', since: gulp.lastRun(Content) }
     .pipe rename (file) =>
       file.extname = ".html"
@@ -26,6 +26,5 @@ export default Content = () ->
       return
     .pipe PrettyURLs()
     .pipe Markdown()
-    # .pipe Memorize()
+    .pipe Memorize()
     .pipe gulp.dest globs.dest
-

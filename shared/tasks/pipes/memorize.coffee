@@ -4,28 +4,22 @@ import YAML from "yaml"
 
 import TaskPipe from "~/tasks/pipes/task.coffee"
 
+MemorizedStore = {}
+
 class MemorizePipe extends TaskPipe
-  @cache: {}
-
   @newInstance: (options = {}) =>
-    if options.cached?
-      return MemorizePipe.cache
-
     new @ "memorize-pipe", options
 
   _transform: (file, encoding, next) =>
-    MemorizePipe.fileCheck file, next
+    @fileCheck file, next
 
-    unless @dataIsCached file.path
+    unless MemorizePipe.dataIsCached file.path
       @saveDataToCache file.path, file.data
 
     next null, file
 
-  dataIsCached: (filePath = "") ->
-    MemorizePipe.cache[filePath] or false
-
   saveDataToCache: (filePath, contents) ->
-    MemorizePipe.cache[filePath] = contents
+    MemorizedStore[filePath] = contents
     @push @createCacheFile filePath, contents
 
   createCacheFile: (filePath, contents) ->
@@ -33,4 +27,14 @@ class MemorizePipe extends TaskPipe
       path: filePath.replace /(\.[^.]*)$/, ".yml"
       contents: Buffer.from YAML.stringify contents
 
+  @getAllCachedData: () ->
+    MemorizedStore
+
+  @getCachedData: (filePath = "") ->
+    MemorizedStore[filePath] or {}
+
+  @dataIsCached: (filePath = "") ->
+    MemorizedStore[filePath] or false
+
+export Memorized = MemorizePipe.getAllCachedData
 export default MemorizePipe.newInstance
