@@ -26,6 +26,9 @@ dependencies:
   gulp-favicons:
     specifier: 4.0.1
     version: 4.0.1
+  gulp-rename:
+    specifier: ^2.0.0
+    version: 2.0.0
   gulp-stylus:
     specifier: 3.0.1
     version: 3.0.1
@@ -1926,6 +1929,11 @@ packages:
       favicons: 7.1.5
       multipipe: 4.0.0
       vinyl: 3.0.0
+    dev: false
+
+  /gulp-rename@2.0.0:
+    resolution: {integrity: sha512-97Vba4KBzbYmR5VBs9mWmK+HwIf5mj+/zioxfZhOKeXtx5ZjBk57KFlePf5nxq9QsTtFl0ejnHE3zTC9MHXqyQ==}
+    engines: {node: '>=4'}
     dev: false
 
   /gulp-stylus@3.0.1:

@@ -1,3 +1,5 @@
+import path from "node:path"
+
 import TaskPipe from "~/tasks/pipes/task.coffee"
 
 routes = PLATE_ENV.contentRoutes
@@ -7,24 +9,25 @@ class PrettyURLs extends TaskPipe
     new @ "pretty-urls-pipe", options
 
   transpile: ({ file }) ->
-    fileRoute = @cleanFileRoute file.path
+    filePath = @cleanRoute file.path
 
-    data =
+    defaultData =
       layout: "not-found"
       permalink: "/404"
+      tmpFile: file.path
 
+    Promise.resolve
+      data: @getRouteData filePath, defaultData
+
+  getRouteData: (route, data) ->
     for own pattern, details of routes
       patternRegex = @patternToRegex pattern
 
-      if patternMatched = patternRegex.exec(fileRoute)
+      if patternMatched = patternRegex.exec(route)
         data.layout = details.layout if details.layout
         data.permalink = @generateURL(details.permalink, patternMatched.groups)
         break
-
-    Promise.resolve
-      data: data
-      file:
-        path: file.path.replace /\.md$/, ".html"
+    data
 
   patternToRegex: (pattern) ->
     STR_REGEX = pattern.split("/").map (part) ->
@@ -44,9 +47,7 @@ class PrettyURLs extends TaskPipe
       .replace /:(\w+)/g, (match, param) => params[param]
       .replace "*", ""
 
-  cleanFileRoute: (filePath) ->
-    filePath
-      .replace "#{PLATE_ROOT}/content", ""
-      .replace /((\/index)?(\.[^.]+))$/i, ""
+  cleanRoute: (filePath) ->
+    "/#{path.parse(filePath).dir}"
 
 export default PrettyURLs.newInstance

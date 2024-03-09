@@ -1,5 +1,6 @@
-import PluginError from "plugin-error"
+import merge from "lodash/merge.js";
 import { Transform } from "node:stream"
+import PluginError from "plugin-error"
 
 export default class TaskPipe extends Transform
   @newInstance: (options = {}) =>
@@ -20,6 +21,7 @@ export default class TaskPipe extends Transform
       return
 
   _transform: (file, encoding, next) ->
+    console.log "TASK Transforming #{@name}"
     TaskPipe.fileCheck file, next
 
     try
@@ -44,7 +46,6 @@ export default class TaskPipe extends Transform
 
     if transpiled.file
       original = merge original, transpiled.file
-
     original
 
   pipeError: (file, message = "") ->
