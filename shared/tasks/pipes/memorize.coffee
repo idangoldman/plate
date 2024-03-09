@@ -13,7 +13,7 @@ class MemorizePipe extends TaskPipe
   _transform: (file, encoding, next) =>
     @fileCheck file, next
 
-    unless MemorizePipe.dataIsCached file.path
+    unless @dataIsCached file.path
       @saveDataToCache file.path, file.data
 
     next null, file
@@ -27,13 +27,13 @@ class MemorizePipe extends TaskPipe
       path: filePath.replace /(\.[^.]*)$/, ".yml"
       contents: Buffer.from YAML.stringify contents
 
-  @getAllCachedData: () ->
+  getAllCachedData: () ->
     MemorizedStore
 
-  @getCachedData: (filePath = "") ->
+  getCachedData: (filePath = "") ->
     MemorizedStore[filePath] or {}
 
-  @dataIsCached: (filePath = "") ->
+  dataIsCached: (filePath = "") ->
     MemorizedStore[filePath] or false
 
 export Memorized = MemorizePipe.getAllCachedData
