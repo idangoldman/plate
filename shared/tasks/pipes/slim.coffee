@@ -8,17 +8,15 @@ class SlimPipe extends TaskPipe
 
   transpile: ({ file, contents }) ->
     locals = JSON.stringify @options.locals || {}
-    slimContents = contents
 
-    $.cwd = path.join(PLATE_PKG, "tools", "templates");
-    { stdout, stderr } = await $"echo #{slimContents} | ruby slim.rb #{locals}".quiet()
+    $.cwd = path.join(PLATE_PKG, "tools", "slim");
+    console.log locals
+    { stdout, stderr } = await $"echo #{contents} | ruby lib.rb #{locals}".quiet()
 
     if stderr
       throw new Error stderr
 
-    contents = stdout
-    file.path = file.path.replace(/(\.[^.]*)$/, ".html")
-
-    return { file, contents }
+    return
+      contents: stdout
 
 export default SlimPipe.newInstance
