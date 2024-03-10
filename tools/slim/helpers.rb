@@ -4,38 +4,17 @@ require "yaml"
 require "i18n"
 
 module SlimHelpers
-  def self.render_partial(partial_name, locals = {})
-    partial_path = "path/to/partials/_#{partial_name}.slim"
-    self.render_template(partial_path, locals)
-  end
+  extend self
 
-  def self.render_template(template_path, locals = {})
-    Slim::Template.new(template_path).render(OpenStruct.new locals)
-  end
+  def render_template(contents_or_path, locals = {})
+    scope = OpenStruct.new(locals)
+    scope.extend(SlimHelpers)
 
-  def self.initialize_i18n
-    I18n.load_path += Dir['../../locales/*.yml']
-    I18n.default_locale = :en
-  end
-
-  def self.change_locale(lang_code = :en)
-    I18n.locale = lang_code
-  end
-
-  def html_safe(string)
-    string.respond_to?(:html_safe) ? string.html_safe : string
-  end
-
-  def link_to(name, url, options = {})
-    "<a href=\"#{url}\" #{options.map { |k, v| "#{k}=\"#{v}\"" }.join(' ')}>#{name}</a>"
+    Slim::Template.new(contents_or_path).render(scope)
   end
 
   def class_if(condition, class_name)
     condition ? class_name : nil
-  end
-
-  def image_tag(src, alt: "", **attrs)
-    "<img src=\"#{asset_path(src)}\" alt=\"#{alt}\" #{attrs.map { |k, v| "#{k}='#{v}'" }.join(' ')}>"
   end
 
   def javascript_include_tag(src)
@@ -46,8 +25,8 @@ module SlimHelpers
     "<link rel=\"stylesheet\" href=\"#{asset_path(src)}\">"
   end
 
-  def asset_path(src)
-    "/assets/#{src}" # Customize based on your asset directory structure
+  def current_link(name, url, options = {})
+    class_name = options[:class] || ''
+    "<a href='#{url}' class='#{class_name}'>#{name}</a>"
   end
-
 end

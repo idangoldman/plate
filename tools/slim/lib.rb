@@ -6,8 +6,8 @@ require_relative "helpers"
 
 begin
   locals = ARGV[0] ? JSON.parse(ARGV[0]) : {}
-  slim_content = $stdin.read
-  compiled_html = SlimHelpers.render_template(slim_content, OpenStruct.new(locals))
+  contents = $stdin.read
+  compiled_html = SlimHelpers.render_template(contents, locals)
 
   puts compiled_html
 rescue => e
