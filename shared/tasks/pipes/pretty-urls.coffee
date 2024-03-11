@@ -2,30 +2,28 @@ import path from "node:path"
 
 import TaskPipe from "~/tasks/pipes/task.coffee"
 
+globs = PLATE_ENV.globs
 routes = PLATE_ENV.contentRoutes
-globs = PLATE_ENV.globs.content
 
 class PrettyURLs extends TaskPipe
   @newInstance: (options = {}) =>
     new @ "pretty-urls-pipe", options
 
   transpile: ({ file }) ->
-    filePath = @cleanRoute file.path
-
     defaultData =
-      layout: "not-found"
-      permalink: "/404"
-      tmpPath: path.join globs.dest, file.path
+      tmpPath: path.join PLATE_ROOT, globs.content.dest, file.path
 
     Promise.resolve
-      data: @getRouteData filePath, defaultData
+      data: @getRouteData file.path, defaultData
 
-  getRouteData: (route, data) ->
+  getRouteData: (filePath, data) ->
+    route = @cleanRoute filePath
+
     for own pattern, details of routes
       patternRegex = @patternToRegex pattern
 
       if patternMatched = patternRegex.exec(route)
-        data.layout = details.layout if details.layout
+        data.layout = path.join PLATE_ROOT, globs.templates.views, details.layout
         data.permalink = @generateURL(details.permalink, patternMatched.groups)
         break
     data

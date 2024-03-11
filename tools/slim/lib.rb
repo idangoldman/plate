@@ -8,11 +8,11 @@ require "slim/translator"
 require_relative "helpers"
 
 begin
-  contents = Psych.safe_load(STDIN.read, permitted_classes: [Date, Time])
-  compiled_html = SlimHelpers.render_template(contents.layout, contents)
+  # puts $LOAD_PATH
+  $TEMPLATES_PATH = ARGV.first
+  contents = Psych.safe_load(STDIN.read, permitted_classes: [Date, Time], symbolize_names: true)
 
-  STDOUT.puts compiled_html
-  STDOUT.puts contents
+  compiled_html = SlimHelpers.render_template(contents[:layout], contents)
 rescue => e
   STDERR.puts "Error compiling Slim template: #{e.message}"
   exit 1
