@@ -5,12 +5,14 @@ GEM
     i18n (1.14.4)
       concurrent-ruby (~> 1.0)
     json (2.7.1)
+    psych (5.1.2)
+      stringio
     slim (5.2.1)
       temple (~> 0.10.0)
       tilt (>= 2.1.0)
+    stringio (3.1.0)
     temple (0.10.3)
     tilt (2.3.0)
-    yaml (0.3.0)
 
 PLATFORMS
   arm64-darwin-23
@@ -19,8 +21,8 @@ PLATFORMS
 DEPENDENCIES
   i18n
   json
+  psych
   slim
-  yaml
 
 RUBY VERSION
    ruby 3.3.0p0

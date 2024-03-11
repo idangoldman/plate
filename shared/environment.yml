@@ -31,5 +31,5 @@ globs:
     dest: tmp/public/css
 
   templates:
-    src: templates/**/*.{html,slim}
+    src: tmp/content/**/*.yml
     dest: tmp/public

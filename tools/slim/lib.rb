@@ -1,15 +1,18 @@
 #!/usr/bin/env ruby
-require "slim"
+require "date"
+require "time"
 require "json"
+require "psych"
+require "slim"
 require "slim/translator"
 require_relative "helpers"
 
 begin
-  locals = ARGV[0] ? JSON.parse(ARGV[0]) : {}
-  contents = $stdin.read
-  compiled_html = SlimHelpers.render_template(contents, locals)
+  contents = Psych.safe_load(STDIN.read, permitted_classes: [Date, Time])
+  compiled_html = SlimHelpers.render_template(contents.layout, contents)
 
-  puts compiled_html
+  STDOUT.puts compiled_html
+  STDOUT.puts contents
 rescue => e
   STDERR.puts "Error compiling Slim template: #{e.message}"
   exit 1
