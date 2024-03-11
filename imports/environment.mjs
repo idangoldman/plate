@@ -1,4 +1,4 @@
-import { deepFreezeMerge, importEnvironmentFile } from "@/tools/methods.mjs";
+import { deepFreezeMerge, importEnvironmentFile } from "@/tools/methods/index.mjs";
 
 (async () => {
   const PACKAGE_ENV = await importEnvironmentFile(PLATE_PKG, "shared/environment.yml");
