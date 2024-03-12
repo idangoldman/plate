@@ -2,28 +2,27 @@ import { $ } from "zx"
 import TaskPipe from "~/tasks/pipes/task.coffee"
 import path from "node:path"
 
-globs = PLATE_ENV.globs.templates
+{ globs } = PLATE_ENV
 
 class SlimPipe extends TaskPipe
   @newInstance: (options = {}) =>
     new @ "slim-pipe", options
 
   transpile: ({ file, contents }) ->
-    { stdout, stderr } = await @execute contents
-
-    if stderr
-      throw new Error stderr
-
-    # console.log contents
-    console.log stdout
+    template = await @generate contents
 
     Promise.resolve
-      contents: stdout
+      contents: template
 
-  execute: ( contents ) ->
+  generate: ( contents ) ->
+    localesPath = path.join PLATE_ROOT, globs.locales
     slimPath = path.join PLATE_PKG, "tools", "slim"
-    templatesPath = path.join PLATE_ROOT, globs.views
+    templatesPath = path.join PLATE_ROOT, globs.templates.views
 
-    { stdout, stderr } = await $"echo #{contents} | ruby #{slimPath}/lib.rb #{templatesPath}".quiet()
+    print = await $"echo #{contents} | ruby #{slimPath}/lib.rb #{templatesPath} #{localesPath}".quiet()
+
+    if print.stderr
+      throw new Error print.stderr
+    print.stdout
 
 export default SlimPipe.newInstance
