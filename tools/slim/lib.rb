@@ -13,9 +13,15 @@ begin
 
   I18n.load_path += Dir[$LOCALES_PATH]
   I18n.default_locale = :en
+  Slim::Engine.set_options(
+    pretty: true,
+    tabsize: 2,
+    enable_engines: [:ruby, :javascript, :css],
+    streaming: true
+  )
 
   contents = Psych.safe_load(STDIN.read, permitted_classes: [Date, Time], symbolize_names: true)
-  compiled_html = SlimHelpers.render_template(contents[:layout], contents)
+  compiled_html = SlimHelpers.render_template(contents[:layout], contents) { contents[:html] }
 
   puts compiled_html
 rescue => e

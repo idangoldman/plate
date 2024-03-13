@@ -13,13 +13,12 @@ module SlimHelpers
   def render_template(name, locals = {}, &block)
     scope = OpenStruct.new(locals)
     scope.extend(SlimHelpers)
-    render_args = [scope]
 
-    if block_given?
-      render_args << block
+    unless block_given?
+      block = Proc.new {}
     end
 
-    Slim::Template.new("#{name}.slim").render(*render_args)
+    Slim::Template.new("#{name}.slim").render(scope, &block)
   end
 
   def class_if(condition, class_name)
