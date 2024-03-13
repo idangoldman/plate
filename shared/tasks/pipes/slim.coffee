@@ -19,7 +19,7 @@ class SlimPipe extends TaskPipe
     slimPath = path.join PLATE_PKG, "tools", "slim"
     templatesPath = path.join PLATE_ROOT, globs.templates.views
 
-    print = await $"echo #{contents} | ruby #{slimPath}/lib.rb #{templatesPath} #{localesPath}".quiet()
+    print = await $"echo #{contents} | ruby #{slimPath}/boot.rb #{templatesPath} #{localesPath}".quiet()
 
     if print.stderr
       throw new Error print.stderr

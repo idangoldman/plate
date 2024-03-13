@@ -1,24 +1,10 @@
-require "slim"
-require "ostruct"
-require "yaml"
-require "i18n"
+require_relative "utils"
 
 module SlimHelpers
   extend self
 
-  def template(name, locals = {}, &block)
-    render_template("#{$TEMPLATES_PATH}/#{name}", locals, &block)
-  end
-
-  def render_template(name, locals = {}, &block)
-    scope = OpenStruct.new(locals)
-    scope.extend(SlimHelpers)
-
-    unless block_given?
-      block = Proc.new {}
-    end
-
-    Slim::Template.new("#{name}.slim").render(scope, &block)
+  def template(basename, locals = {}, &block)
+    Utils.render_template("#{$TEMPLATES_PATH}/#{basename}", locals, &block)
   end
 
   def class_if(condition, class_name)
