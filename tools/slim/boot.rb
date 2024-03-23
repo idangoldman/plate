@@ -19,9 +19,9 @@ begin
 
   $LOG = Utils.create_logger($SLIM_PATHs[:log])
 
+  Locals::load_yaml($CONTENTS)
   Utils.load_locales($SLIM_PATHs[:locales], :en)
   Utils.set_slim()
-  Locals.load_yaml($CONTENTS)
 
   puts Utils.compile_slim_to_html()
 rescue => e

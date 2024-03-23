@@ -23,7 +23,7 @@ class PrettyURLs extends TaskPipe
       patternRegex = @patternToRegex pattern
 
       if patternMatched = patternRegex.exec(route)
-        data.layout = path.join PLATE_ROOT, globs.templates.views, details.layout
+        data.layout = details.layout
         data.permalink = @generateURL(details.permalink, patternMatched.groups)
         break
     data
