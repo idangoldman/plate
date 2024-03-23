@@ -17,9 +17,9 @@ begin
   $SLIM_PATHs = JSON.parse(ARGV[0], object_class: OpenStruct, symbolize_names: true)
   $CONTENTS = STDIN.read
 
-  $LOG = Utils.create_logger($SLIM_PATHs[:log])
+  $LOG = Utils.create_logger("$SLIM_PATHs[:log]/slim.log")
 
-  Locals::load_yaml($CONTENTS)
+  Locals::setup($CONTENTS, $SLIM_PATHs[:locales], :en)
   Utils.load_locales($SLIM_PATHs[:locales], :en)
   Utils.set_slim()
 

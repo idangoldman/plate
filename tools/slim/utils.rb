@@ -1,19 +1,5 @@
-require "date"
-require "i18n"
-require "ostruct"
-require "psych"
-require "slim"
-require "time"
-
-require_relative "helpers"
-
 module Utils
   extend self
-
-  def load_locales
-    I18n.load_path += Dir[$LOCALES_PATH]
-    I18n.default_locale = :en
-  end
 
   def set_slim
     Slim::Engine.set_options(
@@ -24,25 +10,35 @@ module Utils
     )
   end
 
-  def parse_yaml(contents = "")
-    Psych.safe_load(contents, permitted_classes: [Date, Time], symbolize_names: true)
+  def create_logger(log_file_path = '/tmp/slim.log')
+    unless File.exist?(File.dirname(log_file))
+      FileUtils.mkdir_p(File.dirname(log_file))
+    end
+
+    log = Logger.new(log_file)
+    log.formatter = proc do |severity, datetime, progname, msg|
+      "[#{severity} #{datetime.strftime("%H:%M:%S")}] #{msg}\n"
+    end
+
+    log
   end
 
-  def compile_slim_to_html(contents)
-    data = parse_yaml(contents)
-    compiled_html = render_template(data[:layout], data) { data[:html] }
+  def compile_slim_to_html()
+    scope = TemplateHelpers.new(Locals.new, self.render_template)
+    render_template(scope.locals[:layout], scope) { scope.locals[:content] }
   end
 
-  def render_template(basename, locals = {}, &block)
-    scope = OpenStruct.new(locals)
-    scope.extend(SlimHelpers)
+  def render_template(basename, scope, &block)
+    template_file_path = "#{$SLIM_PATHs[:templates]}/#{basename}.slim"
+
+    unless File.exist?(template_file_path)
+      raise "Slim template not found: #{template_file_path}"
+    end
 
     unless block_given?
       block = Proc.new {}
     end
 
-    Dir.chdir($TEMPLATES_PATH) do
-      Slim::Template.new("#{basename}.slim").render(scope, &block)
-    end
+    Slim::Template.new("#{template_file_path").render(scope, &block)
   end
 end

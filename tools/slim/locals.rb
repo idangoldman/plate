@@ -1,10 +1,10 @@
 class Locals
-  @@data = {}
+  @@attributes = {}
   @missing_keys = []
 
-  def self.load_yaml(contents = "")
-    yaml_sym = Psych.safe_load(contents, permitted_classes: [Date, Time], symbolize_names: true)
-    @@data = default_data_structure(yaml_sym)
+  def self.setup(contents, locales_path, locale = :en)
+    self.load_yaml(contents)
+    self.load_locales(locales_path, locale)
   end
 
   def method_missing(method, *args, &block)
@@ -29,23 +29,23 @@ class Locals
   private
 
   def missing_keys=(key)
-    if [@@missing_keys.first, @@missing_keys.last].include?(key)
-      @@missing_keys = [key]
+    if [@missing_keys.first, @missing_keys.last].include?(key)
+      @missing_keys = [key]
     else
-      @@missing_keys << key
+      @missing_keys << key
     end
   end
 
   def missing_keys
-    @@missing_keys.compact.join(".")
+    @missing_keys.compact.join(".")
   end
 
-  def default_data_structure(sym)
+  def structure_attributes(sym)
     locals = {
       content: sym[:html] || "",
-      layout: sym[:layout] || "default",
-      permalink: sym[:permalink] || "",
       frontmatter: sym[:frontmatter] || {},
+      layout: sym[:layout] || "default",
+      permalink: sym[:permalink] || ""
     }
 
     if sym.has_key?(:frontmatter)
@@ -56,9 +56,19 @@ class Locals
     locals
   end
 
-  def get_data_from(key)
+  def self.get_data_from(key)
     $LOG.info("GET DATA: #{key}")
     keys = key.split(".").map(&:to_sym)
-    @@data.dig(*keys) || ""
+    @@attributes.dig(*keys) || ""
+  end
+
+  def self.load_yaml(contents = "")
+    yaml_sym = Psych.safe_load(contents, permitted_classes: [Date, Time], symbolize_names: true)
+    @@attributes = structure_attributes(yaml_sym)
+  end
+
+  def self.load_locales(path, locale = :en)
+    I18n.load_path += Dir[path]
+    I18n.default_locale = locale
   end
 end
