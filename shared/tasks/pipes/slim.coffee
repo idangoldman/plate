@@ -15,14 +15,18 @@ class SlimPipe extends TaskPipe
       contents: template
 
   generate: ( contents ) ->
-    localesPath = path.join PLATE_ROOT, globs.locales
-    slimPath = path.join PLATE_PKG, "tools", "slim"
-    templatesPath = path.join PLATE_ROOT, globs.templates.views
+    slimBoot = path.join PLATE_PKG, "tools", "slim", "boot.rb"
 
-    print = await $"echo #{contents} | ruby #{slimPath}/boot.rb #{templatesPath} #{localesPath}".quiet()
+    paths = JSON.stringify
+      locales: path.join PLATE_ROOT, globs.locales
+      logs: path.join PLATE_ROOT, globs.logs
+      templates: path.join PLATE_ROOT, globs.templates.views
 
-    if print.stderr
-      throw new Error print.stderr
-    print.stdout
+    capture = await $"echo '#{contents}' | ruby #{slimBoot} #{paths} ".quiet()
+
+    if capture.stderr
+      throw new Error capture.stderr
+
+    capture.stdout
 
 export default SlimPipe.newInstance

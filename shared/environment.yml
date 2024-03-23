@@ -16,6 +16,9 @@ globs:
 
   locales: locales/**/*.yml
 
+  logs: tmp/logs
+
+
   manifest:
     src: images/favicon.svg
     dest: tmp/public/manifest
@@ -33,7 +36,7 @@ globs:
     dest: tmp/public
     views: templates
 
-content_routes:
-  "/:path":
-    layout: "default"
-    permalink: /:path
+# content_routes:
+#   "/:path":
+#     layout: "default"
+#     permalink: /:path
