@@ -2,9 +2,9 @@ class Locals
   @@attributes = {}
   @missing_keys = []
 
-  def self.setup(contents, locales_path, locale = :en)
+  def self.setup(contents, locales_path)
     self.load_yaml(contents)
-    self.load_locales(locales_path, locale)
+    self.load_locales(locales_path)
   end
 
   def method_missing(method, *args, &block)
