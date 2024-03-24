@@ -11,11 +11,11 @@ module Utils
   end
 
   def create_logger(log_file_path = '/tmp/slim.log')
-    unless File.exist?(File.dirname(log_file))
-      FileUtils.mkdir_p(File.dirname(log_file))
+    unless File.exist?(File.dirname(log_file_path))
+      FileUtils.mkdir_p(File.dirname(log_file_path))
     end
 
-    log = Logger.new(log_file)
+    log = Logger.new(log_file_path)
     log.formatter = proc do |severity, datetime, progname, msg|
       "[#{severity} #{datetime.strftime("%H:%M:%S")}] #{msg}\n"
     end
@@ -24,8 +24,8 @@ module Utils
   end
 
   def compile_slim_to_html()
-    scope = TemplateHelpers.new(Locals.new, self.render_template)
-    render_template(scope.locals[:layout], scope) { scope.locals[:content] }
+    scope = TemplateHelpers.new(Locals.new, method(:render_template))
+    # render_template(scope.locals[:layout], scope) { scope.locals[:content] }
   end
 
   def render_template(basename, scope, &block)
@@ -39,6 +39,6 @@ module Utils
       block = Proc.new {}
     end
 
-    Slim::Template.new("#{template_file_path").render(scope, &block)
+    Slim::Template.new(template_file_path).render(scope, &block)
   end
 end

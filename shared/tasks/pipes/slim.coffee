@@ -9,7 +9,11 @@ class SlimPipe extends TaskPipe
     new @ "slim-pipe", options
 
   transpile: ({ file, contents }) ->
-    template = await @generate contents
+    try
+      template = await @generate contents
+    catch error
+      console.error error
+      template = contents
 
     Promise.resolve
       contents: template
@@ -22,10 +26,11 @@ class SlimPipe extends TaskPipe
       logs: path.join PLATE_ROOT, globs.logs
       templates: path.join PLATE_ROOT, globs.templates.views
 
-    capture = await $"echo '#{contents}' | ruby #{slimBoot} #{paths} ".quiet()
+    $.verbose = false
+    capture = await $"echo #{contents} | ruby #{slimBoot} #{paths}"
 
     if capture.stderr
-      throw new Error capture.stderr
+      throw new Error capture
 
     capture.stdout
 

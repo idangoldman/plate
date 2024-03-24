@@ -40,7 +40,7 @@ class Locals
     @missing_keys.compact.join(".")
   end
 
-  def structure_attributes(sym)
+  def self.structure_attributes(sym)
     locals = {
       content: sym[:html] || "",
       frontmatter: sym[:frontmatter] || {},
@@ -64,7 +64,7 @@ class Locals
 
   def self.load_yaml(contents = "")
     yaml_sym = Psych.safe_load(contents, permitted_classes: [Date, Time], symbolize_names: true)
-    @@attributes = structure_attributes(yaml_sym)
+    @@attributes = self.structure_attributes(yaml_sym)
   end
 
   def self.load_locales(path, locale = :en)
