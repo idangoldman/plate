@@ -7,15 +7,15 @@ class Locals
     self.load_locales(locales_path)
   end
 
-  def method_missing(method, *args, &block)
-    value_from(method.to_s)
+  def method_missing(name, *args, &block)
+    if name.to_sym == :[]
+      @@attributes.dig(*args)
+    end
   end
 
   private
 
   def value_from(key)
-    $LOG.info("GET DATA: #{key}")
-
     if missing_keys(key)
       value = I18n.t(missing_keys, default: self.attribute_from(missing_keys))
     end
@@ -43,7 +43,6 @@ class Locals
   end
 
   def self.attribute_from(key)
-    $LOG.info("GET DATA: #{key}")
     keys = key.split(".").map(&:to_sym)
     @@attributes.dig(*keys) || ""
   end

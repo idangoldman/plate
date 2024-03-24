@@ -2,7 +2,6 @@ class TemplateHelpers
   attr_reader :locals, :render
 
   def initialize(locals, render)
-    # OpenStruct.new.extend(TemplateHelpers)
     @locals = locals
     @render = render
   end
