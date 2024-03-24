@@ -8,25 +8,27 @@ class Locals
   end
 
   def method_missing(method, *args, &block)
-    self.get(method.to_s)
+    value_from(method.to_s)
   end
 
-  def get(key)
+  private
+
+  def value_from(key)
     $LOG.info("GET DATA: #{key}")
 
     if missing_keys(key)
-      value = I18n.t(missing_keys, default: get_data_from(missing_keys))
+      value = I18n.t(missing_keys, default: self.attribute_from(missing_keys))
     end
 
     # if value.nil?
     #   missing_keys(key)
-    #   value = I18n.t(missing_keys, default: get_data_from(missing_keys))
+    #   value = I18n.t(missing_keys, default: self.attribute_from(missing_keys))
     # end
 
-    if value.is_a?(Hash) then Locals else value end
+    # TODO: only return self if value is a hash with child hashes?
+    # if it's a hash return as OpenStruct?
+    if value.is_a?(Hash) then self else value end
   end
-
-  private
 
   def missing_keys=(key)
     if [@missing_keys.first, @missing_keys.last].include?(key)
@@ -40,31 +42,23 @@ class Locals
     @missing_keys.compact.join(".")
   end
 
-  def self.structure_attributes(sym)
-    locals = {
-      content: sym[:html] || "",
-      frontmatter: sym[:frontmatter] || {},
-      layout: sym[:layout] || "default",
-      permalink: sym[:permalink] || ""
-    }
-
-    if sym.has_key?(:frontmatter)
-      locals.merge!(sym[:frontmatter])
-    end
-
-    # JSON.parse(locals.to_json, object_class: OpenStruct)
-    locals
-  end
-
-  def self.get_data_from(key)
+  def self.attribute_from(key)
     $LOG.info("GET DATA: #{key}")
     keys = key.split(".").map(&:to_sym)
     @@attributes.dig(*keys) || ""
   end
 
+  def self.structure_attributes(sym)
+    @@attributes = sym.slice(:html, :layout, :permalink)
+
+    if sym.key?(:frontmatter)
+      @@attributes.merge!(sym[:frontmatter])
+    end
+  end
+
   def self.load_yaml(contents = "")
     yaml_sym = Psych.safe_load(contents, permitted_classes: [Date, Time], symbolize_names: true)
-    @@attributes = self.structure_attributes(yaml_sym)
+    self.structure_attributes(yaml_sym)
   end
 
   def self.load_locales(path, locale = :en)

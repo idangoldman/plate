@@ -32,7 +32,7 @@ module Utils
     template_file_path = "#{$SLIM_PATHs[:templates]}/#{basename}.slim"
 
     unless File.exist?(template_file_path)
-      raise "Slim template not found: #{template_file_path}"
+      raise "'#{template_file_path}' template not found"
     end
 
     unless block_given?
