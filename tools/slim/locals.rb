@@ -1,67 +1,71 @@
 class Locals
-  @@attributes = {}
-  @missing_keys = []
+  attr_reader :head
+  attr_reader :attributes_tree
 
-  def self.setup(contents, locales_path)
-    self.load_yaml(contents)
-    self.load_locales(locales_path)
+  @@attributes_tree = {}
+
+  def self.load(contents)
+    loaded_yaml = Psych.safe_load(contents, permitted_classes: [Date, Time], symbolize_names: true)
+    @@attributes_tree = self.deep_openstruct_from(loaded_yaml)
+  end
+
+  def initialize
+    @head = @@attributes_tree.deep_dup
   end
 
   def method_missing(name, *args, &block)
-    if name.to_sym == :[]
-      @@attributes.dig(*args)
-    end
+    missing_name = define_missing_name(name, args)
+    attributes_from(missing_name) || super
+  end
+
+  def respond_to_missing?(name, include_private = false)
+    missing_name = self.define_missing_name(name, [])
+    @head.respond_to?(missing_name) || super
   end
 
   private
 
-  def value_from(key)
-    if missing_keys(key)
-      value = I18n.t(missing_keys, default: self.attribute_from(missing_keys))
-    end
-
-    # if value.nil?
-    #   missing_keys(key)
-    #   value = I18n.t(missing_keys, default: self.attribute_from(missing_keys))
-    # end
-
-    # TODO: only return self if value is a hash with child hashes?
-    # if it's a hash return as OpenStruct?
-    if value.is_a?(Hash) then self else value end
+  def head_reset_return
+    value = @head.deep_dup
+    @head = @@attributes_tree.deep_dup
+    value
   end
 
-  def missing_keys=(key)
-    if [@missing_keys.first, @missing_keys.last].include?(key)
-      @missing_keys = [key]
+  def define_missing_name(name, args)
+    defined_name = if name.to_sym == :[]
+                    args.first
+                  else
+                    name
+                  end
+
+    defined_name.to_s
+  end
+
+  def attributes_from(name)
+    unless @head.respond_to?(name)
+      head_reset_return()
+      return nil
+    end
+
+    @head = @head.dig(name)
+
+    unless [Hash, Array, OpenStruct].include?(@head.class)
+      return head_reset_return()
+    end
+
+    self
+  end
+
+  def self.deep_openstruct_from(object)
+    case object
+    when Hash
+      object.each_with_object(OpenStruct.new) do |(key, value), result|
+        result[key] = deep_openstruct_from(value)
+      end
+    when Array
+      object.map { |element| deep_openstruct_from(element) }
     else
-      @missing_keys << key
+      object
     end
-  end
-
-  def missing_keys
-    @missing_keys.compact.join(".")
-  end
-
-  def self.attribute_from(key)
-    keys = key.split(".").map(&:to_sym)
-    @@attributes.dig(*keys) || ""
-  end
-
-  def self.structure_attributes(sym)
-    @@attributes = sym.slice(:html, :layout, :permalink)
-
-    if sym.key?(:frontmatter)
-      @@attributes.merge!(sym[:frontmatter])
-    end
-  end
-
-  def self.load_yaml(contents = "")
-    yaml_sym = Psych.safe_load(contents, permitted_classes: [Date, Time], symbolize_names: true)
-    self.structure_attributes(yaml_sym)
-  end
-
-  def self.load_locales(path, locale = :en)
-    I18n.load_path += Dir[path]
-    I18n.default_locale = locale
   end
 end

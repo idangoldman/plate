@@ -24,7 +24,7 @@ module Utils
   end
 
   def compile_slim_to_html()
-    scope = TemplateHelpers.new(Locals.new, method(:render_template))
+    scope = TemplateHelpers.new(Locals, method(:render_template))
     # render_template(scope.locals[:layout], scope) { scope.locals[:content] }
   end
 

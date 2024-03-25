@@ -6,12 +6,12 @@ class TemplateHelpers
     @render = render
   end
 
-  def method_missing(method, *args, &block)
-    @locals.send(method, *args, &block)
+  def method_missing(name, *args, &block)
+    @locals.send(name, *args, &block) || super
   end
 
-  def respond_to_missing?(method_name, include_private = false)
-    @locals.respond_to?(method_name)
+  def respond_to_missing?(name, include_private = false)
+    @locals.respond_to?(name) || super
   end
 
   def template(basename, &block)

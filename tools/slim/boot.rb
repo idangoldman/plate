@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
+require "active_support/all"
 require "date"
 require "fileutils"
 require "i18n"
@@ -8,7 +9,6 @@ require "logger"
 require "ostruct"
 require "psych"
 require "slim"
-require "time"
 
 require_relative "template_helpers"
 require_relative "locals"
@@ -19,7 +19,7 @@ begin
   $SLIM_PATHs = JSON.parse(ARGV[0], object_class: OpenStruct, symbolize_names: true)
   $LOG = Utils.create_logger("#{$SLIM_PATHs[:logs]}/slim.log")
 
-  Locals::setup($CONTENTS, $SLIM_PATHs[:locales])
+  Locals::load($CONTENTS)
   Utils.set_slim()
 
   puts Utils.compile_slim_to_html()
