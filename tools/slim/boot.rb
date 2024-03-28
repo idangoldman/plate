@@ -10,17 +10,16 @@ require "ostruct"
 require "psych"
 require "slim"
 
-require_relative "template_helpers"
-require_relative "locals"
-require_relative "utils"
+Dir[File.join(File.dirname(__FILE__), "*.rb")].each do |file|
+  require file unless file == __FILE__
+end
 
 begin
-  $CONTENTS = STDIN.read
-  $SLIM_PATHs = JSON.parse(ARGV[0], object_class: OpenStruct, symbolize_names: true)
-  $LOG = Utils.create_logger("#{$SLIM_PATHs[:logs]}/slim.log")
+  $SLIM_PATHs = JSON.parse(ARGV[0], symbolize_names: true)
+  $LOG = Utils.create_logger("slim.log")
 
-  Locals::load($CONTENTS)
   Utils.set_slim()
+  Utils.set_locales()
 
   puts Utils.compile_slim_to_html()
 rescue => e

@@ -1,6 +1,15 @@
 module Utils
   extend self
 
+  def set_locales
+    I18n.load_path = [
+      Dir[$SLIM_PATHs[:locales]],
+      Dir[$SLIM_PATHs[:contents]]
+    ]
+
+    I18n.default_locale = :en
+  end
+
   def set_slim
     Slim::Engine.set_options(
       enable_engines: [:ruby, :javascript, :css],
@@ -10,21 +19,23 @@ module Utils
     )
   end
 
-  def create_logger(log_file_path = '/tmp/slim.log')
-    unless File.exist?(File.dirname(log_file_path))
-      FileUtils.mkdir_p(File.dirname(log_file_path))
+  def create_logger(log_file_path = 'slim.log')
+    log_full_path = File.join($SLIM_PATHs[:logs], log_file_path)
+
+    unless File.exist?(File.dirname(log_full_path))
+      FileUtils.mkdir_p(File.dirname(log_full_path))
     end
 
-    log = Logger.new(log_file_path)
+    log = Logger.new(log_full_path)
     log.formatter = proc do |severity, datetime, progname, msg|
-      "[#{severity} #{datetime.strftime("%H:%M:%S")}] #{msg}\n"
+      "[#{datetime.strftime("%H:%M:%S")} #{severity}] #{msg}\n"
     end
 
     log
   end
 
   def compile_slim_to_html()
-    scope = TemplateHelpers.new(Locals, method(:render_template))
+    # scope = TemplateHelpers.new(Locals, method(:render_template))
     # render_template(scope.locals[:layout], scope) { scope.locals[:content] }
   end
 
