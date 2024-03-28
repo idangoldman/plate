@@ -9,6 +9,7 @@ globs = PLATE_ENV.globs.content
 
 export default Content = (next) ->
   gulp.src globs.src, { base: '.', since: gulp.lastRun(Content) }
+    # TODO: refactor this pipe as part of the PrettyURLs pipe
     .pipe rename (file) =>
       file.extname = ".html"
 

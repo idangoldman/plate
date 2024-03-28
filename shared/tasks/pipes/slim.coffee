@@ -10,25 +10,26 @@ class SlimPipe extends TaskPipe
 
   transpile: ({ file, contents }) ->
     try
-      template = await @generate contents
+      renderedContents = await @generate file.path
     catch error
       console.error error
-      template = contents
+      renderedContents = contents
 
     Promise.resolve
-      contents: template
+      contents: renderedContents
 
-  generate: ( contents ) ->
+  generate: ( filePath ) ->
     slimBoot = path.join PLATE_PKG, "tools", "slim", "boot.rb"
 
     paths = JSON.stringify
+      contents: filePath
       locales: path.join PLATE_ROOT, globs.locales
       logs: path.join PLATE_ROOT, globs.logs
       templates: path.join PLATE_ROOT, globs.templates.views
 
     $.verbose = false
-    capture = await $"echo #{contents} | ruby #{slimBoot} #{paths}"
-
+    capture = await $"ruby #{slimBoot} #{paths}"
+    # console.log capture
     if capture.stderr
       throw new Error capture
 

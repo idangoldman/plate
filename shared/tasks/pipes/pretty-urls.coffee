@@ -11,7 +11,8 @@ class PrettyURLs extends TaskPipe
 
   transpile: ({ file }) ->
     defaultData =
-      tmpPath: path.join PLATE_ROOT, globs.content.dest, file.path
+      layout: "default"
+      permalink: path.join PLATE_ROOT, globs.content.dest, file.path
 
     Promise.resolve
       data: @getRouteData file.path, defaultData
@@ -26,6 +27,7 @@ class PrettyURLs extends TaskPipe
         data.layout = details.layout
         data.permalink = @generateURL(details.permalink, patternMatched.groups)
         break
+
     data
 
   patternToRegex: (pattern) ->

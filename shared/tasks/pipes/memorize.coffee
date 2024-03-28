@@ -19,6 +19,9 @@ class MemorizePipe extends TaskPipe
     next null, file
 
   saveDataToCache: (filePath, contents) ->
+    # TODO: remove this hack when working on locales task support
+    contents = { en: { page: contents } }
+
     MemorizedStore[filePath] = contents
     @push @createCacheFile filePath, contents
 
