@@ -1,6 +1,7 @@
 import { inspect } from "unist-util-inspect"
 import { remark } from "remark"
 import { visit } from "unist-util-visit"
+import merge from "lodash/merge.js"
 import rehypeStringify from "rehype-stringify"
 import remarkFrontmatter from "remark-frontmatter"
 import remarkParse from "remark-parse"
@@ -34,11 +35,15 @@ class MarkdownPipe extends TaskPipe
 
     # console.log processedFile
 
+    markdownData =
+      assets: processedFile.assets || []
+      html: processedFile.value
+
+    if processedFile.frontmatter
+      markdownData = merge markdownData, processedFile.frontmatter
+
     Promise.resolve
       contents: processedFile.value
-      data:
-        assets: processedFile.assets || []
-        frontmatter: processedFile.frontmatter || {}
-        html: processedFile.value
+      data: markdownData
 
 export default MarkdownPipe.newInstance
