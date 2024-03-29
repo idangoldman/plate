@@ -1,8 +1,8 @@
 module Slim
   class Dictionary < Filter
-    def on_slim_output(escape, code, content)
-      capture = code.match(/(?<method>^[a-z][a-z\.0-9_]+)(?:\((?<args>.*)\))?/i)
-      code = replace_dots_with_i18n(code, capture) if I18n.exists?(capture[:method])
+    def on_slim_output( escape, code, content )
+      capture = code.match( /(?<method>^[a-z][a-z\.0-9_]+)(?:\((?<args>.*)\))?/i )
+      code = replace_dots_with_i18n( code, capture ) if I18n.exists?( capture[:method] )
 
       LOG.info "
         ON_SLIM_OUTPUT
@@ -10,12 +10,12 @@ module Slim
         CODE:    #{code.inspect}
         CONTENT: #{content.inspect}
       "
-      [:slim, :output, escape, code, compile(content)]
+      [:slim, :output, escape, code, compile( content )]
     end
 
     private
 
-    def replace_dots_with_i18n(code, captured)
+    def replace_dots_with_i18n( code, captured )
       captured => { method:, args: }
 
       if args.present?

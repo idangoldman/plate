@@ -9,13 +9,13 @@ require "ostruct"
 require "psych"
 require "slim"
 
-Dir[File.join(File.dirname(__FILE__), "*.rb")].each do |file|
+Dir[File.join( File.dirname( __FILE__ ), "*.rb" )].each do |file|
   require file unless file == __FILE__
 end
 
 begin
-  SLIM_PATHs = JSON.parse(ARGV[0], symbolize_names: true)
-  LOG = Utils.create_logger("slim.log")
+  SLIM_PATHs = JSON.parse( ARGV[0], symbolize_names: true )
+  LOG = Utils.create_logger( "slim.log" )
 
   Utils.set_slim
   Utils.set_locales
@@ -24,7 +24,7 @@ begin
 rescue StandardError => e
   warn "
     Error compiling Slim template: #{e.message}
-    #{e.backtrace.join("\n")}
+    #{e.backtrace.join( "\n" )}
   "
   exit 1
 end
