@@ -1,17 +1,9 @@
 class TemplateHelpers
-  attr_reader :locals, :render
+  attr_reader :render
 
-  def initialize(locals, render)
-    @locals = locals
+
+  def initialize(render)
     @render = render
-  end
-
-  def method_missing(name, *args, &block)
-    @locals.send(name, *args, &block) || super
-  end
-
-  def respond_to_missing?(name, include_private = false)
-    @locals.respond_to?(name) || super
   end
 
   def template(basename, &block)

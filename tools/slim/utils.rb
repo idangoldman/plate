@@ -13,9 +13,10 @@ module Utils
   def set_slim
     Slim::Engine.set_options(
       enable_engines: [:ruby, :javascript, :css],
+      # logic_less: true,
       pretty: true,
       streaming: true,
-      tabsize: 2,
+      tabsize: 2
     )
   end
 
@@ -35,8 +36,8 @@ module Utils
   end
 
   def compile_slim_to_html()
-    # scope = TemplateHelpers.new(Locals, method(:render_template))
-    # render_template(scope.locals[:layout], scope) { scope.locals[:content] }
+    scope = TemplateHelpers.new(method(:render_template))
+    render_template(I18n.t('page.layout'), scope) { I18n.t('page.html') }
   end
 
   def render_template(basename, scope, &block)
