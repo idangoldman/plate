@@ -1,10 +1,8 @@
 module Utils
-  extend self
-
   def set_locales
     I18n.load_path = [
-      Dir[$SLIM_PATHs[:locales]],
-      Dir[$SLIM_PATHs[:contents]]
+      Dir[SLIM_PATHs[:locales]],
+      Dir[SLIM_PATHs[:contents]]
     ]
 
     I18n.default_locale = :en
@@ -12,7 +10,7 @@ module Utils
 
   def set_slim
     Slim::Engine.set_options(
-      enable_engines: [:ruby, :javascript, :css],
+      enable_engines: %i[ruby javascript css],
       # logic_less: true,
       pretty: true,
       streaming: true,
@@ -20,36 +18,29 @@ module Utils
     )
   end
 
-  def create_logger(log_file_path = 'slim.log')
-    log_full_path = File.join($SLIM_PATHs[:logs], log_file_path)
-
-    unless File.exist?(File.dirname(log_full_path))
-      FileUtils.mkdir_p(File.dirname(log_full_path))
-    end
+  def create_logger(log_file_path = "slim.log")
+    log_full_path = File.join(SLIM_PATHs[:logs], log_file_path)
+    FileUtils.mkdir_p(File.dirname(log_full_path))
 
     log = Logger.new(log_full_path)
-    log.formatter = proc do |severity, datetime, progname, msg|
-      "[#{datetime.strftime("%H:%M:%S")} #{severity}] #{msg}\n"
+    log.formatter = proc do |severity, datetime, _progname, msg|
+      "[#{datetime.strftime('%H:%M:%S')} #{severity}] #{msg}\n"
     end
 
     log
   end
 
-  def compile_slim_to_html()
+  def compile_slim_to_html
     scope = TemplateHelpers.new(method(:render_template))
-    render_template(I18n.t('page.layout'), scope) { I18n.t('page.html') }
+    render_template(I18n.t("page.layout"), scope) { I18n.t("page.html") }
   end
 
   def render_template(basename, scope, &block)
-    template_file_path = "#{$SLIM_PATHs[:templates]}/#{basename}.slim"
+    template_file_path = "#{SLIM_PATHs[:templates]}/#{basename}.slim"
 
-    unless File.exist?(template_file_path)
-      raise "'#{template_file_path}' template not found"
-    end
+    raise "'#{template_file_path}' template not found" unless File.exist?(template_file_path)
 
-    unless block_given?
-      block = Proc.new {}
-    end
+    block = proc {} unless block_given?
 
     Slim::Template.new(template_file_path).render(scope, &block)
   end

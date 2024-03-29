@@ -1,0 +1,28 @@
+require:
+  - rubocop-performance
+  - rubocop-thread_safety
+
+AllCops:
+  TargetRubyVersion: 3.3.0
+  NewCops: enable
+  Include:
+    - 'Gemfile'
+    - 'tools/slim/**/*.rb'
+
+Lint:
+  Syntax: true
+
+Metrics/LineLength:
+  Max: 120
+Metrics/MethodLength:
+  Max: 15
+Metrics/ClassLength:
+  Max: 100
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/Documentation:
+  Enabled: false
