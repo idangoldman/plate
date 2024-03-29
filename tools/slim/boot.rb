@@ -9,7 +9,7 @@ require "ostruct"
 require "psych"
 require "slim"
 
-Dir[File.join( File.dirname( __FILE__ ), "*.rb" )].each do |file|
+Dir[File.join( File.dirname( __FILE__ ), "**/*.rb" )].each do |file|
   require file unless file == __FILE__
 end
 

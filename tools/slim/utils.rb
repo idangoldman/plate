@@ -20,7 +20,7 @@ module Utils
 
   def self.create_logger( log_file_path = "slim.log" )
     log_full_path = File.join( SLIM_PATHs[:logs], log_file_path )
-    FileUtils.mkdir_p( File.dirname( log_full_path ))
+    FileUtils.mkdir_p( File.dirname( log_full_path ) )
 
     log = Logger.new( log_full_path )
     log.formatter = proc do |severity, datetime, _progname, msg|
@@ -31,7 +31,7 @@ module Utils
   end
 
   def self.compile_slim_to_html
-    render_template( I18n.t( "page.layout" ), Helpers.new ) { I18n.t( "page.html" ) }
+    render_template( I18n.t( "page.layout" ), PagePresenter.new ) { I18n.t( "page.html" ) }
   end
 
   def self.render_template( basename, scope, &block )
