@@ -4,20 +4,18 @@ server:
   port: 1234
 
 globs:
+  clean: tmp/**/*
+  locales: locales/**/*.yml
+  logs: tmp/logs
+  public: tmp/public
+
   assets:
     src: assets/**/*
     dest: tmp/public
 
-  clean: tmp/**/*
-
   content:
     src: content/**/*.md
     dest: tmp/content
-
-  locales: locales/**/*.yml
-
-  logs: tmp/logs
-
 
   manifest:
     src: images/favicon.svg
