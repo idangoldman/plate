@@ -31,8 +31,7 @@ module Utils
   end
 
   def self.compile_slim_to_html
-    scope = TemplateHelpers.new(method(:render_template))
-    render_template(I18n.t("page.layout"), scope) { I18n.t("page.html") }
+    render_template(I18n.t("page.layout"), Helpers.new) { I18n.t("page.html") }
   end
 
   def self.render_template(basename, scope, &block)

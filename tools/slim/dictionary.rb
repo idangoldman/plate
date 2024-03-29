@@ -13,6 +13,8 @@ module Slim
       [:slim, :output, escape, code, compile(content)]
     end
 
+    private
+
     def replace_dots_with_i18n(code, captured)
       captured => { method:, args: }
 
@@ -25,4 +27,4 @@ module Slim
   end
 end
 
-Slim::Engine.before Slim::EndInserter, Slim::Dictionary
+Slim::Engine.before Slim::Controls, Slim::Dictionary

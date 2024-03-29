@@ -1,12 +1,6 @@
-class TemplateHelpers
-  attr_reader :render
-
-  def initialize(render)
-    @render = render
-  end
-
+class Helpers
   def template(basename, &)
-    @render.call(basename, self, &)
+    Utils.render_template(basename, self, &)
   end
 
   def class_if(condition, class_name)
