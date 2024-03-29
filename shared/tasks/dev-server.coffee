@@ -4,8 +4,9 @@ import browserSync from "browser-sync"
 
 export Serve = (next) ->
   browserSync.init
-    server: globs.public
     port: server.port
+    server: globs.public
+    startPath: server.path
   next()
 
 export Reload = (next) ->

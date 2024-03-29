@@ -1,6 +1,7 @@
 server:
   hostname: localhost
   ip: 0.0.0.0
+  path: /
   port: 1234
 
 globs:
@@ -22,12 +23,13 @@ globs:
     dest: tmp/public/manifest
 
   scripts:
+    outputFile: site.js
     src: scripts/*.{coffee,js,cjs,mjs}
-    dest: tmp/public/js
+    dest: tmp/public/assets/scripts
 
   styles:
     src: styles/*.{css,styl}
-    dest: tmp/public/css
+    dest: tmp/public/assets/styles
 
   templates:
     src: tmp/content/**/*.yml
