@@ -1,5 +1,5 @@
 module Utils
-  def set_locales
+  def self.set_locales
     I18n.load_path = [
       Dir[SLIM_PATHs[:locales]],
       Dir[SLIM_PATHs[:contents]]
@@ -8,7 +8,7 @@ module Utils
     I18n.default_locale = :en
   end
 
-  def set_slim
+  def self.set_slim
     Slim::Engine.set_options(
       enable_engines: %i[ruby javascript css],
       # logic_less: true,
@@ -18,7 +18,7 @@ module Utils
     )
   end
 
-  def create_logger(log_file_path = "slim.log")
+  def self.create_logger(log_file_path = "slim.log")
     log_full_path = File.join(SLIM_PATHs[:logs], log_file_path)
     FileUtils.mkdir_p(File.dirname(log_full_path))
 
@@ -30,12 +30,12 @@ module Utils
     log
   end
 
-  def compile_slim_to_html
+  def self.compile_slim_to_html
     scope = TemplateHelpers.new(method(:render_template))
     render_template(I18n.t("page.layout"), scope) { I18n.t("page.html") }
   end
 
-  def render_template(basename, scope, &block)
+  def self.render_template(basename, scope, &block)
     template_file_path = "#{SLIM_PATHs[:templates]}/#{basename}.slim"
 
     raise "'#{template_file_path}' template not found" unless File.exist?(template_file_path)
