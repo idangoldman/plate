@@ -18,7 +18,7 @@ WEB_MANIFEST =
     appleIcon: true
     appleStartup: true
     favicons: true
-    windows: true
+    windows: false
     yandex: true
   lang: locale.en.meta.lang
   manifestMaskable: false
