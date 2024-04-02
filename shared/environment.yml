@@ -28,6 +28,7 @@ globs:
     dest: tmp/public/assets/scripts
 
   styles:
+    assets: assets
     src: styles/*.{css,styl}
     dest: tmp/public/assets/styles
 

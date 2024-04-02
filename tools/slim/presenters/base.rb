@@ -16,23 +16,17 @@ class PresenterBase
   end
 
   def localized?( value )
-    return true if value.is_a?(Date) || value.is_a?(DateTime) || value.is_a?(Time)
-    return true if value.is_a?(String) && formatted_date?(value)
-    return true if value.is_a?(Integer) && timestamp?(value)
-    false
-  end
-
-  def formatted_date?( value )
-    DateTime.parse( value )
-    true
-  rescue ArgumentError
-    false
-  end
-
-  def timestamp?( value )
-    Time.at( value )
-    true
-  rescue TypeError, ArgumentError
+    case value
+    when Date, DateTime, Time
+      true
+    when String
+      !!DateTime.parse( value )
+    when Integer
+      !!Time.at( value )
+    else
+      raise ArgumentError, "Invalid value type"
+    end
+  rescue ArgumentError, TypeError
     false
   end
 end

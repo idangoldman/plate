@@ -14,4 +14,5 @@ group :development do
   gem "rubocop-performance"
   gem "rubocop-thread_safety"
   gem "ruby-lsp"
+  gem "slim_lint"
 end

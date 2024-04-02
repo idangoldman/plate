@@ -9,5 +9,6 @@ export default Styles = () ->
       include: [
         path.join PLATE_ROOT, globs.src
         path.join PLATE_ROOT, "node_modules"
+        path.join PLATE_ROOT, globs.assets
       ]
     .pipe gulp.dest globs.dest
