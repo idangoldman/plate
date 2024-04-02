@@ -3,12 +3,10 @@ import stylus from "gulp-stylus"
 
 globs = PLATE_ENV.globs.styles
 
+includesMap = globs.includes.map (include) -> path.join PLATE_ROOT, include
+
 export default Styles = () ->
   gulp.src globs.src
     .pipe stylus
-      include: [
-        path.join PLATE_ROOT, globs.src
-        path.join PLATE_ROOT, "node_modules"
-        path.join PLATE_ROOT, globs.assets
-      ]
+      include: includesMap
     .pipe gulp.dest globs.dest

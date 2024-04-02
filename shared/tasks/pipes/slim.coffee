@@ -25,7 +25,7 @@ class SlimPipe extends TaskPipe
       contents: filePath
       locales: path.join PLATE_ROOT, globs.locales
       logs: path.join PLATE_ROOT, globs.logs
-      templates: path.join PLATE_ROOT, globs.templates.views
+      templates: path.join PLATE_ROOT, globs.templates.src
 
     $.verbose = false
     capture = await $"ruby #{slimBoot} #{paths}"

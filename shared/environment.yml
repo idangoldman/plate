@@ -28,14 +28,17 @@ globs:
     dest: tmp/public/assets/scripts
 
   styles:
-    assets: assets
-    src: styles/*.{css,styl}
+    includes:
+      - node_modules
+      - styles
+      - assets
+    src: styles/site.styl
     dest: tmp/public/assets/styles
 
   templates:
-    src: tmp/content/**/*.yml
+    content: tmp/content/**/*.yml
+    src: templates
     dest: tmp/public
-    views: templates
 
 # content_routes:
 #   "/:path":

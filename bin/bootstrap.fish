@@ -14,7 +14,7 @@ function project_bootstrap --description 'Create a basic project structure'
     touch README.md
 
     # Copy files
-    cp -rv "$DOTFILES_FOLDER/templates/blah-plate/" .
+    cp -rv "$DOTFILES_FOLDER/templates/plate/" .
 
     # Replace placeholders in LICENSE.txt
     # set current_year (date "+%Y")

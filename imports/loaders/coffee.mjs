@@ -8,8 +8,7 @@ export async function load(url, context, nextLoad) {
     const { source: rawSource } = await nextLoad(url, { ...context, format });
     const transformedSource = coffeescript.compile(rawSource.toString(), {
       filename: url,
-      inlineMap: true,
-      sourceMap: false,
+      inlineMap: true
     });
 
     return {

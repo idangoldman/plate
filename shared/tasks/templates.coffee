@@ -4,7 +4,7 @@ import rename from "gulp-rename"
 globs = PLATE_ENV.globs.templates
 
 export default Templates = () ->
-  gulp.src globs.src, { since: gulp.lastRun(Templates) }
+  gulp.src globs.content
     .pipe slim()
     .pipe rename (file) =>
       file.extname = ".html"
