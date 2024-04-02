@@ -9,4 +9,5 @@ export default Styles = () ->
   gulp.src globs.src
     .pipe stylus
       include: includesMap
+      'include css': true
     .pipe gulp.dest globs.dest
