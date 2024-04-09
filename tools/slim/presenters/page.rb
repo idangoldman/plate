@@ -1,21 +1,19 @@
-class PagePresenter < PresenterBase
-  def initialize
-    super( i18n_base_path: "page" )
-  end
+class PagePresenter < BasePresenter
+  attr_reader :date, :html, :permalink, :tags, :title
 
-  def template( basename, & )
-    Utils.render_template( basename, self, & )
-  end
+  i18n "page"
 
-  def class_if( condition, class_name )
-    condition ? class_name : nil
-  end
+  prepare :date, format: "YYYY-MM-DD"
+  prepare :html, escape: false, alias: :content
+  prepare :permalink, encode: true
+  prepare :tags, default: []
+  prepare :title, titleize: true
 
   def current_page?( url )
-    t( "permalink" ) == url
+    @permalink == url
   end
 
-  def current_page_class( url, default_class = "current" )
+  def current_class( url, default_class = "current" )
     class_if( current_page?( url ), default_class )
   end
 end
