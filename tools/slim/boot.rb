@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require "active_support/all"
+require "cgi"
 require "date"
 require "fileutils"
 require "json"
