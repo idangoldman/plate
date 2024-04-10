@@ -1,5 +1,5 @@
-class PagePresenter < Presenter
-  i18n "page"
+class PagePresenter < Presenter::Base
+  lexicon "page"
 
   properties :date, :html, :permalink, :tags, :title
 
