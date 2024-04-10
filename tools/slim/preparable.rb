@@ -1,4 +1,4 @@
-# escape, encode, parse, sanitize, normalize, serialize, validate
+# format escape, encode, parse, sanitize, normalize, serialize, validate
 module Preparable
   def self.included( base )
     base.extend( PreparableMethods )
