@@ -1,7 +1,7 @@
-class PagePresenter < BasePresenter
-  attr_reader :date, :html, :permalink, :tags, :title
-
+class PagePresenter < Presenter
   i18n "page"
+
+  properties :date, :html, :permalink, :tags, :title
 
   prepare :date, format: "YYYY-MM-DD"
   prepare :html, escape: false, alias: :content

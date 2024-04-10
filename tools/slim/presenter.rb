@@ -1,4 +1,7 @@
-class BasePresenter
+class Presenter
+  include Preparable
+  # include Localable
+
   def initialize( i18n_base_path: "" )
     @base_path = i18n_base_path
   end

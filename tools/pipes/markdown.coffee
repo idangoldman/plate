@@ -10,7 +10,7 @@ import remarkRehype from "remark-rehype"
 import AssetsFullUrlRemarkPlugin from "@/tools/remark/assets-full-url.coffee"
 import ExcerptRemarkPlugin from "@/tools/remark/excerpt.coffee"
 import FrontmatterRemarkPlugin from "@/tools/remark/frontmatter.coffee"
-import TaskPipe from "~/tasks/pipes/task.coffee"
+import TaskPipe from "@/tools/pipes/task.coffee"
 
 class MarkdownPipe extends TaskPipe
   @newInstance: (options = {}) =>

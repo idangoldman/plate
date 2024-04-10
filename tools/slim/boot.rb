@@ -9,6 +9,7 @@ require "logger"
 require "ostruct"
 require "psych"
 require "slim"
+require "uri"
 
 Dir[File.join( File.dirname( __FILE__ ), "**/*.rb" )].each do |file|
   require file unless file == __FILE__

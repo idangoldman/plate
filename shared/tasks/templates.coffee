@@ -1,4 +1,4 @@
-import slim from "~/tasks/pipes/slim.coffee"
+import slim from "@/tools/pipes/slim.coffee"
 import rename from "gulp-rename"
 
 globs = PLATE_ENV.globs.templates

@@ -1,6 +1,6 @@
 import path from "node:path"
 
-import TaskPipe from "~/tasks/pipes/task.coffee"
+import TaskPipe from "@/tools/pipes/task.coffee"
 
 globs = PLATE_ENV.globs
 routes = PLATE_ENV.contentRoutes

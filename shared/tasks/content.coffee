@@ -1,9 +1,9 @@
 import path from "node:path"
 import rename from "gulp-rename"
 
-import Markdown from "~/tasks/pipes/markdown.coffee"
-import Memorize from "~/tasks/pipes/memorize.coffee"
-import PrettyURLs from "~/tasks/pipes/pretty-urls.coffee"
+import Markdown from "@/tools/pipes/markdown.coffee"
+import Memorize from "@/tools/pipes/memorize.coffee"
+import PrettyURLs from "@/tools/pipes/pretty-urls.coffee"
 
 globs = PLATE_ENV.globs.content
 
