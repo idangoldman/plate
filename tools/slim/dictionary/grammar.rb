@@ -1,20 +1,22 @@
 # format escape, encode, parse, sanitize, normalize, serialize, validate
-module Preparable
+module Grammar
   def self.included( base )
-    base.extend( PreparableMethods )
+    base.extend( InstanceMethods )
   end
 
-  module PreparableMethods
-    def properties( *args )
+  module InstanceMethods
+    alias vocab vocabulary
+    alias gram grammar
+
+    def vocabulary( *args )
       # args.each do |property|
       #   define_method( property ) do
       #     instance_variable_get( :"@#{property}" )
       #   end
       # end
     end
-    alias property properties
 
-    def prepare( attribute, options = {} )
+    def grammar( attribute, options = {} )
       define_method( attribute ) do
         value = instance_variable_get( :"@#{attribute}" )
 
