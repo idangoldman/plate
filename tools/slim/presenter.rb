@@ -3,6 +3,8 @@ module Presenter
     include Lexiconic
     include Grammar
 
+    alias tpl template
+    alias partial template
     def template( basename, & )
       Utils.render_template( basename, self, & )
     end
