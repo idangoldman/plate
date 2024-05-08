@@ -1,9 +1,18 @@
 {
-  "name": "plate",
+  "name": "@idangoldman/plate",
+  "title": "PLATE",
   "description": "A simple boilerplate for web development",
   "author": "Idan Goldman",
   "license": "MIT",
   "version": "0.2.0",
+  "homepage": "https://idangoldman.github.io/plate/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/idangoldman/plate.git"
+  },
+  "bugs": {
+    "url": "https://github.com/idangoldman/plate/issues"
+  },
   "bin": {
     "plate": "./bin/plate.fish"
   },
