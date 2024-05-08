@@ -1,0 +1,17 @@
+server:
+  hostname: localhost
+  ip: 0.0.0.0
+  path: /
+  port: 1234
+
+globs:
+  clean: tmp/**/*
+
+  assets:
+    src: assets/**/*
+    dest: tmp/public
+
+  scripts:
+    outputFile: site.js
+    src: scripts/**/*.coffee
+    dest: tmp/public/assets/scripts

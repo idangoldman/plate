@@ -1,8 +1,10 @@
-import { deepFreezeMerge, importEnvironmentFile } from "@/tools/methods/index.mjs";
+import { deepFreezeMerge, importEnvironmentFile } from "@/imports/helpers.mjs";
 
 (async () => {
-  const PACKAGE_ENV = await importEnvironmentFile(PLATE_PKG, "shared/environment.yml");
-  const PROJECT_ENV = await importEnvironmentFile(PLATE_ROOT, "environment.yml");
+  const configPathSuffix = "config/environment.yml";
+
+  const PACKAGE_ENV = await importEnvironmentFile(`${PLATE_PKG}/${configPathSuffix}`);
+  const PROJECT_ENV = await importEnvironmentFile(`${PLATE_ROOT}/${configPathSuffix}`);
 
   global.PLATE_ENV = deepFreezeMerge(PACKAGE_ENV, PROJECT_ENV);
 })();

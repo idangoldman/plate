@@ -20,14 +20,13 @@ export function deepFreezeMerge(...objects) {
   return deepFreeze(merge({}, ...objects));
 }
 
-export async function importEnvironmentFile(...paths) {
-  const ABSOLUTE_PATH = path.join(...paths);
+export async function importEnvironmentFile(filePath) {
   let environtmentFile = undefined;
 
   try {
-    environtmentFile = (await import(ABSOLUTE_PATH)).default;
+    environtmentFile = (await import(filePath)).default;
   } catch (e) {
-    console.warn(`No environment file found at ${ABSOLUTE_PATH}`);
+    console.warn(`No environment file found at ${filePath}`);
   } finally {
     return environtmentFile;
   }

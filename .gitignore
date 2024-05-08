@@ -133,3 +133,4 @@ dist
 !*lock*
 tmp/
 !tmp/.keep
+!.vscode/
