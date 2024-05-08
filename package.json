@@ -4,8 +4,8 @@
   "description": "A simple boilerplate for web development",
   "author": "Idan Goldman",
   "license": "MIT",
-  "version": "0.2.0",
-  "homepage": "https://idangoldman.github.io/plate/",
+  "version": "0.2.1",
+  "homepage": "https://github.com/idangoldman/plate/",
   "repository": {
     "type": "git",
     "url": "https://github.com/idangoldman/plate.git"
