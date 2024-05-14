@@ -21,10 +21,11 @@
   },
   "engines": {
     "node": "22.1.0",
-    "pnpm": "9.1.0"
+    "pnpm": "9.1.1"
   },
   "dependencies": {
     "coffeescript": "2.7.0",
+    "gulp": "^5.0.0",
     "lodash": "^4.17.21",
     "yaml": "2.4.2",
     "zx": "^8.0.2"
