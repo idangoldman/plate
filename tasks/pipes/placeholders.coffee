@@ -1,16 +1,15 @@
 import get from "lodash/get.js"
 import has from "lodash/has.js"
-import path from "node:path"
 
-import TaskPipe from "~/tasks/pipes/task.coffee"
+import TaskPipe from "@/tasks/pipes/task.coffee"
+import { PLACEHOLDERS } from "@/tools/regex.coffee"
 
 class PlaceholdersPipe extends TaskPipe
   @newInstance: (options = {}) =>
     new @ "placeholders-pipe", options
 
   transpile: ({ contents }) ->
-    placeholderPatterns = new RegExp "\\{\\{\\s*(?<placeholder>[a-z0-9-_.]+?)\\s*\\}\\}", "gmi"
-    replacedContents = contents.replace placeholderPatterns, @process.bind(@)
+    replacedContents = contents.replace PLACEHOLDERS, @process.bind(@)
 
     Promise.resolve
       contents: replacedContents
@@ -18,6 +17,7 @@ class PlaceholdersPipe extends TaskPipe
   process: (match, placeholder) ->
     if has @options, placeholder
       return get(@options, placeholder)
+        .replace(PLACEHOLDERS, @process.bind(@))
 
     match
 
