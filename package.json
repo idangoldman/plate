@@ -24,10 +24,11 @@
     "pnpm": "9.1.1"
   },
   "dependencies": {
-    "coffeescript": "2.7.0",
+    "coffeescript": "^2.7.0",
+    "esbuild": "^0.21.3",
     "gulp": "^5.0.0",
     "lodash": "^4.17.21",
     "yaml": "2.4.2",
-    "zx": "^8.0.2"
+    "zx": "^8.1.0"
   }
 }

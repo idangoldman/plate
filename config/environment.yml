@@ -9,9 +9,8 @@ globs:
 
   assets:
     src: assets/**/*
-    dest: tmp/public
+    dest: tmp/assets
 
   scripts:
-    outputFile: site.js
     src: scripts/**/*.coffee
-    dest: tmp/public/assets/scripts
+    dest: tmp/scripts

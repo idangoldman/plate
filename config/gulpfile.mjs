@@ -1,4 +1,5 @@
 import gulp from "gulp";
+global.gulp = gulp;
 
 await import(PLATE_GULPFILE).then((gulpfile) => {
   for (const module in gulpfile) {

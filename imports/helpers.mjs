@@ -1,5 +1,4 @@
 import merge from "lodash/merge.js";
-import path from "node:path";
 
 // Copy of https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze
 export function deepFreeze(object) {
