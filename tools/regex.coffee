@@ -1,0 +1,7 @@
+export SNAKE_CASE           = new RegExp "[_]([a-z])", "gi"
+export REMOVABLE_CHARACTERS = new RegExp "_+", "gi"
+export PATTERN_PLACEHOLDERS = new RegExp "(?<pattern>\\{\\{\\s*(?<placeholder>[a-z0-9-_\.]+?)\\s*\\}\\})", "gmi"
+export PLACEHOLDERS         = new RegExp "\\{\\{\\s*(?<placeholder>[a-z0-9-_.]+?)\\s*\\}\\}", "gmi"
+export PATH_STARTS_WITH     = new RegExp "^([~|@]/)"
+export PACKAGE_PATH_PREFIX  = new RegExp "^~\\/"
+export PROJECT_PATH_PREFIX  = new RegExp "^@\\/"

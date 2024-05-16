@@ -15,8 +15,11 @@ export default Scripts = ->
       outdir: paths.dest
       platform: 'browser'
       format: 'esm'
-      plugins: [resolverPlugin(), coffeePlugin(), yamlPlugin()]
-    })
-    .catch (error) ->
+      plugins: [
+        resolverPlugin(),
+        coffeePlugin(),
+        yamlPlugin()
+      ]
+    }).catch (error) ->
       console.error error
       process.exit 1

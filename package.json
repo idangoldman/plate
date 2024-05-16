@@ -4,7 +4,7 @@
   "description": "A simple boilerplate for web development",
   "author": "Idan Goldman",
   "license": "MIT",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "homepage": "https://github.com/idangoldman/plate/",
   "repository": {
     "type": "git",
@@ -13,15 +13,16 @@
   "bugs": {
     "url": "https://github.com/idangoldman/plate/issues"
   },
+  "engines": {
+    "node": "22.1.0",
+    "pnpm": "9.1.1"
+  },
+  "type": "module",
   "bin": {
     "plate": "./bin/plate.fish"
   },
   "scripts": {
     "publish": "pnpm publish --access public"
-  },
-  "engines": {
-    "node": "22.1.0",
-    "pnpm": "9.1.1"
   },
   "dependencies": {
     "coffeescript": "^2.7.0",
@@ -29,6 +30,7 @@
     "fast-glob": "^3.3.2",
     "gulp": "^5.0.0",
     "lodash": "^4.17.21",
+    "plugin-error": "^2.0.1",
     "yaml": "2.4.2",
     "zx": "^8.1.0"
   }
