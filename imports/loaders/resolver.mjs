@@ -11,14 +11,14 @@ async function fileExists(filePath) {
 
 export async function resolve(specifier, context, nextResolve) {
   if (specifier.startsWith("~/")) {
-    const { PLATE_ROOT, PLATE_PKG } = process.env;
+    const { PLATE_PRJ, PLATE_PKG } = process.env;
     let updatedSpecifier = specifier.replace(/^~/, `${PLATE_PKG}/shared`);
 
-    if (PLATE_ROOT !== PLATE_PKG) {
-      const rootPath = specifier.replace(/^~/, PLATE_ROOT);
+    if (PLATE_PRJ !== PLATE_PKG) {
+      const projectPath = specifier.replace(/^~/, PLATE_PRJ);
 
-      if (await fileExists(rootPath)) {
-        updatedSpecifier = rootPath;
+      if (await fileExists(projectPath)) {
+        updatedSpecifier = projectPath;
       }
     }
 
