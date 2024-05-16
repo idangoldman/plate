@@ -4,10 +4,10 @@ import { register } from "node:module";
 import "./globals.mjs";
 
 // Registering loaders
-register("./loaders/resolver.mjs", import.meta.url);
-register("./loaders/cjs.mjs", import.meta.url);
-register("./loaders/yaml.mjs", import.meta.url);
-register("./loaders/coffee.mjs", import.meta.url);
+register(`${PLATE_PKG}/imports/loaders/resolver.mjs`, import.meta.url);
+register(`${PLATE_PKG}/imports/loaders/cjs.mjs`, import.meta.url);
+register(`${PLATE_PKG}/imports/loaders/yaml.mjs`, import.meta.url);
+register(`${PLATE_PKG}/imports/loaders/coffee.mjs`, import.meta.url);
 
 // Setting up environment variables
-(async () => await import("./environment.mjs"))();
+(async () => await import(`${PLATE_PKG}/imports/environment.mjs`))();

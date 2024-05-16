@@ -1,22 +1,15 @@
-import { readFile } from "node:fs/promises"
-import { transformKeysFromSnakeToCamel } from "@/imports/helpers.mjs"
-import YAML from "yaml"
-
-const extensionsRegex = /\.ya?ml$/
+import { transformYaml, extensionsYaml } from "../transformers/yaml.mjs";
 
 export async function load(url, context, nextLoad) {
-  if (extensionsRegex.test(url)) {
-    const rawSource = await readFile(new URL(url), "utf8")
-    let defaultExport = YAML.parse(rawSource.toString());
-        defaultExport = transformKeysFromSnakeToCamel(defaultExport);
-        defaultExport = JSON.stringify(defaultExport, null, 2);
+  if (extensionsYaml.test(url)) {
+    const transformedSource = await transformYaml(new URL(url).pathname);
 
     return {
       format: "module",
       shortCircuit: true,
-      source: `export default ${defaultExport};`,
-    }
+      source: transformedSource,
+    };
   }
 
-  return nextLoad(url, context, nextLoad)
+  return nextLoad(url, context, nextLoad);
 }

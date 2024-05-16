@@ -1,15 +1,10 @@
-import coffeescript from "coffeescript";
-
-const extensionsRegex = /\.(coffee|litcoffee|coffee\.md)$/;
+import { transformCoffee, extensionsCoffee } from "../transformers/coffee.mjs";
 
 export async function load(url, context, nextLoad) {
-  if (extensionsRegex.test(url)) {
+  if (extensionsCoffee.test(url)) {
     const format = "module";
-    const { source: rawSource } = await nextLoad(url, { ...context, format });
-    const transformedSource = coffeescript.compile(rawSource.toString(), {
-      filename: url,
-      inlineMap: true
-    });
+    const { source } = await nextLoad(url, { ...context, format });
+    const transformedSource = await transformCoffee(source, url);
 
     return {
       format,
