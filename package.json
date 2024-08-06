@@ -4,7 +4,7 @@
   "description": "A simple boilerplate for web development",
   "author": "Idan Goldman",
   "license": "MIT",
-  "version": "0.4.2",
+  "version": "0.5.0",
   "homepage": "https://github.com/idangoldman/plate/",
   "repository": {
     "type": "git",
@@ -25,20 +25,17 @@
     "help": "make help"
   },
   "dependencies": {
+    "@coffeelint/cli": "5.2.11",
     "@eslint/js": "9.8.0",
     "coffeescript": "2.7.0",
     "esbuild": "0.23.0",
     "eslint": "9.8.0",
     "fast-glob": "3.3.2",
     "globals": "15.9.0",
-    "gulp": "5.0.0",
     "lodash": "4.17.21",
-    "plugin-error": "2.0.1",
     "prettier": "3.3.3",
     "yaml": "2.5.0",
+    "yargs": "17.7.2",
     "zx": "8.1.4"
-  },
-  "devDependencies": {
-    "@coffeelint/cli": "^5.2.11"
   }
 }

@@ -6,18 +6,6 @@ set --global --export PLATE_NODE_MODULES (find_parent_folder $PLATE_PKG node_mod
 set --global --export PLATE_PRJ (pwd -P)
 
 set --local registry_path $PLATE_PKG/imports/registry.mjs
-
-argparse 'gulp=!test -f "$_flag_value"' -- $argv
-
 set --local node_arguments $argv
-
-if set --query _flag_gulp
-    set --local gulp_bin "$PLATE_NODE_MODULES/gulp/bin/gulp.js"
-    set --local gulp_cwd "--cwd='$PLATE_PRJ'"
-    set --local gulp_file "--gulpfile='$PLATE_PKG/configs/gulpfile.mjs'"
-    set --global --export PLATE_GULPFILE (realpath $_flag_gulp)
-
-    set --prepend node_arguments $gulp_bin $gulp_cwd $gulp_file
-end
 
 node --trace-warnings --import $registry_path $node_arguments

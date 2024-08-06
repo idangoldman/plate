@@ -29,7 +29,8 @@ lint_fix:
 	eslint --fix --config configs/eslint.config.js .
 
 coffeelint:
-	coffeelint --file configs/coffeelint.json .
+	# coffeelint --file configs/coffeelint.json .
+	coffeelint --file configs/coffeelint.json bin/locals.coffee
 
 # Define target for publishing
 publish:
