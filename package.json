@@ -14,24 +14,31 @@
     "url": "https://github.com/idangoldman/plate/issues"
   },
   "engines": {
-    "node": "22.1.0",
-    "pnpm": "9.1.1"
+    "node": "22.5.1",
+    "pnpm": "9.6.0"
   },
   "type": "module",
   "bin": {
     "plate": "./bin/plate.fish"
   },
   "scripts": {
-    "publish": "pnpm publish --access public"
+    "help": "make help"
   },
   "dependencies": {
-    "coffeescript": "^2.7.0",
-    "esbuild": "^0.21.3",
-    "fast-glob": "^3.3.2",
-    "gulp": "^5.0.0",
-    "lodash": "^4.17.21",
-    "plugin-error": "^2.0.1",
-    "yaml": "2.4.2",
-    "zx": "^8.1.0"
+    "@eslint/js": "9.8.0",
+    "coffeescript": "2.7.0",
+    "esbuild": "0.23.0",
+    "eslint": "9.8.0",
+    "fast-glob": "3.3.2",
+    "globals": "15.9.0",
+    "gulp": "5.0.0",
+    "lodash": "4.17.21",
+    "plugin-error": "2.0.1",
+    "prettier": "3.3.3",
+    "yaml": "2.5.0",
+    "zx": "8.1.4"
+  },
+  "devDependencies": {
+    "@coffeelint/cli": "^5.2.11"
   }
 }

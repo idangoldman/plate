@@ -14,7 +14,7 @@ set --local node_arguments $argv
 if set --query _flag_gulp
     set --local gulp_bin "$PLATE_NODE_MODULES/gulp/bin/gulp.js"
     set --local gulp_cwd "--cwd='$PLATE_PRJ'"
-    set --local gulp_file "--gulpfile='$PLATE_PKG/config/gulpfile.mjs'"
+    set --local gulp_file "--gulpfile='$PLATE_PKG/configs/gulpfile.mjs'"
     set --global --export PLATE_GULPFILE (realpath $_flag_gulp)
 
     set --prepend node_arguments $gulp_bin $gulp_cwd $gulp_file

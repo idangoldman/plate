@@ -1,0 +1,14 @@
+arrowParens: always
+bracketSameLine: true
+bracketSpacing: true
+embeddedLanguageFormatting: off
+endOfLine: lf
+printWidth: 120
+proseWrap: preserve
+quoteProps: as-needed
+semi: true
+singleAttributePerLine: true
+singleQuote: false
+tabWidth: 2
+trailingComma: none
+useTabs: false
