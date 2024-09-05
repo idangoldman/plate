@@ -8,7 +8,7 @@
 SHELL ?= /usr/bin/env fish
 PLATE_ENV ?= development
 PLATE_PKG_PATH ?= $(shell pwd)
-PLATE_PKG_PATH ?= $(PLATE_PKG_PATH)
+PLATE_PRJ_PATH ?= $(PLATE_PKG_PATH)
 PLATE_CONF_PATH ?= $(PLATE_PKG_PATH)/configs
 PLATE_BIN_PATH ?= $(PLATE_PKG_PATH)/node_modules/.bin
 

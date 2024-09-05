@@ -1,6 +1,7 @@
 # Ignore the following directories
 log/*
-node_modules/*
+node_modules
+src/*
 tmp/*
 
 # Ignore the following files

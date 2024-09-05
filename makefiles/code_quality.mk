@@ -1,8 +1,8 @@
-.PHONY: format format-fix lint lint-fix
-
 #
 # Code Quality:
 #
+
+.PHONY: format format-fix lint lint-fix
 
 # Support formatting js, cjs, mjs, coffee, css, scss files
 format:
