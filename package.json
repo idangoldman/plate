@@ -21,6 +21,9 @@
   "bin": {
     "plate": "./bin/plate.fish"
   },
+  "imports": {
+    "#root/*": "./*"
+  },
   "scripts": {
     "help": "make help"
   },
