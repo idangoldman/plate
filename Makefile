@@ -28,7 +28,7 @@ help:
 	@echo ""
 	@awk ' \
 		BEGIN { section = "" } \
-		/^[#] [A-Z][A-Za-z0-9 ]+:/ { section = substr($$0, 3); printf "\n%s\n\n", section } \
+		/^[#] [A-Z][A-Za-z0-9 ]+:/ { section = substr($$0, 3); printf "\n  %s\n\n", section } \
 		/^[#].*/ { last_comment = substr($$0, 3) } \
 		/^[a-z_-]+:/ { target = $$1; sub(/:/, "", target); if (last_comment) { printf "  %-25s %s\n", target, last_comment; last_comment = "" } } \
 		' $(MAKEFILE_LIST)
