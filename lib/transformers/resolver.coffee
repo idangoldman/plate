@@ -3,7 +3,7 @@ import {
   STARTS_WITH_BASE_PATH,
   STARTS_WITH_PACKAGE_PATH,
   STARTS_WITH_PROJECT_PATH
-} from "#root/tools/regex.js"
+} from "#root/helpers/regex.js"
 
 fileExists = async (filePath) ->
   try

@@ -1,5 +1,5 @@
 import { transformYaml } from "#root/transformers/yaml.js"
-import { YAML_EXTENSION } from "#root/tools/regex.js"
+import { YAML_EXTENSION } from "#root/helpers/regex.js"
 
 export load = async (url, context, nextLoad) ->
   if YAML_EXTENSION.test(url)

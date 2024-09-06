@@ -1,4 +1,5 @@
-import { deepFreezeMerge, importEnvironmentFile } from "#root/src/imports/helpers.js"
+import { deepFreezeMerge } from "#root/helpers/deep.js"
+import { importEnvironmentFile } from "#root/helpers/import-environment-file.js"
 
 do ->
   configFilePath = "configs/environment.yml"

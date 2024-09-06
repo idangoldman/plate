@@ -1,4 +1,4 @@
-import { COFFEE_EXTENSION } from "#root/tools/regex.js"
+import { COFFEE_EXTENSION } from "#root/helpers/regex.js"
 import { transformCoffee } from "#root/transformers/coffee.js"
 
 export load = async (url, context, nextLoad) ->
