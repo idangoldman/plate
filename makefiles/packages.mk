@@ -2,15 +2,14 @@
 # Packages:
 #
 
-.PHONY: install fresh-install update upgrade publish
+.PHONY: install fresh-install update upgrade publish prune
 
 # Install dependencies
 install:
 	pnpm install --frozen-lockfile
 
 # Fresh install
-fresh-install:
-	rm -rvf node_modules pnpm-lock.yaml
+fresh-install: prune
 	# pnpm store prune
 	pnpm prune
 
@@ -20,8 +19,16 @@ update:
 
 # Upgrade dependencies
 upgrade:
-	pnpm upgrade
+	# pnpm upgrade --latest
+	pnpm update --lockfile-only
 
 # Publish package
 publish:
 	pnpm publish --access public
+
+# Prune package
+prune:
+	rm -frv \
+		node_modules \
+		pnpm-lock.yaml \
+		tmp/*

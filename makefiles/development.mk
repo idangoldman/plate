@@ -2,7 +2,7 @@
 # Development:
 #
 
-.PHONY: clean build watch build-test test
+.PHONY: clean build watch build-test test run
 
 # Clean the project
 clean:
@@ -41,3 +41,12 @@ build-test: build
 # Test the project
 test: build-test
 	$(PLATE_BIN_PATH)/cucumber-js --config="configs/cucumber.yml"
+
+# Run the project via Node.js
+run:
+	node \
+		--trace-warnings \
+		--trace-deprecation \
+		--trace-uncaught \
+		--import="$(PLATE_PKG_PATH)/src/registry.js" \
+		$(PLATE_CLI_ARGS)

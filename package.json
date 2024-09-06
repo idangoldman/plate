@@ -24,6 +24,13 @@
   "imports": {
     "#root/*": "./src/*"
   },
+  "files": [
+    "bin",
+    "configs",
+    "Makefile",
+    "makefiles",
+    "src"
+  ],
   "scripts": {
     "help": "make help"
   },
@@ -35,13 +42,10 @@
     "coffeescript": "2.7.0",
     "esbuild": "0.23.1",
     "eslint": "9.9.1",
-    "fast-glob": "3.3.2",
     "globals": "15.9.0",
     "lodash": "4.17.21",
     "prettier": "3.3.3",
     "sinon": "18.0.0",
-    "yaml": "2.5.1",
-    "yargs": "17.7.2",
-    "zx": "8.1.5"
+    "yaml": "2.5.1"
   }
 }
