@@ -22,7 +22,7 @@
     "plate": "./bin/plate.fish"
   },
   "imports": {
-    "#root/*": "./*"
+    "#root/*": "./src/*"
   },
   "scripts": {
     "help": "make help"
