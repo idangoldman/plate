@@ -8,9 +8,9 @@ export deepFreeze = (object) ->
     value = object[name]
 
     if (value and typeof value is "object") or typeof value is "function"
-      deepFreezeMerge value
+      deepMergeFreeze value
 
   Object.freeze object
 
-export deepFreezeMerge = (...objects) ->
+export deepMergeFreeze = (...objects) ->
   deepFreeze merge({}, ...objects)
