@@ -33,9 +33,5 @@ help:
 		/^[a-z_-]+:/ { target = $$1; sub(/:/, "", target); if (last_comment) { printf "  %-25s %s\n", target, last_comment; last_comment = "" } } \
 		' $(MAKEFILE_LIST)
 
-# Define target for publishing
-publish:
-	pnpm publish --access public
-
 # Load additional makefiles
 include ./makefiles/*.mk

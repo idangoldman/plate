@@ -1,8 +1,8 @@
 #
-# Maintenance:
+# Packages:
 #
 
-.PHONY: install update upgrade fresh-install clean
+.PHONY: install fresh-install update upgrade publish
 
 # Install dependencies
 install:
@@ -22,7 +22,6 @@ update:
 upgrade:
 	pnpm upgrade
 
-# Clean the project
-clean:
-	rm -rfv $(PLATE_PKG_PATH)/src
-	mkdir -p $(PLATE_PKG_PATH)/src
+# Publish package
+publish:
+	pnpm publish --access public
