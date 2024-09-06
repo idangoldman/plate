@@ -1,4 +1,9 @@
 import { access } from "node:fs/promises";
+import {
+  STARTS_WITH_BASE_PATH,
+  STARTS_WITH_PACKAGE_PATH,
+  STARTS_WITH_PROJECT_PATH,
+} from "#root/tools/regex.coffee";
 
 async function fileExists(filePath) {
   try {
@@ -9,30 +14,33 @@ async function fileExists(filePath) {
   }
 }
 
-export const pathStartsWith = new RegExp("^([~|@]/)");
-export const packagePathPrefix = "~/";
-export const projectPathPrefix = "@/";
-
 export async function pathResolver(specifier) {
-  let updatedSpecifier = specifier;
+  const { PLATE_PRJ_PATH, PLATE_PKG_PATH } = process.env;
 
-  if (specifier.startsWith(packagePathPrefix)) {
-    const { PLATE_PRJ, PLATE_PKG } = process.env;
-    updatedSpecifier = specifier.replace(/^~/, PLATE_PKG);
+  if (!PLATE_PRJ_PATH || !PLATE_PKG_PATH) {
+    return specifier;
+  }
 
-    if (PLATE_PRJ !== PLATE_PKG) {
-      const projectPath = specifier.replace(/^~/, PLATE_PRJ);
+  if (!STARTS_WITH_BASE_PATH.test(specifier)) {
+    return specifier;
+  }
+
+  if (STARTS_WITH_PACKAGE_PATH.test(specifier)) {
+    if (PLATE_PKG_PATH !== PLATE_PRJ_PATH) {
+      const projectPath = specifier.replace(
+        STARTS_WITH_PACKAGE_PATH,
+        PLATE_PRJ_PATH,
+      );
 
       if (await fileExists(projectPath)) {
-        updatedSpecifier = projectPath;
+        return projectPath;
       }
     }
+
+    return specifier.replace(STARTS_WITH_PACKAGE_PATH, PLATE_PKG_PATH);
   }
 
-  if (specifier.startsWith(projectPathPrefix)) {
-    const { PLATE_PKG } = process.env;
-    updatedSpecifier = specifier.replace(/^@/, PLATE_PKG);
+  if (STARTS_WITH_PROJECT_PATH.test(specifier)) {
+    return specifier.replace(STARTS_WITH_PROJECT_PATH, PLATE_PRJ_PATH);
   }
-
-  return updatedSpecifier;
 }

@@ -16,7 +16,7 @@ build: clean
 		--compile \
 		--no-header \
 		--output $(PLATE_PKG_PATH)/src \
-		$(PLATE_PKG_PATH)
+		$(PLATE_PKG_PATH)/lib
 
 
 # Watch the project
@@ -28,4 +28,4 @@ watch: clean
 		--no-header \
 		--watch \
 		--output $(PLATE_PKG_PATH)/src \
-		$(PLATE_PKG_PATH)
+		$(PLATE_PKG_PATH)/lib
