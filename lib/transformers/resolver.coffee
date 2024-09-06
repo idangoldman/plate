@@ -12,12 +12,11 @@ fileExists = async (filePath) ->
   catch
     false
 
-export pathResolver = async (specifier) ->
+export default async (specifier) ->
   { PLATE_PRJ_PATH, PLATE_PKG_PATH } = process.env
 
-  return specifier unless PLATE_PRJ_PATH and PLATE_PKG_PATH
-
-  return specifier unless STARTS_WITH_BASE_PATH.test specifier
+  unless PLATE_PRJ_PATH and PLATE_PKG_PATH and STARTS_WITH_BASE_PATH.test specifier
+    return specifier
 
   if STARTS_WITH_PACKAGE_PATH.test specifier
     if PLATE_PKG_PATH isnt PLATE_PRJ_PATH

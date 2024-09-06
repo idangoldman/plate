@@ -1,5 +1,5 @@
 import { COFFEE_EXTENSION } from "#root/helpers/regex.js"
-import { transformCoffee } from "#root/transformers/coffee.js"
+import transformCoffee from "#root/transformers/coffee.js"
 
 export load = async (url, context, nextLoad) ->
   if COFFEE_EXTENSION.test(url)
