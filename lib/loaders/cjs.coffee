@@ -1,3 +1,5 @@
+import { COMMON_JS_CONTENT } from "#root/helpers/regex.js"
+
 export load = async (url, context, nextLoad) ->
   return await nextLoad(url, context, nextLoad) unless url.endsWith(".js")
 
@@ -18,5 +20,4 @@ containsCJS = (source) ->
   src = "" + source
 
   # A realistic version of this loader would use a parser like Acorn to check for actual `module.exports` syntax
-  return true if /exports[\[\.( ?=)]/.test(src) or /module\.exports/.test(src)
-  return true if /require\(/.test(src) and not /createRequire\(/.test(src)
+  return true if COMMON_JS_CONTENT.test(src)
