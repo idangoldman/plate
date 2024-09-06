@@ -1,11 +1,11 @@
 import { COMMON_JS_CONTENT } from "#root/helpers/regex.js"
 
-export load = async (url, context, nextLoad) ->
+export load = (url, context, nextLoad) ->
   return await nextLoad(url, context, nextLoad) unless url.endsWith(".js")
 
   await transform(url, context, nextLoad)
 
-transform = async (url, context, nextLoad) ->
+transform = (url, context, nextLoad) ->
   try
     nextResult = await nextLoad(url, { ...context, format: "module" })
     throw new Error("CommonJS") if containsCJS(nextResult.source)

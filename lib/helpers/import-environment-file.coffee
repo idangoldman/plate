@@ -1,4 +1,4 @@
-export importEnvironmentFile = async (filePath) ->
+export importEnvironmentFile = (filePath) ->
   environtmentFile = undefined
 
   try

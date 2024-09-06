@@ -5,7 +5,7 @@ import transformCoffee from "#root/transformers/coffee.js"
 export default ->
   name: "coffeescript"
   setup: (build) ->
-    build.onLoad({ filter: COFFEE_EXTENSION }, async ({ path }) ->
+    build.onLoad({ filter: COFFEE_EXTENSION }, ({ path }) ->
       source = await readFile(path, "utf8")
       transformedSource = await transformCoffee(source, path)
 

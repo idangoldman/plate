@@ -1,5 +1,5 @@
-import { pathResolver } from "#root/transformers/resolver.js"
+import pathResolver from "#root/transformers/resolver.js"
 
-export resolve = async (specifier, context, nextResolve) ->
+export resolve = (specifier, context, nextResolve) ->
   resolvedPath = await pathResolver(specifier)
   nextResolve resolvedPath, context, nextResolve
