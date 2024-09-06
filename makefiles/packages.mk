@@ -7,11 +7,13 @@
 # Install dependencies
 install:
 	pnpm install --frozen-lockfile
+	pnpm link .
 
 # Fresh install
 fresh-install: prune
 	# pnpm store prune
 	pnpm prune
+	pnpm link .
 
 # Update dependencies
 update:

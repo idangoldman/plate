@@ -1,6 +1,12 @@
 .PHONY: help
 .DEFAULT_GOAL := help
 
+PLATE_ENV ?= development
+PLATE_PKG_PATH ?= ./
+PLATE_PRJ_PATH ?= $(PLATE_PKG_PATH)
+PLATE_BIN_PATH ?= $(PLATE_PKG_PATH)/node_modules/.bin
+PLATE_CONF_PATH ?= $(PLATE_PKG_PATH)/configs
+
 # Help command
 help:
 	@echo "PLATE CLI"
