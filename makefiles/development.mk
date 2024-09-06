@@ -2,12 +2,7 @@
 # Development:
 #
 
-.PHONY: clean build watch
-
-# Clean the project
-clean:
-	rm -rfv $(PLATE_PKG_PATH)/src
-	mkdir -p $(PLATE_PKG_PATH)/src
+.PHONY: build watch
 
 # Build the project
 build: clean
