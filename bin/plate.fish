@@ -1,5 +1,10 @@
 #!/usr/bin/env fish
 
+# Remove this line after having the same global node and pnpm versions
+if type -q fnm
+    fnm use --resolve-engines --corepack-enabled --install-if-missing --silent-if-unchanged --log-level=quiet
+end
+
 if test -z "$PLATE_ENV"
     set --global --export PLATE_ENV development
 end

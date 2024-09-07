@@ -17,12 +17,15 @@ fresh-install: prune
 
 # Update dependencies
 update:
+	# pnpm upgrade --latest
+	# pnpm update --lockfile-only
 	pnpm update
 
-# Upgrade dependencies
+# Upgrade pnpm and node
 upgrade:
-	# pnpm upgrade --latest
-	pnpm update --lockfile-only
+	# fnm install --latest
+	corepack up
+	pnpm add -g pnpm
 
 # Publish package
 publish:
