@@ -22,7 +22,8 @@
     "plate": "./bin/plate.fish"
   },
   "imports": {
-    "#root/*": "./src/*"
+    "#root/*": "./src/*",
+    "#tests/*": "./tests/*"
   },
   "files": [
     "bin",
