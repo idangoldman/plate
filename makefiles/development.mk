@@ -40,7 +40,7 @@ build-test: build
 
 # Test the project
 test: build-test
-	$(PLATE_BIN_PATH)/cucumber-js --config="configs/cucumber.yml"
+	$(PLATE_BIN_PATH)/cucumber-js --config="$(PLATE_CONF_PATH)/cucumber.yml"
 
 # Run the project via Node.js
 run:

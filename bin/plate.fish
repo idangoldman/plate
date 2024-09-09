@@ -14,7 +14,7 @@ set --global --export PLATE_PKG_PATH (find_parent_folder (status --current-filen
 set --global --export PLATE_PRJ_PATH (pwd -P)
 
 set --global --export PLATE_BIN_PATH $PLATE_PKG_PATH/node_modules/.bin
-set --global --export PLATE_CONF_PATH $PLATE_PKG_PATH/configs
+set --global --export PLATE_CONF_PATH .(string replace --regex --ignore-case $PLATE_PRJ_PATH "" $PLATE_PKG_PATH)/configs
 
 set --global --export PLATE_CLI_COMMAND help
 set --global --export PLATE_CLI_ARGS $argv[2..-1]
@@ -32,10 +32,15 @@ if test (count $argv) -ge 1
     set --global --export PLATE_CLI_ARGS $argv[$command_index..-1]
 end
 
-echo "Plate CLI arguments: $PLATE_CLI_ARGS"
-echo "Plate CLI command: $PLATE_CLI_COMMAND"
-echo "Plate environment: $PLATE_ENV"
-echo "Plate package path: $PLATE_PKG_PATH"
-echo "Plate project path: $PLATE_PRJ_PATH"
+echo "PLATE_ENV: $PLATE_ENV"
+echo "PLATE_PKG_PATH: $PLATE_PKG_PATH"
+echo "PLATE_PRJ_PATH: $PLATE_PRJ_PATH"
+echo "PLATE_BIN_PATH: $PLATE_BIN_PATH"
+echo "PLATE_CONF_PATH: $PLATE_CONF_PATH"
+echo "PLATE_CLI_COMMAND: $PLATE_CLI_COMMAND"
+echo "PLATE_CLI_ARGS: $PLATE_CLI_ARGS"
+echo "PLATE_PRJ_PATH: $PLATE_PRJ_PATH"
+echo "PLATE_CLI_COMMAND: $PLATE_CLI_COMMAND"
+echo "PLATE_CLI_ARGS: $PLATE_CLI_ARGS"
 
 make --debug --makefile $PLATE_PKG_PATH/Makefile $PLATE_CLI_COMMAND
