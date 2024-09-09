@@ -7,8 +7,8 @@
 # Clean the project
 clean:
 	rm -rfv \
-		$(PLATE_PKG_PATH)/src \
-		$(PLATE_PKG_PATH)/tests/steps/*.js
+		$(PLATE_PRJ_PATH)/src \
+		$(PLATE_PRJ_PATH)/tests/steps/*.js
 
 # Build the project
 build: clean
@@ -16,8 +16,8 @@ build: clean
 		--bare \
 		--compile \
 		--no-header \
-		--output $(PLATE_PKG_PATH)/src \
-		$(PLATE_PKG_PATH)/lib
+		--output $(PLATE_PRJ_PATH)/src \
+		$(PLATE_PRJ_PATH)/lib
 
 # Watch the project
 watch: clean
@@ -27,8 +27,8 @@ watch: clean
 		--inline-map \
 		--no-header \
 		--watch \
-		--output $(PLATE_PKG_PATH)/src \
-		$(PLATE_PKG_PATH)/lib
+		--output $(PLATE_PRJ_PATH)/src \
+		$(PLATE_PRJ_PATH)/lib
 
 # Build the test project
 build-test: build
@@ -36,7 +36,7 @@ build-test: build
 		--bare \
 		--compile \
 		--no-header \
-		$(PLATE_PKG_PATH)/tests/steps
+		$(PLATE_PRJ_PATH)/tests/steps
 
 # Test the project
 test: build-test

@@ -28,6 +28,7 @@
   "files": [
     "bin",
     "configs",
+    "lib",
     "Makefile",
     "makefiles",
     "src"

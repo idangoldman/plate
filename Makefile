@@ -12,7 +12,7 @@ help:
 	@echo "PLATE CLI"
 	@echo "--------------"
 	@echo "Usage:"
-	@echo "  plate <command> [arguments]"
+	@echo "  plate [pkg] <command> [arguments]"
 	@echo ""
 	@echo "Commands:"
 	@echo ""
@@ -22,6 +22,10 @@ help:
 		/^[#].*/ { last_comment = substr($$0, 3) } \
 		/^[a-z_-]+:/ { target = $$1; sub(/:/, "", target); if (last_comment) { printf "  %-25s %s\n", target, last_comment; last_comment = "" } } \
 		' $(MAKEFILE_LIST)
+
+# Used in case of need running a command with-in plate package folder
+pkg:
+	@echo $(PLATE_PKG_PATH)
 
 # Load makefiles
 include $(PLATE_PKG_PATH)/makefiles/*.mk
