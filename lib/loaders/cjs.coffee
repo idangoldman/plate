@@ -1,19 +1,27 @@
 import { COMMON_JS_CONTENT } from "#root/helpers/regex.js"
 
 export load = (url, context, nextLoad) ->
-  return await nextLoad(url, context, nextLoad) unless url.endsWith(".js")
+  unless url.endsWith(".js")
+    return await nextLoad(url, context, nextLoad)
 
   await transform(url, context, nextLoad)
 
 transform = (url, context, nextLoad) ->
   try
-    nextResult = await nextLoad(url, { ...context, format: "module" })
-    throw new Error("CommonJS") if containsCJS(nextResult.source)
-    nextResult
-  catch error
-    if (error?.message.includes("require") and error.includes("import")) or error?.message.includes("CommonJS")
-      return { format: "commonjs" }
+    nextResult = await nextLoad url, { ...context, format: "module" }
 
+    if containsCJS(nextResult.source)
+      throw new Error("CommonJS")
+
+    nextResult
+
+  catch error
+    if error.message == "CommonJS"
+      return { format: "commonjs" }
+    # emitImportAssertionWarning
+    else if error.message.includes("emitImportAssertionWarning")
+      console.log 123, context
+    #   return await nextLoad(url, context, nextLoad)
     throw error
 
 containsCJS = (source) ->

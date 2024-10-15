@@ -29,18 +29,17 @@ if test (count $argv) -ge 1
     end
 
     set --global --export PLATE_CLI_COMMAND $argv[$command_index]
-    set --global --export PLATE_CLI_ARGS $argv[$command_index..-1]
+    set --global --export PLATE_CLI_ARGS $argv[(math $command_index + 1)..-1]
+
 end
 
-echo "PLATE_ENV: $PLATE_ENV"
-echo "PLATE_PKG_PATH: $PLATE_PKG_PATH"
-echo "PLATE_PRJ_PATH: $PLATE_PRJ_PATH"
-echo "PLATE_BIN_PATH: $PLATE_BIN_PATH"
-echo "PLATE_CONF_PATH: $PLATE_CONF_PATH"
-echo "PLATE_CLI_COMMAND: $PLATE_CLI_COMMAND"
-echo "PLATE_CLI_ARGS: $PLATE_CLI_ARGS"
-echo "PLATE_PRJ_PATH: $PLATE_PRJ_PATH"
-echo "PLATE_CLI_COMMAND: $PLATE_CLI_COMMAND"
-echo "PLATE_CLI_ARGS: $PLATE_CLI_ARGS"
+# echo "PLATE_ENV: $PLATE_ENV"
+# echo "PLATE_PKG_PATH: $PLATE_PKG_PATH"
+# echo "PLATE_PRJ_PATH: $PLATE_PRJ_PATH"
+# echo "PLATE_BIN_PATH: $PLATE_BIN_PATH"
+# echo "PLATE_CONF_PATH: $PLATE_CONF_PATH"
+# echo "PLATE_CLI_COMMAND: $PLATE_CLI_COMMAND"
+# echo "PLATE_CLI_ARGS: $PLATE_CLI_ARGS"
 
-make --debug --makefile $PLATE_PKG_PATH/Makefile $PLATE_CLI_COMMAND
+# make --debug --makefile $PLATE_PKG_PATH/Makefile $PLATE_CLI_COMMAND
+make --makefile $PLATE_PKG_PATH/Makefile $PLATE_CLI_COMMAND
