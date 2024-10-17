@@ -1,4 +1,6 @@
 import { access } from "node:fs/promises"
+import path from "node:path"
+
 import {
   STARTS_WITH_BASE_PATH,
   STARTS_WITH_PACKAGE_PATH,
@@ -20,11 +22,12 @@ export default (specifier) ->
 
   if STARTS_WITH_PACKAGE_PATH.test specifier
     if PLATE_PKG_PATH isnt PLATE_PRJ_PATH
-      projectPath = specifier.replace STARTS_WITH_PACKAGE_PATH, PLATE_PRJ_PATH
+      projectPath = path.join PLATE_PRJ_PATH, specifier.replace STARTS_WITH_PACKAGE_PATH, ""
 
-      return projectPath if await fileExists projectPath
+      if await fileExists projectPath
+        return projectPath
 
-    return specifier.replace STARTS_WITH_PACKAGE_PATH, PLATE_PKG_PATH
+    return path.join PLATE_PKG_PATH, specifier.replace STARTS_WITH_PACKAGE_PATH, ""
 
   if STARTS_WITH_PROJECT_PATH.test specifier
-    specifier.replace STARTS_WITH_PROJECT_PATH, PLATE_PRJ_PATH
+    path.join PLATE_PRJ_PATH, specifier.replace STARTS_WITH_PROJECT_PATH, ""
