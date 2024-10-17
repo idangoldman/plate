@@ -4,7 +4,7 @@
   "description": "A simple boilerplate for web development",
   "author": "Idan Goldman",
   "license": "MIT",
-  "version": "0.4.2",
+  "version": "0.5.0",
   "homepage": "https://github.com/idangoldman/plate/",
   "repository": {
     "type": "git",
@@ -14,24 +14,41 @@
     "url": "https://github.com/idangoldman/plate/issues"
   },
   "engines": {
-    "node": "22.1.0",
-    "pnpm": "9.1.1"
+    "node": "22.5.1",
+    "pnpm": "9.9.0"
   },
   "type": "module",
   "bin": {
     "plate": "./bin/plate.fish"
   },
+  "imports": {
+    "#root/*": "./src/*",
+    "#tests/*": "./tests/*"
+  },
+  "files": [
+    "bin",
+    "configs",
+    "lib",
+    "Makefile",
+    "makefiles",
+    "src"
+  ],
   "scripts": {
-    "publish": "pnpm publish --access public"
+    "help": "make help"
   },
   "dependencies": {
-    "coffeescript": "^2.7.0",
-    "esbuild": "^0.21.3",
-    "fast-glob": "^3.3.2",
-    "gulp": "^5.0.0",
-    "lodash": "^4.17.21",
-    "plugin-error": "^2.0.1",
-    "yaml": "2.4.2",
-    "zx": "^8.1.0"
-  }
+    "@coffeelint/cli": "5.2.11",
+    "@cucumber/cucumber": "11.0.0",
+    "@cucumber/pretty-formatter": "1.0.1",
+    "@eslint/js": "9.9.1",
+    "coffeescript": "2.7.0",
+    "esbuild": "0.23.1",
+    "eslint": "9.9.1",
+    "globals": "15.9.0",
+    "lodash": "4.17.21",
+    "prettier": "3.3.3",
+    "sinon": "18.0.0",
+    "yaml": "2.5.1"
+  },
+  "packageManager": "pnpm@9.9.0+sha512.60c18acd138bff695d339be6ad13f7e936eea6745660d4cc4a776d5247c540d0edee1a563695c183a66eb917ef88f2b4feb1fc25f32a7adcadc7aaf3438e99c1"
 }
