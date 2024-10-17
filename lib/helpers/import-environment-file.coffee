@@ -1,9 +1,9 @@
 export importEnvironmentFile = (filePath) ->
-  environtmentFile = undefined
+  environtmentFile = {}
 
   try
     environtmentFile = (await import(filePath)).default
-  catch e
+  catch error
     console.warn "No environment file found at #{filePath}"
   finally
     environtmentFile
