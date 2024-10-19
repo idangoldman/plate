@@ -9,6 +9,8 @@ Object::toCaseKeys = (caseName) ->
 
     @[newKey] = value
 
+  @
+
 Object::toCamelCaseKeys = ->
   @.toCaseKeys "camel"
 
