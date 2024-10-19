@@ -9,17 +9,17 @@ Object::toCaseKeys = (caseName) ->
 
     @[newKey] = value
 
-Object::toCamelCase = ->
+Object::toCamelCaseKeys = ->
   @.toCaseKeys "camel"
 
-Object::toConstantCase = ->
+Object::toConstantCaseKeys = ->
   @.toCaseKeys "constant"
 
-Object::toKebabCase = ->
+Object::toKebabCaseKeys = ->
   @.toCaseKeys "kebab"
 
-Object::toPascalCase = ->
+Object::toPascalCaseKeys = ->
   @.toCaseKeys "pascal"
 
-Object::toSnakeCase = ->
+Object::toSnakeCaseKeys = ->
   @.toCaseKeys "snake"
