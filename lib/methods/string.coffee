@@ -3,7 +3,7 @@ String::toCase = () ->
 
 String::toCamelCase = ->
   words = @.toCase()
-  words[0].toLowerCase() + words.slice(1).toPascalCase()
+  words.first().toLowerCase() + words.slice(1).toPascalCase()
 
 String::toConstantCase = ->
   @.toCase().join('_').toUpperCase()
