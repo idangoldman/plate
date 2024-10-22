@@ -4,6 +4,8 @@ default:
   paths:
     - tests/features/**/*.feature
   import:
+    - tests/support/world.js
+    - tests/support/hooks.js
     - tests/steps/**/*.js
   format:
     - "@cucumber/pretty-formatter"

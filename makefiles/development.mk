@@ -36,7 +36,7 @@ build-test: build
 		--bare \
 		--compile \
 		--no-header \
-		$(PLATE_PRJ_PATH)/tests/steps
+		$(PLATE_PRJ_PATH)/tests
 
 # Test the project
 test: build-test
