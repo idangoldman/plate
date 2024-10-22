@@ -6,19 +6,22 @@ String::toCamelCase = ->
   words.first().toLowerCase() + words.slice(1).toPascalCase()
 
 String::toConstantCase = ->
-  @.toCase().join('_').toUpperCase()
+  @.toCase().join('_')
 
 String::toDotCase = ->
   @.toCase().join('.')
 
 String::toKebabCase = ->
-  @.toCase().join('-').toLowerCase()
+  @.toCase().join('-')
 
 String::toPascalCase = ->
-  @.toCase().map((word) -> word.charAt(0).toUpperCase() + word.slice(1)).join('')
+  @.toCase().map((word) -> word.toCapitalize()).join('')
 
 String::toSnakeCase = ->
-  @.toCase().join('_').toLowerCase()
+  @.toCase().join('_')
 
 String::toTitleCase = ->
-  @.toCase().map((word) -> word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
+  @.toCase().map((word) -> word.toCapitalize()).join(' ')
+
+String::toCapitalize = ->
+  @.charAt(0).toUpperCase() + @.slice(1)
