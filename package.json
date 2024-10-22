@@ -37,6 +37,7 @@
     "@cucumber/cucumber": "11.0.1",
     "@cucumber/pretty-formatter": "1.0.1",
     "@eslint/js": "9.13.0",
+    "chai": "^5.1.1",
     "coffeescript": "2.7.0",
     "esbuild": "0.24.0",
     "eslint": "9.13.0",

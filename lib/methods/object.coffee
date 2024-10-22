@@ -1,5 +1,7 @@
+import capitalize from "#root/helpers/capitalize.js"
+
 Object::toCaseKeys = (caseName) ->
-  caseMethodName = "to#{caseName.toTitleCase()}Case"
+  caseMethodName = "to#{capitalize(caseName)}Case"
 
   for key, value of @
     newKey = key[caseMethodName]()
@@ -12,16 +14,16 @@ Object::toCaseKeys = (caseName) ->
   @
 
 Object::toCamelCaseKeys = ->
-  @.toCaseKeys "camel"
+  @toCaseKeys "camel"
 
 Object::toConstantCaseKeys = ->
-  @.toCaseKeys "constant"
+  @toCaseKeys "constant"
 
 Object::toKebabCaseKeys = ->
-  @.toCaseKeys "kebab"
+  @toCaseKeys "kebab"
 
 Object::toPascalCaseKeys = ->
-  @.toCaseKeys "pascal"
+  @toCaseKeys "pascal"
 
 Object::toSnakeCaseKeys = ->
-  @.toCaseKeys "snake"
+  @toCaseKeys "snake"

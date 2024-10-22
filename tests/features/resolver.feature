@@ -13,12 +13,12 @@ Feature: Path Resolver
     Then the result should be "<expected>"
 
     Examples:
-      | input               | expected                        |
-      | lodash/merge.js     | lodash/merge.js                 |
-      | ~/lib/globals.js    | /package/path/lib/globals.js    |
-      | @/src/utils.js      | /project/path/src/utils.js      |
-      | ~/config/dev.json   | /package/path/config/dev.json   |
-      | @/tests/main.js     | /project/path/tests/main.js     |
+      | input             | expected                      |
+      | lodash/merge.js   | lodash/merge.js               |
+      | ~/lib/globals.js  | /package/path/lib/globals.js  |
+      | @/src/utils.js    | /project/path/src/utils.js    |
+      | ~/config/dev.json | /package/path/config/dev.json |
+      | @/tests/main.js   | /project/path/tests/main.js   |
 
   Scenario: Missing environment variables
     Given the environment variables are not set
