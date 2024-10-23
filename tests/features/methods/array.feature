@@ -4,7 +4,7 @@ Feature: Array Methods
   So that I can write more readable code
 
   Background:
-    Given I have imported the array prototype methods
+    Given I have imported the Array prototype methods
 
   Scenario Outline: Accessing array elements
     Given I have an array <input>

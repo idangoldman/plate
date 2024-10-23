@@ -4,7 +4,7 @@ Feature: String Case Conversions
   So that I can maintain consistent naming conventions in my codebase
 
   Background:
-    Given I have imported the string prototype methods
+    Given I have imported the String prototype methods
 
   Scenario Outline: Converting strings to different cases
     Given I have a string "<input>"

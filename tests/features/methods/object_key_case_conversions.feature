@@ -4,7 +4,7 @@ Feature: Object Key Case Conversions
   So that I can maintain consistent object property naming
 
   Background:
-    Given I have imported the object prototype methods
+    Given I have imported the Object prototype methods
 
   Scenario Outline: Converting nested object keys to different cases
     Given I have an object

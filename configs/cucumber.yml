@@ -1,13 +1,24 @@
 default:
   # parallel: 2
+  failFast: true
+  forceExit: true
+  language: en
+  retry: 0
+  strict: true
   verbose: true
+
+  name:
+    - Accessing array elements
+
   paths:
     - tests/features/**/*.feature
+
   import:
-    - tests/support/world.js
-    - tests/support/hooks.js
+    - tests/support/**/*.js
     - tests/steps/**/*.js
+
   format:
     - "@cucumber/pretty-formatter"
+
   formatOptions:
     colorsEnabled: true
