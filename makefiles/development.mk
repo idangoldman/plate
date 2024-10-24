@@ -6,13 +6,13 @@
 
 # Clean the project
 clean:
-	rm -rfv \
+	@rm -rf \
 		$(PLATE_PRJ_PATH)/src \
-		$(PLATE_PRJ_PATH)/tests/steps/*.js
+		$(PLATE_PRJ_PATH)/tests/**/*.js
 
 # Build the project
 build: clean
-	$(PLATE_BIN_PATH)/coffee \
+	@$(PLATE_BIN_PATH)/coffee \
 		--bare \
 		--compile \
 		--no-header \
@@ -21,7 +21,7 @@ build: clean
 
 # Watch the project
 watch: clean
-	$(PLATE_BIN_PATH)/coffee \
+	@$(PLATE_BIN_PATH)/coffee \
 		--bare \
 		--compile \
 		--inline-map \
@@ -32,15 +32,15 @@ watch: clean
 
 # Build the test project
 build-test: build
-	$(PLATE_BIN_PATH)/coffee \
+	@$(PLATE_BIN_PATH)/coffee \
 		--bare \
 		--compile \
 		--no-header \
-		$(PLATE_PRJ_PATH)/tests/steps
+		$(PLATE_PRJ_PATH)/tests
 
 # Test the project
 test: build-test
-	$(PLATE_BIN_PATH)/cucumber-js --config="$(PLATE_CONF_PATH)/cucumber.yml"
+	@$(PLATE_BIN_PATH)/cucumber-js --config="$(PLATE_CONF_PATH)/cucumber.yml"
 
 # Run the project via Node.js
 run:
