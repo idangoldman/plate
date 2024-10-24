@@ -3,9 +3,6 @@ Feature: Object Key Case Conversions
   I want to convert all keys in an object to different cases
   So that I can maintain consistent object property naming
 
-  Background:
-    Given I have imported the Object prototype methods
-
   Scenario Outline: Converting nested object keys to different cases
     Given I have an object
       """

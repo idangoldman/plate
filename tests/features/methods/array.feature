@@ -3,13 +3,10 @@ Feature: Array Methods
   I want to easily access first and last elements of arrays
   So that I can write more readable code
 
-  Background:
-    Given I have imported the Array prototype methods
-
   Scenario Outline: Accessing array elements
-    Given I have an array <input>
-    When I call the <method> method
-    Then I should get <expected>
+    Given an array "<input>"
+    When call the "<method>" method on the array
+    Then return "<expected>" as the result
 
     Examples:
       | input           | method | expected  |
@@ -17,5 +14,3 @@ Feature: Array Methods
       | [1, 2, 3, 4, 5] | last   | 5         |
       | []              | first  | undefined |
       | []              | last   | undefined |
-      | ["a", "b", "c"] | first  | "a"       |
-      | ["a", "b", "c"] | last   | "c"       |

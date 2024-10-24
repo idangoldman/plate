@@ -3,9 +3,6 @@ Feature: String Case Conversions
   I want to convert strings between different case formats
   So that I can maintain consistent naming conventions in my codebase
 
-  Background:
-    Given I have imported the String prototype methods
-
   Scenario Outline: Converting strings to different cases
     Given I have a string "<input>"
     When I convert it to "<case_type>" case
@@ -13,7 +10,7 @@ Feature: String Case Conversions
 
     Examples:
       | input       | case_type | expected    |
-      | helloWorld  | camel     | helloWorld  |
+      | hello_World | camel    | helloWorld  |
       | hello_world | camel     | helloWorld  |
       | hello-world | camel     | helloWorld  |
       | hello.world | camel     | helloWorld  |

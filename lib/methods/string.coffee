@@ -5,10 +5,10 @@ String::toCase = () ->
 
 String::toCamelCase = ->
   words = @toCase()
-  words.first().toLowerCase() + words.slice(1).toPascalCase()
+  words.first().toLowerCase() + words.slice(1).map(capitalize).join('')
 
 String::toConstantCase = ->
-  @toCase().join('_')
+  @toCase().join('_').toUpperCase()
 
 String::toDotCase = ->
   @toCase().join('.')

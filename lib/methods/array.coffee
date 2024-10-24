@@ -1,5 +1,10 @@
 Array::first = ->
-    @[0]
+  @[0]
 
 Array::last = ->
-    @[@length - 1]
+  @[@length - 1]
+
+# Array.hooks.around ["first", "last"], (fn) ->
+#     if @length is 0
+#        then undefined
+#        else fn.call(@)
