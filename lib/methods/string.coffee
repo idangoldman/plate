@@ -1,4 +1,5 @@
 import capitalize from "#root/helpers/capitalize.js"
+import { CASE_SEPARATORS } from "#root/helpers/regex.js"
 
 String::toCase = () ->
   @replace(/([A-Z])|[_\-\.]/g, " $1").trim().toLowerCase().split(/\s+/)
