@@ -1,27 +1,39 @@
 import capitalize from "#root/helpers/capitalize.js"
-import { CASE_SEPARATORS } from "#root/helpers/regex.js"
+import { CASE_SEPARATORS, CASE_WHITESPACE } from "#root/helpers/regex.js"
 
 String::toCase = () ->
-  @replace(/([A-Z])|[_\-\.]/g, " $1").trim().toLowerCase().split(/\s+/)
+  @replace CASE_SEPARATORS, " $1"
+    .trim()
+    .toLowerCase()
+    .split CASE_WHITESPACE
 
 String::toCamelCase = ->
   words = @toCase()
   words.first().toLowerCase() + words.slice(1).map(capitalize).join('')
 
 String::toConstantCase = ->
-  @toCase().join('_').toUpperCase()
+  @toCase()
+    .join "_"
+    .toUpperCase()
 
 String::toDotCase = ->
-  @toCase().join('.')
+  @toCase()
+    .join "."
 
 String::toKebabCase = ->
-  @toCase().join('-')
+  @toCase()
+    .join "-"
 
 String::toPascalCase = ->
-  @toCase().map(capitalize).join('')
+  @toCase()
+    .map capitalize
+    .join ""
 
 String::toSnakeCase = ->
-  @toCase().join('_')
+  @toCase()
+    .join "_"
 
 String::toTitleCase = ->
-  @toCase().map(capitalize).join(' ')
+  @toCase()
+    .map capitalize
+    .join " "

@@ -1,4 +1,5 @@
-export CASE_SEPARATORS         = new RegExp "([A-Z])|[_\\-\\.]", "g"
+export CASE_SEPARATORS          = new RegExp "([A-Z])|[_\\-\\.]", "g"
+export CASE_WHITESPACE          = new RegExp "\\s+", "g"
 export COFFEE_EXTENSION         = new RegExp "\\.(coffee|litcoffee|coffee\\.md)$", "i"
 export COMMON_JS_CONTENT        = new RegExp "exports[\\[\\.( ?=)]|module\\.exports|require\\(|createRequire\\(", "i"
 export PATTERN_PLACEHOLDERS     = new RegExp "(?<pattern>\\{\\{\\s*(?<placeholder>[a-z0-9-_\\.]+?)\\s*\\}\\})", "gmi"
