@@ -1,17 +1,18 @@
 import capitalize from "#root/helpers/capitalize.js"
 
-Object::toCaseKeys = (caseName) ->
-  caseMethodName = "to#{capitalize(caseName)}Case"
+Object::toCaseKeys = (caseType) ->
+  prototypeName = "to#{capitalize caseType}Case"
+  result = {}
 
-  for key, value of @
-    newKey = key[caseMethodName]()
+  for own key, value of @
+    newKey = key["#{prototypeName}"]()
 
-    if typeof value is "object"
-      value = value.toCaseKeys(caseName)
+    result[newKey] = if typeof value is "object" and value?
+      value.toCaseKeys caseType
+    else
+      value
 
-    @[newKey] = value
-
-  @
+  result
 
 Object::toCamelCaseKeys = ->
   @toCaseKeys "camel"

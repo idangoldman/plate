@@ -7,8 +7,11 @@ default:
   strict: true
   verbose: true
 
-  name:
-    - Accessing array elements
+  # name:
+  # - Accessing array elements
+  # - Resolving different types of path specifiers
+  # - Converting nested object keys to different cases
+  # - Converting strings to different cases
 
   paths:
     - tests/features/**/*.feature
