@@ -6,7 +6,7 @@ export default transformYaml = (filePath, keysCase = "camel") ->
 
   transformedContent = YAML
     .parse source.toString()
-    .toCaseKeys keysCase
+    # .toCaseKeys keysCase
 
   transformedContent = JSON.stringify transformedContent, null, 2
 

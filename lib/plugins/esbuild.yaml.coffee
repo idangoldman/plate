@@ -5,7 +5,7 @@ export default ->
   name: "yaml"
   setup: (build) ->
     build.onLoad({ filter: YAML_EXTENSION }, (args) ->
-      transformedSource = await transformYaml(args.path, args.importAssertions?.keysCase or 'camel')
+      transformedSource = await transformYaml(args.path, args.importAttributes?.keysCase or 'camel')
 
       return {
         contents: transformedSource
