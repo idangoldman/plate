@@ -25,12 +25,12 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build
-        run: coffee --bare --compile --no-header --output ./src ./lib
+        run: pnpm exec coffee --bare --compile --no-header --output ./src ./lib
 
       - name: Run tests
         run: |
-          coffee --bare --compile --no-header ./tests
-          cucumber-js --config="./configs/cucumber.yml"
+          pnpm exec coffee --bare --compile --no-header ./tests
+          pnpm exec cucumber-js --config="./configs/cucumber.yml"
 
       - name: Publish to NPM
         run: pnpm publish --access public --no-git-checks
