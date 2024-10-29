@@ -1,11 +1,27 @@
 default:
   # parallel: 2
+  failFast: true
+  forceExit: true
+  language: en
+  retry: 0
+  strict: true
   verbose: true
+
+  # name:
+  # - Accessing array elements
+  # - Resolving different types of path specifiers
+  # - Converting nested object keys to different cases
+  # - Converting strings to different cases
+
   paths:
     - tests/features/**/*.feature
+
   import:
+    - tests/support/**/*.js
     - tests/steps/**/*.js
+
   format:
     - "@cucumber/pretty-formatter"
+
   formatOptions:
     colorsEnabled: true
