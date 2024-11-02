@@ -1,82 +1,87 @@
-import Singleton from "#root/methods/singleton.js"
-import Hooks from "#root/methods/hooks.js"
+import capitalize from "#root/helpers/capitalize.js"
 
-export default class PrototypeBase extends Singleton
+export default class PrototypeBase
   @registry = new Map()
-  @applied = false
-
-  @validExtends = new Set [
+  @supported = new Set [
     "Array"
-    "String"
-    "Object"
-    "Number"
     "Date"
-    "RegExp"
     "Function"
+    "Map"
+    "Number"
+    "Object"
+    "Promise"
+    "RegExp"
+    "Set"
+    "String"
   ]
 
-  @before ['apply', 'remove'], { once: true }, -> @getInstance()
+  @extends: (natives...) ->
+    nativesToExtend = []
 
-  @extends = (target) ->
-    targetName = if typeof target is 'string' then target else target.name
-    throw new Error "Invalid target: #{targetName}" unless @validTargets.has(targetName)
+    for proto in natives.flat()
+      nativeName = if typeof proto is 'string' then proto else proto.name
+      capitalizedName = capitalize nativeName
 
-    @register(targetName)
-    targetName
+      unless @supported.has capitalizedName
+        throw new Error "Unsupported prototype: #{nativeName}"
 
-  @getPrototype = (name) ->
-    return global[name].prototype if @validExtends.has(name)
-    throw new Error "Invalid target: #{name}"
+      protoObj = global[capitalizedName]?.prototype
 
-  @methods = ->
-    Object.getOwnPropertyNames(@prototype).reduce (acc, name) =>
-      return acc if name is 'constructor'
-      acc[name] = (instance, ...args) =>
-        @prototype[name].apply(instance, args)
-      acc
-    , {}
+      unless protoObj?
+        throw new Error "Cannot find prototype for: #{nativeName}"
 
-  @register = (target) ->
-    throw new Error "Invalid target: #{target}" unless @validExtends.has(target)
+      nativesToExtend.push protoObj
 
-    methods = Object.getOwnPropertyNames(@prototype).reduce (acc, name) =>
-      return acc if name is 'constructor'
-      method = @prototype[name]
-      acc[name] = Hooks.wrapMethod(this, name, method)
-      acc
-    , {}
+    unless nativesToExtend.length
+      throw new Error "No native prototypes to extend"
 
-    @registry.set(target, {
-      ...(if @registry.has(target) then @registry.get(target) else {})
-      ...methods
-    })
-    @
+    @registry.set @name, nativesToExtend
 
-  @apply = ->
-    return if @applied
+    true
 
-    @registry.forEach (methods, target) =>
-      prototype = @getPrototype(target)
+  @methods: ->
+    Object.getOwnPropertyNames @prototype
+      .filter (name) -> name isnt "constructor"
+      .reduce (acc, name) =>
+        acc[name] = @prototype[name]
+        acc
+      , {}
 
-      Object.entries(methods).forEach ([name, implementation]) =>
-        return if prototype[name]?
+  @apply: ->
+    nativePrototypes = @registry.get @name
 
-        Object.defineProperty prototype, name,
-          configurable: true
+    unless nativePrototypes?.length
+      throw new Error "No native prototypes registered for #{@name}"
+
+    methods = @methods()
+
+    unless Object.keys(methods).length
+      throw new Error "No methods defined in #{@name}"
+
+    for name, fn of methods
+      for proto in nativePrototypes
+        if proto[name]?
+          console.warn "Method #{name} already exists on #{proto.constructor.name}"
+          continue
+
+        Object.defineProperty proto, name,
+          value: fn
           enumerable: false
-          value: implementation
+          configurable: true
           writable: true
 
-    @applied = true
     @
 
-  @remove = ->
-    return unless @applied
+  @remove: ->
+    nativePrototypes = @registry.get @name
 
-    @registry.forEach (methods, target) =>
-      prototype = @getPrototype(target)
-      Object.keys(methods).forEach (name) ->
-        delete prototype[name]
+    unless nativePrototypes?.length
+      throw new Error "No native prototypes registered for #{@name}"
 
-    @applied = false
+    methods = @methods()
+
+    for name of methods
+      for proto in nativePrototypes
+        delete proto[name]
+
     @

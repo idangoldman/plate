@@ -13,3 +13,5 @@ export default class PrototypeString extends PrototypeBase
   toPascalCase:   -> @toCase().map(capitalize).join("")
   toSnakeCase:    -> @toCase().join("_")
   toTitleCase:    -> @toCase().map(capitalize).join(" ")
+
+export methods = PrototypeString.methods()
