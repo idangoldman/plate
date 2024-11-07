@@ -8,7 +8,7 @@ import "./globals.js"
 # https://www.npmjs.com/package/import-glob
 register "#{PLATE_PKG_PATH}/src/loaders/resolver.js", import.meta.url
 register "#{PLATE_PKG_PATH}/src/loaders/yaml.js", import.meta.url
-register "#{PLATE_PKG_PATH}/src/loaders/coffee.js", import.meta.url
+register "#{PLATE_PKG_PATH}/src/loaders/coffeescript.js", import.meta.url
 
 # Setting up environment with variables and methods
 do ->
