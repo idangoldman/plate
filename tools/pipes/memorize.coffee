@@ -2,7 +2,7 @@ import path from "node:path"
 import vinyl from "vinyl"
 import YAML from "yaml"
 
-import TaskPipe from "~/tasks/pipes/task.coffee"
+import TaskPipe from "@/tools/pipes/task.coffee"
 
 MemorizedStore = {}
 

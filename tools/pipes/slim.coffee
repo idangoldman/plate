@@ -1,5 +1,5 @@
 import { $ } from "zx"
-import TaskPipe from "~/tasks/pipes/task.coffee"
+import TaskPipe from "@/tools/pipes/task.coffee"
 import path from "node:path"
 
 { globs } = PLATE_ENV
