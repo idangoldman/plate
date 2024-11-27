@@ -41,5 +41,10 @@ end
 # echo "PLATE_CLI_COMMAND: $PLATE_CLI_COMMAND"
 # echo "PLATE_CLI_ARGS: $PLATE_CLI_ARGS"
 
-# make --debug --makefile $PLATE_PKG_PATH/Makefile $PLATE_CLI_COMMAND
-make --makefile $PLATE_PKG_PATH/Makefile $PLATE_CLI_COMMAND
+process-compose \
+    --config="$PLATE_PKG_PATH/processes/defaults.yml" \
+    --config="$PLATE_PKG_PATH/processes/package.yml" \
+    --config="$PLATE_PKG_PATH/processes/development.yml" \
+    --config="$PLATE_PKG_PATH/processes/code-quality.yml" \
+    --no-server \
+    run $PLATE_CLI_COMMAND
