@@ -1,0 +1,8 @@
+disable_env_expansion: true
+is_strict: true
+log_level: trace
+log_location: "./logs/development.log"
+
+shell:
+  shell_command: "fish"
+  shell_argument: "-c"

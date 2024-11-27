@@ -1,0 +1,93 @@
+processes:
+  clean:
+    namespace: development
+    description: "Clean up the project"
+    availability:
+      restart: "no"
+    command: |
+      rm -rvf ${PLATE_PRJ_PATH}/src
+      find ${PLATE_PRJ_PATH}/tests -name "*.js" -delete -print
+
+  build:
+    namespace: development
+    description: "Build the project"
+    depends_on:
+      clean:
+        condition: process_completed
+    availability:
+      restart: "no"
+    command: |
+      ${PLATE_BIN_PATH}/coffee \
+        --bare \
+        --compile \
+        --no-header \
+        --output ${PLATE_PRJ_PATH}/src \
+        ${PLATE_PRJ_PATH}/lib
+
+  watch:
+    namespace: development
+    description: "Watch the project"
+    depends_on:
+      clean:
+        condition: process_completed
+    availability:
+      restart: "on_failure"
+    command: |
+      ${PLATE_BIN_PATH}/coffee \
+        --bare \
+        --compile \
+        --inline-map \
+        --no-header \
+        --watch \
+        --output ${PLATE_PRJ_PATH}/src \
+        ${PLATE_PRJ_PATH}/lib
+
+  build-test:
+    namespace: development
+    description: "Build the test project"
+    depends_on:
+      build:
+        condition: process_completed
+    availability:
+      restart: "no"
+    command: |
+      ${PLATE_BIN_PATH}/coffee \
+        --bare \
+        --compile \
+        --no-header \
+        ${PLATE_PRJ_PATH}/tests
+
+  test:
+    namespace: development
+    description: "Test the project"
+    depends_on:
+      build-test:
+        condition: process_completed
+    availability:
+      restart: "no"
+    command: |
+      ${PLATE_BIN_PATH}/cucumber-js --config="${PLATE_CONF_PATH}/cucumber.yml"
+
+  run:
+    namespace: development
+    description: "Run the project via Node.js"
+    availability:
+      restart: "no"
+    command: |
+      node \
+        --trace-warnings \
+        --trace-deprecation \
+        --trace-uncaught \
+        --import="${PLATE_PKG_PATH}/src/registry.js" ${PLATE_CLI_ARGS}
+
+  logs:
+    namespace: development
+    description: "Show the project logs"
+    availability:
+      restart: "no"
+    command: |
+      set --local PLATE_LOG_PATH $$PLATE_PKG_PATH/logs/$$PLATE_ENV.log
+
+      if test -f $$PLATE_LOG_PATH
+        tail -f $$PLATE_LOG_PATH
+      end
