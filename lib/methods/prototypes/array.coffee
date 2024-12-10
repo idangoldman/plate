@@ -5,6 +5,7 @@ export default class PrototypeArray extends PrototypeBase
 
   # @around ["first", "last"], (fn) -> if @isEmpty then undefined else fn.call @
 
+  excludes: (element) -> not @includes element
   first:   -> @[0]
   from:    (index) -> @slice(index)
   isEmpty: -> @length is 0
