@@ -1,5 +1,4 @@
 import { register } from "node:module"
-import { applyPrototypes } from "#root/methods/defaults.js"
 
 # Importing global variables
 import "./globals.js"
@@ -13,4 +12,6 @@ register "#{PLATE_PKG_PATH}/src/loaders/coffeescript.js", import.meta.url
 # Setting up environment with variables and methods
 do ->
   await import("#{PLATE_PKG_PATH}/src/environment.js")
-  applyPrototypes()
+
+  methods = await import("#{PLATE_PKG_PATH}/src/methods/defaults.js")
+  methods.applyPrototypes()

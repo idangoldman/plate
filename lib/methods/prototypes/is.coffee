@@ -1,7 +1,7 @@
 import BasePrototype from "#root/methods/prototypes/base.js"
 
 export default class IsPrototype extends BasePrototype
-  @extends "Object", "String", "Array", "Number", "Date", "RegExp", "Function", "Promise", "Set", "Map"
+  @extends "Object", "String", "Array"
 
   isArray:     -> Array.isArray(@)
   isBoolean:   -> typeof @ == "boolean"

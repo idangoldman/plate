@@ -24,5 +24,6 @@ export default class PrototypeObject extends PrototypeBase
   toPascalCaseKeys:   -> @toCaseKeys "pascal"
   toSnakeCaseKeys:    -> @toCaseKeys "snake"
 
+  # keys: -> if Object.keys? then Object.keys @ else []
 
 export methods = PrototypeObject.methods()

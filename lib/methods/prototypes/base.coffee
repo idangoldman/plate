@@ -4,14 +4,7 @@ export default class PrototypeBase
   @registry = new Map()
   @supported = new Set [
     "Array"
-    "Date"
-    "Function"
-    "Map"
-    "Number"
     "Object"
-    "Promise"
-    "RegExp"
-    "Set"
     "String"
   ]
 

@@ -1,6 +1,7 @@
 import PrototypeArray from "#root/methods/prototypes/array.js"
 import PrototypeObject from "#root/methods/prototypes/object.js"
 import PrototypeString from "#root/methods/prototypes/string.js"
+# import IsPrototype from "#root/methods/prototypes/is.js"
 
 export applyPrototypes = ->
   PrototypeArray.apply()
