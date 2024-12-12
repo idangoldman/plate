@@ -16,13 +16,18 @@ Then "return {string} as the result", (expected) ->
   switch expected
     when "undefined"
       expect(@result).to.be.undefined
+
     when "true"
       expect(@result).to.be.true
+
     when "false"
       expect(@result).to.be.false
+
     when ARRAY_CONTENT.test(expected)
       expect(@result).to.deep.equal(JSON.parse(expected))
+
     when OBJECT_CONTENT.test(expected)
       expect(@result).to.deep.equal(JSON.parse(expected))
+
     else
       expect(@result).to.equal(parseInt(expected))

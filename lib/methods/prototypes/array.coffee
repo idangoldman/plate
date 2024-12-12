@@ -7,7 +7,6 @@ export default class PrototypeArray extends PrototypeBase
 
   excludes: (element) -> not @includes element
   first:   -> @[0]
-  from:    (index) -> @slice(index)
   isEmpty: -> @length is 0
   last:    -> @[@length - 1]
 

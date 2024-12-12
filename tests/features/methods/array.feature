@@ -27,5 +27,3 @@ Feature: Array Methods
       | input     | method   | arguments | expected  |
       | [1, 2, 3] | excludes | 5         | true      |
       | [1, 2, 3] | excludes | 2         | false     |
-      | [1, 2, 3] | from     | 1         | [2, 3]    |
-      | [1, 2, 3] | from     | 2         | [3]       |
