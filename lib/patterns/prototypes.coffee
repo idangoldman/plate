@@ -1,24 +1,40 @@
-import capitalize from "#root/helpers/capitalize.js"
+import glob from "glob"
 
-export default class PrototypeBase
+if process.mainModule is require.main
+  Prototypes.initilize()
+
+export default class Prototypes
+  @prefix: "___"
   @registry = new Map()
   @supported = new Set [
     "Array"
+    "Function"
     "Object"
     "String"
   ]
+
+  @destory:   -> @load prototypes, "remove"
+  @initilize: -> @load prototypes, "apply"
+
+  @load: (protos = prototypes, method = "apply") ->
+    files = await glob("#{PLATE_PKG_PATH}/src/prototypes/*.js")
+
+    for file in files
+      prototypes = await import(file)
+      prototypes[method]()
+
+    true
 
   @extends: (natives...) ->
     nativesToExtend = []
 
     for proto in natives.flat()
-      nativeName = if typeof proto is 'string' then proto else proto.name
-      capitalizedName = capitalize nativeName
+      nativeName = proto.name.capitalize()
 
-      unless @supported.has capitalizedName
+      unless @supported.has nativeName
         throw new Error "Unsupported prototype: #{nativeName}"
 
-      protoObj = global[capitalizedName]?.prototype
+      protoObj = global[nativeName]?.prototype
 
       unless protoObj?
         throw new Error "Cannot find prototype for: #{nativeName}"
@@ -53,8 +69,13 @@ export default class PrototypeBase
 
     for name, fn of methods
       for proto in nativePrototypes
-        if proto[name]?
-          console.warn "Method #{name} already exists on #{proto.constructor.name}"
+        if proto[name].isNativeMethod()
+          console.warn "Method #{name} is native on #{proto.constructor.name}"
+          proto["#{@prefix}#{name}"] = proto[name]
+          proto[name] = null
+
+        if proto[name]? and not proto["#{@prefix}#{name}"]?
+          console.warn "Method `#{name}` and `#{@prefix}#{name}` already exist on #{proto.constructor.name}"
           continue
 
         Object.defineProperty proto, name,

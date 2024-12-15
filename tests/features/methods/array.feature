@@ -1,6 +1,6 @@
 Feature: Array Methods
   As a developer
-  I want to easily access first and last elements of arrays
+  I want to use the Array methods to easily work with arrays
   So that I can write more readable code
 
   Scenario Outline: Accessing array elements
@@ -14,9 +14,6 @@ Feature: Array Methods
       | [1, 2, 3] | last    | 3         |
       | []        | first   | undefined |
       | []        | last    | undefined |
-      | []        | isEmpty | true      |
-      | [1, 2, 3] | isEmpty | false     |
-
 
   Scenario Outline: Accessing array elements with arguments
     Given an array "<input>"

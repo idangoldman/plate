@@ -1,13 +1,13 @@
 import { After, BeforeAll, AfterAll } from "@cucumber/cucumber"
 
-import { applyPrototypes, removePrototypes } from "#root/methods/defaults.js"
+import Prototypes from "#root/patterns/prototypes.js"
 
 After ->
   @restoreEnvironmentState()
   @resetState()
 
 BeforeAll ->
-  applyPrototypes()
+  Prototypes.initilize()
 
 AfterAll ->
-  removePrototypes()
+  Prototypes.destory()
