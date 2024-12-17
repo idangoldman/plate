@@ -5,8 +5,7 @@ export default class Strings extends Prototypes
   @extends "String"
 
   capitalize: () ->
-    "" unless @length > 0
-       else @charAt(0).toUpperCase() + @slice(1).toLowerCase()
+    unless @length > 0 then "" else @charAt(0).toUpperCase() + @slice(1).toLowerCase()
 
   times: (x = 1, y = 1) ->
     Array(y)

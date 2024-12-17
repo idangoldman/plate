@@ -29,12 +29,11 @@
     "bin",
     "configs",
     "lib",
-    "Makefile",
-    "makefiles",
+    "processes",
     "src"
   ],
   "scripts": {
-    "help": "make help"
+    "help": "plate help"
   },
   "dependencies": {
     "@coffeelint/cli": "5.2.11",
@@ -45,7 +44,7 @@
     "coffeescript": "2.7.0",
     "esbuild": "0.24.0",
     "eslint": "9.13.0",
-    "glob": "11.0.0",
+    "fast-glob": "^3.3.2",
     "globals": "15.11.0",
     "lodash": "4.17.21",
     "prettier": "3.3.3",

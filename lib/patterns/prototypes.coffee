@@ -1,7 +1,4 @@
-import glob from "glob"
-
-if process.mainModule is require.main
-  Prototypes.initilize()
+import fastGlob from "fast-glob"
 
 export default class Prototypes
   @prefix: "___"
@@ -13,11 +10,11 @@ export default class Prototypes
     "String"
   ]
 
-  @destory:   -> @load prototypes, "remove"
-  @initilize: -> @load prototypes, "apply"
+  @destory:   -> @load "remove"
+  @initilize: -> @load "apply"
 
-  @load: (protos = prototypes, method = "apply") ->
-    files = await glob("#{PLATE_PKG_PATH}/src/prototypes/*.js")
+  @load: (method = "apply") ->
+    files = await fastGlob.glob("#{PLATE_PKG_PATH}/src/prototypes/*.js")
 
     for file in files
       prototypes = await import(file)
@@ -99,3 +96,6 @@ export default class Prototypes
         delete proto[name]
 
     @
+
+if import.meta.url is process.argv[1]
+  Prototypes.initilize()

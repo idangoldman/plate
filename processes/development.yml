@@ -13,7 +13,7 @@ processes:
     description: "Build the project"
     depends_on:
       clean:
-        condition: process_completed
+        condition: process_completed_successfully
     availability:
       restart: "no"
     command: |
@@ -29,7 +29,7 @@ processes:
     description: "Watch the project"
     depends_on:
       clean:
-        condition: process_completed
+        condition: process_completed_successfully
     availability:
       restart: "on_failure"
     command: |
@@ -47,7 +47,7 @@ processes:
     description: "Build the test project"
     depends_on:
       build:
-        condition: process_completed
+        condition: process_completed_successfully
     availability:
       restart: "no"
     command: |
@@ -62,7 +62,7 @@ processes:
     description: "Test the project"
     depends_on:
       build-test:
-        condition: process_completed
+        condition: process_completed_successfully
     availability:
       restart: "no"
     command: |
@@ -89,5 +89,5 @@ processes:
       set --local PLATE_LOG_PATH $$PLATE_PKG_PATH/logs/$$PLATE_ENV.log
 
       if test -f $$PLATE_LOG_PATH
-        tail -f $$PLATE_LOG_PATH
+        tail -f -v -n 5 $$PLATE_LOG_PATH
       end

@@ -10,9 +10,9 @@ export default class To extends Prototypes
     else []
 
   toObject: -> switch true
-    when @isArray()  then @reduce (obj, value, index) -> obj[index] = value; obj, {}
+    when @isArray() then @reduce ((obj, value, index) -> obj[index] = value; obj), {}
     when @isObject() then @clone()
-    when @isString() then @split("").reduce (obj, value, index) -> obj[index] = value; obj, {}
+    when @isString() then @split("").reduce ((obj, value, index) -> obj[index] = value; obj), {}
     else {}
 
   toBoolean: -> switch true

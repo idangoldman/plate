@@ -16,8 +16,8 @@ export default class Objects extends Prototypes
 
   get: (key) ->
     switch true
-      when @isArray()  then @key
-      when @isObject() then @key in @ ? @[key] : undefined
+      when @isArray()  then @key || undefined
+      when @isObject() then @[key] || undefined
       else undefined
 
   has: (key) ->
