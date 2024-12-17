@@ -57,13 +57,4 @@ export default class Objects extends Prototypes
   toPascalCaseKeys:   -> @toCaseKeys "pascal"
   toSnakeCaseKeys:    -> @toCaseKeys "snake"
 
-  # inspect: ->
-  # methods: ->
-  #   Object.getOwnPropertyNames @prototype
-  #     .filter (name) -> name isnt "constructor"
-  #     .reduce (acc, name) =>
-  #       acc[name] = @prototype[name]
-  #       acc
-  #     , {}
-
 export methods = Objects.methods()
