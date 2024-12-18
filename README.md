@@ -13,6 +13,7 @@
 - [ ] Implement `getter` and `setter` methods in `Objects` prototype to use `MissingMethod` pattern routing prototype methods to use static methods of the same name.
 - [ ] Replace the use of `export methods = Objects.methods()` in prototypes files with `Objects::methodName` pattern.
 - [ ] Rewrite `Objects::methods` method to list all methods names in an array of an object.
+- [ ] Further more, Let's say trying to use `Strings.capitalize` method in `Functions.after` method, and it's not defined, it should first try and import the `Strings` prototype and then call the method again. Well, maybe for now it's going to be better to just use `Strings.capitalize` method in the `Functions.after` method, and if it's not defined, it should throw an error. Because it's for internal use only and for extenral use all the `Prototypes` should be imported by the time of use.
 
 ### Prototypes methods enhancements
 

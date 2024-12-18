@@ -2,16 +2,16 @@ import Arrays from "#root/prototypes/arrays.js"
 import Objects from "#root/prototypes/objects.js"
 import Functions from "#root/prototypes/functions.js"
 import Strings from "#root/prototypes/strings.js"
-import Iss from "#root/prototypes/methods/is.js"
-import Tos from "#root/prototypes/methods/to.js"
+import IsMethods from "#root/prototypes/methods/is.js"
+import ToMethods from "#root/prototypes/methods/to.js"
 
 export initialize = ->
   Arrays.apply()
   Functions.apply()
   Objects.apply()
   Strings.apply()
-  Iss.apply()
-  Tos.apply()
+  IsMethods.apply()
+  ToMethods.apply()
 
   true
 
@@ -20,8 +20,8 @@ export destroy = ->
   Functions.remove()
   Objects.remove()
   Strings.remove()
-  Iss.remove()
-  Tos.remove()
+  IsMethods.remove()
+  ToMethods.remove()
 
   true
 
