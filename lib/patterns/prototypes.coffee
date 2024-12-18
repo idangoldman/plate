@@ -54,6 +54,7 @@ export default class Prototypes
 
     for name, fn of methods
       for proto in nativePrototypes
+
         if isNativeMethod proto[name]
           console.warn "Method #{name} is native on #{proto.constructor.name}"
           proto["#{@prefix}#{name}"] = proto[name]

@@ -10,4 +10,4 @@ BeforeAll ->
   Prototypes.initialize()
 
 AfterAll ->
-  Prototypes.destory()
+  Prototypes.destroy()
