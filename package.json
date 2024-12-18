@@ -37,16 +37,16 @@
   },
   "dependencies": {
     "@coffeelint/cli": "5.2.11",
-    "@cucumber/cucumber": "11.0.1",
+    "@cucumber/cucumber": "11.1.1",
     "@cucumber/pretty-formatter": "1.0.1",
-    "@eslint/js": "9.13.0",
-    "chai": "5.1.1",
+    "@eslint/js": "9.17.0",
+    "chai": "5.1.2",
     "coffeescript": "2.7.0",
     "esbuild": "0.24.0",
-    "eslint": "9.13.0",
-    "globals": "15.11.0",
+    "eslint": "9.17.0",
+    "globals": "15.13.0",
     "lodash": "4.17.21",
-    "prettier": "3.3.3",
-    "yaml": "2.6.0"
-  },
+    "prettier": "3.4.2",
+    "yaml": "2.6.1"
+  }
 }
