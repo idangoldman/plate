@@ -13,6 +13,7 @@
 - [ ] Remove the use of `export methods = Functions.methods()` in prototypes.
 - [ ] Transform `lib/helpers/safe.coffee` file functions into `Functions` prototype as a `safe`, `safeReturn` `safeOrFailure` methods, might be even used with `Hooks.around` method.
 - [ ] Move `toCase` and `toCaseKeys` into `prototypes/methods/naming-casing.coffee`. Extending `Object` with `strings` and `keys` methods combined.
+- [ ] Create defaults loader class for prototypes and methods loading.
 
 ### Testing
 

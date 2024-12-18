@@ -1,4 +1,4 @@
-import fastGlob from "fast-glob"
+import capitalize from "#root/helpers/capitalize.js"
 
 export default class Prototypes
   @prefix: "___"
@@ -10,23 +10,11 @@ export default class Prototypes
     "String"
   ]
 
-  @destory:   -> @load "remove"
-  @initilize: -> @load "apply"
-
-  @load: (method = "apply") ->
-    files = await fastGlob.glob("#{PLATE_PKG_PATH}/src/prototypes/*.js")
-
-    for file in files
-      prototypes = await import(file)
-      prototypes[method]()
-
-    true
-
   @extends: (natives...) ->
     nativesToExtend = []
 
     for proto in natives.flat()
-      nativeName = proto.name.capitalize()
+      nativeName = capitalize if typeof proto is 'string' then proto else proto.name
 
       unless @supported.has nativeName
         throw new Error "Unsupported prototype: #{nativeName}"
@@ -96,6 +84,3 @@ export default class Prototypes
         delete proto[name]
 
     @
-
-if import.meta.url is process.argv[1]
-  Prototypes.initilize()

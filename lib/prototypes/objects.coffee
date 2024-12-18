@@ -1,4 +1,5 @@
 import Prototypes from "#root/patterns/prototypes.js"
+import capitalize from "#root/helpers/capitalize.js"
 
 export default class Objects extends Prototypes
   @extends "Object"
@@ -38,7 +39,7 @@ export default class Objects extends Prototypes
      message.each().log()
 
   toCaseKeys: (caseType) ->
-    prototypeName = "to#{caseType.capitalize()}Case"
+    prototypeName = "to#{capitalize caseType}Case"
     result = {}
 
     for own key, value of @

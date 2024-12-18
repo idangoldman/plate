@@ -1,6 +1,6 @@
 import { After, BeforeAll, AfterAll } from "@cucumber/cucumber"
 
-import Prototypes from "#root/patterns/prototypes.js"
+import Prototypes from "#root/prototypes/defaults.js"
 
 After ->
   @restoreEnvironmentState()
