@@ -4,39 +4,19 @@ import capitalize from "#root/helpers/capitalize.js"
 export default class Objects extends Prototypes
   @extends "Object"
 
-  each:   (args...) -> Object.entries.apply null, args || [@]
   keys:   (args...) -> Object.___keys.apply null, args || [@]
-  merge:  (args...) -> Object.assign.apply null, args || [@]
-  values: (args...) -> Object.___values.apply null, args || [@]
-
-  each: (fn) ->
-    switch true
-      when @isArray()  then @forEach fn
-      when @isObject() then @keys().forEach (key) -> fn.call @, key, @get(key)
-      else {}
-
-  get: (key) ->
-    switch true
-      when @isArray()  then @key || undefined
-      when @isObject() then @[key] || undefined
-      else undefined
-
-  has: (key) ->
-    switch true
-      when @isArray()  then @key in @
-      when @isObject() then @key in @
-      else false
-
-  log: -> console.log @
 
   print: () ->
-     messages = [
-      "#".times 10, 2
+    messages = [
+      "####################"
+      "####################"
       JSON.stringify @, null, 2
-      "#".times 10, 2
-     ]
+      "####################"
+      "####################"
+    ]
 
-     message.each().log()
+    for message in messages
+      console.log message
 
   toCaseKeys: (caseType) ->
     prototypeName = "to#{capitalize caseType}Case"

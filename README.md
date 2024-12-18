@@ -2,19 +2,25 @@
 
 ## TODOs
 
-- [ ] Move `toCase` and `toCaseKeys` into `prototypes/methods/naming-casing.coffee`. Extending `Object` with `strings` and `keys` methods combined.
-
 ### Hooks pattern and Functions Prototype implementation
 
 - [ ] Implement `Hooks` pattern into `Prototypes` pattern.
 - [ ] Implement `before`, `around`, and `after` wrappers of `Hooks.addHook` in `Functions` prototype.
 - [ ] Transform `lib/helpers/safe.coffee` file functions into `Functions` prototype as a `safe`, `safeReturn` `safeOrFailure` methods, might be even used with `Hooks.around` method.
 
-### Objects Prototype enhancements
+### Prototypes enhancements
 
 - [ ] Implement `Objects.inspect` printing the `object` in a human readable format.
-- [ ] Implement `Objects.merge` method with deep merge.
-- [ ] Implement `Objects.methods` method to list all methods of an object.
+- [ ] Implement `Objects.merge` method with deep merge by default.
+- [ ] Implement `Objects.freeze` method to freeze the object and all nested objects.
+- [ ] Implement `Objects.keys` method to get the keys of the object.
+- [ ] Implement `Objects.values` method to get the values of the object.
+- [ ] Implement `Objects.each` method to iterate over the object.
+- [ ] Implement `Objects.get` method to get the value of the object by the key.
+- [ ] Implement `Objects.has` method to check if the object has the key.
+- [ ] Implement `Strings.times` method to repeat the string n times.
+- [ ] Implement `prototypes/methods/to.coffee` with `to` method to convert the object to a specific type.
+- [ ] Move `toCase` and `toCaseKeys` into `prototypes/methods/naming-casing.coffee`. Extending `Object` with `strings` and `keys` methods combined.
 
 ### MissingMethod pattern upgrade
 
