@@ -1,11 +1,11 @@
 import capitalize from "#root/helpers/capitalize.js"
+import isNativeMethod from "#root/helpers/is-native-method.js"
 
 export default class Prototypes
   @prefix: "___"
   @registry = new Map()
   @supported = new Set [
     "Array"
-    "Function"
     "Object"
     "String"
   ]
@@ -54,7 +54,7 @@ export default class Prototypes
 
     for name, fn of methods
       for proto in nativePrototypes
-        if proto[name].isNativeMethod()
+        if isNativeMethod proto[name]
           console.warn "Method #{name} is native on #{proto.constructor.name}"
           proto["#{@prefix}#{name}"] = proto[name]
           proto[name] = null

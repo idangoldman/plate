@@ -7,7 +7,7 @@ After ->
   @resetState()
 
 BeforeAll ->
-  Prototypes.initilize()
+  Prototypes.initialize()
 
 AfterAll ->
   Prototypes.destory()
