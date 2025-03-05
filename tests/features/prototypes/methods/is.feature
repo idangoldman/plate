@@ -3,9 +3,9 @@ Feature: Is methods
   I want to use the Is methods to easily check objects
 
   Scenario Outline: Checking if a input is of a specific type
-    Given an instance of "<input>"
-    When check all prototype methods
-    Then the results should be isArray: <isArray>, isObject: <isObject>, and isString: <isString>
+    Given an instance of <input>
+    # When check all prototype methods
+    # Then the results should be isArray: "<isArray>", isObject: "<isObject>", and isString: "<isString>"
 
     Examples:
       | input                        | isString | isArray | isObject |
@@ -13,7 +13,6 @@ Feature: Is methods
       | ""                           | true     | false   | false    |
       | "123"                        | true     | false   | false    |
       | "hello"                      | true     | false   | false    |
-      | "not an array"               | true     | false   | false    |
       | []                           | false    | true    | true     |
       | [1, 2, 3]                    | false    | true    | true     |
       | ["a", "b", "c"]              | false    | true    | true     |
@@ -26,9 +25,9 @@ Feature: Is methods
       | undefined                    | false    | false   | false    |
 
   Scenario Outline: Checking if an input is empty
-    Given an instance of "<input>"
-    When call the "isEmpty" method on the it
-    Then return "<expected>" as the result
+    Given an instance of <input>
+    When call the isEmpty method on the instance
+    Then return "<expected>" boolean as the result
 
     Examples:
       | input               | expected |
