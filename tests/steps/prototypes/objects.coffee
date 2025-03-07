@@ -1,8 +1,6 @@
 import { Given, When, Then } from "@cucumber/cucumber"
 import { expect } from "chai"
 
-import capitalize from "#root/helpers/capitalize.js"
-
 Given "I have an object", (jsonString) ->
   @input = JSON.parse(jsonString)
 

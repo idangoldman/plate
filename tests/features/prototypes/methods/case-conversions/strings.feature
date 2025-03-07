@@ -10,7 +10,7 @@ Feature: String Case Conversions
 
     Examples:
       | input       | case_type | expected    |
-      | hello_World | camel    | helloWorld  |
+      | hello_World | camel     | helloWorld  |
       | hello_world | camel     | helloWorld  |
       | hello-world | camel     | helloWorld  |
       | hello.world | camel     | helloWorld  |
@@ -27,7 +27,25 @@ Feature: String Case Conversions
       | hello.world | dot       | hello.world |
       | hello_world | dot       | hello.world |
 
-  # Scenario: Attempt to convert string to an unsupported case
-  #   Given I have a string "<input>"
-  #   When I convert it to "<case_type>" case
-  #   Then I should get an error message "Case type unsupported is not supported"
+  Scenario Outline: Capitalizing strings with different formats
+    Given I have a string "<input>"
+    When I call the capitalize method on it
+    Then I should get "<expected>"
+
+    Examples:
+      | input          | expected       |
+      | hello          | Hello          |
+      | WORLD          | World          |
+      | already_done   | Already_done   |
+      | camelCase      | CamelCase      |
+      | PascalCase     | PascalCase     |
+      | snake_case     | Snake_case     |
+      | kebab-case     | Kebab-case     |
+      | multiple words | Multiple words |
+      | 123test        | 123test        |
+      | _private       | _private       |
+      | a              | A              |
+      | $special       | $special       |
+      | über           | Über           |
+      | café           | Café           |
+      | españa         | España         |

@@ -1,0 +1,26 @@
+disable_env_expansion: true
+is_strict: true
+log_level: trace
+log_location: "./logs/development.log"
+working_directory: "./"
+
+environment:
+  - "PC_NO_SERVER=1"
+
+log_configuration:
+  add_timestamp: true
+  disable_json: false
+  fields_order: ["time", "level", "message"]
+  flush_each_line: true
+  no_color: false
+  no_metadata: true
+  timestamp_format: "06-01-02 15:04:05.000"
+  rotation:
+    compress: false
+    max_age_days: 10
+    max_backups: 2
+    max_size_mb: 1
+
+shell:
+  shell_command: "fish"
+  shell_argument: "-c"
