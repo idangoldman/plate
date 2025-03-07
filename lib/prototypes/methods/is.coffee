@@ -10,13 +10,6 @@ export default class Is extends Prototypes
 
   isEmpty: ->
     switch true
-      when @isArray()  then @length == 0
-      when @isObject() then Object.___keys(@).length == 0
-      when @isString() then @length == 0
-      else false
-
-  isEmpty: ->
-    switch true
       when @isArray()
         return @length == 0
       when @isObject()
