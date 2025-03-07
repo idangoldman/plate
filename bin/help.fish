@@ -1,8 +1,5 @@
 #!/usr/bin/env fish
 
-# PLATE Framework Help Script
-# Provides formatted help information about available commands
-
 function print_header
     set_color blue
     echo ""
