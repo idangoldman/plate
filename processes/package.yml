@@ -45,3 +45,11 @@ processes:
       restart: "no"
     command: |
       pnpm outdated
+
+  version:
+    namespace: package
+    description: "Display package version"
+    availability:
+      restart: "no"
+    command: |
+      jq -r '.version' ${PLATE_PKG_PATH}/package.json
