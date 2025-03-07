@@ -4,7 +4,8 @@ import capitalize from "#root/helpers/capitalize.js"
 export default class Objects extends Prototypes
   @extends "Object"
 
-  keys:   (args...) -> Object.___keys.apply null, args || [@]
+  # keys:   (args...) -> Object.___keys.apply null, args || [@]
+  keys: -> Object.keys @
 
   print: () ->
     messages = [

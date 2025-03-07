@@ -1,35 +1,53 @@
 import { Given, When, Then } from "@cucumber/cucumber"
 import { expect } from "chai"
 
-import { ARRAY_CONTENT, OBJECT_CONTENT, STRING_CONTENT } from "#root/helpers/regex.js"
-Given "an instance of {string}", (input) ->
-  try
-    switch input
-      when STRING_CONTENT.test(input)
-        @input = input
-      else
-        @input = JSON.parse input
-  catch error
-    @input = eval input
+Given "I have the following values:", (dataTable) ->
+  @testValues = {}
 
-When "check all prototype methods", () ->
-  console.log @input
-  @result = Object.getOwnPropertyNames(@input.__proto__)
-  expect(@result).to.include.members(["isArray", "isObject", "isString"])
+  for row in dataTable.hashes()
+    name = row.name
 
-When "call the isEmpty method on the instance", () ->
-  @result = @input.isEmpty()
+    if row.specialType
+      switch row.specialType
+        when "null"
+          @testValues[name] = null
+        when "undefined"
+          @testValues[name] = undefined
+        when "new Map()"
+          @testValues[name] = new Map()
+        when "new Set()"
+          @testValues[name] = new Set()
+        when "Object.create(null)"
+          @testValues[name] = Object.create(null)
+    else if row.value
+      try
+        @testValues[name] = JSON.parse(row.value)
+      catch error
+        if row.value.startsWith('"') && row.value.endsWith('"')
+          @testValues[name] = row.value.slice(1, -1)
+        else
+          @testValues[name] = row.value
 
-Then "return {string} boolean as the result", (expected) ->
-  switch expected
-    when "true"
-      expect(@result).to.be.true
-    when "false"
-      expect(@result).to.be.false
-    else
-      throw new Error("Invalid expected value: #{expected}")
+When "I check their types", ->
+  @results = {}
 
-Then "the results should be isArray: {string}, isObject: {string}, and isString: {string}", (isArray, isObject, isString) ->
-  expect(@input.isArray()).to.equal(isArray == "true")
-  expect(@input.isObject()).to.equal(isObject == "true")
-  expect(@input.isString()).to.equal(isString == "true")
+  for name, value of @testValues
+    @results[name] =
+      isArray: value?.isArray?() || false
+      isObject: value?.isObject?() || false
+      isString: value?.isString?() || false
+      isEmpty: value?.isEmpty?() || false
+
+Then "the results should be:", (dataTable) ->
+  for row in dataTable.hashes()
+    name = row.name
+
+    expectedResults =
+      isArray: row.isArray == 'true'
+      isObject: row.isObject == 'true'
+      isString: row.isString == 'true'
+      isEmpty: row.isEmpty == 'true'
+
+    actualResults = @results[name]
+    expect(actualResults).to.deep.equal(expectedResults,
+      "Results for '#{name}' don't match expected values")

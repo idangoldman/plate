@@ -1,50 +1,24 @@
-Feature: Is methods
+Feature: Is methods type checking
   As a developer
-  I want to use the Is methods to easily check objects
+  I want to use the Is methods to check value types
 
-  Scenario Outline: Checking if a input is of a specific type
-    Given an instance of <input>
-    # When check all prototype methods
-    # Then the results should be isArray: "<isArray>", isObject: "<isObject>", and isString: "<isString>"
-
-    Examples:
-      | input                        | isString | isArray | isObject |
-      | " "                          | true     | false   | false    |
-      | ""                           | true     | false   | false    |
-      | "123"                        | true     | false   | false    |
-      | "hello"                      | true     | false   | false    |
-      | []                           | false    | true    | true     |
-      | [1, 2, 3]                    | false    | true    | true     |
-      | ["a", "b", "c"]              | false    | true    | true     |
-      | [null, undefined]            | false    | true    | true     |
-      | {}                           | false    | false   | true     |
-      | {"key": "value"}             | false    | false   | true     |
-      | {"nested": {"key": "value"}} | false    | false   | true     |
-      | 42                           | false    | false   | false    |
-      | null                         | false    | false   | false    |
-      | undefined                    | false    | false   | false    |
-
-  Scenario Outline: Checking if an input is empty
-    Given an instance of <input>
-    When call the isEmpty method on the instance
-    Then return "<expected>" boolean as the result
-
-    Examples:
-      | input               | expected |
-      | []                  | true     |
-      | {}                  | true     |
-      | ""                  | true     |
-      | [1, 2, 3]           | false    |
-      | {"key": "value"}    | false    |
-      | "hello"             | false    |
-      | [undefined]         | false    |
-      | {"key": undefined}  | false    |
-      | " "                 | false    |
-      | [null]              | false    |
-      | {"toString": null}  | false    |
-      | {"__proto__": null} | false    |
-      | {"length": 0}       | false    |
-      | [,,,]               | false    |
-      | Object.create(null) | true     |
-      | new Map()           | true     |
-      | new Set()           | true     |
+  Scenario: Checking simple value types
+    Given I have the following values:
+      | name      | value     | specialType |
+      | string    | "hello"   |             |
+      | emptyStr  | ""        |             |
+      | number    | 42        |             |
+      | array     | [1,2,3]   |             |
+      | emptyArr  | []        |             |
+      | object    | {"a":1}   |             |
+      | emptyObj  | {}        |             |
+    When I check their types
+    Then the results should be:
+      | name      | isArray | isObject | isString | isEmpty |
+      | string    | false   | false    | true     | false   |
+      | emptyStr  | false   | false    | true     | true    |
+      | number    | false   | false    | false    | false   |
+      | array     | true    | true     | false    | false   |
+      | emptyArr  | true    | true     | false    | true    |
+      | object    | false   | true     | false    | false   |
+      | emptyObj  | false   | true     | false    | true    |

@@ -8,13 +8,12 @@ default:
   verbose: true
 
   name:
-    # - Converting strings to different cases
-    # - Converting nested object keys to different cases
-    # - Accessing array elements
-    # - Accessing array elements with arguments
-    # - Resolving different types of path specifiers
-    - Checking if a input is of a specific type
-    # - Checking if an input is empty
+    - Converting strings to different cases
+    - Converting nested object keys to different cases
+    - Accessing array elements
+    - Accessing array elements with arguments
+    - Resolving different types of path specifiers
+    - Checking simple value types
 
   paths:
     - tests/features/**/*.feature
