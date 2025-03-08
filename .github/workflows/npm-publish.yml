@@ -37,7 +37,7 @@ jobs:
           pnpm exec cucumber-js --config="./configs/cucumber.yml"
 
       - name: Publish to NPM
-        run: pnpm publish --no-git-checks --provenance --access public
+        run: pnpm publish --no-git-checks --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_CONFIG_PROVENANCE: true
+          NPM_CONFIG_PROVENANCE: false

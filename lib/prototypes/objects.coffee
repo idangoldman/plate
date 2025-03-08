@@ -7,7 +7,7 @@ export default class Objects extends Prototypes
   # keys:   (args...) -> Object.___keys.apply null, args || [@]
   keys: -> Object.keys @
 
-  print: () ->
+  print: ->
     messages = [
       "####################"
       "####################"

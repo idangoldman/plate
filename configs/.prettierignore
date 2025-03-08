@@ -1,0 +1,7 @@
+src/
+logs/
+node_modules/
+coverage/
+tmp/
+tests/**/*.js
+*.coffee

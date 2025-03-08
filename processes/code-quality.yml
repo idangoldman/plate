@@ -1,14 +1,15 @@
 processes:
   format:
     namespace: code_quality
-    description: "Support formatting js, cjs, mjs, coffee, css, scss files"
+    description: "Check formatting for coffee, css, scss files"
     availability:
       restart: "no"
     command: |
       ${PLATE_BIN_PATH}/prettier \
         --check \
         --config ${PLATE_CONF_PATH}/prettierrc.yml \
-        ./**/*.{js,cjs,mjs,coffee,css,scss}
+        --ignore-path ${PLATE_CONF_PATH}/.prettierignore \
+        "${PLATE_PRJ_PATH}/**/*.{coffee,css,scss}"
 
   format-fix:
     namespace: code_quality
@@ -19,20 +20,22 @@ processes:
       ${PLATE_BIN_PATH}/prettier \
         --write \
         --config ${PLATE_CONF_PATH}/prettierrc.yml \
-        ./**/*.{js,cjs,mjs,coffee,css,scss}
+        --ignore-path ${PLATE_PKG_PATH}/.prettierignore \
+        "${PLATE_PRJ_PATH}/**/*.{coffee,css,scss}"
 
   lint:
     namespace: code_quality
-    description: "Support linting js, cjs, mjs, coffee files"
+    description: "Check linting for CoffeeScript files"
     availability:
       restart: "no"
     command: |
-      ${PLATE_BIN_PATH}/eslint --config ${PLATE_CONF_PATH}/eslint.config.js .
+      set --local coffeelint_json_tmp (mktemp)
+      set --local coffeelint_files (find ${PLATE_PRJ_PATH}/lib -name "*.coffee" -type f)
 
-  lint-fix:
-    namespace: code_quality
-    description: "Automatically fix linting issues in supported files"
-    availability:
-      restart: "no"
-    command: |
-      ${PLATE_BIN_PATH}/eslint --fix --config ${PLATE_CONF_PATH}/eslint.config.js .
+      yq -o=json ${PLATE_CONF_PATH}/coffeelint.yml > $$coffeelint_json_tmp
+
+      ${PLATE_BIN_PATH}/coffeelint \
+        --file $$coffeelint_json_tmp \
+        $$coffeelint_files
+
+      rm -frv $$coffeelint_json_tmp
