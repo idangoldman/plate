@@ -33,10 +33,10 @@ export default class Objects extends Prototypes
 
     result
 
-  toCamelCaseKeys:    -> @toCaseKeys "camel"
+  toCamelCaseKeys: ->    @toCaseKeys "camel"
   toConstantCaseKeys: -> @toCaseKeys "constant"
-  toKebabCaseKeys:    -> @toCaseKeys "kebab"
-  toPascalCaseKeys:   -> @toCaseKeys "pascal"
-  toSnakeCaseKeys:    -> @toCaseKeys "snake"
+  toKebabCaseKeys: ->    @toCaseKeys "kebab"
+  toPascalCaseKeys: ->   @toCaseKeys "pascal"
+  toSnakeCaseKeys: ->    @toCaseKeys "snake"
 
 export methods = Objects.methods()
