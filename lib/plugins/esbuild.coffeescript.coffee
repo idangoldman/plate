@@ -2,7 +2,7 @@ import { COFFEE_EXTENSION } from "#root/helpers/regex.js"
 import { readFile } from "node:fs/promises"
 import transformCoffee from "#root/transformers/coffeescript.js"
 
-export default ->
+export default -> {
   name: "coffeescript"
   setup: (build) ->
     build.onLoad({ filter: COFFEE_EXTENSION }, ({ path }) ->
@@ -14,3 +14,4 @@ export default ->
         loader: "js"
       }
     )
+}
