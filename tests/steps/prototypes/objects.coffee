@@ -5,7 +5,7 @@ Given "I have an object", (jsonString) ->
   @input = JSON.parse(jsonString)
 
 When "I convert all keys to {string}", (caseType) ->
-  @result = @input.toCaseKeys caseType
+  @result = @input["to#{caseType}Case"]()
 
 Then "I should get an object", (jsonString) ->
   expectedObject = JSON.parse(jsonString)
