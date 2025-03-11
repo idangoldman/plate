@@ -30,8 +30,8 @@ Feature: Object Key Case Conversions
 
     Examples:
       | key1       | key2      | key3         | key4         | key5           | case_type   | expected_key1 | expected_key2 | expected_key3 | expected_key4 | expected_key5 |
-      | first_name | last_name | contact_info | phone_number | email_address  | camel       | firstName     | lastName      | contactInfo   | phoneNumber   | emailAddress  |
-      | firstName  | lastName  | contactInfo  | phoneNumber  | emailAddress   | snake       | first_name    | last_name     | contact_info  | phone_number  | email_address |
-      | first_name | last_name | contact_info | phone_number | email_address  | pascal      | FirstName     | LastName      | ContactInfo   | PhoneNumber   | EmailAddress  |
-      | firstName  | lastName  | contactInfo  | phoneNumber  | emailAddress   | kebab       | first-name    | last-name     | contact-info  | phone-number  | email-address |
-      | first_name | last_name | contact_info | phone_number | email_address  | constant    | FIRST_NAME    | LAST_NAME     | CONTACT_INFO  | PHONE_NUMBER  | EMAIL_ADDRESS |
+      | first_name | last_name | contact_info | phone_number | email_address  | Camel       | firstName     | lastName      | contactInfo   | phoneNumber   | emailAddress  |
+      | firstName  | lastName  | contactInfo  | phoneNumber  | emailAddress   | Snake       | first_name    | last_name     | contact_info  | phone_number  | email_address |
+      | first_name | last_name | contact_info | phone_number | email_address  | Pascal      | FirstName     | LastName      | ContactInfo   | PhoneNumber   | EmailAddress  |
+      | firstName  | lastName  | contactInfo  | phoneNumber  | emailAddress   | Kebab       | first-name    | last-name     | contact-info  | phone-number  | email-address |
+      | first_name | last_name | contact_info | phone_number | email_address  | Constant    | FIRST_NAME    | LAST_NAME     | CONTACT_INFO  | PHONE_NUMBER  | EMAIL_ADDRESS |
