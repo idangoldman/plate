@@ -18,7 +18,7 @@ Feature: Is methods type checking
       | string    | false   | false    | true     | false   |
       | emptyStr  | false   | false    | true     | true    |
       | number    | false   | false    | false    | false   |
-      | array     | true    | true     | false    | false   |
-      | emptyArr  | true    | true     | false    | true    |
+      | array     | true    | false    | false    | false   |
+      | emptyArr  | true    | false    | false    | true    |
       | object    | false   | true     | false    | false   |
       | emptyObj  | false   | true     | false    | true    |

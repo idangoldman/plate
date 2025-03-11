@@ -5,7 +5,7 @@ export default class Is extends Prototypes
 
   # isArray:  (args...) -> Array.___isArray.apply null, args or [@]
   isArray: ->  Array.isArray @
-  isObject: -> typeof @ is "object" and @ isnt null
+  isObject: -> typeof @ is "object" and Array.isArray(@) is false and @ isnt null
   isString: -> typeof @ is "string"
 
   isEmpty: ->
