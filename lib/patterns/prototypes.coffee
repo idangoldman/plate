@@ -1,14 +1,25 @@
 import capitalize from "#root/helpers/capitalize.js"
 import isNativeMethod from "#root/helpers/is-native-method.js"
+import Hooks from "#root/patterns/hooks.js"
 
 export default class Prototypes
   @prefix: "___"
   @registry = new Map()
   @supported = new Set [
     "Array"
+    "Function"
     "Object"
     "String"
   ]
+
+  @after = (methodNames, handler) ->
+    Hooks.registerClassHook "after", @, methodNames, handler
+
+  @around = (methodNames, handler) ->
+    Hooks.registerClassHook "around", @, methodNames, handler
+
+  @before = (methodNames, handler) ->
+    Hooks.registerClassHook "before", @, methodNames, handler
 
   @extends: (natives...) ->
     nativesToExtend = []
@@ -41,6 +52,34 @@ export default class Prototypes
         acc
       , {}
 
+  @applyClassHooks: (methods) ->
+    return methods unless @pendingHooks?.length
+
+    for hookDef in @pendingHooks
+      for methodName in hookDef.methodNames
+        continue unless methods[methodName]?
+
+        originalMethod = methods[methodName]
+
+        switch hookDef.type
+          when 'before'
+            methods[methodName] = (args...) ->
+              hookDef.handler.call(@, args...)
+              originalMethod.apply(@, args)
+
+          when 'after'
+            methods[methodName] = (args...) ->
+              result = originalMethod.apply(@, args)
+              hookDef.handler.call(@, result, args...)
+              result
+
+          when 'around'
+            methods[methodName] = (args...) ->
+              boundOriginal = originalMethod.bind(@)
+              hookDef.handler.call(@, boundOriginal, args...)
+
+    methods
+
   @apply: ->
     nativePrototypes = @registry.get @name
 
@@ -51,6 +90,8 @@ export default class Prototypes
 
     unless Object.keys(methods).length
       throw new Error "No methods defined in #{@name}"
+
+    methods = @applyClassHooks(methods)
 
     for name, fn of methods
       for proto in nativePrototypes
@@ -85,6 +126,10 @@ export default class Prototypes
 
     for name of methods
       for proto in nativePrototypes
-        delete proto[name]
+        if proto["#{@prefix}#{name}"]?
+          proto[name] = proto["#{@prefix}#{name}"]
+          delete proto["#{@prefix}#{name}"]
+        else
+          delete proto[name]
 
     @

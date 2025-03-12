@@ -7,6 +7,13 @@ export default class Is extends Prototypes
   isArray: ->  Array.isArray @
   isObject: -> typeof @ is "object" and Array.isArray(@) is false and @ isnt null
   isString: -> typeof @ is "string"
+  # isNumber: ->
+  #   typeof @ is "number"
+  #     ? @ - @ is 0
+  #     : typeof @ is 'string' and @.trim() isnt ''
+  #       ? (Number.isFinite ? Number.isFinite(+num) : isFinite(+num))
+  #       : false
+
 
   isEmpty: ->
     switch true

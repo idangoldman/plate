@@ -14,6 +14,10 @@ default:
     - Accessing array elements with arguments
     - Resolving different types of path specifiers
     - Checking simple value types
+    - Hooks Pattern Implementation
+    - Function Prototype Methods
+    - Class-Level Hooks
+    - Array Prototype with Hooks
 
   paths:
     - tests/features/**/*.feature
