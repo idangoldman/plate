@@ -249,12 +249,6 @@ This is a major update for the framework and might be an easy one because most o
 - [ ] Implement an `analytics` object for `async` interaction with a stats server.
 - [ ] Implementation of the 3 acronyms - `i18n`, `l10n`, and `a11y`.
 
-### Hooks Pattern and Functions Prototype Implementation
-
-- [ ] Implement `Hooks` pattern into `Prototypes` pattern.
-- [ ] Implement `before`, `around`, and `after` wrappers of `Hooks.addHook` in `Functions` prototype.
-- [ ] Transform `lib/helpers/safe.coffee` file functions into `Functions` prototype as a `safe`, `safeReturn` `safeOrFailure` methods, might be even used with `Hooks.around` method.
-
 ### Prototypes Enhancements
 
 - [ ] Implement `Objects.inspect` printing the `object` in a human readable format.
@@ -268,7 +262,6 @@ This is a major update for the framework and might be an easy one because most o
 - [ ] Implement `Objects.has` method to check if the object has the key.
 - [ ] Implement `Strings.times` method to repeat the string `n` times.
 - [ ] Implement `prototypes/methods/to.coffee` with `to` method to convert the object to a specific type.
-- [ ] Move `toCase` and `toCaseKeys` into `prototypes/methods/naming-casing.coffee`. Extending `Object` with `strings` and `keys` methods combined.
 - [ ] Implement `Numbers.toHuman([size, weight, dimension, distance, etc...])` method to convert the numbers to a human readable formats.
 - [ ] Test `yaml` file loading and using `Objects.keyCase` method.
 
@@ -285,7 +278,6 @@ This is a major update for the framework and might be an easy one because most o
 - [ ] Implement `glob` transformer and register as node.js loader in `lib/transformers/glob.coffee`.
 - [ ] Implement `main` as an `importAttributes` of imported files, to be used like main in Python.
 - [ ] Create defaults loader class for prototypes and methods loading.
-- [ ] Implement `plate help` using the example in `bin/help.fish`.
 - [ ] Restructure `lib/` folder:
   - [ ] Migrate some of the functionality out of the `lib/helpers` folder and into `Prototypes` or `Transformers`, the rest into `lib/utils`.
   - [ ] Rename `lib/plugins` to `lib/esbuild`
