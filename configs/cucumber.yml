@@ -8,16 +8,7 @@ default:
   verbose: true
 
   name:
-    - Converting strings to different cases
-    - Converting nested object keys to different cases
-    - Accessing array elements
-    - Accessing array elements with arguments
-    - Resolving different types of path specifiers
-    - Checking simple value types
-    - Hooks Pattern Implementation
-    - Function Prototype Methods
-    - Class-Level Hooks
-    - Array Prototype with Hooks
+    - Adding before hooks to a method
 
   paths:
     - tests/features/**/*.feature

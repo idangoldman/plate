@@ -13,13 +13,13 @@ export default class Prototypes
   ]
 
   @after = (methodNames, handler) ->
-    Hooks.registerClassHook "after", @, methodNames, handler
+    Hooks.classAfterHook @, methodNames, handler
 
   @around = (methodNames, handler) ->
-    Hooks.registerClassHook "around", @, methodNames, handler
+    Hooks.classAroundHook @, methodNames, handler
 
   @before = (methodNames, handler) ->
-    Hooks.registerClassHook "before", @, methodNames, handler
+    Hooks.classBeforeHook @, methodNames, handler
 
   @extends: (natives...) ->
     nativesToExtend = []
@@ -52,34 +52,6 @@ export default class Prototypes
         acc
       , {}
 
-  @applyClassHooks: (methods) ->
-    return methods unless @pendingHooks?.length
-
-    for hookDef in @pendingHooks
-      for methodName in hookDef.methodNames
-        continue unless methods[methodName]?
-
-        originalMethod = methods[methodName]
-
-        switch hookDef.type
-          when 'before'
-            methods[methodName] = (args...) ->
-              hookDef.handler.call(@, args...)
-              originalMethod.apply(@, args)
-
-          when 'after'
-            methods[methodName] = (args...) ->
-              result = originalMethod.apply(@, args)
-              hookDef.handler.call(@, result, args...)
-              result
-
-          when 'around'
-            methods[methodName] = (args...) ->
-              boundOriginal = originalMethod.bind(@)
-              hookDef.handler.call(@, boundOriginal, args...)
-
-    methods
-
   @apply: ->
     nativePrototypes = @registry.get @name
 
@@ -91,7 +63,8 @@ export default class Prototypes
     unless Object.keys(methods).length
       throw new Error "No methods defined in #{@name}"
 
-    methods = @applyClassHooks(methods)
+    # Apply class hooks to methods
+    methods = Hooks.applyClassHooks(@, methods)
 
     for name, fn of methods
       for proto in nativePrototypes

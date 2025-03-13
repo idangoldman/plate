@@ -15,14 +15,14 @@ When "call the {string} method with {string} on the array", (methodName, arg) ->
   @result = @input[methodName](JSON.parse arg)
 
 Then "return {string} as the result", (expected) ->
-  switch expected
-    when "undefined"
+  switch true
+    when expected is "undefined"
       expect(@result).to.be.undefined
 
-    when "true"
+    when expected is "true"
       expect(@result).to.be.true
 
-    when "false"
+    when expected is "false"
       expect(@result).to.be.false
 
     when ARRAY_CONTENT.test(expected)
@@ -38,9 +38,8 @@ Then "return {string} as the result", (expected) ->
 class TestArrayHooks extends Arrays
   @extends "Array"
 
-  # Class-level hooks
-  @around ["first", "last"], (fn) ->
-    if @isEmpty() then undefined else fn.call(@)
+  @around ["first", "last"], (fn, args...) ->
+    if @isEmpty() then undefined else fn.apply(@, args)
 
   first: -> @[0]
   last: -> @[@length - 1]
@@ -71,16 +70,6 @@ When "I check the hooks applied to {string}", (methodName) ->
   # Create a non-empty array to compare behavior
   @nonEmptyArray = [1]
   @nonEmptyResult = @nonEmptyArray[methodName]()
-
-Then "I should get {string}", (expected) ->
-  if expected is "undefined"
-    expect(@result).to.be.undefined
-  else if expected is "true"
-    expect(@result).to.be.true
-  else if expected is "false"
-    expect(@result).to.be.false
-  else
-    expect(@result).to.equal(parseInt(expected))
 
 Then "I should get undefined", ->
   expect(@result).to.be.undefined
