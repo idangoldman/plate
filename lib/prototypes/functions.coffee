@@ -4,14 +4,17 @@ import Hooks from "#root/patterns/hooks.js"
 export default class Functions extends Prototypes
   @extends "Function"
 
-  # before: (handler) ->
-  #   target = @prototype ? @
-  #   methodName = @name
-  #   Hooks.before target, methodName, handler
-  #   @
-  after: (handler) -> Hooks::addHook "after", @, [@name], handler
-  around: (handler) -> Hooks::addHook "around", @, [@name], handler
-  before: (handler) -> Hooks::addHook "before", @, [@name], handler
+  after: (handler) ->
+    Hooks.after @, @name, handler
+    @
+
+  around: (handler) ->
+    Hooks.around @, @name, handler
+    @
+
+  before: (handler) ->
+    Hooks.before @, @name, handler
+    @
 
   safely: (args...) ->
     functionName = @name or 'anonymous'

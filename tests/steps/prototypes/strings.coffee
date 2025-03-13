@@ -10,7 +10,17 @@ When "I convert it to {string} case", (caseType) ->
   @result = @input["to#{capitalize caseType}Case"]()
 
 When "I call the capitalize method on it", ->
-  @result = capitalize(@input)
+  @result = @input.capitalize()
 
 Then "I should get {string}", (expected) ->
-  expect(@result).to.equal(expected)
+  if expected is "undefined"
+    expect(@result).to.be.undefined
+  else if expected is "true"
+    expect(@result).to.be.true
+  else if expected is "false"
+    expect(@result).to.be.false
+  else
+    if /^\d+\.\d+$/.test(expected)
+      expected = parseInt(expected)
+
+    expect(@result).to.equal(expected)

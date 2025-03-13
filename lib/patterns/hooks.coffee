@@ -1,4 +1,4 @@
-class Hooks
+export default class Hooks
   @hooks = new Map()
   @classHooks = new Map()
   @wraps = -> Object.assign { before: [], after: [], around: [] }
@@ -132,5 +132,3 @@ class Hooks
     target[methodName] = @wrapMethod(target, methodName, originalMethod)
 
     target
-
-export default Hooks
