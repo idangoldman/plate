@@ -18,5 +18,5 @@ export PATTERN_PLACEHOLDERS     = new RegExp "(?<pattern>\\{\\{\\s*(?<placeholde
 export PLACEHOLDERS             = new RegExp "\\{\\{\\s*(?<placeholder>[a-z0-9-_\\.]+?)\\s*\\}\\}", "gmi"
 
 ### Case ###
-export CASE_SEPARATORS          = new RegExp "([A-Z])|[_\\-\\.]", "g"
+export CASE_SEPARATORS          = new RegExp "([A-Z]{1}[a-z]+)|[_\\-\\.]", "g"
 export CASE_WHITESPACE          = new RegExp "\\s+", "g"

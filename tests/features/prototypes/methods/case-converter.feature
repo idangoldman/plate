@@ -1,0 +1,49 @@
+@prototypes @methods
+Feature: Case Conversions
+  As a developer
+  I want to convert strings between different case formats
+  So that I can maintain consistent naming conventions in my codebase
+
+  @strings
+  Scenario Outline: Converting strings to different case formats
+    Given I have a string "<input>"
+    When I convert it to "<case_type>" case
+    Then I should get "<expected>"
+
+    Examples:
+      | input       | case_type | expected    |
+      | hello_World | camel     | helloWorld  |
+      | helloWorld  | constant  | HELLO_WORLD |
+      | HelloWorld  | kebab     | hello-world |
+      | helloWorld  | pascal    | HelloWorld  |
+      | helloWorld  | snake     | hello_world |
+      | hello.World | title     | Hello World |
+      | HELLO_WORLD | dot       | hello.world |
+
+  @objects
+  Scenario: Converting nested object keys from different case formats to PascalCase
+    Given I have an object
+      """json
+      {
+        "firstName": "John",
+        "last_name": "Doe",
+        "contact-info": {
+          "EmailAddress": "john@example.com",
+          "home.address": "1st Main Street",
+          "PHONE_NUMBER": "123-456-7890"
+        }
+      }
+      """
+    When I convert all keys of the object to PascalCase format
+    Then I should get an object
+      """json
+      {
+        "FirstName": "John",
+        "LastName": "Doe",
+        "ContactInfo": {
+          "EmailAddress": "john@example.com",
+          "HomeAddress": "1st Main Street",
+          "PhoneNumber": "123-456-7890"
+        }
+      }
+      """

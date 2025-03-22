@@ -6,7 +6,7 @@ import Strings from "#root/prototypes/strings.js"
 
 # Method Prototypes
 import IsMethods from "#root/prototypes/methods/is.js"
-import NameCasingMethods from "#root/prototypes/methods/name-casing.js"
+import CaseConverterMethods from "#root/prototypes/methods/case-converter.js"
 # import ToMethods from "#root/prototypes/methods/to.js"
 
 export initialize = ->
@@ -16,7 +16,7 @@ export initialize = ->
   Strings.apply()
 
   IsMethods.apply()
-  NameCasingMethods.apply()
+  CaseConverterMethods.apply()
   # ToMethods.apply()
 
   true
@@ -28,7 +28,7 @@ export destroy = ->
   Strings.remove()
 
   IsMethods.remove()
-  NameCasingMethods.remove()
+  CaseConverterMethods.remove()
   # ToMethods.apply()
 
   true

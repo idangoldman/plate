@@ -71,9 +71,6 @@ When "I check the hooks applied to {string}", (methodName) ->
   @nonEmptyArray = [1]
   @nonEmptyResult = @nonEmptyArray[methodName]()
 
-Then "I should get undefined", ->
-  expect(@result).to.be.undefined
-
 Then "the array hook should handle empty arrays", ->
   # The hooks should cause empty array methods to return undefined
   expect(@result).to.be.undefined
