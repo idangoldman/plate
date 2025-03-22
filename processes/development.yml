@@ -6,7 +6,6 @@ processes:
       restart: "no"
     command: |
       rm -rvf ${PLATE_PRJ_PATH}/src
-      find ${PLATE_PRJ_PATH}/tests -name "*.js" -delete -print
 
   build:
     namespace: development
@@ -55,6 +54,7 @@ processes:
         --bare \
         --compile \
         --no-header \
+        --output ${PLATE_PRJ_PATH}/src/tests \
         ${PLATE_PRJ_PATH}/tests
 
   test:

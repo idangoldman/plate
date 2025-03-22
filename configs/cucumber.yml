@@ -7,8 +7,7 @@ default:
   strict: true
   verbose: true
 
-  name:
-    - Adding before hooks to a method
+  tags: "@prototypes"
 
   paths:
     - tests/features/**/*.feature

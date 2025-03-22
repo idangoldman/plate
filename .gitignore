@@ -1,13 +1,8 @@
 # Ignore the following directories
-log/*
+logs
 node_modules
-src/*
-tmp/*
-
-# Ignore the following files
-*.log
-*.log.*
-tests/**/*.js
+src
+tmp
 
 # Keep the following files for empty directories to be included in the repository
 !/**/.gitkeep
