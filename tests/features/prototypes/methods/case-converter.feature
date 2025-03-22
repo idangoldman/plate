@@ -1,4 +1,4 @@
-@prototypes @methods
+@prototypes @methods @case-converter
 Feature: Case Conversions
   As a developer
   I want to convert strings between different case formats
@@ -7,18 +7,18 @@ Feature: Case Conversions
   @strings
   Scenario Outline: Converting strings to different case formats
     Given I have a string "<input>"
-    When I convert it to "<case_type>" case
-    Then I should get "<expected>"
+    When I convert it to "<caseType>" case
+    Then I should get "<expected>" string
 
     Examples:
-      | input       | case_type | expected    |
-      | hello_World | camel     | helloWorld  |
-      | helloWorld  | constant  | HELLO_WORLD |
-      | HelloWorld  | kebab     | hello-world |
-      | helloWorld  | pascal    | HelloWorld  |
-      | helloWorld  | snake     | hello_world |
-      | hello.World | title     | Hello World |
-      | HELLO_WORLD | dot       | hello.world |
+      | input       | caseType | expected    |
+      | hello_World | camel    | helloWorld  |
+      | helloWorld  | constant | HELLO_WORLD |
+      | HelloWorld  | kebab    | hello-world |
+      | helloWorld  | pascal   | HelloWorld  |
+      | helloWorld  | snake    | hello_world |
+      | hello.World | title    | Hello World |
+      | HELLO_WORLD | dot      | hello.world |
 
   @objects
   Scenario: Converting nested object keys from different case formats to PascalCase

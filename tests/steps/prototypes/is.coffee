@@ -1,53 +1,27 @@
 import { Given, When, Then } from "@cucumber/cucumber"
 import { expect } from "chai"
 
-Given "I have the following values:", (dataTable) ->
-  @testValues = {}
+Given "the following values:", (table) ->
+  @values = {}
 
-  for row in dataTable.hashes()
-    name = row.name
+  for { name, value } in table.hashes()
+    @values[name] = JSON.parse(value)
 
-    if row.specialType
-      switch row.specialType
-        when "null"
-          @testValues[name] = null
-        when "undefined"
-          @testValues[name] = undefined
-        when "new Map()"
-          @testValues[name] = new Map()
-        when "new Set()"
-          @testValues[name] = new Set()
-        when "Object.create(null)"
-          @testValues[name] = Object.create(null)
-    else if row.value
-      try
-        @testValues[name] = JSON.parse(row.value)
-      catch error
-        if row.value.startsWith('"') && row.value.endsWith('"')
-          @testValues[name] = row.value.slice(1, -1)
-        else
-          @testValues[name] = row.value
+When "I check the type of {string}", (name) ->
+  @result = {
+    isArray: @values[name].isArray(),
+    isObject: @values[name].isObject(),
+    isString: @values[name].isString()
+  }
 
-When "I check their types", ->
-  @results = {}
+When "I check if {string} is empty", (name) ->
+  @result = @values[name].isEmpty()
 
-  for name, value of @testValues
-    @results[name] =
-      isArray: value?.isArray?() || false
-      isObject: value?.isObject?() || false
-      isString: value?.isString?() || false
-      isEmpty: value?.isEmpty?() || false
+Then "it should be one of:", (table) ->
+  expected = table.rowsHash()
 
-Then "the results should be:", (dataTable) ->
-  for row in dataTable.hashes()
-    name = row.name
+  for key, value of expected
+    expect(@result[key]).to.equal(value is "true")
 
-    expectedResults =
-      isArray: row.isArray == 'true'
-      isObject: row.isObject == 'true'
-      isString: row.isString == 'true'
-      isEmpty: row.isEmpty == 'true'
-
-    actualResults = @results[name]
-    expect(actualResults).to.deep.equal(expectedResults,
-      "Results for '#{name}' don't match expected values")
+Then "it should be {string}", (expected) ->
+  expect(@result).to.equal(expected is "true")

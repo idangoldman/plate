@@ -12,7 +12,7 @@ When "I convert it to {string} case", (caseType) ->
 When "I call the capitalize method on it", ->
   @result = @input.capitalize()
 
-Then "I should get {string}", (expected) ->
+Then "I should get {string} string", (expected) ->
   if expected is "undefined"
     expect(@result).to.be.undefined
   else if expected is "true"
