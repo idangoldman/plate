@@ -13,8 +13,8 @@ default:
     - tests/features/**/*.feature
 
   import:
-    - tests/support/**/*.js
-    - tests/steps/**/*.js
+    - src/tests/support/**/*.js
+    - src/tests/steps/**/*.js
 
   format:
     - "@cucumber/pretty-formatter"
