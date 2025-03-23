@@ -1,4 +1,4 @@
-import { When, Then } from "@cucumber/cucumber"
+import { When } from "@cucumber/cucumber"
 
 When "I call the {string} method on the {string} array", (methodName, arrayName) ->
   @result = @input[arrayName][methodName]()

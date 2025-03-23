@@ -1,4 +1,4 @@
-import { Given, When, Then } from "@cucumber/cucumber"
+import { When, Then } from "@cucumber/cucumber"
 import { expect } from "chai"
 
 When "I check the type of {string}", (name) ->
