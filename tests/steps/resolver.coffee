@@ -1,4 +1,4 @@
-import {Given, When, Then} from "@cucumber/cucumber"
+import { Given, When, Then } from "@cucumber/cucumber"
 import assert from "node:assert/strict"
 import pathResolver from "#root/transformers/resolver.js"
 
