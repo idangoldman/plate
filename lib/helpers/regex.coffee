@@ -3,6 +3,7 @@ export ARRAY_CONTENT            = new RegExp "^\\s*\\[.*\\]\\s*$"
 export COMMON_JS_CONTENT        = new RegExp "exports[\\[\\.( ?=)]|module\\.exports|require\\(|createRequire\\(", "i"
 export OBJECT_CONTENT           = new RegExp "^\\s*\\{.*\\}\\s*$"
 export STRING_CONTENT           = new RegExp '^\\s*\\".*\\"\\s*$'
+export NUMBER_CONTENT           = new RegExp "^\\d+([\\.,\\d])*$"
 
 ### File extensions ###
 export COFFEE_EXTENSION         = new RegExp "\\.(coffee|litcoffee|coffee\\.md)$", "i"

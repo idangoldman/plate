@@ -7,7 +7,9 @@ default:
   strict: true
   verbose: true
 
-  tags: "@prototypes"
+  # Optional for filtering scenarios by tags
+  # Keep in mind, tags act as query operators not as combinators
+  # tags: "@... and not @... or @..."
 
   paths:
     - tests/features/**/*.feature
