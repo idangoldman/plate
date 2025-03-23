@@ -1,4 +1,4 @@
-import { Given, When, Then } from "@cucumber/cucumber"
+import { Given, When } from "@cucumber/cucumber"
 import { expect } from "chai"
 
 import capitalize from "#root/helpers/capitalize.js"
@@ -11,16 +11,3 @@ When "I convert it to {string} case", (caseType) ->
 
 When "I call the capitalize method on it", ->
   @result = @input.capitalize()
-
-Then "I should get {string} string", (expected) ->
-  if expected is "undefined"
-    expect(@result).to.be.undefined
-  else if expected is "true"
-    expect(@result).to.be.true
-  else if expected is "false"
-    expect(@result).to.be.false
-  else
-    if /^\d+\.\d+$/.test(expected)
-      expected = parseInt(expected)
-
-    expect(@result).to.equal(expected)

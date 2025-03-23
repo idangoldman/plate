@@ -8,7 +8,7 @@ Feature: Case Conversions
   Scenario Outline: Converting strings to different case formats
     Given I have a string "<input>"
     When I convert it to "<caseType>" case
-    Then I should get "<expected>" string
+    Then I should get "<expected>" as the result
 
     Examples:
       | input       | caseType | expected    |

@@ -4,7 +4,7 @@ Feature: Is methods type checking
   I want to use the Is methods to check value types
 
   Background:
-    Given the following values:
+    Given the following inputs:
       | name      | value   |
       | string    | "hello" |
       | emptyStr  | ""      |
@@ -15,7 +15,7 @@ Feature: Is methods type checking
       | emptyObj  | {}      |
 
   @arrays @objects @strings
-  Scenario Outline: Checking the data types of values
+  Scenario Outline: Checking the data types of inputs
     When I check the type of "<name>"
     Then it should be one of:
       | isArray  | <isArray>  |
