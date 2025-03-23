@@ -6,7 +6,7 @@ Given "the following inputs:", (table) ->
   @input = {}
 
   for { name, value } in table.hashes()
-    @input[name] = JSON.parse(value)
+    @input[name] = JSON.parse value
 
 Then "I should get {string} as the result", (expected) ->
   switch true
@@ -19,14 +19,14 @@ Then "I should get {string} as the result", (expected) ->
     when expected is "false"
       expect(@result).to.be.false
 
-    when NUMBER_CONTENT.test(expected)
-      expect(@result).to.equal(parseInt(expected))
+    when NUMBER_CONTENT.test expected
+      expect(@result).to.equal(parseInt expected, 10)
 
-    when ARRAY_CONTENT.test(expected)
-      expect(@result).to.deep.equal(JSON.parse(expected))
+    when ARRAY_CONTENT.test expected
+      expect(@result).to.deep.equal(JSON.parse expected)
 
-    when OBJECT_CONTENT.test(expected)
-      expect(@result).to.deep.equal(JSON.parse(expected))
+    when OBJECT_CONTENT.test expected
+      expect(@result).to.deep.equal(JSON.parse expected)
 
     else
       expect(@result).to.equal(expected)
