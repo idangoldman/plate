@@ -1,3 +1,4 @@
+# @prototypes @natives @functions
 Feature: Function Prototype Methods
   As a developer
   I want to use the Function prototype methods
