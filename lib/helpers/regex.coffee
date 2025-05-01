@@ -10,7 +10,7 @@ export COFFEE_EXTENSION         = new RegExp "\\.(coffee|litcoffee|coffee\\.md)$
 export YAML_EXTENSION           = new RegExp "\\.ya?ml$", "i"
 
 ### Path Starters ###
-export STARTS_WITH_BASE_PATH    = new RegExp "^([~|@]/)"
+export STARTS_WITH_BASE_PATH    = new RegExp "^([~|@]\\/)"
 export STARTS_WITH_PACKAGE_PATH = new RegExp "^~\\/"
 export STARTS_WITH_PROJECT_PATH = new RegExp "^@\\/"
 
