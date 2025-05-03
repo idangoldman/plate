@@ -30,7 +30,7 @@ processes:
       restart: "no"
     command: |
       set --local coffeelint_json_tmp (mktemp)
-      set --local coffeelint_files (find ${PLATE_PRJ_PATH}/{lib,tests} -name "*.coffee" -type f)
+      set --local coffeelint_files (find ${PLATE_PRJ_PATH}/{source,lib,tests} -name "*.coffee" -type f)
 
       yq -o=json ${PLATE_CONF_PATH}/coffeelint.yml > $$coffeelint_json_tmp
 

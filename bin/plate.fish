@@ -33,17 +33,21 @@ if test (count $argv) -ge 1
 
 end
 
-# echo "PLATE_ENV: $PLATE_ENV"
-# echo "PLATE_PKG_PATH: $PLATE_PKG_PATH"
-# echo "PLATE_PRJ_PATH: $PLATE_PRJ_PATH"
-# echo "PLATE_BIN_PATH: $PLATE_BIN_PATH"
-# echo "PLATE_CONF_PATH: $PLATE_CONF_PATH"
-# echo "PLATE_CLI_COMMAND: $PLATE_CLI_COMMAND"
-# echo "PLATE_CLI_ARGS: $PLATE_CLI_ARGS"
-
 # Handle help command separately
 if test "$PLATE_CLI_COMMAND" = help
     $PLATE_PKG_PATH/bin/help.fish "$PLATE_PKG_PATH/processes"
+    exit 0
+end
+
+# Check for the environment command, setting project as package target
+if test "$PLATE_CLI_COMMAND" = environment
+    echo "PLATE_ENV: $PLATE_ENV"
+    echo "PLATE_PKG_PATH: $PLATE_PKG_PATH"
+    echo "PLATE_PRJ_PATH: $PLATE_PRJ_PATH"
+    echo "PLATE_BIN_PATH: $PLATE_BIN_PATH"
+    echo "PLATE_CONF_PATH: $PLATE_CONF_PATH"
+    echo "PLATE_CLI_COMMAND: $PLATE_CLI_COMMAND"
+    echo "PLATE_CLI_ARGS: $PLATE_CLI_ARGS"
     exit 0
 end
 

@@ -25,6 +25,9 @@
     "#root/*": "./src/*",
     "#tests/*": "./tests/*"
   },
+  "exports": {
+    "./plugins/*": "./src/plugins/*"
+  },
   "files": [
     "bin",
     "configs",
