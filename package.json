@@ -26,6 +26,9 @@
   "imports": {
     "#root/*": "./src/*"
   },
+  "exports": {
+    "./plugins/*": "./src/plugins/*"
+  },
   "files": [
     "bin",
     "configs",
