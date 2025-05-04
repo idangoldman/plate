@@ -67,8 +67,7 @@ processes:
       restart: "no"
     command: |
       ${PLATE_BIN_PATH}/cucumber-js \
-        --config="${PLATE_CONF_PATH}/cucumber.yml" \
-        --tags="@natives"
+        --config="${PLATE_CONF_PATH}/cucumber.yml"
 
   run:
     namespace: development

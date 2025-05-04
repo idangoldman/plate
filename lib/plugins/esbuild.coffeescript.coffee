@@ -6,6 +6,8 @@ export default -> {
   name: "coffeescript"
   setup: (build) ->
     build.onLoad({ filter: COFFEE_EXTENSION }, ({ path }) ->
+      console.log "Compiling file:", path
+
       source = await readFile(path, "utf8")
       transformedSource = await transformCoffee(source, path)
 

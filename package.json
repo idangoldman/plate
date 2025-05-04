@@ -44,10 +44,10 @@
     "@cucumber/pretty-formatter": "1.0.1",
     "chai": "5.2.0",
     "coffeescript": "2.7.0",
-    "esbuild": "0.25.0",
+    "esbuild": "0.25.3",
     "globals": "16.0.0",
     "lodash": "4.17.21",
     "prettier": "3.5.3",
-    "yaml": "2.7.0"
+    "yaml": "2.7.1"
   }
 }
