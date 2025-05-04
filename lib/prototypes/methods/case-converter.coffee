@@ -15,7 +15,7 @@ export default class CaseConverter extends Prototypes
     for own key, value of @
       newKey = key["#{prototypeName}"]()
 
-      result[newKey] = if typeof value is "object" and value?
+      result[newKey] = if typeof value is "object" and Array.isArray(value) is false and value?
         value.toCaseKeys caseType
       else
         value
