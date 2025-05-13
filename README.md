@@ -264,6 +264,7 @@ This is a major update for the framework and might be an easy one because most o
 - [ ] Implement `prototypes/methods/to.coffee` with `to` method to convert the object to a specific type.
 - [ ] Implement `Numbers.toHuman([size, weight, dimension, distance, etc...])` method to convert the numbers to a human readable formats.
 - [ ] Test `yaml` file loading and using `Objects.keyCase` method.
+- [ ] Implement `Objects.hasCase` method to check if the object has the key with the specific case.
 
 ### MissingMethod Pattern Upgrade
 
