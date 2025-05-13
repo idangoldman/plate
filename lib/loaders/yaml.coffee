@@ -5,9 +5,7 @@ export load = (url, context, nextLoad) ->
   unless YAML_EXTENSION.test(url)
     return nextLoad(url, context)
 
-  keyCase = context.importAttributes?.keyCase or 'camel'
-
-  transformedSource = await transformYaml new URL(url).pathname, keyCase
+  transformedSource = await transformYaml new URL(url).pathname, context.importAttributes?.keyCase
 
   return {
     format: "module"

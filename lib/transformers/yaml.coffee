@@ -3,10 +3,13 @@ import YAML from "yaml"
 
 import { methods } from "#root/prototypes/methods/case-converter.js"
 
-export default transformYaml = (filePath, keyCase = "camel") ->
+export default transformYaml = (filePath, keyCase = "") ->
   source = await readFile(filePath, "utf8")
   transformedContent = YAML.parse source.toString()
-  transformedContent = methods.toCaseKeys.bind(transformedContent)(keyCase)
+
+  unless keyCase.isEmpty()
+    transformedContent = methods.toCaseKeys.bind(transformedContent)(keyCase)
+
   transformedContent = JSON.stringify transformedContent, null, 2
 
   "export default #{transformedContent};"
