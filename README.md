@@ -99,7 +99,7 @@ Are the core structures upon PLATE's functionality and behavior extended from.
 | Hooks    |         |
 | Components   |         |
 | Events      |         |
-| Stores |         |
+| Stores |local, session, cookie, memory |
 
 #### Prototypes
 
