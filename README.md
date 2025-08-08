@@ -214,14 +214,13 @@ This is a major update for the framework and might be an easy one because most o
   - [ ] Create a `plate` task to copy a config file to extend or override the PLATE's config file in the current project.
   - [ ] Create a Singleton class pattern, just because? No, because it's overly copy-paste piece of code pattern that can be capsulated into a base class and extended from.
 
-#### Backlog for future iterations
+### Backlog for future iterations
 
 - [ ] Extend events pattern with Keyboard events
-- [ ] Implementation of `interval` and `timeout` in a form of `delay:1s` and `iterate:200ms`
-- [ ] Page/Route
-- [ ] Cache via service worker
-- [ ] Implement "HTML over the Wire" page and template loading pattern.
-- [ ] Implement an `analytics` object for `async` interaction with a stats server.
+- [ ] Implement Locations prototype extending page route navigation
+- [ ] Implement Cache API as part of the Store pattern
+- [ ] Implement IndexDB APi as part of the Store pattern
+- [ ] Implement Templates pattern for loading html and css files on the fly.
 - [ ] Implementation of the 3 acronyms - `i18n`, `l10n`, and `a11y`.
 - [ ] Implement Timers pattern with every (interval), delay (timeout), clear, clearAll.
 - [ ] Implement wait, waitFor, sleep, debounce, throttle and utils functions.
@@ -229,3 +228,7 @@ This is a major update for the framework and might be an easy one because most o
 - [ ] Implement Clipboard pattern with copy and paste functionality.
 - [ ] Extend HTMLElements with update (with observers),empty, append, prepend, find, html, css, create functionality.
 - [ ] Implement component.isolate functionality.
+
+### Advocating
+- [ ] Create a GitHub repository with code usage examples of JavaScript on a Plate framework.
+- [ ] Create a documentation website for JavaScript on a Plate.
