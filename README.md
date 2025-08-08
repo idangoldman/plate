@@ -96,11 +96,10 @@ Are the core structures upon PLATE's functionality and behavior extended from.
 | Pattern     | Description |
 | -------- | ------- |
 | Prototypes    |         |
-| Storage |         |
-| Events      |         |
-| Element    |         |
-| Component   |         |
 | Hooks    |         |
+| Component   |         |
+| Events      |         |
+| Storage |         |
 
 #### Prototypes
 
