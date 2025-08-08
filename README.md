@@ -97,9 +97,9 @@ Are the core structures upon PLATE's functionality and behavior extended from.
 | -------- | ------- |
 | Prototypes    |         |
 | Hooks    |         |
-| Component   |         |
+| Components   |         |
 | Events      |         |
-| Storage |         |
+| Stores |         |
 
 #### Prototypes
 
