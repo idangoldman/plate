@@ -232,3 +232,6 @@ This is a major update for the framework and might be an easy one because most o
 ### Advocating
 - [ ] Create a GitHub repository with code usage examples of JavaScript on a Plate framework.
 - [ ] Create a documentation website for JavaScript on a Plate.
+- [ ] Create a CDN publishing GitHub Action
+- [ ] Create a Testing GitHub Action
+- [ ] Fix NPM package publishing GitHub Action
