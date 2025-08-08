@@ -164,27 +164,13 @@ The above dependencies aren't set in stone and might be replaced by a better sui
 
 ### Components Pattern
 
-This is a major update for the framework and might be an easy one because most of the _work-in-theory_ codebase already written and been testishly used as part of `fmwk` (`feature.js`) which by the end of this implementation be obsolete and archived.
+This is a major update for the framework and might be an easy one because most of the _work-in-theory_ codebase already written and been testishly used as part of `fmwk` which by the end of this implementation be obsolete and archived.
 
-- [ ] Implement `component("selector", callback)`
-- [ ] Implement supporting pattern objects
-  - [ ] Base element
-  - [ ] DOM Events
-  - [ ] Local and Session Storage
-- [ ] Migrate and extend tests for those of the above
-
-#### In the Next Iteration
-
-- [ ] Inputs (form too?)
-- [ ] Keyboard events as shortcut combos
-- [ ] Keyboard navigation helpers built in
-- [ ] Implementation of `interval` and `timeout` in a form of `delay:1s` and `iterate:200ms`
-- [ ] Page/Route
-- [ ] Advanced Element
-- [ ] Cache via service worker
-- [ ] Implement "HTML over the Wire" page and template loading pattern.
-- [ ] Implement an `analytics` object for `async` interaction with a stats server.
-- [ ] Implementation of the 3 acronyms - `i18n`, `l10n`, and `a11y`.
+- [ ] Implement `component("selector", callback)` pattern
+- [ ] Implement HTMLElements prototype
+- [ ] Implement DOM Events as events pattern
+- [ ] Implement Storage APIs as store pattern
+- [ ] Migrate and extend tests for the above via feature documents
 
 ### Prototypes Enhancements
 
@@ -202,8 +188,11 @@ This is a major update for the framework and might be an easy one because most o
 - [ ] Implement `Numbers.toHuman([size, weight, dimension, distance, etc...])` method to convert the numbers to a human readable formats.
 - [ ] Test `yaml` file loading and using `Objects.keyCase` method.
 - [ ] Implement `Objects.hasCase` method to check if the object has the key with the specific case.
+- [ ] Implement toDataUrl 
+- [ ] Implement clean text
+- [ ] Implement sanitize
 
-### MissingMethod Pattern Upgrade
+### MissingMethod Pattern
 
 - [ ] Implement `MissingMethod` (`respond_to_missing` and `method_is_missing`) pattern for `Prototypes` pattern be based on?
 - [ ] Implement `getter` and `setter` methods in `Objects` prototype to use `MissingMethod` pattern routing prototype methods to use static methods of the same name.
@@ -214,12 +203,29 @@ This is a major update for the framework and might be an easy one because most o
 ### Infrastructure Upgrades
 
 - [ ] Implement `glob` transformer and register as node.js loader in `lib/transformers/glob.coffee`.
+- [ ] Implement `svg` transformer and register as node.js loader in `lib/transformers/svg.coffee`.
 - [ ] Implement `main` as an `importAttributes` of imported files, to be used like main in Python.
 - [ ] Create defaults loader class for prototypes and methods loading.
+- [ ] Refactor the library into tree-shakable structure for a bundle smaller footprint.
 - [ ] Restructure `lib/` folder:
   - [ ] Migrate some of the functionality out of the `lib/helpers` folder and into `Prototypes` or `Transformers`, the rest into `lib/utils`.
   - [ ] Rename `lib/plugins` to `lib/esbuild`
   - [ ] Create a folder for node specific code `lib/node` and move all related folders and files of code into it.
   - [ ] Create a `plate` task to copy a config file to extend or override the PLATE's config file in the current project.
   - [ ] Create a Singleton class pattern, just because? No, because it's overly copy-paste piece of code pattern that can be capsulated into a base class and extended from.
-  - [ ] Implement `esbuild.icons.coffee` transformer to load icons from the `icons` folder and register as node.js loader in `lib/transformers/esbuild/icons.coffee`.
+
+#### Backlog for future iterations
+
+- [ ] Extend events pattern with Keyboard events
+- [ ] Implementation of `interval` and `timeout` in a form of `delay:1s` and `iterate:200ms`
+- [ ] Page/Route
+- [ ] Cache via service worker
+- [ ] Implement "HTML over the Wire" page and template loading pattern.
+- [ ] Implement an `analytics` object for `async` interaction with a stats server.
+- [ ] Implementation of the 3 acronyms - `i18n`, `l10n`, and `a11y`.
+- [ ] Implement Timers pattern with every (interval), delay (timeout), clear, clearAll.
+- [ ] Implement wait, waitFor, sleep, debounce, throttle and utils functions.
+- [ ] Implement Messages pattern as a wrapper for Broadcast API.
+- [ ] Implement Clipboard pattern with copy and paste functionality.
+- [ ] Extend HTMLElements with update (with observers),empty, append, prepend, find, html, css, create functionality.
+- [ ] Implement component.isolate functionality.
