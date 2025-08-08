@@ -67,38 +67,6 @@ The center of opinions for framework and it's dependencies configuration files. 
 ls -la ./configs/**/*
 ```
 
-### Presets (WIP)
-
-Basically, the preset files store initial `key: value` YAML structured variables to be used across the codebase.
-
-Contents of presets can be accessed across the codebase by referencing `$PLATE_CONFIG['KEY']`.
-
-### Dependencies (WIP)
-
-The configuration files of PLATE's dependencies are located in this folder with the exception of stubborn dependencies that enforce it's configuration file be in the root folder of the project they are part of.
-
-### Override (IDEA)
-
-All configuration files can be overridden by placing a config file in your project's folder in the same path the config file is located in PLATE's folder.
-
-For ease of use, run the following command to override a configuration file:
-
-```shell
-plate config override presets/website.yml
-```
-
-### Extend (WIP)
-
-All configuration files can be extended by placing a config file in your project's folder in the same path the config file is located in PLATE's folder with a suffix of a `PLATE_ENV` to run in.
-
-For ease of use, run the following command to override a configuration file:
-
-```shell
-plate config extend production presets/website.yml
-```
-
-Extend is basically doing a deep merge between PLATE's core config and project's config file with `PLATE_ENV` suffix.
-
 ## Library
 
 ### Imports
@@ -125,63 +93,35 @@ Extend is basically doing a deep merge between PLATE's core config and project's
 
 Are the core structures upon PLATE's functionality and behavior extended from.
 
+| Pattern     | Description |
+| -------- | ------- |
+| Prototypes    |         |
+| Storage |         |
+| Events      |         |
+| Element    |         |
+| Component   |         |
+| Hooks    |         |
+
 #### Prototypes
 
 ##### Natives (WIP)
 
-###### Objects
-
-| Method  | Description |
-| ------- | ----------- |
-| `keys`  |             |
-| `print` |             |
-
-###### Arrays
-
-| Method     | Description |
-| ---------- | ----------- |
-| `excludes` |             |
-| `first`    |             |
-| `last`     |             |
-
-###### Strings
-
-| Method       | Description |
-| ------------ | ----------- |
-| `capitalize` |             |
-| `times`      |             |
+| Native    | Description |
+| -------- | ------- |
+| Objects    |         |
+| Arrays |         |
+| Strings      |         |
+| Functions    |         |
+| Numbers    |         |
+| HTMLElements    |         |
 
 ##### Methods (WIP)
 
-###### Is
-
-| Method     | Description |
-| ---------- | ----------- |
-| `isArray`  |             |
-| `isObject` |             |
-| `isString` |             |
-| `isEmpty`  |             |
-
-###### To
-
-| Method      | Description |
-| ----------- | ----------- |
-| `toArray`   |             |
-| `toObject`  |             |
-| `toBoolean` |             |
-| `toNumber`  |             |
-
-###### Naming Conventions
-
-| Case     | Example |
+| Methods     | Description |
 | -------- | ------- |
-| Camel    |         |
-| Constant |         |
-| Dot      |         |
-| Kebab    |         |
-| Pascal   |         |
-| Snake    |         |
-| Title    |         |
+| Is    |         |
+| To |         |
+| Naming Conventions      |         |
 
 #### Hooks (WIP)
 
@@ -199,8 +139,6 @@ Are the core structures upon PLATE's functionality and behavior extended from.
 | `once`  |             |
 | `emit`  |             |
 | `off`   |             |
-
-#### Missing Methods (IDEA)
 
 ## Testing
 
