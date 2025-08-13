@@ -28,5 +28,8 @@ Then "I should get {string} as the result", (expected) ->
     when OBJECT_CONTENT.test expected
       expect(@result).to.deep.equal(JSON.parse expected)
 
+    when expected is ""
+      expect(@result).to.equal("")
+
     else
       expect(@result).to.equal(expected)
