@@ -7,7 +7,7 @@ import Strings from "#root/prototypes/strings.js"
 # Method Prototypes
 import IsMethods from "#root/prototypes/methods/is.js"
 import CaseConverterMethods from "#root/prototypes/methods/case-converter.js"
-# import ToMethods from "#root/prototypes/methods/to.js"
+import ToMethods from "#root/prototypes/methods/to.js"
 
 export initialize = ->
   Arrays.apply()
@@ -17,7 +17,7 @@ export initialize = ->
 
   IsMethods.apply()
   CaseConverterMethods.apply()
-  # ToMethods.apply()
+  ToMethods.apply()
 
   true
 
@@ -29,7 +29,7 @@ export destroy = ->
 
   IsMethods.remove()
   CaseConverterMethods.remove()
-  # ToMethods.apply()
+  ToMethods.apply()
 
   true
 
