@@ -16,8 +16,8 @@ export initialize = ->
   Strings.apply()
 
   IsMethods.apply()
-  CaseConverterMethods.apply()
   ToMethods.apply()
+  CaseConverterMethods.apply()
 
   true
 
@@ -28,8 +28,8 @@ export destroy = ->
   Strings.remove()
 
   IsMethods.remove()
-  CaseConverterMethods.remove()
   ToMethods.apply()
+  CaseConverterMethods.remove()
 
   true
 

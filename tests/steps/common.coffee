@@ -8,28 +8,39 @@ Given "the following inputs:", (table) ->
   for { name, value } in table.hashes()
     @input[name] = JSON.parse value
 
-Then "I should get {string} as the result", (expected) ->
-  switch true
-    when expected is "undefined"
-      expect(@result).to.be.undefined
+Then "I should get {expectedValue} as the result", (expected) ->
+  { type, value } = expected
 
-    when expected is "true"
-      expect(@result).to.be.true
+  switch type
+    when "boolean"
+      expect(@result).to.be.a 'boolean', "Expected result to be boolean but got #{typeof @result}"
+      expect(@result).to.equal value
 
-    when expected is "false"
-      expect(@result).to.be.false
+    when "null"
+      expect(@result).to.be.a "null", "Expected result to be null but got #{typeof @result}"
+      expect(@result).to.equal value
 
-    when NUMBER_CONTENT.test expected
-      expect(@result).to.equal(parseInt expected, 10)
+    when "undefined"
+      expect(@result).to.be.a "undefined", "Expected result to be undefined but got #{typeof @result}"
+      expect(@result).to.equal value
 
-    when ARRAY_CONTENT.test expected
-      expect(@result).to.deep.equal(JSON.parse expected)
+    when "number"
+      expect(@result).to.be.a 'number', "Expected result to be number but got #{typeof @result}"
+      expect(@result).to.equal value
 
-    when OBJECT_CONTENT.test expected
-      expect(@result).to.deep.equal(JSON.parse expected)
+    when "string"
+      expect(@result).to.be.a 'string', "Expected result to be string but got #{typeof @result}"
+      expect(@result).to.equal value
 
-    when expected is ""
-      expect(@result).to.equal("")
+    when "array"
+      expect(@result).to.be.an 'array', "Expected result to be array but got #{typeof @result}"
+      expect(@result).to.not.be.an 'object', "Expected result to be array but got object"
+      expect(@result).to.deep.equal value
+
+    when "object"
+      expect(@result).to.be.an 'object', "Expected result to be object but got #{typeof @result}"
+      expect(@result).to.not.be.an 'array', "Expected result to be object but got array"
+      expect(@result).to.deep.equal value
 
     else
-      expect(@result).to.equal(expected)
+      throw new Error("Unsupported expected type: #{type}")

@@ -1,2 +1,5 @@
 export default isNativeMethod = (fn) ->
-  unless fn? then false else fn.toString().includes "[native code]"
+  try
+    Function.prototype.toString.call(fn).includes "[native code]"
+  catch error
+    false

@@ -1,7 +1,9 @@
-import { setWorldConstructor } from "@cucumber/cucumber"
+import { setWorldConstructor, World } from "@cucumber/cucumber"
 
-setWorldConstructor class ResolverWorld
-  constructor: ->
+setWorldConstructor class PlateWorld extends World
+  constructor: (options) ->
+    super(options)
+
     @originalEnv = {}
     @resetState()
 

@@ -5,8 +5,8 @@ export default class To extends Prototypes
 
   toArray: -> switch true
     when @isArray()  then @slice()
-    when @isObject() then @keys().map (key) -> [key, @get(key)]
-    when @isString() then @split("")
+    when @isObject() then Object.entries(@)
+    when @isString() then @.split("")
     else []
 
   toObject: -> switch true
@@ -24,7 +24,7 @@ export default class To extends Prototypes
   toNumber: -> switch true
     when @isArray()  then @length
     when @isObject() then @keys().length
-    when @isString() then @length
+    when @isString() then parseInt(@, 10)
     else +@
 
 export methods = To.methods()

@@ -1,4 +1,4 @@
-@prototypes @natives @arrays
+@prototypes @arrays
 Feature: Array Prototype Methods
   As a developer
   I want to use the Array methods to easily work with arrays
@@ -12,7 +12,7 @@ Feature: Array Prototype Methods
 
   Scenario Outline: Using first and last methods
     When I call the "<method>" method on the "<name>" array
-    Then I should get "<expected>" as the result
+    Then I should get <expected> as the result
 
     Examples:
       | name     | method | expected  |
@@ -23,7 +23,7 @@ Feature: Array Prototype Methods
 
   Scenario Outline: Using excludes method
     When I call the "excludes" method on the "<name>" array with value "<value>"
-    Then I should get "<expected>" as the result
+    Then I should get <expected> as the result
 
     Examples:
       | name     | value | expected |
