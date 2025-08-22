@@ -1,0 +1,100 @@
+version: "3"
+
+tasks:
+  clean:
+    desc: "Clean up the project"
+    cmds:
+      - rm -rvf {{.PLATE_PRJ_PATH}}/src
+
+  build:
+    desc: "Build the project from CoffeeScript sources"
+    deps: [clean]
+    sources:
+      - "{{.PLATE_PRJ_PATH}}/lib/**/*.coffee"
+    generates:
+      - "{{.PLATE_PRJ_PATH}}/src/**/*.js"
+    cmds:
+      - |
+        {{.PLATE_BIN_PATH}}/coffee \
+          --bare \
+          --compile \
+          --no-header \
+          --output {{.PLATE_PRJ_PATH}}/src \
+          {{.PLATE_PRJ_PATH}}/lib
+
+  watch:
+    desc: "Watch the project for changes and rebuild"
+    deps: [clean]
+    cmds:
+      - |
+        {{.PLATE_BIN_PATH}}/coffee \
+          --bare \
+          --compile \
+          --inline-map \
+          --no-header \
+          --watch \
+          --output {{.PLATE_PRJ_PATH}}/src \
+          {{.PLATE_PRJ_PATH}}/lib
+
+  build-test:
+    desc: "Build test files from CoffeeScript sources"
+    deps: [build]
+    sources:
+      - "{{.PLATE_PRJ_PATH}}/tests/**/*.coffee"
+    generates:
+      - "{{.PLATE_PRJ_PATH}}/src/tests/**/*.js"
+    cmds:
+      - |
+        {{.PLATE_BIN_PATH}}/coffee \
+          --bare \
+          --compile \
+          --no-header \
+          --output {{.PLATE_PRJ_PATH}}/src/tests \
+          {{.PLATE_PRJ_PATH}}/tests
+
+  test:
+    desc: "Run Cucumber tests"
+    deps: [build-test]
+    sources:
+      - "{{.PLATE_PRJ_PATH}}/src/tests/**/*.js"
+      - "{{.PLATE_PRJ_PATH}}/tests/**/*.feature"
+      - "{{.PLATE_CONF_PATH}}/cucumber.yml"
+    generates:
+      - "{{.PLATE_TMP_PATH}}/cucumber-report.html"
+    cmds:
+      - |
+        set --local cucumber_yml_tmp "{{.PLATE_TMP_PATH}}/cucumber.yml"
+
+        yq eval --yaml-fix-merge-anchor-to-spec -o=json '.' {{.PLATE_CONF_PATH}}/cucumber.yml | \
+          yq eval -P '.' - > $cucumber_yml_tmp
+
+        {{.PLATE_BIN_PATH}}/cucumber-js \
+          --config="$cucumber_yml_tmp" \
+          {{.CLI_ARGS}}
+
+  test-report:
+    desc: "Open test report in browser"
+    deps: [test]
+    cmds:
+      - open "file://{{.PLATE_PKG_PATH}}/tmp/cucumber-report.html"
+
+  run:
+    desc: "Run the project via Node.js"
+    deps: [build]
+    cmds:
+      - |
+        node \
+          --trace-warnings \
+          --trace-deprecation \
+          --trace-uncaught \
+          --import="{{.PLATE_PKG_PATH}}/src/registry.js" {{.CLI_ARGS}}
+
+  logs:
+    desc: "Show the project logs"
+    cmds:
+      - |
+        set --local PLATE_LOG_PATH {{.PLATE_LOG_PATH}}/{{.PLATE_ENV}}.log
+
+        if test -f $PLATE_LOG_PATH
+          tail -f -v -n 5 $PLATE_LOG_PATH
+        end

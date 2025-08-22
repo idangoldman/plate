@@ -1,0 +1,45 @@
+version: "3"
+
+tasks:
+  install:
+    desc: "Install dependencies"
+    sources:
+      - "{{.PLATE_PRJ_PATH}}/package.json"
+      - "{{.PLATE_PRJ_PATH}}/pnpm-lock.yaml"
+    generates:
+      - "{{.PLATE_PRJ_PATH}}/node_modules/.package-lock.json"
+    cmds:
+      - pnpm install --frozen-lockfile
+      - pnpm link .
+
+  fresh-install:
+    desc: "Fresh install dependencies"
+    cmds:
+      - rm -frv node_modules pnpm-lock.yaml tmp logs
+      - pnpm prune
+      - pnpm install
+      - pnpm link .
+
+  update:
+    desc: "Update dependencies"
+    sources:
+      - "{{.PLATE_PRJ_PATH}}/package.json"
+    generates:
+      - "{{.PLATE_PRJ_PATH}}/pnpm-lock.yaml"
+    cmds:
+      - pnpm update
+
+  upgrade:
+    desc: "Upgrade dependencies and package manager"
+    cmds:
+      - corepack up && pnpm add -g pnpm
+
+  outdated:
+    desc: "Check for outdated dependencies"
+    cmds:
+      - pnpm outdated
+
+  version:
+    desc: "Display package version"
+    cmds:
+      - jq -r '.version' {{.PLATE_PKG_PATH}}/package.json

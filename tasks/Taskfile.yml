@@ -1,0 +1,66 @@
+version: "3"
+
+includes:
+  package:
+    taskfile: ./Taskfile.package.yml
+    optional: false
+  dev:
+    taskfile: ./Taskfile.development.yml
+    optional: false
+  quality:
+    taskfile: ./Taskfile.code-quality.yml
+    optional: false
+
+vars:
+  PLATE_ENV: '{{.PLATE_ENV | default "development"}}'
+  PLATE_PKG_PATH: "{{.PLATE_PKG_PATH}}"
+  PLATE_PRJ_PATH: "{{.PLATE_PRJ_PATH}}"
+  PLATE_BIN_PATH: "{{.PLATE_PKG_PATH}}/node_modules/.bin"
+  PLATE_TMP_PATH: "{{.PLATE_PKG_PATH}}/tmp"
+  PLATE_LOG_PATH: "{{.PLATE_PKG_PATH}}/logs"
+  PLATE_CONF_PATH: "{{.PLATE_PKG_PATH}}/configs"
+
+tasks:
+  default:
+    desc: "Show available tasks across all namespaces"
+    cmds:
+      - task --list-all
+
+  help:
+    desc: "Display help information and full task list"
+    cmds:
+      - |
+        echo "PLATE Framework Taskfile"
+        echo "======================="
+        echo ""
+        echo "A web development framework built on principles of joy and readability."
+        echo ""
+        echo "Available namespaces:"
+        echo "  package  - Package management (install, update, upgrade, etc.)"
+        echo "  dev      - Development workflow (build, test, watch, run)"
+        echo "  quality  - Code quality checks (format, lint, fix)"
+        echo ""
+        echo "Usage examples:"
+        echo "  plate package:install     # Install dependencies"
+        echo "  plate dev:build          # Build the project"
+        echo "  plate dev:watch          # Watch and rebuild on changes"
+        echo "  plate quality:format     # Check code formatting"
+        echo "  plate quality:all        # Run all quality checks"
+        echo ""
+        echo "Complete task list:"
+        echo "=================="
+      - task --list-all
+
+  environment:
+    desc: "Display environment variables"
+    cmds:
+      - |
+        echo "PLATE Environment Variables"
+        echo "=========================="
+        echo "PLATE_ENV: {{.PLATE_ENV}}"
+        echo "PLATE_PKG_PATH: {{.PLATE_PKG_PATH}}"
+        echo "PLATE_PRJ_PATH: {{.PLATE_PRJ_PATH}}"
+        echo "PLATE_BIN_PATH: {{.PLATE_BIN_PATH}}"
+        echo "PLATE_TMP_PATH: {{.PLATE_TMP_PATH}}"
+        echo "PLATE_LOG_PATH: {{.PLATE_LOG_PATH}}"
+        echo "PLATE_CONF_PATH: {{.PLATE_CONF_PATH}}"
