@@ -1,0 +1,2 @@
+ignoredBuiltDependencies:
+  - "@go-task/cli"

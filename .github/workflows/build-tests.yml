@@ -1,0 +1,49 @@
+name: Build and Test
+
+on:
+  push:
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".node-version"
+          registry-url: "https://registry.npmjs.org"
+          cache: "pnpm"
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v3
+        with:
+          version: latest
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build CoffeeScript bootstrap (creates production binary)
+        run: pnpm run prepack
+
+      - name: Run code quality checks
+        run: |
+          plate qa:format
+          plate qa:lint
+
+      - name: Build project
+        run: plate dev:build
+
+      - name: Run tests
+        run: plate dev:test
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: tmp/cucumber-report.html

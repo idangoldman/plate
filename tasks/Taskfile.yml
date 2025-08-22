@@ -7,8 +7,8 @@ includes:
   dev:
     taskfile: ./Taskfile.development.yml
     optional: false
-  quality:
-    taskfile: ./Taskfile.code-quality.yml
+  qa:
+    taskfile: ./Taskfile.quality.yml
     optional: false
 
 vars:

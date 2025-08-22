@@ -15,7 +15,7 @@ tasks:
   fresh-install:
     desc: "Fresh install dependencies"
     cmds:
-      - rm -frv node_modules pnpm-lock.yaml tmp logs
+      - task -t ./tasks package:clean
       - pnpm prune
       - pnpm install
       - pnpm link .

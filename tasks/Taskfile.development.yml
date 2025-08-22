@@ -4,11 +4,11 @@ tasks:
   clean:
     desc: "Clean up the project"
     cmds:
-      - rm -rvf {{.PLATE_PRJ_PATH}}/src
+      - rm -rvf {{.PLATE_PRJ_PATH}}/src {{.PLATE_PRJ_PATH}}/bin/plate.js {{.PLATE_TMP_PATH}}/* {{.PLATE_LOG_PATH}}/*
 
   build:
     desc: "Build the project from CoffeeScript sources"
-    deps: [clean]
+    deps: [clean, build-cli]
     sources:
       - "{{.PLATE_PRJ_PATH}}/lib/**/*.coffee"
     generates:
@@ -22,9 +22,24 @@ tasks:
           --output {{.PLATE_PRJ_PATH}}/src \
           {{.PLATE_PRJ_PATH}}/lib
 
+  build-cli:
+    desc: "Build the CoffeeScript CLI bootstrap"
+    sources:
+      - "{{.PLATE_PKG_PATH}}/bin/plate.coffee"
+    generates:
+      - "{{.PLATE_PKG_PATH}}/bin/plate.js"
+    cmds:
+      - |
+        {{.PLATE_BIN_PATH}}/coffee \
+          --bare \
+          --compile \
+          --no-header \
+          --output {{.PLATE_PKG_PATH}}/bin \
+          {{.PLATE_PKG_PATH}}/bin/plate.coffee
+
   watch:
     desc: "Watch the project for changes and rebuild"
-    deps: [clean]
+    deps: [clean, build-cli]
     cmds:
       - |
         {{.PLATE_BIN_PATH}}/coffee \
@@ -88,13 +103,3 @@ tasks:
           --trace-deprecation \
           --trace-uncaught \
           --import="{{.PLATE_PKG_PATH}}/src/registry.js" {{.CLI_ARGS}}
-
-  logs:
-    desc: "Show the project logs"
-    cmds:
-      - |
-        set --local PLATE_LOG_PATH {{.PLATE_LOG_PATH}}/{{.PLATE_ENV}}.log
-
-        if test -f $PLATE_LOG_PATH
-          tail -f -v -n 5 $PLATE_LOG_PATH
-        end

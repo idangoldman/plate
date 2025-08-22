@@ -19,6 +19,7 @@
   },
   "type": "module",
   "bin": {
+    "plate-dev": "./bin/plate.coffee",
     "plate": "./bin/plate.js"
   },
   "imports": {
@@ -33,8 +34,7 @@
     "src"
   ],
   "scripts": {
-    "build": "coffee --bare --compile --no-header --output ./bin ./bin/plate.coffee",
-    "prepack": "npm run build",
+    "prepack": "pnpm exec task -t taskfiles dev:build-cli",
     "help": "plate help"
   },
   "dependencies": {
@@ -46,7 +46,6 @@
     "@cucumber/cucumber": "12.1.0",
     "@cucumber/pretty-formatter": "2.1.0",
     "chai": "5.3.2",
-    "esbuild": "0.25.9",
     "globals": "16.3.0",
     "lodash": "4.17.21",
     "prettier": "3.6.2",
