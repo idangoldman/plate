@@ -23,7 +23,7 @@ main = ->
     process.env.PLATE_PRJ_PATH = process.env.PLATE_PKG_PATH
     cliArguments = cliArguments.slice(1)
 
-  cliOptions = [, '-t', "#{process.env.PLATE_PKG_PATH}/tasks", ...cliArguments]
+  cliOptions = ['-t', "#{process.env.PLATE_PKG_PATH}/tasks", ...cliArguments]
 
   taskProcess = spawn('task', cliOptions, {
     stdio: 'inherit'
