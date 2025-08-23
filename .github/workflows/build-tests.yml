@@ -9,6 +9,11 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    env:
+      PLATE_PKG_PATH: ${{ github.workspace }}
+      PLATE_PRJ_PATH: ${{ github.workspace }}
+      PLATE_ENV: development
+
     steps:
       - uses: actions/checkout@v4
 
