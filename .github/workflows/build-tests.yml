@@ -36,18 +36,18 @@ jobs:
       - name: Build Plate Cli
         run: |
           task -t ./tasks dev:build-cli
-          chmod +x ./bin/plate.js
+          pnpm link --global
 
       - name: Run code quality checks
         run: |
-          ./bin/plate qa:format
-          ./bin/plate qa:lint
+          plate qa:format
+          plate qa:lint
 
       - name: Build project
-        run: ./bin/plate dev:build
+        run: plate dev:build
 
       - name: Run tests
-        run: ./bin/plate dev:test
+        run: plate dev:test
 
       - name: Upload test results
         if: always()
