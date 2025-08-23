@@ -37,7 +37,6 @@
     "help": "plate help"
   },
   "dependencies": {
-    "@go-task/cli": "3.44.1",
     "coffeescript": "2.7.0"
   },
   "devDependencies": {
