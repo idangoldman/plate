@@ -1,5 +1,3 @@
-#!/usr/bin/env node --import=coffeescript/register
-
 import { spawn } from 'node:child_process'
 import { dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -13,7 +11,7 @@ findPackageRoot = (packageName = '@idangoldman/plate') ->
     throw new Error("Could not resolve #{packageName} package: #{error.message}")
 
 main = ->
-  process.env.PLATE_ENV = process.env.PLATE_ENV ?? 'development'
+  process.env.PLATE_ENV = process.env.PLATE_ENV or 'development'
   process.env.PLATE_PKG_PATH = await findPackageRoot()
   process.env.PLATE_PRJ_PATH = process.cwd()
 
