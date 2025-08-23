@@ -12,9 +12,9 @@ includes:
     optional: false
 
 vars:
-  PLATE_ENV: '{{.PLATE_ENV | default "development"}}'
-  PLATE_PKG_PATH: "{{.PLATE_PKG_PATH}}"
-  PLATE_PRJ_PATH: "{{.PLATE_PRJ_PATH}}"
+  PLATE_ENV: '{{.ENV.PLATE_ENV | default "development"}}'
+  PLATE_PKG_PATH: "{{.ENV.PLATE_PKG_PATH | default '.'}}"
+  PLATE_PRJ_PATH: "{{.ENV.PLATE_PRJ_PATH | default '.'}}"
   PLATE_BIN_PATH: "{{.PLATE_PKG_PATH}}/node_modules/.bin"
   PLATE_TMP_PATH: "{{.PLATE_PKG_PATH}}/tmp"
   PLATE_LOG_PATH: "{{.PLATE_PKG_PATH}}/logs"
