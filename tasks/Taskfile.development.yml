@@ -34,7 +34,6 @@ tasks:
           --bare \
           --compile \
           --no-header \
-          --output {{.PLATE_PKG_PATH}}/bin \
           {{.PLATE_PKG_PATH}}/bin/plate.coffee
 
   watch:
