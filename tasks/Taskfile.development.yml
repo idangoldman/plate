@@ -4,7 +4,7 @@ tasks:
   clean:
     desc: "Clean up the project"
     cmds:
-      - rm -rvf {{.PLATE_PRJ_PATH}}/src {{.PLATE_PRJ_PATH}}/bin/plate.js {{.PLATE_TMP_PATH}}/* {{.PLATE_LOG_PATH}}/*
+      - rm -rvf {{.PLATE_PRJ_PATH}}/src
 
   build:
     desc: "Build the project from CoffeeScript sources"
@@ -21,6 +21,11 @@ tasks:
           --no-header \
           --output {{.PLATE_PRJ_PATH}}/src \
           {{.PLATE_PRJ_PATH}}/lib
+
+  clean-cli:
+    desc: "Clean up the project"
+    cmds:
+      - rm -rvf {{.PLATE_PRJ_PATH}}/bin/plate.js
 
   build-cli:
     desc: "Build the CoffeeScript CLI bootstrap"
