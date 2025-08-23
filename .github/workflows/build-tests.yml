@@ -43,6 +43,24 @@ jobs:
           task -t ./tasks dev:build-cli
           pnpm link --global .
 
+      - name: Debug and build Plate CLI
+        run: |
+          # Check if CoffeeScript file exists
+          ls -la bin/
+          
+          # Build with verbose output
+          task -t ./tasks dev:build-cli -v
+          
+          # Check if JS file was created
+          ls -la bin/
+          
+          # If JS file exists, verify it's valid
+          if [ -f bin/plate.js ]; then
+            head -10 bin/plate.js
+          else
+            echo "plate.js not found, using CoffeeScript directly"
+          fi
+
       # - name: Run code quality checks
       #   run: |
       #     plate qa:format
