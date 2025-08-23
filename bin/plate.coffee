@@ -1,8 +1,18 @@
 import { spawn } from 'node:child_process'
-import { dirname } from 'node:path'
+import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 findPackageRoot = (packageName = '@idangoldman/plate') ->
+  try
+    currentDir = process.cwd()
+    packageJsonPath = join(currentDir, 'package.json')
+    packageJson = await import(packageJsonPath, { with: { type: 'json' } })
+
+    if packageJson.default?.name is packageName
+      return currentDir
+  catch
+    console.warn "#{packageName} is not in #{currentDir}"
+
   try
     packageJsonUrl = await import.meta.resolve("#{packageName}/package.json")
     packageJsonPath = fileURLToPath(packageJsonUrl)

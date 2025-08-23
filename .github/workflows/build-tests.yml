@@ -36,7 +36,7 @@ jobs:
       - name: Build Plate Cli
         run: |
           task -t ./tasks dev:build-cli
-          pnpm link --global
+          pnpm link --global .
 
       - name: Run code quality checks
         run: |
