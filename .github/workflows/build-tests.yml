@@ -34,18 +34,20 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build Plate Cli
-        run: task -t ./tasks dev:build-cli
+        run: |
+          task -t ./tasks dev:build-cli
+          chmod +x ./bin/plate.js
 
       - name: Run code quality checks
         run: |
-          plate qa:format
-          plate qa:lint
+          ./bin/plate qa:format
+          ./bin/plate qa:lint
 
       - name: Build project
-        run: plate dev:build
+        run: ./bin/plate dev:build
 
       - name: Run tests
-        run: plate dev:test
+        run: ./bin/plate dev:test
 
       - name: Upload test results
         if: always()
