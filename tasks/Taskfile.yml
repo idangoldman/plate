@@ -13,8 +13,8 @@ includes:
 
 vars:
   PLATE_ENV: '{{.ENV.PLATE_ENV | default "development"}}'
-  PLATE_PKG_PATH: "{{.ENV.PLATE_PKG_PATH | default '.'}}"
-  PLATE_PRJ_PATH: "{{.ENV.PLATE_PRJ_PATH | default '.'}}"
+  PLATE_PKG_PATH: "{{.ENV.PLATE_PKG_PATH | default .USER_WORKING_DIR}}"
+  PLATE_PRJ_PATH: "{{.ENV.PLATE_PRJ_PATH | default .USER_WORKING_DIR}}"
   PLATE_BIN_PATH: "{{.PLATE_PKG_PATH}}/node_modules/.bin"
   PLATE_TMP_PATH: "{{.PLATE_PKG_PATH}}/tmp"
   PLATE_LOG_PATH: "{{.PLATE_PKG_PATH}}/logs"
