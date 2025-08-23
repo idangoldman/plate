@@ -67,7 +67,7 @@ jobs:
       #     plate qa:lint
 
       - name: Build project
-        run: plate dev:build
+        run: node ./bin/plate.js dev:build
 
       - name: Run tests
         run: plate dev:test
