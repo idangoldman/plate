@@ -54,13 +54,11 @@ tasks:
     method: checksum
     cmds:
       - |
-        set --local coffeelint_json_tmp {{.PLATE_TMP_PATH}}/coffeelint.json
-        set --local coffeelint_files (find {{.PLATE_PRJ_PATH}}/{lib,tests} -name "*.coffee" -type f)
-      - |
-        yq -o=json {{.PLATE_CONF_PATH}}/coffeelint.yml > $coffeelint_json_tmp
-      - |
+        coffeelint_json_tmp="{{.PLATE_TMP_PATH}}/coffeelint.json"
+        coffeelint_files=$(find {{.PLATE_PRJ_PATH}}/{lib,tests} -name "*.coffee" -type f)
+
+        yq -o=json {{.PLATE_CONF_PATH}}/coffeelint.yml > "$coffeelint_json_tmp"
+
         {{.PLATE_BIN_PATH}}/coffeelint \
-          --file $coffeelint_json_tmp \
+          --file "$coffeelint_json_tmp" \
           $coffeelint_files
-      - |
-        rm -frv $coffeelint_json_tmp

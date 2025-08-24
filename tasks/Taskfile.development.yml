@@ -82,16 +82,16 @@ tasks:
       - "{{.PLATE_TMP_PATH}}/cucumber-report.html"
     cmds:
       - |
-        set --local cucumber_yml_tmp "{{.PLATE_TMP_PATH}}/cucumber.yml"
-      - |
+        cucumber_yml_tmp="{{.PLATE_TMP_PATH}}/cucumber.yml"
+        cucumber_yml_tmp_relative="../tmp/cucumber.yml"
+
         yq eval --yaml-fix-merge-anchor-to-spec -o=json '.' {{.PLATE_CONF_PATH}}/cucumber.yml | \
-          yq eval -P '.' - > $cucumber_yml_tmp
-      - |
+        yq eval -P '.' - > "$cucumber_yml_tmp"
+
         {{.PLATE_BIN_PATH}}/cucumber-js \
-          --config="$cucumber_yml_tmp" \
-          {{.CLI_ARGS}}
-      - |
-        rm -frv $cucumber_yml_tmp
+          --config="$cucumber_yml_tmp_relative" {{.CLI_ARGS}}
+
+        rm -frv "$cucumber_yml_tmp"
 
   test-report:
     desc: "Open test report in browser"
