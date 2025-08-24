@@ -133,8 +133,6 @@ tasks:
         # Run with full debugging
         "{{.PLATE_BIN_PATH}}/cucumber-js" \
           --config="$cucumber_yml_tmp" \
-          --verbose \
-          --dry-run \
           {{.CLI_ARGS}} || echo "Dry run failed"
         
         echo ""
