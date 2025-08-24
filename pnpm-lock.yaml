@@ -4,13 +4,13 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  '@idangoldman/plate': 'link:'
+
 importers:
 
   .:
     dependencies:
-      '@go-task/cli':
-        specifier: 3.44.1
-        version: 3.44.1
       coffeescript:
         specifier: 2.7.0
         version: 2.7.0
@@ -121,13 +121,6 @@ packages:
 
   '@cucumber/tag-expressions@6.2.0':
     resolution: {integrity: sha512-KIF0eLcafHbWOuSDWFw0lMmgJOLdDRWjEL1kfXEWrqHmx2119HxVAr35WuEd9z542d3Yyg+XNqSr+81rIKqEdg==}
-
-  '@go-task/cli@3.44.1':
-    resolution: {integrity: sha512-l5Wj8SyjPfnriFB0Y4+UErjyxtylLlBlHb5cCilk+PRDP+RBt8jNEfkKrkrmDtLc/u82aj6Cu0zqo1DvMwAKIg==}
-
-  '@go-task/go-npm@0.2.0':
-    resolution: {integrity: sha512-vQbdtBvesHm8EUFHX8QKg4rbBodmu9VsAXH1ozpbiN5jdTMOYHTCMM31EurAYmY+rNNtxJQ4JGy6t383RPlqbw==}
-    hasBin: true
 
   '@isaacs/balanced-match@4.0.1':
     resolution: {integrity: sha512-yzMTt9lEb8Gv7zRioUilSglI0c0smZ9k5D65677DLWLtWJaXIS3CqcGyUFByYKlnUj6TkjLVs54fBl6+TiGQDQ==}
@@ -835,12 +828,6 @@ snapshots:
       lodash.sortby: 4.7.0
 
   '@cucumber/tag-expressions@6.2.0': {}
-
-  '@go-task/cli@3.44.1':
-    dependencies:
-      '@go-task/go-npm': 0.2.0
-
-  '@go-task/go-npm@0.2.0': {}
 
   '@isaacs/balanced-match@4.0.1': {}
 
