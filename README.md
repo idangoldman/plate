@@ -21,7 +21,7 @@ Ok, enough with the Chinese cookie placebo. What is the framework all about? The
 To get started with PLATE, run the follow installment command in your project folder with `pnpm` package manager.
 
 ```shell
-pnpm add blah-ink/plate
+pnpm add @idangoldman/plate
 ```
 
 Once installed, you're ready to dive into the world of PLATE and experiment with it's powerful capabilities.
@@ -31,27 +31,33 @@ Once installed, you're ready to dive into the world of PLATE and experiment with
 The main point of interaction with the framework, it's the `plate` command.
 
 ```shell
-plate [command] [arguments...]
+plate [namespace:]command [arguments...]
 ```
 
-You can start here and explore the functionality of it by typing `plate help` into the terminal of your choice.
+PLATE provides a dual binary system:
 
-The command itself is a wrapper of `process-compose` with predefined or runtime set of environment variables. As any other framework uses a task runner for automating it's infrastructure work. PLATE is not any different in this aspect and by choosing `process-compose` as the task runner it takes the advantage of managing the process of the tasks ran by it as well and not only the sequence of the tasks ran in.
+- **`plate-dev`** - Development binary that runs CoffeeScript directly for instant execution
+- **`plate`** - Production binary that runs compiled JavaScript for distribution
+
+You can start here and explore the functionality by typing `plate help` or `plate-dev help` into the terminal of your choice.
+
+The command itself is a CoffeeScript bootstrap that routes to `Taskfile` (go-task) with predefined environment variables and namespace organization. By choosing Taskfile as the task runner, PLATE takes advantage of intelligent dependency management, cross-platform consistency, and advanced build conditions that only rebuild when source files change.
 
 ## Environment Variables
 
 As all framework have environment variables, PLATE is no different. Those variables used to help manage processes and empower the codebase with additional information.
 
-| Name                | Default                            | Availability         | Description                                                                 |
-| ------------------- | ---------------------------------- | -------------------- | --------------------------------------------------------------------------- |
-| `PLATE_ENV`         | `development`                      | `process`, `runtime` | Used for conditioning functionality.                                        |
-| `PLATE_CONF`        | `PLATE_CONF_PATH/environment.yml`  | `process`, `runtime` | Used for accessing configurations set in a `configs/environment.yml` files. |
-| `PLATE_PKG_PATH`    | `./` -> `@/`                       | `process`, `runtime` |                                                                             |
-| `PLATE_PRJ_PATH`    | `./` -> `~/`                       | `process`, `runtime` |                                                                             |
-| `PLATE_BIN_PATH`    | `PLATE_PKG_PATH/node_modules/.bin` | `process`, `runtime` | Path to the package's `node_nodules/.bin` folder.                           |
-| `PLATE_CONF_PATH`   | `PLATE_PKG_PATH/configs`           | `process`, `runtime` | Path to the current `configs` folder.                                       |
-| `PLATE_CLI_COMMAND` | `help`                             | `process`            |                                                                             |
-| `PLATE_CLI_ARGS`    |                                    | `process`            |                                                                             |
+| Name                | Scope      | Description                                                                        |
+| ------------------- | ---------- | ---------------------------------------------------------------------------------- |
+| `PLATE_PKG_PATH`    | Bootstrap  | Path to PLATE package installation; DEFAULT: `./`, USED AS `@/`                    |
+| `PLATE_PRJ_PATH`    | Bootstrap  | Path to current project (switches with `pkg` command); DEFAULT: `./`, USED AS `~/` |
+| `PLATE_ENV`         | Runtime    | Environment mode (development, production, etc.); DEFAULT: `development`           |
+| `PLATE_BIN_PATH`    | Computed   | Path to node_modules/.bin (via Taskfile templating)                                |
+| `PLATE_CONF_PATH`   | Computed   | Path to configuration files                                                        |
+| `PLATE_LOG_PATH`    | Computed   | Path to log files                                                                  |
+| `PLATE_TMP_PATH`    | Computed   | Path to temporary files                                                            |
+
+**Bootstrap variables** are set by the CoffeeScript entry point, while **computed variables** are templated in the main Taskfile and inherited by all namespace files.
 
 ## Configurations
 
@@ -101,15 +107,15 @@ Extend is basically doing a deep merge between PLATE's core config and project's
 
 | Prefix | Description |
 | ------ | ----------- |
-| `~/`   |             |
-| `@/`   |             |
+| `~/`   | Package-relative imports |
+| `@/`   | Project-relative imports |
 
 #### Formats
 
 | Extension    | Description |
 | ------------ | ----------- |
-| `coffee`     |             |
-| `yml`,`yaml` |             |
+| `coffee`     | CoffeeScript files with compilation |
+| `yml`,`yaml` | YAML files with transformation |
 
 #### Globs (IDEA)
 
@@ -206,14 +212,13 @@ As an opinionated framework, it's built upon unique set of tech tools and librar
 
 | Name              | Job                 | Reason                                                                                                                |
 | ----------------- | ------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| Fish & cmdfile    | Shell               | Easiest to read and write shell scripts in with extended set of functions library via `cmdfile` plugin.               |
 | Node.js           | Runtime environment | JavaScript runtime of use, no special reason.                                                                         |
 | PNPM              | Package Manager     | Simply because it's the fastest of them 3.                                                                            |
-| process-compose   | Task Runner         | A process manager that can be used as a task runner and configured similar to docker compose file. Has a TUI as well. |
+| Taskfile           | Task Runner         | Advanced task runner with intelligent rebuilds, cross-platform support, and dependency management via YAML          |
 | CoffeeScript      | Language            | No the most efficient JavaScript compiled language, yet the easiest and pleasant to read and write.                   |
 | Cucumber.js       | Tests               | `Gherkin` language is the most readable and reusable way to write use-cases and test them.                            |
 | ESBuild           | Bundle              | Current bundler of choice, optimize the CoffeeScript compiled code.                                                   |
-| ESLint & Prettier | Code Quality        | Set of tools configured to automate codebase coherence structure.                                                     |
+| Prettier          | Code Quality        | Set of tools configured to automate codebase coherence structure.                                                     |
 | YAML              | Configuration       | Default config files format.                                                                                          |
 
 The above dependencies aren't set in stone and might be replaced by a better suited tool for the job along the way. Feel free to suggest a better tool for the job with valid points of why.

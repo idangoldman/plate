@@ -1,0 +1,64 @@
+version: "3"
+
+tasks:
+  format:
+    desc: "Check formatting for coffee, css, scss files"
+    ignore_error: true
+    sources:
+      - "{{.PLATE_PRJ_PATH}}/**/*.{yml,yaml,md}"
+      - "{{.PLATE_CONF_PATH}}/prettierrc.yml"
+      - "{{.PLATE_PRJ_PATH}}/.gitignore"
+      - "{{.PLATE_CONF_PATH}}/.prettierignore"
+    method: checksum
+    cmds:
+      - |
+        cat {{.PLATE_PRJ_PATH}}/.gitignore {{.PLATE_CONF_PATH}}/.prettierignore > {{.PLATE_TMP_PATH}}/.prettierignore
+      - |
+        {{.PLATE_BIN_PATH}}/prettier \
+          --check \
+          --config {{.PLATE_CONF_PATH}}/prettierrc.yml \
+          --ignore-path {{.PLATE_TMP_PATH}}/.prettierignore \
+          "{{.PLATE_PRJ_PATH}}/**/*.{yml,yaml,md}"
+      - |
+        rm -frv {{.PLATE_TMP_PATH}}/.prettierignore
+
+  format-fix:
+    desc: "Automatically fix formatting issues in supported files"
+    ignore_error: true
+    sources:
+      - "{{.PLATE_PRJ_PATH}}/**/*.{yml,yaml,md}"
+      - "{{.PLATE_CONF_PATH}}/prettierrc.yml"
+      - "{{.PLATE_PRJ_PATH}}/.gitignore"
+      - "{{.PLATE_CONF_PATH}}/.prettierignore"
+    generates:
+      - "{{.PLATE_PRJ_PATH}}/**/*.{yml,yaml,md}"
+    cmds:
+      - |
+        cat {{.PLATE_PRJ_PATH}}/.gitignore {{.PLATE_CONF_PATH}}/.prettierignore > {{.PLATE_TMP_PATH}}/.prettierignore
+      - |
+        {{.PLATE_BIN_PATH}}/prettier \
+          --write \
+          --config {{.PLATE_CONF_PATH}}/prettierrc.yml \
+          --ignore-path {{.PLATE_TMP_PATH}}/.prettierignore \
+          "{{.PLATE_PRJ_PATH}}/**/*.{yml,yaml,md}"
+      - |
+        rm -frv {{.PLATE_TMP_PATH}}/.prettierignore
+
+  lint:
+    desc: "Check linting for CoffeeScript files"
+    sources:
+      - "{{.PLATE_PRJ_PATH}}/{lib,tests}/**/*.coffee"
+      - "{{.PLATE_CONF_PATH}}/coffeelint.yml"
+    generates:
+      - "{{.PLATE_TMP_PATH}}/coffeelint.json"
+    method: checksum
+    cmds:
+      - |
+        coffeelint_json_tmp="{{.PLATE_TMP_PATH}}/coffeelint.json"
+        coffeelint_files=$(find {{.PLATE_PRJ_PATH}}/{lib,tests} -name "*.coffee" -type f)
+
+        yq -o=json {{.PLATE_CONF_PATH}}/coffeelint.yml > "$coffeelint_json_tmp"
+
+        {{.PLATE_BIN_PATH}}/coffeelint \
+          --file "$coffeelint_json_tmp" \
+          $coffeelint_files
