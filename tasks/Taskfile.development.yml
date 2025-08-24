@@ -8,7 +8,6 @@ tasks:
 
   build:
     desc: "Build the project from CoffeeScript sources"
-    deps: [clean, build-cli]
     sources:
       - "{{.PLATE_PRJ_PATH}}/lib/**/*.coffee"
     generates:
@@ -43,7 +42,6 @@ tasks:
 
   watch:
     desc: "Watch the project for changes and rebuild"
-    deps: [clean, build-cli]
     cmds:
       - |
         {{.PLATE_BIN_PATH}}/coffee \
