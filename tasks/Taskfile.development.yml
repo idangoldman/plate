@@ -88,7 +88,7 @@ tasks:
         yq eval -P '.' - > "$cucumber_yml_tmp"
 
         {{.PLATE_BIN_PATH}}/cucumber-js \
-          --config="$cucumber_yml_tmp_relative" {{.CLI_ARGS}}
+          --config="$cucumber_yml_tmp_relative" --profile="debug" {{.CLI_ARGS}}
 
         rm -frv "$cucumber_yml_tmp"
 
