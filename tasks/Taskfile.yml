@@ -1,24 +1,29 @@
 version: "3"
 
-includes:
-  package:
-    taskfile: ./Taskfile.package.yml
-    optional: false
-  dev:
-    taskfile: ./Taskfile.development.yml
-    optional: false
-  qa:
-    taskfile: ./Taskfile.quality.yml
-    optional: false
-
 vars:
   PLATE_ENV: '{{.ENV.PLATE_ENV | default "development"}}'
   PLATE_PKG_PATH: "{{.ENV.PLATE_PKG_PATH | default .USER_WORKING_DIR}}"
   PLATE_PRJ_PATH: "{{.ENV.PLATE_PRJ_PATH | default .USER_WORKING_DIR}}"
   PLATE_BIN_PATH: "{{.PLATE_PKG_PATH}}/node_modules/.bin"
-  PLATE_TMP_PATH: "{{.PLATE_PKG_PATH}}/tmp"
-  PLATE_LOG_PATH: "{{.PLATE_PKG_PATH}}/logs"
   PLATE_CONF_PATH: "{{.PLATE_PKG_PATH}}/configs"
+  PLATE_LOG_PATH: "{{.PLATE_PKG_PATH}}/logs"
+  PLATE_TMP_PATH: "{{.PLATE_PKG_PATH}}/tmp"
+
+dir: "{{.PLATE_PKG_PATH}}"
+
+includes:
+  package:
+    taskfile: ./Taskfile.package.yml
+    dir: "{{.PLATE_PKG_PATH}}"
+    optional: false
+  dev:
+    taskfile: ./Taskfile.development.yml
+    dir: "{{.PLATE_PKG_PATH}}"
+    optional: false
+  qa:
+    taskfile: ./Taskfile.quality.yml
+    dir: "{{.PLATE_PKG_PATH}}"
+    optional: false
 
 tasks:
   default:
@@ -61,6 +66,6 @@ tasks:
         echo "PLATE_PKG_PATH: {{.PLATE_PKG_PATH}}"
         echo "PLATE_PRJ_PATH: {{.PLATE_PRJ_PATH}}"
         echo "PLATE_BIN_PATH: {{.PLATE_BIN_PATH}}"
-        echo "PLATE_TMP_PATH: {{.PLATE_TMP_PATH}}"
-        echo "PLATE_LOG_PATH: {{.PLATE_LOG_PATH}}"
         echo "PLATE_CONF_PATH: {{.PLATE_CONF_PATH}}"
+        echo "PLATE_LOG_PATH: {{.PLATE_LOG_PATH}}"
+        echo "PLATE_TMP_PATH: {{.PLATE_TMP_PATH}}"

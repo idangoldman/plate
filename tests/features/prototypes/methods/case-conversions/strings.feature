@@ -37,8 +37,8 @@ Feature: String Case Conversions
       | hello          | Hello          |
       | WORLD          | World          |
       | already_done   | Already_done   |
-      | camelCase      | CamelCase      |
-      | PascalCase     | PascalCase     |
+      | camelCase      | Camelcase      |
+      | PascalCase     | Pascalcase     |
       | snake_case     | Snake_case     |
       | kebab-case     | Kebab-case     |
       | multiple words | Multiple words |

@@ -43,11 +43,6 @@ jobs:
           task -t ./tasks dev:build-cli
           pnpm link --global .
 
-      # - name: Run code quality checks
-      #   run: |
-      #     plate qa:format
-      #     plate qa:lint
-
       - name: Build project
         run: node ./bin/plate.js dev:build
 
