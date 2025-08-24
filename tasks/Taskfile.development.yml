@@ -84,6 +84,7 @@ tasks:
       - |
         cucumber_yml_tmp="{{.PLATE_TMP_PATH}}/cucumber.yml"
         cucumber_yml_tmp_relative="../tmp/cucumber.yml"
+        mkdir -p "{{.PLATE_TMP_PATH}}"
 
         yq eval --yaml-fix-merge-anchor-to-spec -o=json '.' {{.PLATE_CONF_PATH}}/cucumber.yml | \
         yq eval -P '.' - > "$cucumber_yml_tmp"
