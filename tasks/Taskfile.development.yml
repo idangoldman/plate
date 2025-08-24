@@ -91,6 +91,8 @@ tasks:
         {{.PLATE_BIN_PATH}}/cucumber-js \
           --config="$cucumber_yml_relative_path" {{.CLI_ARGS}}
 
+        rm -frv "$cucumber_yml_absolute_path"
+
   test-report:
     desc: "Open test report in browser"
     deps: [test]
