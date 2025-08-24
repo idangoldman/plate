@@ -80,15 +80,72 @@ tasks:
       - "{{.PLATE_TMP_PATH}}/cucumber-report.html"
     cmds:
       - |
-        cucumber_yml_tmp="{{.PLATE_TMP_PATH}}/cucumber.yml"
-        cucumber_yml_tmp_relative="../tmp/cucumber.yml"
+        echo "=== DEBUGGING CUCUMBER SETUP ==="
+        echo "Current working directory: $(pwd)"
+        echo "PLATE_PRJ_PATH: {{.PLATE_PRJ_PATH}}"
+        echo "PLATE_PKG_PATH: {{.PLATE_PKG_PATH}}"
+        echo ""
+        
+        # Create temp directory
         mkdir -p "{{.PLATE_TMP_PATH}}"
-
-        yq eval --yaml-fix-merge-anchor-to-spec -o=json '.' {{.PLATE_CONF_PATH}}/cucumber.yml | \
+        
+        # Check if files exist
+        echo "=== CHECKING FILE EXISTENCE ==="
+        echo "Feature files:"
+        find "{{.PLATE_PRJ_PATH}}/tests" -name "*.feature" -type f || echo "No feature files found"
+        echo ""
+        echo "Support files:"
+        find "{{.PLATE_PRJ_PATH}}/src/tests/support" -name "*.js" -type f 2>/dev/null || echo "No support files found"
+        echo ""
+        echo "Step files:"
+        find "{{.PLATE_PRJ_PATH}}/src/tests/steps" -name "*.js" -type f 2>/dev/null || echo "No step files found"
+        echo ""
+        
+        # Process config
+        cucumber_yml_tmp="{{.PLATE_TMP_PATH}}/cucumber.yml"
+        
+        echo "=== PROCESSING CONFIG ==="
+        echo "Original config:"
+        cat "{{.PLATE_CONF_PATH}}/cucumber.yml"
+        echo ""
+        
+        # Process the cucumber config with absolute paths
+        yq eval --yaml-fix-merge-anchor-to-spec -o=json '.' "{{.PLATE_CONF_PATH}}/cucumber.yml" | \
+        yq eval '.default.paths = ["{{.PLATE_PRJ_PATH}}/tests/features/**/*.feature"] | 
+                 .default.import = ["{{.PLATE_PRJ_PATH}}/src/tests/support/**/*.js", "{{.PLATE_PRJ_PATH}}/src/tests/steps/**/*.js"] | 
+                 .debug.paths = ["{{.PLATE_PRJ_PATH}}/tests/features/**/*.feature"] | 
+                 .debug.import = ["{{.PLATE_PRJ_PATH}}/src/tests/support/**/*.js", "{{.PLATE_PRJ_PATH}}/src/tests/steps/**/*.js"]' - | \
         yq eval -P '.' - > "$cucumber_yml_tmp"
+        
+        echo "Processed config:"
+        cat "$cucumber_yml_tmp"
+        echo ""
+        
+        # Test if cucumber can find the config
+        if [ ! -f "$cucumber_yml_tmp" ]; then
+          echo "ERROR: Config file not created!"
+          exit 1
+        fi
+        
+        echo "=== RUNNING CUCUMBER ==="
+        cd "{{.PLATE_PRJ_PATH}}"
+        
+        # Run with full debugging
+        "{{.PLATE_BIN_PATH}}/cucumber-js" \
+          --config="$cucumber_yml_tmp" \
+          --verbose \
+          --dry-run \
+          {{.CLI_ARGS}} || echo "Dry run failed"
+        
+        echo ""
+        echo "=== RUNNING CUCUMBER FOR REAL ==="
+        "{{.PLATE_BIN_PATH}}/cucumber-js" \
+          --config="$cucumber_yml_tmp" \
+          {{.CLI_ARGS}}
+        
+        # Cleanup
+        rm -f "$cucumber_yml_tmp"
 
-        {{.PLATE_BIN_PATH}}/cucumber-js \
-          --config="$cucumber_yml_tmp_relative" --profile="debug" --verbose {{.CLI_ARGS}}
 
         rm -frv "$cucumber_yml_tmp"
 
