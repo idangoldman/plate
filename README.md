@@ -214,11 +214,11 @@ As an opinionated framework, it's built upon unique set of tech tools and librar
 | ----------------- | ------------------- | --------------------------------------------------------------------------------------------------------------------- |
 | Node.js           | Runtime environment | JavaScript runtime of use, no special reason.                                                                         |
 | PNPM              | Package Manager     | Simply because it's the fastest of them 3.                                                                            |
-| Taskfil           | Task Runner         | Advanced task runner with intelligent rebuilds, cross-platform support, and dependency management via YAML          |
+| Taskfile           | Task Runner         | Advanced task runner with intelligent rebuilds, cross-platform support, and dependency management via YAML          |
 | CoffeeScript      | Language            | No the most efficient JavaScript compiled language, yet the easiest and pleasant to read and write.                   |
 | Cucumber.js       | Tests               | `Gherkin` language is the most readable and reusable way to write use-cases and test them.                            |
 | ESBuild           | Bundle              | Current bundler of choice, optimize the CoffeeScript compiled code.                                                   |
-| ESLint & Prettier | Code Quality        | Set of tools configured to automate codebase coherence structure.                                                     |
+| Prettier          | Code Quality        | Set of tools configured to automate codebase coherence structure.                                                     |
 | YAML              | Configuration       | Default config files format.                                                                                          |
 
 The above dependencies aren't set in stone and might be replaced by a better suited tool for the job along the way. Feel free to suggest a better tool for the job with valid points of why.
