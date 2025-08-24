@@ -1,5 +1,2 @@
-ignoredBuiltDependencies:
-  - "@go-task/cli"
-
 overrides:
   "@idangoldman/plate": "link:"
