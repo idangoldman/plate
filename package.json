@@ -37,6 +37,7 @@
     "help": "plate help"
   },
   "dependencies": {
+    "@idangoldman/plate": "link:",
     "coffeescript": "2.7.0"
   },
   "devDependencies": {

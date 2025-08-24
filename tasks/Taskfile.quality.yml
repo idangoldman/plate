@@ -17,7 +17,7 @@ tasks:
           --config {{.PLATE_CONF_PATH}}/prettierrc.yml \
           --ignore-path {{.PLATE_TMP_PATH}}/.prettierignore \
           "{{.PLATE_PRJ_PATH}}/**/*.{yml,yaml,md}"
-      - rm {{.PLATE_TMP_PATH}}/.prettierignore
+      - rm -frv {{.PLATE_TMP_PATH}}/.prettierignore
 
   format-fix:
     desc: "Automatically fix formatting issues in supported files"
@@ -34,10 +34,9 @@ tasks:
         {{.PLATE_BIN_PATH}}/prettier \
           --write \
           --config {{.PLATE_CONF_PATH}}/prettierrc.yml \
-          --ignore-path {{.PLATE_PKG_PATH}}/.gitignore \
-          --ignore-path {{.PLATE_CONF_PATH}}/.prettierignore \
+          --ignore-path {{.PLATE_TMP_PATH}}/.prettierignore \
           "{{.PLATE_PRJ_PATH}}/**/*.{yml,yaml,md}"
-      - rm {{.PLATE_TMP_PATH}}/.prettierignore
+      - rm -frv {{.PLATE_TMP_PATH}}/.prettierignore
 
   lint:
     desc: "Check linting for CoffeeScript files"

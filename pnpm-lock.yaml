@@ -11,6 +11,9 @@ importers:
 
   .:
     dependencies:
+      '@idangoldman/plate':
+        specifier: 'link:'
+        version: 'link:'
       coffeescript:
         specifier: 2.7.0
         version: 2.7.0
