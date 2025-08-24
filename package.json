@@ -4,7 +4,7 @@
   "description": "A simple boilerplate for web development",
   "author": "Idan Goldman",
   "license": "MIT",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "homepage": "https://github.com/idangoldman/plate/",
   "repository": {
     "type": "git",
@@ -15,6 +15,7 @@
   },
   "publishConfig": {
     "access": "public",
+    "provenance": true,
     "registry": "https://registry.npmjs.org/"
   },
   "type": "module",
@@ -23,8 +24,7 @@
     "plate": "./bin/plate.js"
   },
   "imports": {
-    "#root/*": "./src/*",
-    "#tests/*": "./tests/*"
+    "#root/*": "./src/*"
   },
   "files": [
     "bin",

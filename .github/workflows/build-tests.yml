@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      PLATE_ENV: github-actions
+      PLATE_ENV: test-ci
       PLATE_PKG_PATH: ${{ github.workspace }}
       PLATE_PRJ_PATH: ${{ github.workspace }}
 

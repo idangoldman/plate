@@ -27,11 +27,18 @@ main = ->
 
   cliArguments = process.argv.slice(2)
 
+  # If the first argument is 'pkg', switch to package context
   if cliArguments.length > 0 && cliArguments[0] is 'pkg'
     process.env.PLATE_PRJ_PATH = process.env.PLATE_PKG_PATH
     cliArguments = cliArguments.slice(1)
 
-  cliOptions = ['-t', "#{process.env.PLATE_PKG_PATH}/tasks", ...cliArguments]
+  # Default to 'help' if no task is provided, and separate task name from its arguments
+  [ taskName, ...taskArgs ] = if cliArguments.length > 0 then cliArguments else ['help']
+
+  cliOptions = ['-t', "#{process.env.PLATE_PKG_PATH}/tasks", taskName]
+
+  if taskArgs.length > 0
+    cliOptions.push('--', ...taskArgs)
 
   taskProcess = spawn('task', cliOptions, {
     stdio: 'inherit'
