@@ -90,7 +90,7 @@ tasks:
   test-report:
     desc: "Open test report in browser"
     cmds:
-      - cmd: plate dev:test
+      - cmd: plate dev:test {{.CLI_ARGS}}
         ignore_error: true
       - open "file://{{.PLATE_TMP_PATH}}/cucumber-report.html"
 
