@@ -73,12 +73,6 @@ tasks:
     desc: "Run Cucumber tests"
     ignore_error: true
     deps: [build-test]
-    sources:
-      - "{{.PLATE_PRJ_PATH}}/src/tests/**/*.js"
-      - "{{.PLATE_PRJ_PATH}}/tests/**/*.feature"
-      - "{{.PLATE_CONF_PATH}}/cucumber.yml"
-    generates:
-      - "{{.PLATE_TMP_PATH}}/cucumber-report.html"
     cmds:
       - |
         mkdir -p "{{.PLATE_TMP_PATH}}"

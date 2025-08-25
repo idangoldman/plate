@@ -6,19 +6,19 @@ Feature: Case Conversions
 
   @strings
   Scenario Outline: Converting strings to different case formats
-    Given I have a string <input>
+    Given I have a <input> string
     When I convert it to <caseType> case
     Then I should get <expected> as the result
 
     Examples:
-      | input       | caseType | expected      |
-      | hello_World | camel    | "helloWorld"  |
-      | helloWorld  | constant | "HELLO_WORLD" |
-      | HelloWorld  | kebab    | "hello-world" |
-      | helloWorld  | pascal   | "HelloWorld"  |
-      | helloWorld  | snake    | "hello_world" |
-      | hello.World | title    | "Hello World" |
-      | HELLO_WORLD | dot      | "hello.world" |
+      | input         | caseType | expected      |
+      | "hello_World" | camel    | "helloWorld"  |
+      | "helloWorld"  | constant | "HELLO_WORLD" |
+      | "HelloWorld"  | kebab    | "hello-world" |
+      | "helloWorld"  | pascal   | "HelloWorld"  |
+      | "helloWorld"  | snake    | "hello_world" |
+      | "hello.World" | title    | "Hello World" |
+      | "HELLO_WORLD" | dot      | "hello.world" |
 
   @objects
   Scenario: Converting nested object keys from different case formats to PascalCase

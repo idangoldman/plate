@@ -1,6 +1,5 @@
 import { Given, When, Then } from "@cucumber/cucumber"
 import { expect } from "chai"
-import { NUMBER_CONTENT, ARRAY_CONTENT, OBJECT_CONTENT } from "#root/helpers/regex.js"
 import expectedValueParser from "#root/tests/support/expected-value-parser.js"
 
 Given "the following inputs:", (table) ->
@@ -9,10 +8,17 @@ Given "the following inputs:", (table) ->
   for { name, value } in table.hashes()
     @input[name] = expectedValueParser(value).value
 
-
 When "{word} method is called on {word}", (method, name) ->
   try
     @result = @input[name][method]()
+    @error = null
+  catch err
+    @error = err
+    @result = null
+
+When "{word} method is called on {word} with {int}", (method, name, argument) ->
+  try
+    @result = @input[name][method](argument)
     @error = null
   catch err
     @error = err

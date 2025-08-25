@@ -6,27 +6,27 @@ Feature: Array Prototype Methods
 
   Background:
     Given the following inputs:
-      | name      | value     |
-      | standard  | [1, 2, 3] |
-      | empty     | []        |
+      | name     | value     |
+      | standard | [1, 2, 3] |
+      | empty    | []        |
 
   Scenario Outline: Using first and last methods
-    When I call the "<method>" method on the "<name>" array
+    When <method> method is called on <array>
     Then I should get <expected> as the result
 
     Examples:
-      | name     | method | expected  |
+      | array    | method | expected  |
       | standard | first  | 1         |
       | standard | last   | 3         |
       | empty    | first  | undefined |
       | empty    | last   | undefined |
 
   Scenario Outline: Using excludes method
-    When I call the "excludes" method on the "<name>" array with value "<value>"
+    When excludes method is called on <array> with <argument>
     Then I should get <expected> as the result
 
     Examples:
-      | name     | value | expected |
-      | standard | 1     | false    |
-      | standard | 4     | true     |
-      | empty    | 1     | true     |
+      | array    | argument | expected |
+      | standard | 1        | false    |
+      | standard | 4        | true     |
+      | empty    | 1        | true     |
