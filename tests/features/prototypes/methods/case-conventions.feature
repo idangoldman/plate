@@ -1,4 +1,4 @@
-@prototypes @methods @case-converter
+@prototypes @methods @case-conventions
 Feature: Case Conversions
   As a developer
   I want to convert strings between different case formats

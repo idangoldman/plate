@@ -24,7 +24,7 @@ export default class To extends Prototypes
   toNumber: -> switch true
     when @isArray()  then @length
     when @isObject() then @keys().length
-    when @isString() then parseInt(@, 10)
+    when @isString() then parseFloat(@)
     else +@
 
 export methods = To.methods()
