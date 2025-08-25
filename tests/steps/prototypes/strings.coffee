@@ -9,5 +9,5 @@ Given "I have a {string} string", (input) ->
 When "I convert it to {word} case", (caseType) ->
   @result = @input["to#{capitalize caseType}Case"]()
 
-When "capitalize method applied to it", () ->
+When "capitalize method applied to it", ->
   @result = @input.capitalize()

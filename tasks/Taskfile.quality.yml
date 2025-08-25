@@ -4,12 +4,6 @@ tasks:
   format:
     desc: "Check formatting for coffee, css, scss files"
     ignore_error: true
-    sources:
-      - "{{.PLATE_PRJ_PATH}}/**/*.{yml,yaml,md}"
-      - "{{.PLATE_CONF_PATH}}/prettierrc.yml"
-      - "{{.PLATE_PRJ_PATH}}/.gitignore"
-      - "{{.PLATE_CONF_PATH}}/.prettierignore"
-    method: checksum
     cmds:
       - |
         cat {{.PLATE_PRJ_PATH}}/.gitignore {{.PLATE_CONF_PATH}}/.prettierignore > {{.PLATE_TMP_PATH}}/.prettierignore
@@ -25,13 +19,6 @@ tasks:
   format-fix:
     desc: "Automatically fix formatting issues in supported files"
     ignore_error: true
-    sources:
-      - "{{.PLATE_PRJ_PATH}}/**/*.{yml,yaml,md}"
-      - "{{.PLATE_CONF_PATH}}/prettierrc.yml"
-      - "{{.PLATE_PRJ_PATH}}/.gitignore"
-      - "{{.PLATE_CONF_PATH}}/.prettierignore"
-    generates:
-      - "{{.PLATE_PRJ_PATH}}/**/*.{yml,yaml,md}"
     cmds:
       - |
         cat {{.PLATE_PRJ_PATH}}/.gitignore {{.PLATE_CONF_PATH}}/.prettierignore > {{.PLATE_TMP_PATH}}/.prettierignore

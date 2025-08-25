@@ -47,15 +47,15 @@ The command itself is a CoffeeScript bootstrap that routes to `Taskfile` (go-tas
 
 As all framework have environment variables, PLATE is no different. Those variables used to help manage processes and empower the codebase with additional information.
 
-| Name                | Scope      | Description                                                                        |
-| ------------------- | ---------- | ---------------------------------------------------------------------------------- |
-| `PLATE_PKG_PATH`    | Bootstrap  | Path to PLATE package installation; DEFAULT: `./`, USED AS `@/`                    |
-| `PLATE_PRJ_PATH`    | Bootstrap  | Path to current project (switches with `pkg` command); DEFAULT: `./`, USED AS `~/` |
-| `PLATE_ENV`         | Runtime    | Environment mode (development, production, etc.); DEFAULT: `development`           |
-| `PLATE_BIN_PATH`    | Computed   | Path to node_modules/.bin (via Taskfile templating)                                |
-| `PLATE_CONF_PATH`   | Computed   | Path to configuration files                                                        |
-| `PLATE_LOG_PATH`    | Computed   | Path to log files                                                                  |
-| `PLATE_TMP_PATH`    | Computed   | Path to temporary files                                                            |
+| Name              | Scope     | Description                                                                        |
+| ----------------- | --------- | ---------------------------------------------------------------------------------- |
+| `PLATE_PKG_PATH`  | Bootstrap | Path to PLATE package installation; DEFAULT: `./`, USED AS `@/`                    |
+| `PLATE_PRJ_PATH`  | Bootstrap | Path to current project (switches with `pkg` command); DEFAULT: `./`, USED AS `~/` |
+| `PLATE_ENV`       | Runtime   | Environment mode (development, production, etc.); DEFAULT: `development`           |
+| `PLATE_BIN_PATH`  | Computed  | Path to node_modules/.bin (via Taskfile templating)                                |
+| `PLATE_CONF_PATH` | Computed  | Path to configuration files                                                        |
+| `PLATE_LOG_PATH`  | Computed  | Path to log files                                                                  |
+| `PLATE_TMP_PATH`  | Computed  | Path to temporary files                                                            |
 
 **Bootstrap variables** are set by the CoffeeScript entry point, while **computed variables** are templated in the main Taskfile and inherited by all namespace files.
 
@@ -73,17 +73,17 @@ ls -la ./configs/**/*
 
 #### Paths
 
-| Prefix | Description |
-| ------ | ----------- |
+| Prefix | Description              |
+| ------ | ------------------------ |
 | `~/`   | Package-relative imports |
 | `@/`   | Project-relative imports |
 
 #### Formats
 
-| Extension    | Description |
-| ------------ | ----------- |
+| Extension    | Description                         |
+| ------------ | ----------------------------------- |
 | `coffee`     | CoffeeScript files with compilation |
-| `yml`,`yaml` | YAML files with transformation |
+| `yml`,`yaml` | YAML files with transformation      |
 
 #### Globs (IDEA)
 
@@ -93,34 +93,34 @@ ls -la ./configs/**/*
 
 Are the core structures upon PLATE's functionality and behavior extended from.
 
-| Pattern     | Description |
-| -------- | ------- |
-| Prototypes    |         |
-| Hooks    |         |
-| Components   |         |
-| Events      |         |
-| Stores |local, session, cookie, memory |
+| Pattern    | Description                    |
+| ---------- | ------------------------------ |
+| Prototypes |                                |
+| Hooks      |                                |
+| Components |                                |
+| Events     |                                |
+| Stores     | local, session, cookie, memory |
 
 #### Prototypes
 
 ##### Natives (WIP)
 
-| Native    | Description |
-| -------- | ------- |
-| Objects    |         |
-| Arrays |         |
-| Strings      |         |
-| Functions    |         |
-| Numbers    |         |
-| HTMLElements    |         |
+| Native       | Description |
+| ------------ | ----------- |
+| Objects      |             |
+| Arrays       |             |
+| Strings      |             |
+| Functions    |             |
+| Numbers      |             |
+| HTMLElements |             |
 
 ##### Methods (WIP)
 
-| Methods     | Description |
-| -------- | ------- |
-| Is    |         |
-| To |         |
-| Naming Conventions      |         |
+| Methods            | Description |
+| ------------------ | ----------- |
+| Is                 |             |
+| To                 |             |
+| Naming Conventions |             |
 
 #### Hooks (WIP)
 
@@ -147,16 +147,16 @@ Our main believe is in testing our code in a behavioral driven development where
 
 As an opinionated framework, it's built upon unique set of tech tools and libraries, some of which are self-built from previous projects. Let's go over the list:
 
-| Name              | Job                 | Reason                                                                                                                |
-| ----------------- | ------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| Node.js           | Runtime environment | JavaScript runtime of use, no special reason.                                                                         |
-| PNPM              | Package Manager     | Simply because it's the fastest of them 3.                                                                            |
-| Taskfile           | Task Runner         | Advanced task runner with intelligent rebuilds, cross-platform support, and dependency management via YAML          |
-| CoffeeScript      | Language            | No the most efficient JavaScript compiled language, yet the easiest and pleasant to read and write.                   |
-| Cucumber.js       | Tests               | `Gherkin` language is the most readable and reusable way to write use-cases and test them.                            |
-| ESBuild           | Bundle              | Current bundler of choice, optimize the CoffeeScript compiled code.                                                   |
-| Prettier          | Code Quality        | Set of tools configured to automate codebase coherence structure.                                                     |
-| YAML              | Configuration       | Default config files format.                                                                                          |
+| Name         | Job                 | Reason                                                                                                     |
+| ------------ | ------------------- | ---------------------------------------------------------------------------------------------------------- |
+| Node.js      | Runtime environment | JavaScript runtime of use, no special reason.                                                              |
+| PNPM         | Package Manager     | Simply because it's the fastest of them 3.                                                                 |
+| Taskfile     | Task Runner         | Advanced task runner with intelligent rebuilds, cross-platform support, and dependency management via YAML |
+| CoffeeScript | Language            | No the most efficient JavaScript compiled language, yet the easiest and pleasant to read and write.        |
+| Cucumber.js  | Tests               | `Gherkin` language is the most readable and reusable way to write use-cases and test them.                 |
+| ESBuild      | Bundle              | Current bundler of choice, optimize the CoffeeScript compiled code.                                        |
+| Prettier     | Code Quality        | Set of tools configured to automate codebase coherence structure.                                          |
+| YAML         | Configuration       | Default config files format.                                                                               |
 
 The above dependencies aren't set in stone and might be replaced by a better suited tool for the job along the way. Feel free to suggest a better tool for the job with valid points of why.
 
@@ -188,7 +188,7 @@ This is a major update for the framework and might be an easy one because most o
 - [ ] Implement `Numbers.toHuman([size, weight, dimension, distance, etc...])` method to convert the numbers to a human readable formats.
 - [ ] Test `yaml` file loading and using `Objects.keyCase` method.
 - [ ] Implement `Objects.hasCase` method to check if the object has the key with the specific case.
-- [ ] Implement toDataUrl 
+- [ ] Implement toDataUrl
 - [ ] Implement clean text
 - [ ] Implement sanitize
 
@@ -230,6 +230,7 @@ This is a major update for the framework and might be an easy one because most o
 - [ ] Implement component.isolate functionality.
 
 ### Advocating
+
 - [ ] Create a GitHub repository with code usage examples of JavaScript on a Plate framework.
 - [ ] Create a documentation website for JavaScript on a Plate.
 - [ ] Create a CDN publishing GitHub Action

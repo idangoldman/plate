@@ -1,25 +1,24 @@
-export default expectedValueParser = (value) ->
-  # Boolean check
+export parseBoolean = (value) ->
   if value in ["true", "false"]
-    return { type: "boolean", value: value is "true" }
+    { type: "boolean", value: value is "true" }
 
-  # Null check
+export parseNull = (value) ->
   if value is "null"
-    return { type: "null", value: null }
+    { type: "null", value: null }
 
-  # Undefined check
+export parseUndefined = (value) ->
   if value is "undefined"
-    return { type: "undefined", value: undefined }
+    { type: "undefined", value: undefined }
 
-  # Number check
+export parseNumber = (value) ->
   if /^-?\d+(?:\.\d+)?$/.test(value)
-    return { type: "number", value: parseFloat(value) }
+    { type: "number", value: parseFloat(value) }
 
-  # String check (quoted)
+export parseString = (value) ->
   if /^".*"$/.test(value)
-    return { type: "string", value: value.slice(1, -1) }
+    { type: "string", value: value.slice(1, -1) }
 
-  # Array check
+export parseArray = (value) ->
   if /^\[.*\]$/.test(value)
     try
       parsed = JSON.parse(value)
@@ -31,7 +30,7 @@ export default expectedValueParser = (value) ->
     catch error
       throw new Error("Invalid array format: #{value}")
 
-  # Object check
+export parseObject = (value) ->
   if /^\{.*\}$/.test(value)
     try
       parsed = JSON.parse(value)
@@ -43,5 +42,21 @@ export default expectedValueParser = (value) ->
     catch error
       throw new Error("Invalid object format: #{value}")
 
-  # If we reach here, we don't know the type
+export default expectedValueParser = (value) ->
+  parsers = [
+    parseBoolean,
+    parseNull,
+    parseUndefined,
+    parseNumber,
+    parseString,
+    parseArray,
+    parseObject
+  ]
+
+  for parser in parsers
+    result = parser(value)
+
+    if result?
+      return result
+
   throw new Error("Unable to determine expected type for: #{value}")
