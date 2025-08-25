@@ -21,20 +21,20 @@ Feature: To conversion methods
 
   @to-array
   Scenario Outline: Converting values to arrays
-    When I call the "toArray" method on the "<name>" value
+    When toArray method is called on <name>
     Then I should get <expected> as the result
 
     Examples:
       | name           | expected                    |
-      | stringValue    | ["h","e","l","l","o"]       |
+      | stringValue    | ["hello"]                   |
       | emptyString    | []                          |
       | arrayValue     | [1,2,3]                     |
       | emptyArray     | []                          |
       | objectValue    | [["a",1],["b",2]]           |
       | emptyObject    | []                          |
-      | numberValue    | []                          |
-      | booleanTrue    | []                          |
-      | nullValue      | []                          |
+      | numberValue    | [42]                        |
+      | booleanTrue    | [true]                      |
+      | nullValue      | null                        |
 
   @to-object
   Scenario Outline: Converting values to objects

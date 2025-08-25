@@ -4,10 +4,11 @@ export default class To extends Prototypes
   @extends "Object"
 
   toArray: -> switch true
-    when @isArray()  then @slice()
+    when @isArray() then @slice()
     when @isObject() then Object.entries(@)
-    when @isString() then @.split("")
-    else []
+    when @isString()
+      if @length is 0 then [] else [@]
+    else [@]
 
   toObject: -> switch true
     when @isArray() then @reduce ((obj, value, index) -> obj[index] = value; obj), {}

@@ -4,13 +4,14 @@ setWorldConstructor class PlateWorld extends World
   constructor: (options) ->
     super(options)
 
-    @originalEnv = {}
-    @resetState()
-
-  resetState: ->
+    # Initialize test state
     @error = undefined
     @expected = undefined
-    @input = undefined
+    @input = {}
+    @result = undefined
+
+    # Environment state management
+    @originalEnv = {}
 
   saveEnvironmentState: ->
     @originalEnv.PLATE_PRJ_PATH = process.env.PLATE_PRJ_PATH
