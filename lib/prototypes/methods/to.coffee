@@ -12,20 +12,16 @@ export default class To extends Prototypes
 
   toObject: -> switch true
     when @isArray() then @reduce ((obj, value, index) -> obj[index] = value; obj), {}
-    when @isObject() then @clone()
-    when @isString() then @split("").reduce ((obj, value, index) -> obj[index] = value; obj), {}
-    else {}
+    when @isObject() then Object.assign {}, @
+    when @isString()
+      if @length is 0 then {} else {0: @}
+    else
+      {0: @}
 
   toBoolean: -> switch true
     when @isArray()  then @length > 0
     when @isObject() then @keys().length > 0
     when @isString() then @length > 0
     else !!@
-
-  toNumber: -> switch true
-    when @isArray()  then @length
-    when @isObject() then @keys().length
-    when @isString() then parseFloat(@)
-    else +@
 
 export methods = To.methods()
