@@ -71,7 +71,6 @@ tasks:
 
   test:
     desc: "Run Cucumber tests"
-    ignore_error: true
     deps: [build-test]
     cmds:
       - |
@@ -90,9 +89,10 @@ tasks:
 
   test-report:
     desc: "Open test report in browser"
-    deps: [test]
     cmds:
-      - open "file://{{.PLATE_PKG_PATH}}/tmp/cucumber-report.html"
+      - cmd: plate dev:test
+        ignore_error: true
+      - open "file://{{.PLATE_TMP_PATH}}/cucumber-report.html"
 
   run:
     desc: "Run the project via Node.js"
