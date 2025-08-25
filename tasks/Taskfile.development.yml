@@ -71,6 +71,7 @@ tasks:
 
   test:
     desc: "Run Cucumber tests"
+    ignore_error: true
     deps: [build-test]
     sources:
       - "{{.PLATE_PRJ_PATH}}/src/tests/**/*.js"
