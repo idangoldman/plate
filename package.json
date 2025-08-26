@@ -4,7 +4,7 @@
   "description": "A simple boilerplate for web development",
   "author": "Idan Goldman",
   "license": "MIT",
-  "version": "0.8.1",
+  "version": "0.9.0",
   "homepage": "https://github.com/idangoldman/plate/",
   "repository": {
     "type": "git",
@@ -26,6 +26,9 @@
   "imports": {
     "#root/*": "./src/*"
   },
+  "exports": {
+    "./plugins/*": "./src/plugins/*"
+  },
   "files": [
     "bin",
     "configs",
@@ -42,12 +45,14 @@
   },
   "devDependencies": {
     "@coffeelint/cli": "5.2.11",
-    "@cucumber/cucumber": "12.1.0",
+    "@cucumber/cucumber": "12.2.0",
     "@cucumber/pretty-formatter": "2.1.0",
-    "chai": "5.3.2",
+    "chai": "6.0.1",
+    "coffeescript": "2.7.0",
     "globals": "16.3.0",
     "lodash": "4.17.21",
     "prettier": "3.6.2",
+    "prettier-plugin-gherkin": "3.1.2",
     "yaml": "2.8.1"
   }
 }

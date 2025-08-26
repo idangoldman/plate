@@ -61,14 +61,17 @@ export default class Prototypes
           proto[name] = null
 
         if proto[name]? and not proto["#{@prefix}#{name}"]?
-          console.warn "Method `#{name}` and `#{@prefix}#{name}` already exist on #{proto.constructor.name}"
+          console.warn """
+            Method `#{name}` and `#{@prefix}#{name}` already exist on #{proto.constructor.name}
+          """
           continue
 
-        Object.defineProperty proto, name,
+        Object.defineProperty proto, name, {
           value: fn
           enumerable: false
           configurable: true
           writable: true
+        }
 
     @
 
@@ -82,6 +85,10 @@ export default class Prototypes
 
     for name of methods
       for proto in nativePrototypes
-        delete proto[name]
+        if proto["#{@prefix}#{name}"]?
+          proto[name] = proto["#{@prefix}#{name}"]
+          delete proto["#{@prefix}#{name}"]
+        else
+          delete proto[name]
 
     @

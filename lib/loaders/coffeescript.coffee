@@ -9,9 +9,10 @@ export load = (url, context, nextLoad) ->
 
     transformedSource = await transformCoffee source, url
 
-    return
+    return {
       format: format
       shortCircuit: true
       source: transformedSource
+    }
 
   nextLoad(url, context, nextLoad)

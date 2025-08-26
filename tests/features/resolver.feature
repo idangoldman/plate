@@ -1,3 +1,5 @@
+@runtime
+@resolver
 Feature: Path Resolver
   As a developer
   I want to resolve path specifiers correctly

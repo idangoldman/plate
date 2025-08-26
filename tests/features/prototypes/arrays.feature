@@ -1,26 +1,33 @@
-Feature: Array Methods
+@prototypes
+@arrays
+Feature: Array Prototype Methods
   As a developer
   I want to use the Array methods to easily work with arrays
-  So that I can write more readable code
+  So that I can write more readable and consistent code
 
-  Scenario Outline: Accessing array elements
-    Given an array "<input>"
-    When call the "<method>" method on the array
-    Then return "<expected>" as the result
+  Background:
+    Given the following inputs:
+      | name     | value     |
+      | standard | [1, 2, 3] |
+      | empty    | []        |
+
+  Scenario Outline: Using first and last methods
+    When <method> method is called on <array>
+    Then I should get <expected> as the result
 
     Examples:
-      | input     | method  | expected  |
-      | [1, 2, 3] | first   | 1         |
-      | [1, 2, 3] | last    | 3         |
-      | []        | first   | undefined |
-      | []        | last    | undefined |
+      | array    | method | expected  |
+      | standard | first  | 1         |
+      | standard | last   | 3         |
+      | empty    | first  | undefined |
+      | empty    | last   | undefined |
 
-  Scenario Outline: Accessing array elements with arguments
-    Given an array "<input>"
-    When call the "<method>" method with "<arguments>" on the array
-    Then return "<expected>" as the result
+  Scenario Outline: Using excludes method
+    When excludes method is called on <array> with <argument>
+    Then I should get <expected> as the result
 
-  Examples:
-      | input     | method   | arguments | expected  |
-      | [1, 2, 3] | excludes | 5         | true      |
-      | [1, 2, 3] | excludes | 2         | false     |
+    Examples:
+      | array    | argument | expected |
+      | standard | 1        | false    |
+      | standard | 4        | true     |
+      | empty    | 1        | true     |

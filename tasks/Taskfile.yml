@@ -12,18 +12,18 @@ vars:
 dir: "{{.PLATE_PKG_PATH}}"
 
 includes:
-  package:
-    taskfile: ./Taskfile.package.yml
-    dir: "{{.PLATE_PKG_PATH}}"
-    optional: false
   dev:
+    dir: "{{.PLATE_PKG_PATH}}"
+    optional: false
     taskfile: ./Taskfile.development.yml
+  package:
     dir: "{{.PLATE_PKG_PATH}}"
     optional: false
+    taskfile: ./Taskfile.package.yml
   qa:
-    taskfile: ./Taskfile.quality.yml
     dir: "{{.PLATE_PKG_PATH}}"
     optional: false
+    taskfile: ./Taskfile.quality.yml
 
 tasks:
   default:

@@ -1,14 +1,17 @@
-import { setWorldConstructor } from "@cucumber/cucumber"
+import { setWorldConstructor, World } from "@cucumber/cucumber"
 
-setWorldConstructor class ResolverWorld
-  constructor: ->
-    @originalEnv = {}
-    @resetState()
+setWorldConstructor class PlateWorld extends World
+  constructor: (options) ->
+    super(options)
 
-  resetState: ->
+    # Initialize test state
     @error = undefined
     @expected = undefined
     @input = undefined
+    @result = undefined
+
+    # Environment state management
+    @originalEnv = {}
 
   saveEnvironmentState: ->
     @originalEnv.PLATE_PRJ_PATH = process.env.PLATE_PRJ_PATH

@@ -47,15 +47,15 @@ The command itself is a CoffeeScript bootstrap that routes to `Taskfile` (go-tas
 
 As all framework have environment variables, PLATE is no different. Those variables used to help manage processes and empower the codebase with additional information.
 
-| Name                | Scope      | Description                                                                        |
-| ------------------- | ---------- | ---------------------------------------------------------------------------------- |
-| `PLATE_PKG_PATH`    | Bootstrap  | Path to PLATE package installation; DEFAULT: `./`, USED AS `@/`                    |
-| `PLATE_PRJ_PATH`    | Bootstrap  | Path to current project (switches with `pkg` command); DEFAULT: `./`, USED AS `~/` |
-| `PLATE_ENV`         | Runtime    | Environment mode (development, production, etc.); DEFAULT: `development`           |
-| `PLATE_BIN_PATH`    | Computed   | Path to node_modules/.bin (via Taskfile templating)                                |
-| `PLATE_CONF_PATH`   | Computed   | Path to configuration files                                                        |
-| `PLATE_LOG_PATH`    | Computed   | Path to log files                                                                  |
-| `PLATE_TMP_PATH`    | Computed   | Path to temporary files                                                            |
+| Name              | Scope     | Description                                                                        |
+| ----------------- | --------- | ---------------------------------------------------------------------------------- |
+| `PLATE_PKG_PATH`  | Bootstrap | Path to PLATE package installation; DEFAULT: `./`, USED AS `@/`                    |
+| `PLATE_PRJ_PATH`  | Bootstrap | Path to current project (switches with `pkg` command); DEFAULT: `./`, USED AS `~/` |
+| `PLATE_ENV`       | Runtime   | Environment mode (development, production, etc.); DEFAULT: `development`           |
+| `PLATE_BIN_PATH`  | Computed  | Path to node_modules/.bin (via Taskfile templating)                                |
+| `PLATE_CONF_PATH` | Computed  | Path to configuration files                                                        |
+| `PLATE_LOG_PATH`  | Computed  | Path to log files                                                                  |
+| `PLATE_TMP_PATH`  | Computed  | Path to temporary files                                                            |
 
 **Bootstrap variables** are set by the CoffeeScript entry point, while **computed variables** are templated in the main Taskfile and inherited by all namespace files.
 
@@ -67,55 +67,23 @@ The center of opinions for framework and it's dependencies configuration files. 
 ls -la ./configs/**/*
 ```
 
-### Presets (WIP)
-
-Basically, the preset files store initial `key: value` YAML structured variables to be used across the codebase.
-
-Contents of presets can be accessed across the codebase by referencing `$PLATE_CONFIG['KEY']`.
-
-### Dependencies (WIP)
-
-The configuration files of PLATE's dependencies are located in this folder with the exception of stubborn dependencies that enforce it's configuration file be in the root folder of the project they are part of.
-
-### Override (IDEA)
-
-All configuration files can be overridden by placing a config file in your project's folder in the same path the config file is located in PLATE's folder.
-
-For ease of use, run the following command to override a configuration file:
-
-```shell
-plate config override presets/website.yml
-```
-
-### Extend (WIP)
-
-All configuration files can be extended by placing a config file in your project's folder in the same path the config file is located in PLATE's folder with a suffix of a `PLATE_ENV` to run in.
-
-For ease of use, run the following command to override a configuration file:
-
-```shell
-plate config extend production presets/website.yml
-```
-
-Extend is basically doing a deep merge between PLATE's core config and project's config file with `PLATE_ENV` suffix.
-
 ## Library
 
 ### Imports
 
 #### Paths
 
-| Prefix | Description |
-| ------ | ----------- |
+| Prefix | Description              |
+| ------ | ------------------------ |
 | `~/`   | Package-relative imports |
 | `@/`   | Project-relative imports |
 
 #### Formats
 
-| Extension    | Description |
-| ------------ | ----------- |
+| Extension    | Description                         |
+| ------------ | ----------------------------------- |
 | `coffee`     | CoffeeScript files with compilation |
-| `yml`,`yaml` | YAML files with transformation |
+| `yml`,`yaml` | YAML files with transformation      |
 
 #### Globs (IDEA)
 
@@ -125,65 +93,37 @@ Extend is basically doing a deep merge between PLATE's core config and project's
 
 Are the core structures upon PLATE's functionality and behavior extended from.
 
+| Pattern    | Description                    |
+| ---------- | ------------------------------ |
+| Prototypes |                                |
+| Hooks      |                                |
+| Components |                                |
+| Events     |                                |
+| Stores     | local, session, cookie, memory |
+
 #### Prototypes
 
 ##### Natives (WIP)
 
-###### Objects
-
-| Method  | Description |
-| ------- | ----------- |
-| `keys`  |             |
-| `print` |             |
-
-###### Arrays
-
-| Method     | Description |
-| ---------- | ----------- |
-| `excludes` |             |
-| `first`    |             |
-| `last`     |             |
-
-###### Strings
-
-| Method       | Description |
-| ------------ | ----------- |
-| `capitalize` |             |
-| `times`      |             |
+| Native       | Status | Description |
+| ------------ | ------ | ----------- |
+| Objects      | WIP    |             |
+| Arrays       | WIP    |             |
+| Strings      | WIP    |             |
+| Functions    | IDEA   |             |
+| Regexp       | IDEA   |             |
+| Numbers      | IDEA   |             |
+| HTMLElements | IDEA   |             |
 
 ##### Methods (WIP)
 
-###### Is
+| Methods           | Description |
+| ----------------- | ----------- |
+| Is                |             |
+| To                |             |
+| Naming Conversion |             |
 
-| Method     | Description |
-| ---------- | ----------- |
-| `isArray`  |             |
-| `isObject` |             |
-| `isString` |             |
-| `isEmpty`  |             |
-
-###### To
-
-| Method      | Description |
-| ----------- | ----------- |
-| `toArray`   |             |
-| `toObject`  |             |
-| `toBoolean` |             |
-| `toNumber`  |             |
-
-###### Naming Conventions
-
-| Case     | Example |
-| -------- | ------- |
-| Camel    |         |
-| Constant |         |
-| Dot      |         |
-| Kebab    |         |
-| Pascal   |         |
-| Snake    |         |
-| Title    |         |
-
-#### Hooks (WIP)
+#### Hooks (IDEA)
 
 | Hook     | Description |
 | -------- | ----------- |
@@ -200,8 +140,6 @@ Are the core structures upon PLATE's functionality and behavior extended from.
 | `emit`  |             |
 | `off`   |             |
 
-#### Missing Methods (IDEA)
-
 ## Testing
 
 Our main believe is in testing our code in a behavioral driven development where everyone can think of a way the code should act and write a pseudo code example of it. Then write the first iteration of the internal behavior of code block, see it works on a happy path. Now write an essay about that piece of code with usage examples testing various ways of using and not using the piece of code that was only in our imagination before. Cool.
@@ -210,16 +148,16 @@ Our main believe is in testing our code in a behavioral driven development where
 
 As an opinionated framework, it's built upon unique set of tech tools and libraries, some of which are self-built from previous projects. Let's go over the list:
 
-| Name              | Job                 | Reason                                                                                                                |
-| ----------------- | ------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| Node.js           | Runtime environment | JavaScript runtime of use, no special reason.                                                                         |
-| PNPM              | Package Manager     | Simply because it's the fastest of them 3.                                                                            |
-| Taskfile           | Task Runner         | Advanced task runner with intelligent rebuilds, cross-platform support, and dependency management via YAML          |
-| CoffeeScript      | Language            | No the most efficient JavaScript compiled language, yet the easiest and pleasant to read and write.                   |
-| Cucumber.js       | Tests               | `Gherkin` language is the most readable and reusable way to write use-cases and test them.                            |
-| ESBuild           | Bundle              | Current bundler of choice, optimize the CoffeeScript compiled code.                                                   |
-| Prettier          | Code Quality        | Set of tools configured to automate codebase coherence structure.                                                     |
-| YAML              | Configuration       | Default config files format.                                                                                          |
+| Name         | Job                 | Reason                                                                                                     |
+| ------------ | ------------------- | ---------------------------------------------------------------------------------------------------------- |
+| Node.js      | Runtime environment | JavaScript runtime of use, no special reason.                                                              |
+| PNPM         | Package Manager     | Simply because it's the fastest of them 3.                                                                 |
+| Taskfile     | Task Runner         | Advanced task runner with intelligent rebuilds, cross-platform support, and dependency management via YAML |
+| CoffeeScript | Language            | No the most efficient JavaScript compiled language, yet the easiest and pleasant to read and write.        |
+| Cucumber.js  | Tests               | `Gherkin` language is the most readable and reusable way to write use-cases and test them.                 |
+| ESBuild      | Bundle              | Current bundler of choice, optimize the CoffeeScript compiled code.                                        |
+| Prettier     | Code Quality        | Set of tools configured to automate codebase coherence structure.                                          |
+| YAML         | Configuration       | Default config files format.                                                                               |
 
 The above dependencies aren't set in stone and might be replaced by a better suited tool for the job along the way. Feel free to suggest a better tool for the job with valid points of why.
 
@@ -227,33 +165,13 @@ The above dependencies aren't set in stone and might be replaced by a better sui
 
 ### Components Pattern
 
-This is a major update for the framework and might be an easy one because most of the _work-in-theory_ codebase already written and been testishly used as part of `fmwk` (`feature.js`) which by the end of this implementation be obsolete and archived.
+This is a major update for the framework and might be an easy one because most of the _work-in-theory_ codebase already written and been testishly used as part of `fmwk` which by the end of this implementation be obsolete and archived.
 
-- [ ] Implement `component("selector", callback)`
-- [ ] Implement supporting pattern objects
-  - [ ] Base element
-  - [ ] DOM Events
-  - [ ] Local and Session Storage
-- [ ] Migrate and extend tests for those of the above
-
-#### In the Next Iteration
-
-- [ ] Inputs (form too?)
-- [ ] Keyboard events as shortcut combos
-- [ ] Keyboard navigation helpers built in
-- [ ] Implementation of `interval` and `timeout` in a form of `delay:1s` and `iterate:200ms`
-- [ ] Page/Route
-- [ ] Advanced Element
-- [ ] Cache via service worker
-- [ ] Implement "HTML over the Wire" page and template loading pattern.
-- [ ] Implement an `analytics` object for `async` interaction with a stats server.
-- [ ] Implementation of the 3 acronyms - `i18n`, `l10n`, and `a11y`.
-
-### Hooks Pattern and Functions Prototype Implementation
-
-- [ ] Implement `Hooks` pattern into `Prototypes` pattern.
-- [ ] Implement `before`, `around`, and `after` wrappers of `Hooks.addHook` in `Functions` prototype.
-- [ ] Transform `lib/helpers/safe.coffee` file functions into `Functions` prototype as a `safe`, `safeReturn` `safeOrFailure` methods, might be even used with `Hooks.around` method.
+- [ ] Implement `component("selector", callback)` pattern
+- [ ] Implement HTMLElements prototype
+- [ ] Implement DOM Events as events pattern
+- [ ] Implement Storage APIs as store pattern
+- [ ] Migrate and extend tests for the above via feature documents
 
 ### Prototypes Enhancements
 
@@ -268,11 +186,14 @@ This is a major update for the framework and might be an easy one because most o
 - [ ] Implement `Objects.has` method to check if the object has the key.
 - [ ] Implement `Strings.times` method to repeat the string `n` times.
 - [ ] Implement `prototypes/methods/to.coffee` with `to` method to convert the object to a specific type.
-- [ ] Move `toCase` and `toCaseKeys` into `prototypes/methods/naming-casing.coffee`. Extending `Object` with `strings` and `keys` methods combined.
 - [ ] Implement `Numbers.toHuman([size, weight, dimension, distance, etc...])` method to convert the numbers to a human readable formats.
 - [ ] Test `yaml` file loading and using `Objects.keyCase` method.
+- [ ] Implement `Objects.hasCase` method to check if the object has the key with the specific case.
+- [ ] Implement toDataUrl
+- [ ] Implement clean text
+- [ ] Implement sanitize
 
-### MissingMethod Pattern Upgrade
+### MissingMethod Pattern
 
 - [ ] Implement `MissingMethod` (`respond_to_missing` and `method_is_missing`) pattern for `Prototypes` pattern be based on?
 - [ ] Implement `getter` and `setter` methods in `Objects` prototype to use `MissingMethod` pattern routing prototype methods to use static methods of the same name.
@@ -283,13 +204,39 @@ This is a major update for the framework and might be an easy one because most o
 ### Infrastructure Upgrades
 
 - [ ] Implement `glob` transformer and register as node.js loader in `lib/transformers/glob.coffee`.
+- [ ] Implement `svg` transformer and register as node.js loader in `lib/transformers/svg.coffee`.
 - [ ] Implement `main` as an `importAttributes` of imported files, to be used like main in Python.
 - [ ] Create defaults loader class for prototypes and methods loading.
-- [ ] Implement `plate help` using the example in `bin/help.fish`.
+- [ ] Refactor the library into tree-shakable structure for a bundle smaller footprint.
 - [ ] Restructure `lib/` folder:
   - [ ] Migrate some of the functionality out of the `lib/helpers` folder and into `Prototypes` or `Transformers`, the rest into `lib/utils`.
   - [ ] Rename `lib/plugins` to `lib/esbuild`
   - [ ] Create a folder for node specific code `lib/node` and move all related folders and files of code into it.
   - [ ] Create a `plate` task to copy a config file to extend or override the PLATE's config file in the current project.
   - [ ] Create a Singleton class pattern, just because? No, because it's overly copy-paste piece of code pattern that can be capsulated into a base class and extended from.
-  - [ ] Implement `esbuild.icons.coffee` transformer to load icons from the `icons` folder and register as node.js loader in `lib/transformers/esbuild/icons.coffee`.
+
+### Backlog for future iterations
+
+- [ ] Extend events pattern with Keyboard events
+- [ ] Implement Locations prototype extending page route navigation
+- [ ] Implement Cache API as part of the Store pattern
+- [ ] Implement IndexDB APi as part of the Store pattern
+- [ ] Implement Templates pattern for loading html and css files on the fly.
+- [ ] Implementation of the 3 acronyms - `i18n`, `l10n`, and `a11y`.
+- [ ] Implement Timers pattern with every (interval), delay (timeout), clear, clearAll.
+- [ ] Implement wait, waitFor, sleep, debounce, throttle and utils functions.
+- [ ] Implement Messages pattern as a wrapper for Broadcast API.
+- [ ] Implement Clipboard pattern with copy and paste functionality.
+- [ ] Extend HTMLElements with update (with observers),empty, append, prepend, find, html, css, create functionality.
+- [ ] Implement component.isolate functionality.
+- [ ] Return of ESLint with YAML, Markdown, and Gerkin as linter task
+- [ ] Add Hooks pattern to support Functions extensions and Prototypes pattern
+- [ ] Add Functions Prototypes extensions with safe execution and hooks support
+
+### Advocating
+
+- [ ] Create a GitHub repository with code usage examples of JavaScript on a Plate framework.
+- [ ] Create a documentation website for JavaScript on a Plate.
+- [ ] Create a CDN publishing GitHub Action
+- [ ] Create a Testing GitHub Action
+- [ ] Fix NPM package publishing GitHub Action
