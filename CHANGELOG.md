@@ -9,7 +9,7 @@
   [Security]   in case of vulnerabilities.
 -->
 
-## [0.9.0] - YYYY-MM-DD
+## [0.9.0] - 2025-08-26
 
 ### Added
 
