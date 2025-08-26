@@ -105,24 +105,25 @@ Are the core structures upon PLATE's functionality and behavior extended from.
 
 ##### Natives (WIP)
 
-| Native       | Description |
-| ------------ | ----------- |
-| Objects      |             |
-| Arrays       |             |
-| Strings      |             |
-| Functions    |             |
-| Numbers      |             |
-| HTMLElements |             |
+| Native       | Status | Description |
+| ------------ | ------ | ----------- |
+| Objects      | WIP    |             |
+| Arrays       | WIP    |             |
+| Strings      | WIP    |             |
+| Functions    | IDEA   |             |
+| Regexp       | IDEA   |             |
+| Numbers      | IDEA   |             |
+| HTMLElements | IDEA   |             |
 
 ##### Methods (WIP)
 
-| Methods            | Description |
-| ------------------ | ----------- |
-| Is                 |             |
-| To                 |             |
-| Naming Conventions |             |
+| Methods           | Description |
+| ----------------- | ----------- |
+| Is                |             |
+| To                |             |
+| Naming Conversion |             |
 
-#### Hooks (WIP)
+#### Hooks (IDEA)
 
 | Hook     | Description |
 | -------- | ----------- |

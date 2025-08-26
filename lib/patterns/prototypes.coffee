@@ -1,25 +1,14 @@
 import capitalize from "#root/helpers/capitalize.js"
 import isNativeMethod from "#root/helpers/is-native-method.js"
-import Hooks from "#root/patterns/hooks.js"
 
 export default class Prototypes
   @prefix: "___"
   @registry = new Map()
   @supported = new Set [
     "Array"
-    "Function"
     "Object"
     "String"
   ]
-
-  @after = (methodNames, handler) ->
-    Hooks.classAfterHook @, methodNames, handler
-
-  @around = (methodNames, handler) ->
-    Hooks.classAroundHook @, methodNames, handler
-
-  @before = (methodNames, handler) ->
-    Hooks.classBeforeHook @, methodNames, handler
 
   @extends: (natives...) ->
     nativesToExtend = []
@@ -62,9 +51,6 @@ export default class Prototypes
 
     unless Object.keys(methods).length
       throw new Error "No methods defined in #{@name}"
-
-    # Apply class hooks to methods
-    methods = Hooks.applyClassHooks(@, methods)
 
     for name, fn of methods
       for proto in nativePrototypes

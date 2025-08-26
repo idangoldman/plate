@@ -2,7 +2,7 @@ import Prototypes from "#root/patterns/prototypes.js"
 import capitalize from "#root/helpers/capitalize.js"
 import { CASE_SEPARATORS, CASE_WHITESPACE } from "#root/helpers/regex.js"
 
-export default class CaseConverter extends Prototypes
+export default class CaseConversion extends Prototypes
   @extends "String", "Object"
 
   toCase: ->
@@ -65,4 +65,4 @@ export default class CaseConverter extends Prototypes
 
     @toCase().map(capitalize).join(" ")
 
-export methods = CaseConverter.methods()
+export methods = CaseConversion.methods()

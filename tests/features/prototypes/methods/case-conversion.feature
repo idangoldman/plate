@@ -1,8 +1,8 @@
-@prototypes @methods @case-conventions
+@prototypes @methods @case-conversion
 Feature: Case Conversions
   As a developer
   I want to convert strings between different case formats
-  So that I can maintain consistent naming conventions in my codebase
+  So that I can maintain consistent naming conversion in my codebase
 
   @strings
   Scenario Outline: Converting strings to different case formats
