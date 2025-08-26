@@ -7,7 +7,7 @@ setWorldConstructor class PlateWorld extends World
     # Initialize test state
     @error = undefined
     @expected = undefined
-    @input = {}
+    @input = undefined
     @result = undefined
 
     # Environment state management
