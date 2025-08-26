@@ -1,4 +1,5 @@
-@prototypes @strings
+@prototypes
+@strings
 Feature: Strings Prototype Methods
   As a developer
   I want to change the case of strings using prototype methods

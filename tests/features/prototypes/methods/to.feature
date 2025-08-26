@@ -1,4 +1,6 @@
-@prototypes @methods @to
+@prototypes
+@methods
+@to
 Feature: To conversion methods
   As a developer
   I want to convert values between different types using to methods
@@ -6,17 +8,17 @@ Feature: To conversion methods
 
   Background:
     Given the following inputs:
-      | name           | value                    |
-      | stringValue    | "hello"                  |
-      | emptyString    | ""                       |
-      | arrayValue     | [1, 2, 3]                |
-      | emptyArray     | []                       |
-      | objectValue    | {"a": 1, "b": 2}         |
-      | emptyObject    | {}                       |
-      | numberValue    | 42                       |
-      | zeroValue      | 0                        |
-      | booleanTrue    | true                     |
-      | booleanFalse   | false                    |
+      | name         | value            |
+      | stringValue  | "hello"          |
+      | emptyString  | ""               |
+      | arrayValue   | [1, 2, 3]        |
+      | emptyArray   | []               |
+      | objectValue  | {"a": 1, "b": 2} |
+      | emptyObject  | {}               |
+      | numberValue  | 42               |
+      | zeroValue    | 0                |
+      | booleanTrue  | true             |
+      | booleanFalse | false            |
 
   @to-array
   Scenario Outline: Converting values to arrays
@@ -24,15 +26,15 @@ Feature: To conversion methods
     Then I should get <expected> as the result
 
     Examples:
-      | name           | expected                    |
-      | stringValue    | ["hello"]                   |
-      | emptyString    | []                          |
-      | arrayValue     | [1,2,3]                     |
-      | emptyArray     | []                          |
-      | objectValue    | [["a",1],["b",2]]           |
-      | emptyObject    | []                          |
-      | numberValue    | [42]                        |
-      | booleanTrue    | [true]                      |
+      | name        | expected          |
+      | stringValue | ["hello"]         |
+      | emptyString | []                |
+      | arrayValue  | [1,2,3]           |
+      | emptyArray  | []                |
+      | objectValue | [["a",1],["b",2]] |
+      | emptyObject | []                |
+      | numberValue | [42]              |
+      | booleanTrue | [true]            |
 
   @to-object
   Scenario Outline: Converting values to objects
@@ -40,16 +42,16 @@ Feature: To conversion methods
     Then I should get <expected> as the result
 
     Examples:
-      | name           | expected                    |
-      | stringValue    | {"0":"hello"}               |
-      | emptyString    | {}                          |
-      | arrayValue     | {"0":1,"1":2,"2":3}         |
-      | emptyArray     | {}                          |
-      | objectValue    | {"a":1,"b":2}               |
-      | emptyObject    | {}                          |
-      | numberValue    | {"0": 42}                   |
-      | booleanTrue    | {"0": true}                 |
-      | booleanFalse   | {"0": false}                |
+      | name         | expected            |
+      | stringValue  | {"0":"hello"}       |
+      | emptyString  | {}                  |
+      | arrayValue   | {"0":1,"1":2,"2":3} |
+      | emptyArray   | {}                  |
+      | objectValue  | {"a":1,"b":2}       |
+      | emptyObject  | {}                  |
+      | numberValue  | {"0": 42}           |
+      | booleanTrue  | {"0": true}         |
+      | booleanFalse | {"0": false}        |
 
   @to-boolean
   Scenario Outline: Converting values to booleans
@@ -57,14 +59,14 @@ Feature: To conversion methods
     Then I should get <expected> as the result
 
     Examples:
-      | name           | expected |
-      | stringValue    | true     |
-      | emptyString    | false    |
-      | arrayValue     | true     |
-      | emptyArray     | false    |
-      | objectValue    | true     |
-      | emptyObject    | false    |
-      | numberValue    | true     |
-      | zeroValue      | false    |
-      | booleanTrue    | true     |
-      | booleanFalse   | false    |
+      | name         | expected |
+      | stringValue  | true     |
+      | emptyString  | false    |
+      | arrayValue   | true     |
+      | emptyArray   | false    |
+      | objectValue  | true     |
+      | emptyObject  | false    |
+      | numberValue  | true     |
+      | zeroValue    | false    |
+      | booleanTrue  | true     |
+      | booleanFalse | false    |

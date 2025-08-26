@@ -1,4 +1,5 @@
-@prototypes @arrays
+@prototypes
+@arrays
 Feature: Array Prototype Methods
   As a developer
   I want to use the Array methods to easily work with arrays

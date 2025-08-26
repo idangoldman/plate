@@ -12,7 +12,7 @@ tasks:
           --check \
           --config {{.PLATE_CONF_PATH}}/prettierrc.yml \
           --ignore-path {{.PLATE_TMP_PATH}}/.prettierignore \
-          "{{.PLATE_PRJ_PATH}}/**/*.{yml,yaml,md}"
+          "{{.PLATE_PRJ_PATH}}/**/*.{feature,md,yml}"
       - |
         rm -frv {{.PLATE_TMP_PATH}}/.prettierignore
 
@@ -27,7 +27,7 @@ tasks:
           --write \
           --config {{.PLATE_CONF_PATH}}/prettierrc.yml \
           --ignore-path {{.PLATE_TMP_PATH}}/.prettierignore \
-          "{{.PLATE_PRJ_PATH}}/**/*.{yml,yaml,md}"
+          "{{.PLATE_PRJ_PATH}}/**/*.{feature,md,yml}"
       - |
         rm -frv {{.PLATE_TMP_PATH}}/.prettierignore
 
