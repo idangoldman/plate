@@ -229,6 +229,9 @@ This is a major update for the framework and might be an easy one because most o
 - [ ] Implement Clipboard pattern with copy and paste functionality.
 - [ ] Extend HTMLElements with update (with observers),empty, append, prepend, find, html, css, create functionality.
 - [ ] Implement component.isolate functionality.
+- [ ] Return of ESLint with YAML, Markdown, and Gerkin as linter task
+- [ ] Add Hooks pattern to support Functions extensions and Prototypes pattern
+- [ ] Add Functions Prototypes extensions with safe execution and hooks support
 
 ### Advocating
 
