@@ -1,0 +1,40 @@
+DOM_EVENTS_LIST:
+  [
+    ["clicks", ["click", "dblclick", "auxclick"]],
+    ["keys", ["keyup", "keydown", "keypress"]],
+    [
+      "mouse",
+      [
+        "mousedown",
+        "mouseenter",
+        "mouseleave",
+        "mousemove",
+        "mouseout",
+        "mouseover",
+        "mouseup",
+        "wheel",
+      ],
+    ],
+    [
+      "window",
+      [
+        "beforeunload",
+        "contextmenu",
+        "hashchange",
+        "pagehide",
+        "pageshow",
+        "popstate",
+        "resize",
+        "select",
+        "unload",
+        ["scroll", ["top", "bottom", "left", "right"]],
+      ],
+    ],
+    ["form", ["change", "input", "submit", "reset", "invalid", "formdata"]],
+    [
+      "element",
+      ["blur", "focus", "focusin", "focusout", "load", "error", "abort"],
+    ],
+  ]
+
+DOCUMENT_EVENTS_LIST: ["DOMContentLoaded", "readystatechange"]
