@@ -7,6 +7,7 @@ export default class Arrays extends Prototypes
 
   excludes: (element) -> not @includes element
   first: -> @[0]
-  last: ->  @[@length - 1]
+  last: -> @[@length - 1]
+  flatten: -> @flat(Infinity)
 
 export methods = Arrays.methods()

@@ -7,10 +7,14 @@ Feature: Array Prototype Methods
 
   Background:
     Given the following inputs:
-      | name     | value     |
-      | standard | [1, 2, 3] |
-      | empty    | []        |
+      | name     | value                  |
+      | standard | [1, 2, 3]              |
+      | empty    | []                     |
+      | nested   | [1, [2, 3], 4]         |
+      | deep     | [1, [2, [3, [4]], 5]]  |
+      | mixed    | [1, [2, 3], [4, 5, 6]] |
 
+  @first-last
   Scenario Outline: Using first and last methods
     When <method> method is called on <array>
     Then I should get <expected> as the result
@@ -22,6 +26,7 @@ Feature: Array Prototype Methods
       | empty    | first  | undefined |
       | empty    | last   | undefined |
 
+  @excludes
   Scenario Outline: Using excludes method
     When excludes method is called on <array> with <argument>
     Then I should get <expected> as the result
@@ -31,3 +36,16 @@ Feature: Array Prototype Methods
       | standard | 1        | false    |
       | standard | 4        | true     |
       | empty    | 1        | true     |
+
+  @flatten
+  Scenario Outline: Using flatten method
+    When flatten method is called on <array>
+    Then I should get <expected> as the result
+
+    Examples:
+      | array    | expected           |
+      | standard | [1, 2, 3]          |
+      | empty    | []                 |
+      | nested   | [1, 2, 3, 4]       |
+      | deep     | [1, 2, 3, 4, 5]    |
+      | mixed    | [1, 2, 3, 4, 5, 6] |
