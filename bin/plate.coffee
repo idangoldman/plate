@@ -24,6 +24,7 @@ main = ->
   process.env.PLATE_ENV = process.env.PLATE_ENV or 'development'
   process.env.PLATE_PKG_PATH = await findPackageRoot()
   process.env.PLATE_PRJ_PATH = process.cwd()
+  process.env.TASK_TEMP_DIR = join(process.env.PLATE_PKG_PATH, 'tmp')
 
   cliArguments = process.argv.slice(2)
 
