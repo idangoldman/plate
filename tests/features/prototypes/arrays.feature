@@ -7,12 +7,13 @@ Feature: Array Prototype Methods
 
   Background:
     Given the following inputs:
-      | name     | value                  |
-      | standard | [1, 2, 3]              |
-      | empty    | []                     |
-      | nested   | [1, [2, 3], 4]         |
-      | deep     | [1, [2, [3, [4]], 5]]  |
-      | mixed    | [1, [2, 3], [4, 5, 6]] |
+      | name      | value                     |
+      | deep      | [1, [2, [3, [4]], 5]]     |
+      | duplicate | [1, 2, 2, 3, 3, 3]        |
+      | empty     | []                        |
+      | mixed     | [1, [2, 3], 4, [4, 5, 6]] |
+      | nested    | [1, [2, 3], 4]            |
+      | standard  | [1, 2, 3]                 |
 
   @first-last
   Scenario Outline: Using first and last methods
@@ -43,9 +44,10 @@ Feature: Array Prototype Methods
     Then I should get <expected> as the result
 
     Examples:
-      | array    | expected           |
-      | standard | [1, 2, 3]          |
-      | empty    | []                 |
-      | nested   | [1, 2, 3, 4]       |
-      | deep     | [1, 2, 3, 4, 5]    |
-      | mixed    | [1, 2, 3, 4, 5, 6] |
+      | array     | expected           |
+      | deep      | [1, 2, 3, 4, 5]    |
+      | duplicate | [1, 2, 3]          |
+      | empty     | []                 |
+      | mixed     | [1, 2, 3, 4, 5, 6] |
+      | nested    | [1, 2, 3, 4]       |
+      | standard  | [1, 2, 3]          |

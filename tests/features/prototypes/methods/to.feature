@@ -8,17 +8,21 @@ Feature: To conversion methods
 
   Background:
     Given the following inputs:
-      | name         | value            |
-      | stringValue  | "hello"          |
-      | emptyString  | ""               |
-      | arrayValue   | [1, 2, 3]        |
-      | emptyArray   | []               |
-      | objectValue  | {"a": 1, "b": 2} |
-      | emptyObject  | {}               |
-      | numberValue  | 42               |
-      | zeroValue    | 0                |
-      | booleanTrue  | true             |
-      | booleanFalse | false            |
+      | name         | value                 |
+      | stringValue  | "hello"               |
+      | emptyString  | ""                    |
+      | arrayValue   | [1, 2, 3]             |
+      | emptyArray   | []                    |
+      | objectValue  | {"a": 1, "b": 2}      |
+      | emptyObject  | {}                    |
+      | numberValue  | 42                    |
+      | zeroValue    | 0                     |
+      | booleanTrue  | true                  |
+      | booleanFalse | false                 |
+      | csvString    | "apple,banana,cherry" |
+      | spaceString  | "one two three"       |
+      | pipedString  | "red\|green\|blue"    |
+      | trimString   | "  trim me  "         |
 
   @to-array
   Scenario Outline: Converting values to arrays
@@ -35,6 +39,25 @@ Feature: To conversion methods
       | emptyObject | []                |
       | numberValue | [42]              |
       | booleanTrue | [true]            |
+
+  @to-array-with-separator
+  Scenario Outline: Converting strings to arrays with separator
+    When toArray method is called on <name> with <separator>
+    Then I should get <expected> as the result
+
+    Examples:
+      | name        | separator | expected                    |
+      | csvString   | ","       | ["apple","banana","cherry"] |
+      | spaceString | " "       | ["one","two","three"]       |
+      | pipedString | "\|"      | ["red","green","blue"]      |
+      | trimString  | " "       | ["trim","me"]               |
+      | trimString  | ""        | ["  trim me  "]             |
+      | emptyString | ","       | []                          |
+      | stringValue | ","       | ["hello"]                   |
+      | arrayValue  | ","       | [1,2,3]                     |
+      | objectValue | ","       | [["a",1],["b",2]]           |
+      | numberValue | ","       | [42]                        |
+      | booleanTrue | ","       | [true]                      |
 
   @to-object
   Scenario Outline: Converting values to objects
