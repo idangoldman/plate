@@ -37,7 +37,8 @@
     "src"
   ],
   "scripts": {
-    "help": "plate help"
+    "help": "plate help",
+    "build-bin": "task --taskfile ./tasks/Taskfile.yml dev:build-bin"
   },
   "dependencies": {
     "@idangoldman/plate": "link:",
@@ -46,10 +47,10 @@
   "devDependencies": {
     "@coffeelint/cli": "5.2.11",
     "@cucumber/cucumber": "12.2.0",
-    "@cucumber/pretty-formatter": "2.1.0",
+    "@cucumber/pretty-formatter": "2.3.0",
     "chai": "6.0.1",
     "coffeescript": "2.7.0",
-    "globals": "16.3.0",
+    "globals": "16.4.0",
     "lodash": "4.17.21",
     "prettier": "3.6.2",
     "prettier-plugin-gherkin": "3.1.2",
