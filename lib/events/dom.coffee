@@ -21,7 +21,7 @@ export default class DOMEvents extends Events
     eventKey = "#{eventName}_#{callback.toString()}"
 
     unless @listeners.has(eventKey)
-      @element.raw.addEventListener(eventName, callback, false)
+      @element.raw.addEventListener(eventName, callback, { once })
       @listeners.set(eventKey, { eventName, callback })
 
   _unbind: (eventName, callback) ->

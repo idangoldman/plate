@@ -4,12 +4,12 @@ import findReverseBranch from '#root/src/helpers/find-reverse-branch.js'
 export default class Events
   constructor: (eventsList = [], @namespace = '') ->
     @EVENTS_LIST = [].concat(eventsList)
-    @listeners = new WeakMap()
+    @listeners = new Map()
 
     return @
 
   on: (eventNames, callback, once = false) ->
-    validEventNames = _validateEventNames(eventNames)
+    validEventNames = @_validateEventNames(eventNames)
 
     for eventName in validEventNames
       @_bind(eventName, callback, once)
@@ -18,7 +18,7 @@ export default class Events
 
   off: (eventNames, callback) ->
     if eventNames
-      validEventNames = _validateEventNames(eventNames)
+      validEventNames = @_validateEventNames(eventNames)
 
       for eventName in validEventNames
         @_unbind(eventName, callback)
@@ -31,7 +31,7 @@ export default class Events
     @on(eventNames, callback, true)
 
   emit: (eventNames, data) ->
-    validEventNames = _validateEventNames(eventNames)
+    validEventNames = @_validateEventNames(eventNames)
     eventsList = findReverseBranch(validEventNames, @EVENTS_LIST)
 
     for storedEvent in eventsList
@@ -48,7 +48,7 @@ export default class Events
     return @
 
   has: (eventNames) ->
-    validEventNames = _validateEventNames(eventNames)
+    validEventNames = @_validateEventNames(eventNames)
 
     for eventName in validEventNames
       storedEvent = @_createNamespacedEvent(eventName)
@@ -66,7 +66,7 @@ export default class Events
   _validateEventNames: (eventNames) ->
     eventNamesValidation(eventNames, @EVENTS_LIST)
 
-  _createNamespacedEvent: (eventName) ->
+  _createNamespacedEvent: (eventName = '') ->
     if @namespace then "#{@namespace}:#{eventName}" else eventName
 
   _bind: (eventName, callback, once = false) ->
