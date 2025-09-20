@@ -1,6 +1,7 @@
-import { COFFEE_EXTENSION } from "#root/helpers/regex.js"
 import { readFile } from "node:fs/promises"
-import transformCoffee from "#root/transformers/coffeescript.js"
+
+import { COFFEE_EXTENSION } from "#library/utilities/regex"
+import transformCoffee from "#runtime/transformers/coffeescript"
 
 export default -> {
   name: "coffeescript"

@@ -1,5 +1,5 @@
 import { defineParameterType } from "@cucumber/cucumber"
-import expectedValueParser from "#root/tests/support/expected-value-parser.js"
+import expectedValueParser from "#tests/support/expected-value-parser"
 
 # Parameter type for expected values (boolean, null, undefined, number, string, array, object)
 defineParameterType {

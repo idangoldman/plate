@@ -1,7 +1,7 @@
 import { Given, When } from "@cucumber/cucumber"
 import { expect } from "chai"
 
-import capitalize from "#root/helpers/capitalize.js"
+import capitalize from "#library/utilities/capitalize"
 
 Given "I have a {string} string", (input) ->
   @input = input

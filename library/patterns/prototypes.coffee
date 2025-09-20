@@ -1,5 +1,5 @@
-import capitalize from "#root/helpers/capitalize.js"
-import isNativeMethod from "#root/helpers/is-native-method.js"
+import capitalize from "#library/utilities/capitalize"
+import isNativeMethod from "#library/utilities/is-native-method"
 
 export default class Prototypes
   @prefix: "___"

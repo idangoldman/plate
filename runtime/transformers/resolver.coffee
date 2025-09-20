@@ -4,7 +4,7 @@ import {
   STARTS_WITH_BASE_PATH,
   STARTS_WITH_PACKAGE_PATH,
   STARTS_WITH_PROJECT_PATH
-} from "#root/helpers/regex.js"
+} from "#library/utilities/regex"
 
 
 export default (specifier) ->

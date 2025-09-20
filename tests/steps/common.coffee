@@ -1,6 +1,6 @@
 import { Given, When, Then } from "@cucumber/cucumber"
 import { expect } from "chai"
-import expectedValueParser from "#root/tests/support/expected-value-parser.js"
+import expectedValueParser from "#tests/support/expected-value-parser"
 
 Given "the following inputs:", (table) ->
   @input = {}

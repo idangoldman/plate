@@ -1,4 +1,4 @@
-import merge from "lodash/merge.js"
+import merge from "lodash/merge"
 
 # Copy of https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze
 export deepFreeze = (object) ->

@@ -1,5 +1,5 @@
-import Prototypes from "#root/patterns/prototypes.js"
-import capitalize from "#root/helpers/capitalize.js"
+import Prototypes from "#library/patterns/prototypes"
+import capitalize from "#library/utilities/capitalize"
 
 export default class Objects extends Prototypes
   @extends "Object"

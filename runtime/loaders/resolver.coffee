@@ -1,4 +1,4 @@
-import pathResolver from "#root/transformers/resolver.js"
+import pathResolver from "#runtime/transformers/resolver"
 
 export resolve = (specifier, context, nextResolve) ->
   resolvedPath = await pathResolver(specifier)

@@ -1,5 +1,5 @@
-import { STARTS_WITH_BASE_PATH } from "#root/helpers/regex.js"
-import pathResolver from "#root/transformers/resolver.js"
+import { STARTS_WITH_BASE_PATH } from "#library/utilities/regex"
+import pathResolver from "#runtime/transformers/resolver"
 
 export default -> {
   name: "resolver"
