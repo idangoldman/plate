@@ -208,12 +208,8 @@ This is a major update for the framework and might be an easy one because most o
 - [ ] Implement `main` as an `importAttributes` of imported files, to be used like main in Python.
 - [ ] Create defaults loader class for prototypes and methods loading.
 - [ ] Refactor the library into tree-shakable structure for a bundle smaller footprint.
-- [ ] Restructure `lib/` folder:
-  - [ ] Migrate some of the functionality out of the `lib/helpers` folder and into `Prototypes` or `Transformers`, the rest into `lib/utils`.
-  - [ ] Rename `lib/plugins` to `lib/esbuild`
-  - [ ] Create a folder for node specific code `lib/node` and move all related folders and files of code into it.
-  - [ ] Create a `plate` task to copy a config file to extend or override the PLATE's config file in the current project.
-  - [ ] Create a Singleton class pattern, just because? No, because it's overly copy-paste piece of code pattern that can be capsulated into a base class and extended from.
+- [ ] Create a `plate` task to copy a config file to extend or override the PLATE's config file in the current project.
+- [ ] Create a Singleton class pattern, just because? No, because it's overly copy-paste piece of code pattern that can be capsulated into a base class and extended from.
 
 ### Backlog for future iterations
 
@@ -229,7 +225,6 @@ This is a major update for the framework and might be an easy one because most o
 - [ ] Implement Clipboard pattern with copy and paste functionality.
 - [ ] Extend HTMLElements with update (with observers),empty, append, prepend, find, html, css, create functionality.
 - [ ] Implement component.isolate functionality.
-- [ ] Return of ESLint with YAML, Markdown, and Gerkin as linter task
 - [ ] Add Hooks pattern to support Functions extensions and Prototypes pattern
 - [ ] Add Functions Prototypes extensions with safe execution and hooks support
 
@@ -238,5 +233,3 @@ This is a major update for the framework and might be an easy one because most o
 - [ ] Create a GitHub repository with code usage examples of JavaScript on a Plate framework.
 - [ ] Create a documentation website for JavaScript on a Plate.
 - [ ] Create a CDN publishing GitHub Action
-- [ ] Create a Testing GitHub Action
-- [ ] Fix NPM package publishing GitHub Action
