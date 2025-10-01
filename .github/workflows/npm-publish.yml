@@ -41,7 +41,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build Plate CLI
-        run: task -t ./tasks dev:build-bin
+        run: task -t ./tasks binaries:build
 
       - name: Build project
         run: node ./bin/plate.js dev:build
