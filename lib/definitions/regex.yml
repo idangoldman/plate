@@ -1,0 +1,37 @@
+types:
+  array: ^\s*\[.*\]\s*$
+  common_js:
+    pattern: exports[\[\.\( ?=\)]|module\.exports|require\(|createRequire\(
+    flags: i
+  object: ^\s*\{.*\}\s*$
+  string: ^\s*".*"\s*$
+  number: ^\d+([\.,\d])*$
+
+extensions:
+  coffee:
+    pattern: \.(coffee|litcoffee|coffee\.md)$
+    flags: i
+  yaml:
+    pattern: \.ya?ml$
+    flags: i
+
+paths:
+  base: ^([~|@]\/)
+  package: ^~\/
+  project: ^@\/
+
+placeholders:
+  pattern:
+    pattern: (?<pattern>\{\{\s*(?<placeholder>[a-z0-9-_\.]+?)\s*\}\})
+    flags: gmi
+  simple:
+    pattern: \{\{\s*(?<placeholder>[a-z0-9-_\.]+?)\s*\}\}
+    flags: gmi
+
+case:
+  separators:
+    pattern: ([A-Z]{1}[a-z]+)|[_\-\.]
+    flags: g
+  whitespace:
+    pattern: \s+
+    flags: g

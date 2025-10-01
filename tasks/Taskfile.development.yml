@@ -18,15 +18,16 @@ tasks:
           --bare \
           --compile \
           --no-header \
+          --map \
           --output {{.PLATE_PRJ_PATH}}/src \
           {{.PLATE_PRJ_PATH}}/lib
 
-  clean-cli:
+  clean-bin:
     desc: "Clean up the project"
     cmds:
       - rm -rvf {{.PLATE_PRJ_PATH}}/bin/plate.js
 
-  build-cli:
+  build-bin:
     desc: "Build the CoffeeScript CLI bootstrap"
     sources:
       - "{{.PLATE_PKG_PATH}}/bin/plate.coffee"
@@ -38,20 +39,8 @@ tasks:
           --bare \
           --compile \
           --no-header \
-          {{.PLATE_PKG_PATH}}/bin/plate.coffee
-
-  watch:
-    desc: "Watch the project for changes and rebuild"
-    cmds:
-      - |
-        {{.PLATE_BIN_PATH}}/coffee \
-          --bare \
-          --compile \
           --inline-map \
-          --no-header \
-          --watch \
-          --output {{.PLATE_PRJ_PATH}}/src \
-          {{.PLATE_PRJ_PATH}}/lib
+          {{.PLATE_PKG_PATH}}/bin/plate.coffee
 
   build-test:
     desc: "Build test files from CoffeeScript sources"
@@ -66,6 +55,7 @@ tasks:
           --bare \
           --compile \
           --no-header \
+          --map \
           --output {{.PLATE_PRJ_PATH}}/src/tests \
           {{.PLATE_PRJ_PATH}}/tests
 

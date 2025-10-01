@@ -21,3 +21,33 @@ export PLACEHOLDERS             = new RegExp "\\{\\{\\s*(?<placeholder>[a-z0-9-_
 ### Case ###
 export CASE_SEPARATORS          = new RegExp "([A-Z]{1}[a-z]+)|[_\\-\\.]", "g"
 export CASE_WHITESPACE          = new RegExp "\\s+", "g"
+
+# import definitions from "#library/definitions/regex.yml"
+
+# compile = (config) ->
+#   new RegExp config.pattern, config.flags or ""
+
+# # Flatten YAML structure to SCREAMING_SNAKE_CASE keys
+# flattenDefinitions = (obj, prefix = "") ->
+#   result = {}
+
+#   for key, value of obj
+#     newKey = if prefix then "#{prefix}_#{key}" else key
+
+#     if value.pattern?
+#       result[newKey.toUpperCase()] = value
+#     else
+#       Object.assign result, flattenDefinitions(value, newKey)
+
+#   result
+
+# flat = flattenDefinitions definitions
+# cache = {}
+
+# export default new Proxy {},
+#   get: (target, prop) ->
+#     return cache[prop] if cache[prop]?
+#     return undefined unless flat[prop]?
+
+#     cache[prop] = compile flat[prop]
+#     cache[prop]
