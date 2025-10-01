@@ -1,0 +1,24 @@
+DOM_EVENTS_LIST:
+  [
+    ["clicks", ["click", "dblclick", "auxclick"]],
+    ["keys", ["keyup", "keydown", "keypress"]],
+    [
+      "mouse",
+      [
+        "mousedown",
+        "mouseenter",
+        "mouseleave",
+        "mousemove",
+        "mouseout",
+        "mouseover",
+        "mouseup",
+        "wheel",
+      ],
+    ],
+    ["form", ["change", "input", "submit", "reset", "invalid", "formdata"]],
+    [
+      "element",
+      ["blur", "focus", "focusin", "focusout", "load", "error", "abort"],
+    ],
+    ["document", ["DOMContentLoaded", "readystatechange"]],
+  ]
