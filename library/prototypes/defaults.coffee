@@ -25,7 +25,7 @@ export destroy = ->
   Strings.remove()
 
   IsMethods.remove()
-  ToMethods.apply()
+  ToMethods.remove()
   CaseConversionMethods.remove()
 
   true

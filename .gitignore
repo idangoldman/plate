@@ -12,7 +12,7 @@ node_modules
 .task
 
 # Ignore PLATE specific folders and files
-bin/plate.js
+bin/*.js
 log/*
 src/*
 tmp/*
