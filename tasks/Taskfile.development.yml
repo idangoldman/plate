@@ -9,38 +9,14 @@ tasks:
   build:
     desc: "Build the project from CoffeeScript sources"
     sources:
-      - "{{.PLATE_PRJ_PATH}}/lib/**/*.coffee"
+      - "{{.PLATE_PRJ_PATH}}/library/**/*.coffee"
+      - "{{.PLATE_PRJ_PATH}}/runtime/**/*.coffee"
     generates:
-      - "{{.PLATE_PRJ_PATH}}/src/**/*.js"
+      - "{{.PLATE_PRJ_PATH}}/src/library/**/*.js"
+      - "{{.PLATE_PRJ_PATH}}/src/runtime/**/*.js"
     cmds:
-      - |
-        {{.PLATE_BIN_PATH}}/coffee \
-          --bare \
-          --compile \
-          --no-header \
-          --map \
-          --output {{.PLATE_PRJ_PATH}}/src \
-          {{.PLATE_PRJ_PATH}}/lib
-
-  clean-bin:
-    desc: "Clean up the project"
-    cmds:
-      - rm -rvf {{.PLATE_PRJ_PATH}}/bin/plate.js
-
-  build-bin:
-    desc: "Build the CoffeeScript CLI bootstrap"
-    sources:
-      - "{{.PLATE_PKG_PATH}}/bin/plate.coffee"
-    generates:
-      - "{{.PLATE_PKG_PATH}}/bin/plate.js"
-    cmds:
-      - |
-        {{.PLATE_BIN_PATH}}/coffee \
-          --bare \
-          --compile \
-          --no-header \
-          --inline-map \
-          {{.PLATE_PKG_PATH}}/bin/plate.coffee
+      - task -t ./tasks binaries:transpile -- {{.PLATE_PRJ_PATH}}/configs/environment.yml library
+      - task -t ./tasks binaries:transpile -- {{.PLATE_PRJ_PATH}}/configs/environment.yml runtime
 
   build-test:
     desc: "Build test files from CoffeeScript sources"
@@ -50,14 +26,7 @@ tasks:
     generates:
       - "{{.PLATE_PRJ_PATH}}/src/tests/**/*.js"
     cmds:
-      - |
-        {{.PLATE_BIN_PATH}}/coffee \
-          --bare \
-          --compile \
-          --no-header \
-          --map \
-          --output {{.PLATE_PRJ_PATH}}/src/tests \
-          {{.PLATE_PRJ_PATH}}/tests
+      - task -t ./tasks binaries:transpile -- {{.PLATE_PRJ_PATH}}/configs/environment.yml tests
 
   test:
     desc: "Run Cucumber tests"
@@ -90,7 +59,8 @@ tasks:
     cmds:
       - |
         node \
-          --trace-warnings \
           --trace-deprecation \
           --trace-uncaught \
-          --import="{{.PLATE_PKG_PATH}}/src/registry.js" {{.CLI_ARGS}}
+          --trace-warnings \
+          --import="{{.PLATE_PKG_PATH}}/src/registry.js" \
+          {{.CLI_ARGS}}

@@ -1,0 +1,35 @@
+version: "3"
+
+tasks:
+  clean:
+    desc: "Clean up the transpiled binary files"
+    cmds:
+      - rm -rvf {{.PLATE_PRJ_PATH}}/bin/*.js
+
+  build:
+    desc: "Build the project from CoffeeScript sources"
+    sources:
+      - "{{.PLATE_PRJ_PATH}}/bin/*.coffee"
+    generates:
+      - "{{.PLATE_PRJ_PATH}}/bin/*.js"
+    cmds:
+      - |
+        {{.PLATE_BIN_PATH}}/coffee \
+          --bare \
+          --compile \
+          --inline-map \
+          --no-header \
+          --output {{.PLATE_PKG_PATH}}/bin \
+          {{.PLATE_PKG_PATH}}/bin/*.coffee
+
+  transpile:
+    desc: "Transpile and run the ESBuild Transpiler"
+    deps: [build]
+    cmds:
+      - |
+        node \
+          --trace-warnings \
+          --trace-deprecation \
+          --trace-uncaught \
+          {{.PLATE_PKG_PATH}}/bin/transpile.js \
+          {{.CLI_ARGS}}

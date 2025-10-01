@@ -12,6 +12,10 @@ vars:
 dir: "{{.PLATE_PKG_PATH}}"
 
 includes:
+  binaries:
+    dir: "{{.PLATE_PKG_PATH}}"
+    optional: false
+    taskfile: ./Taskfile.binaries.yml
   dev:
     dir: "{{.PLATE_PKG_PATH}}"
     optional: false

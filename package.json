@@ -20,13 +20,11 @@
   },
   "type": "module",
   "bin": {
-    "plate-dev": "./bin/plate.coffee",
     "plate": "./bin/plate.js"
   },
   "imports": {
     "#root/*": "./src/*"
   },
-  "exports": {},
   "files": [
     "bin",
     "configs",
@@ -36,7 +34,7 @@
   ],
   "scripts": {
     "help": "plate help",
-    "build-bin": "task --taskfile ./tasks/Taskfile.yml dev:build-bin"
+    "build-binaries": "task --taskfile ./tasks/Taskfile.yml binaries:build"
   },
   "dependencies": {
     "@idangoldman/plate": "link:"
