@@ -18,6 +18,7 @@ See [CHANGELOG.md](CHANGELOG.md) file for what is already done and available for
   - [x] Minified as well true
   - [ ] Correct resolution for format, platform, and target of library, runtime, and tests.
   - [x] Manage configuration settings in the environment.yml file.
+  - [ ] optimize the npm package to reflect the package in its production state and not development. Meaning removing all folders and files that aren't used in production settings, and update the package json according, after bin/plate compilation as well.
 
 
 ## Next Release (0.11.0)
@@ -48,6 +49,8 @@ See [CHANGELOG.md](CHANGELOG.md) file for what is already done and available for
 
 ### Prototype Enhancements
 
+
+
 #### Objects
 
 - `each` - iterate over the object
@@ -69,7 +72,7 @@ See [CHANGELOG.md](CHANGELOG.md) file for what is already done and available for
 - `toDataUrl` - convert the string to a data URL
 - `truncate` - truncate the string to a specific length with ellipsis
 
-#### Misc
+#### General
 
 - `CaseConversion.hasCase` - check if the string has the specific case
 - `Numbers.toHuman` - convert the number to a human readable format
@@ -83,6 +86,7 @@ See [CHANGELOG.md](CHANGELOG.md) file for what is already done and available for
 ### Ideas
 
 - Implement `MissingMethod` pattern
+  - acts as a router for multiple tree shakable and lazy loadable functionalities.
   - `respond_to_missing` and `method_is_missing` methods in `Objects` prototype
   - Proxying method calls to static methods of the same name in the prototype class.
   - `getter` and `setter` methods in `Objects` prototype to use `MissingMethod` pattern routing prototype methods to use static methods of the same name.
