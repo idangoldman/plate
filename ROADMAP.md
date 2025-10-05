@@ -6,18 +6,18 @@ See [CHANGELOG.md](CHANGELOG.md) file for what is already done and available for
 
 ## WIP Release (0.10.0)
 
-- [ ] Creation of a clear [ROADMAP.md](ROADMAP.md) instead of a TODOs puke.
-- [ ]	lib folder split into two folders library and runtime.
+- [x] Creation of a clear [ROADMAP.md](ROADMAP.md) instead of a TODOs puke.
+- [x]	lib folder split into two folders library and runtime.
 - [ ]	Separate tests of library and runtime.
-- [ ]	Taskfile for binaries of plate and transpile.
+- [x]	Taskfile for binaries of plate and transpile.
 - [ ]	Migrate to ESBuild as the codebase transpiler
-  - [ ] Transpile CoffeeScript to JavaScript files
+  - [x] Transpile CoffeeScript to JavaScript files
   - [ ] Transpile YAML to JavaScript Object files
   - [ ] Resolve aliases #library, #runtime, #tests. Might not need them when setting the absWorkingDir parameter.
-  - [ ] Source maps should be true 
-  - [ ] Minified as well true
+  - [x] Source maps should be true 
+  - [x] Minified as well true
   - [ ] Correct resolution for format, platform, and target of library, runtime, and tests.
-  - [ ] Manage configuration settings in the environment.yml file.
+  - [x] Manage configuration settings in the environment.yml file.
 
 
 ## Next Release (0.11.0)
