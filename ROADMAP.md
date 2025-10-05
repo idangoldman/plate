@@ -4,26 +4,33 @@
 
 See [CHANGELOG.md](CHANGELOG.md) file for what is already done and available for use.
 
-## Current Release (0.10.0)
+## WIP Release (0.10.0)
 
 - [ ] Creation of a clear [ROADMAP.md](ROADMAP.md) instead of a TODOs puke.
 - [ ] Rewrite of the [README.md](README.md) file for clarity.
 
 ## Next Release (0.11.0)
 
-- [ ] Implement DOM Events as events pattern
+- Create Events pattern with on, off, once, emit.
+- Implement DOM Events based of Events pattern.
+  - trigger - should trigger custom Dom events.
+  - disable emit method of Events pattern.
 
 ## Backlog
 
-### Core
+### Library
 
 - Implement `component("selector", callback)` function pattern
 - Implement `HTMLElements` as prototype of native `HTMLElement`
 - Create `Stores` pattern with `local`, `session`, `cookie`, and `memory` storage options.
+- Create Hooks pattern to support Functions extensions and Prototypes pattern
+- Create Functions Prototypes
 
-### General Improvements
+### Runtime
 
 - Test `yaml` file loading and using `Objects.keyCase` method.
+- Implement `glob` imports resolver and loader.
+- Implement `main` as an `importAttributes` of imported files, to be used like main in Python.
 
 ### Prototype Enhancements
 
@@ -69,17 +76,11 @@ See [CHANGELOG.md](CHANGELOG.md) file for what is already done and available for
   - Replace the use of `export methods = Objects.methods()` in prototypes files with `Objects::methodName` pattern.
   - Rewrite `Objects::methods` method to list all methods names in an array of an object.
   - Further more, Let's say trying to use `Strings.capitalize` method in `Functions.after` method, and it's not defined, it should first try and import the `Strings` prototype and then call the method again. Well, maybe for now it's going to be better to just use `Strings.capitalize` method in the `Functions.after` method, and if it's not defined, it should throw an error. Because it's for internal use only and for external use all the `Prototypes` should be imported by the time of use.
-- Implement `glob` transformer and register as node.js loader in `lib/transformers/glob.coffee`.
-- Implement `svg` transformer and register as node.js loader in `lib/transformers/svg.coffee`.
-- Implement `main` as an `importAttributes` of imported files, to be used like main in Python.
 - Create defaults loader class for prototypes and methods loading.
 - Refactor the library into tree-shakable structure for a bundle smaller footprint.
 - Create a `plate` task to copy a config file to extend or override the PLATE's config file in the current project.
-- Create a Singleton class pattern, just because? No, because it's overly copy-paste piece of code pattern that can be capsulated into a base class and extended from.
 - Extend events pattern with Keyboard events
 - Implement Locations prototype extending page route navigation
-- Implement Cache API as part of the Store pattern
-- Implement IndexDB APi as part of the Store pattern
 - Implement Templates pattern for loading html and css files on the fly.
 - Implementation of the 3 acronyms - `i18n`, `l10n`, and `a11y`.
 - Implement Timers pattern with every (interval), delay (timeout), clear, clearAll.
@@ -88,5 +89,3 @@ See [CHANGELOG.md](CHANGELOG.md) file for what is already done and available for
 - Implement Clipboard pattern with copy and paste functionality.
 - Extend HTMLElements with update (with observers),empty, append, prepend, find, html, css, create functionality.
 - Implement component.isolate functionality.
-- Add Hooks pattern to support Functions extensions and Prototypes pattern
-- Add Functions Prototypes extensions with safe execution and hooks support
