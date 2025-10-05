@@ -15,6 +15,8 @@ See [CHANGELOG.md](CHANGELOG.md) file for what is already done and available for
 - Implement DOM Events based of Events pattern.
   - trigger - should trigger custom Dom events.
   - disable emit method of Events pattern.
+- Create definitions folder with YAML files for regex and events names.
+- Refactor regex utility file into a dynamic object loader of regex expressions.
 
 ## Backlog
 
