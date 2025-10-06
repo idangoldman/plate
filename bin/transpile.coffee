@@ -28,6 +28,7 @@ catch error
 esbuild
   .build
     bundle: false
+    charset: 'utf8'
     entryPoints: buildConfig.entrypoints
     format: "esm"
     minify: true
