@@ -31,13 +31,13 @@ esbuild
     bundle: false
     charset: 'utf8'
     entryPoints: buildConfig.entrypoints
-    format: "esm"
+    format: buildConfig.format
     minify: true
     outdir: buildConfig.outdir
-    platform: "browser"
+    platform: buildConfig.platform
     plugins: [coffeeScriptPlugin()]
     sourcemap: true
-    target: ["es2020"]
+    target: buildConfig.targets
 
   .catch (error) ->
     console.error "Error during transpilation: #{error.message}"
