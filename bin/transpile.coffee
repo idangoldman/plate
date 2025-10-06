@@ -27,6 +27,7 @@ catch error
 
 esbuild
   .build
+    absWorkingDir: procces.env.PLATE_PKG_PATH
     bundle: false
     charset: 'utf8'
     entryPoints: buildConfig.entrypoints
