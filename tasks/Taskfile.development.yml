@@ -15,43 +15,8 @@ tasks:
       - "{{.PLATE_PRJ_PATH}}/src/library/**/*.js"
       - "{{.PLATE_PRJ_PATH}}/src/runtime/**/*.js"
     cmds:
-      - task -t ./tasks binaries:transpile -- {{.PLATE_PRJ_PATH}}/configs/environment.yml library
-      - task -t ./tasks binaries:transpile -- {{.PLATE_PRJ_PATH}}/configs/environment.yml runtime
-
-  build-test:
-    desc: "Build test files from CoffeeScript sources"
-    deps: [build]
-    sources:
-      - "{{.PLATE_PRJ_PATH}}/tests/**/*.coffee"
-    generates:
-      - "{{.PLATE_PRJ_PATH}}/src/tests/**/*.js"
-    cmds:
-      - task -t ./tasks binaries:transpile -- {{.PLATE_PRJ_PATH}}/configs/environment.yml tests
-
-  test:
-    desc: "Run Cucumber tests"
-    deps: [build-test]
-    cmds:
-      - |
-        mkdir -p "{{.PLATE_TMP_PATH}}"
-
-        cucumber_yml_relative_path="tmp/cucumber.yml"
-        cucumber_yml_absolute_path="{{.PLATE_TMP_PATH}}/cucumber.yml"
-
-        yq eval --yaml-fix-merge-anchor-to-spec -o=json '.' {{.PLATE_CONF_PATH}}/cucumber.yml | \
-        yq eval -P '.' - > "$cucumber_yml_absolute_path"
-
-        {{.PLATE_BIN_PATH}}/cucumber-js \
-          --config="$cucumber_yml_relative_path" {{.CLI_ARGS}}
-
-        rm -frv "$cucumber_yml_absolute_path"
-
-  test-report:
-    desc: "Open test report in browser"
-    cmds:
-      - cmd: plate dev:test {{.CLI_ARGS}}
-        ignore_error: true
-      - open "file://{{.PLATE_TMP_PATH}}/cucumber-report.html"
+      - plate binaries:transpile library
+      - plate binaries:transpile runtime
 
   run:
     desc: "Run the project via Node.js"

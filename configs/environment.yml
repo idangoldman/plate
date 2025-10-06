@@ -1,27 +1,16 @@
-library:
-  entrypoints:
-    - library/**/*.coffee
-  outdir: src/library
-  format: esm
-  platform: browser
-  targets:
-    - es2020
+server:
+  hostname: localhost
+  ip: 0.0.0.0
+  path: /
+  port: 1234
 
-runtime:
-  entrypoints:
-    - runtime/**/*.coffee
-  outdir: src/runtime
-  format: esm
-  platform: node
-  targets:
-    - node20
+globs:
+  clean: tmp/**/*
 
-tests:
-  entrypoints:
-    - tests/**/*.coffee
-  outdir: src/tests
-  format: esm
-  platform: browser
-  targets:
-    - es2020
-    - node20
+  assets:
+    src: assets/**/*
+    dest: tmp/assets
+
+  scripts:
+    src: scripts/**/*.coffee
+    dest: tmp/scripts

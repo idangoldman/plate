@@ -1,0 +1,27 @@
+library:
+  entrypoints:
+    - library/**/*.coffee
+  outdir: src/library
+  format: esm
+  platform: browser
+  targets:
+    - es2020
+
+runtime:
+  entrypoints:
+    - runtime/**/*.coffee
+  outdir: src/runtime
+  format: esm
+  platform: node
+  targets:
+    - node20
+
+tests:
+  entrypoints:
+    - tests/**/*.coffee
+  outdir: src/tests
+  format: esm
+  platform: browser
+  targets:
+    - es2020
+    - node20
