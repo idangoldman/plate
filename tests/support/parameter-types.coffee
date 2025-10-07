@@ -1,5 +1,5 @@
 import { defineParameterType } from "@cucumber/cucumber"
-import expectedValueParser from "#tests/support/expected-value-parser"
+import expectedValueParser from "#tests/support/expected-value-parser.coffee"
 
 # Parameter type for expected values (boolean, null, undefined, number, string, array, object)
 defineParameterType {

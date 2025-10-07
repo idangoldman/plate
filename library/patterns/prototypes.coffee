@@ -1,5 +1,5 @@
-import capitalize from "#library/utilities/capitalize"
-import isNativeMethod from "#library/utilities/is-native-method"
+import capitalize from "#library/utilities/capitalize.coffee"
+import isNativeMethod from "#library/utilities/is-native-method.coffee"
 
 export default class Prototypes
   @prefix: "___"

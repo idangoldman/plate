@@ -1,5 +1,5 @@
-import { COFFEE_EXTENSION } from "#library/utilities/regex"
-import transformCoffee from "#runtime/transformers/coffeescript"
+import { COFFEE_EXTENSION } from "#library/utilities/regex.coffee"
+import transformCoffee from "#runtime/transformers/coffeescript.coffee"
 
 export load = (url, context, nextLoad) ->
   if COFFEE_EXTENSION.test url

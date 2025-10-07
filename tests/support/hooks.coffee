@@ -1,6 +1,6 @@
 import { After, BeforeAll, AfterAll } from "@cucumber/cucumber"
 
-import Prototypes from "#library/prototypes/defaults"
+import Prototypes from "#library/prototypes/defaults.coffee"
 
 BeforeAll ->
   Prototypes.initialize()

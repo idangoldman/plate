@@ -1,5 +1,5 @@
-import { YAML_EXTENSION } from "#library/utilities/regex"
-import transformYaml from "#runtime/transformers/yaml"
+import { YAML_EXTENSION } from "#library/utilities/regex.coffee"
+import transformYaml from "#runtime/transformers/yaml.coffee"
 
 export load = (url, context, nextLoad) ->
   unless YAML_EXTENSION.test(url)

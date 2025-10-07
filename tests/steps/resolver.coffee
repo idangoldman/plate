@@ -1,6 +1,6 @@
 import { Given, When, Then } from "@cucumber/cucumber"
 import assert from "node:assert/strict"
-import pathResolver from "#runtime/transformers/resolver"
+import pathResolver from "#runtime/transformers/resolver.coffee"
 
 Given "the environment variables are set to:", (dataTable) ->
   @saveEnvironmentState()

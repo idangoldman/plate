@@ -1,7 +1,7 @@
 import { readFile } from "node:fs/promises"
 import YAML from "yaml"
 
-import { methods } from "#library/prototypes/methods/case-conversion"
+import { methods } from "#library/prototypes/methods/case-conversion.coffee"
 
 export default transformYaml = (filePath, keyCase = "") ->
   source = await readFile(filePath, "utf8")

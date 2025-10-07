@@ -1,4 +1,4 @@
-import Prototypes from "#library/patterns/prototypes"
+import Prototypes from "#library/patterns/prototypes.coffee"
 
 export default class Is extends Prototypes
   @extends "Object"
