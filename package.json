@@ -34,7 +34,7 @@
   ],
   "scripts": {
     "help": "plate help",
-    "build-binaries": "TASK_TEMP_DIR=../tmp/task task --taskfile ./tasks/Taskfile.yml binaries:build"
+    "build-binaries": "TASK_TEMP_DIR=../tmp/tasks task --taskfile ./tasks/Taskfile.yml binaries:build"
   },
   "dependencies": {
     "@idangoldman/plate": "link:"
@@ -46,7 +46,6 @@
     "chai": "6.2.0",
     "coffeescript": "2.7.0",
     "esbuild": "0.25.10",
-    "esbuild-coffeescript": "3.0.1",
     "globals": "16.4.0",
     "lodash": "4.17.21",
     "prettier": "3.6.2",

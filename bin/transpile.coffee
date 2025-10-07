@@ -2,7 +2,6 @@ import { readFile } from "node:fs/promises"
 
 import YAML from "yaml"
 import * as esbuild from "esbuild"
-import coffeeScriptPlugin from "esbuild-coffeescript"
 
 try
   [transpileKey] = process.argv.slice(2)
