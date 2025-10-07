@@ -23,7 +23,11 @@
     "plate": "./bin/plate.js"
   },
   "imports": {
-    "#root/*": "./src/*"
+    "#configs/*": "./configs/*",
+    "#library/*": "./library/*",
+    "#root/*": "./src/*",
+    "#runtime/*": "./runtime/*",
+    "#tests/*": "./tests/*"
   },
   "files": [
     "bin",

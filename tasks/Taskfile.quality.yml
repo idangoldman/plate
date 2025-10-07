@@ -1,5 +1,8 @@
 version: "3"
 
+vars:
+  COFFEE_FOLDERS_PATHS: "{{.PLATE_PRJ_PATH}}/{bin,library,runtine,tests}"
+
 tasks:
   format:
     desc: "Check formatting for coffee, css, scss files"
@@ -34,7 +37,7 @@ tasks:
   lint:
     desc: "Check linting for CoffeeScript files"
     sources:
-      - "{{.PLATE_PRJ_PATH}}/{lib,tests}/**/*.coffee"
+      - "{{.COFFEE_FOLDERS_PATHS}}/**/*.coffee"
       - "{{.PLATE_CONF_PATH}}/coffeelint.yml"
     generates:
       - "{{.PLATE_TMP_PATH}}/coffeelint.json"
@@ -42,7 +45,7 @@ tasks:
     cmds:
       - |
         coffeelint_json_tmp="{{.PLATE_TMP_PATH}}/coffeelint.json"
-        coffeelint_files=$(find {{.PLATE_PRJ_PATH}}/{lib,tests} -name "*.coffee" -type f)
+        coffeelint_files=$(find {{.COFFEE_FOLDERS_PATHS}} -name "*.coffee" -type f)
 
         yq -o=json {{.PLATE_CONF_PATH}}/coffeelint.yml > "$coffeelint_json_tmp"
 
