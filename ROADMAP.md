@@ -7,19 +7,18 @@ See [CHANGELOG.md](CHANGELOG.md) file for what is already done and available for
 ## WIP Release (0.10.0)
 
 - [x] Creation of a clear [ROADMAP.md](ROADMAP.md) instead of a TODOs puke.
-- [x]	lib folder split into two folders library and runtime.
-- [ ]	Separate tests of library and runtime.
+- [ ]	Clean up of runtime functionality and tests.
+- [x]	Rename of lib to library.
 - [x]	Taskfile for binaries of plate and transpile.
 - [ ]	Migrate to ESBuild as the codebase transpiler
   - [x] Transpile CoffeeScript to JavaScript files
-  - [ ] Transpile YAML to JavaScript Object files
-  - [ ] Resolve aliases #library, #runtime, #tests. Might not need them when setting the absWorkingDir parameter.
+  - [x] Resolve aliases #library, #tests. Might not need them when setting the absWorkingDir parameter.
   - [x] Source maps should be true 
   - [x] Minified as well true
-  - [ ] Correct resolution for format, platform, and target of library, runtime, and tests.
-  - [x] Manage configuration settings in the environment.yml file.
-  - [ ] optimize the npm package to reflect the package in its production state and not development. Meaning removing all folders and files that aren't used in production settings, and update the package json according, after bin/plate compilation as well.
-
+  - [x] Correct resolution for format, platform, and target of library, and tests.
+  - [x] Manage configuration settings in the transpile.yml file.
+  - [ ] Optimize the npm package to reflect the package in its production state and not development. Meaning removing all folders and files that aren't used in production settings, and update the package json according, after bin/plate compilation as well.
+- [ ] Simplification of package vs project paths into just absolute package path.
 
 ## Next Release (0.11.0)
 
@@ -29,27 +28,24 @@ See [CHANGELOG.md](CHANGELOG.md) file for what is already done and available for
   - trigger - should trigger custom Dom events.
   - disable emit method of Events pattern.
 - Create definitions folder with YAML files for regex and events names.
+- Transpile YAML to JavaScript Object files.
 - Refactor regex utility file into a dynamic object loader of regex expressions.
 
 ## Backlog
 
-### Library
-
-- Implement `component("selector", callback)` function pattern
-- Implement `HTMLElements` as prototype of native `HTMLElement`
+- Implement `component("selector", callback)` function pattern.
+- Implement `HTMLElements` as prototype of native `HTMLElement`.
 - Create `Stores` pattern with `local`, `session`, `cookie`, and `memory` storage options.
-- Create Hooks pattern to support Functions extensions and Prototypes pattern
-- Create Functions Prototypes
-
-### Runtime
-
-- Test `yaml` file loading and using `Objects.keyCase` method.
-- Implement `glob` imports resolver and loader.
-- Implement `main` as an `importAttributes` of imported files, to be used like main in Python.
+- Create Hooks pattern to support Functions extensions and Prototypes pattern.
+- Refactor library into tree-shakable structure for smaller footprint.
 
 ### Prototype Enhancements
 
-
+- Applying prototypes by direct import vs importing specific method or prototype.
+- Create Functions Prototypes
+- Create Numbers Prototypes
+- `CaseConversion.hasCase` - check if the string has the specific case
+- `Numbers.toHuman` - convert the number to a human readable format
 
 #### Objects
 
@@ -72,11 +68,6 @@ See [CHANGELOG.md](CHANGELOG.md) file for what is already done and available for
 - `toDataUrl` - convert the string to a data URL
 - `truncate` - truncate the string to a specific length with ellipsis
 
-#### General
-
-- `CaseConversion.hasCase` - check if the string has the specific case
-- `Numbers.toHuman` - convert the number to a human readable format
-
 ### Advocacy
 
 - GitHub repository with code usage examples.
@@ -94,12 +85,9 @@ See [CHANGELOG.md](CHANGELOG.md) file for what is already done and available for
   - Replace the use of `export methods = Objects.methods()` in prototypes files with `Objects::methodName` pattern.
   - Rewrite `Objects::methods` method to list all methods names in an array of an object.
   - Further more, Let's say trying to use `Strings.capitalize` method in `Functions.after` method, and it's not defined, it should first try and import the `Strings` prototype and then call the method again. Well, maybe for now it's going to be better to just use `Strings.capitalize` method in the `Functions.after` method, and if it's not defined, it should throw an error. Because it's for internal use only and for external use all the `Prototypes` should be imported by the time of use.
-- Create defaults loader class for prototypes and methods loading.
-- Refactor the library into tree-shakable structure for a bundle smaller footprint.
-- Create a `plate` task to copy a config file to extend or override the PLATE's config file in the current project.
 - Extend events pattern with Keyboard events
 - Implement Locations prototype extending page route navigation
-- Implement Templates pattern for loading html and css files on the fly.
+- Implement Templates pattern for loading html and css files on the fly over http or websocket.
 - Implementation of the 3 acronyms - `i18n`, `l10n`, and `a11y`.
 - Implement Timers pattern with every (interval), delay (timeout), clear, clearAll.
 - Implement wait, waitFor, sleep, debounce, throttle and utils functions.
