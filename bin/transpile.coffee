@@ -1,16 +1,12 @@
-{ readFile } = require "node:fs/promises"
-esbuild = require "esbuild"
-path = require "node:path"
-YAML = require "yaml"
+import esbuild from "esbuild"
+
+import yamlTransformer from "#runtime/transformers/yaml.coffee"
+import coffeescriptESBuildLoader "#runtime/loaders/esbuild/coffeescript.coffee"
 
 try
   [transpileKey] = process.argv.slice(2)
-  transpileFilePath = path.join process.env.PLATE_PKG_PATH, "configs", "transpile.yml"
-  transpileFileContents = await readFile(transpileFilePath, "utf8")
-  transpileJsObject = YAML.parse(transpileFileContents, { merge: true })
+  transpileJsObject = yamlTransformer(path.join process.env.PLATE_PKG_PATH, "configs", "transpile.yml")
   transpileConfig = transpileJsObject[transpileKey]
-  console.log transpileJsObject
-  process.exit 0
 
 catch error
   console.error "Error reading or parsing transpile configuration: #{error.message}"
@@ -21,7 +17,7 @@ esbuild
     transpileConfig...
     absWorkingDir: path.resolve process.env.PLATE_PKG_PATH
     plugins: [
-      require "#runtime/loaders/esbuild/coffeescript.coffee"
+      coffeescriptESBuildLoader
     ]
   })
   .catch (error) ->
