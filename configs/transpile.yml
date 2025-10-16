@@ -1,27 +1,33 @@
-library:
-  entrypoints:
-    - library/**/*.coffee
-  outdir: src/library
+default: &default
+  bundle: false
+  charset: utf8
   format: esm
+  minify: true
   platform: browser
-  targets:
+  sourcemap: inline
+  target:
     - es2020
 
-runtime:
-  entrypoints:
-    - runtime/**/*.coffee
-  outdir: src/runtime
-  format: esm
+library:
+  <<: *default
+
+  entryPoints:
+    - library/**/*.coffee
+  outdir: src/library
+
+registry:
+  <<: *default
+
+  entryPoints:
+    - runtime/registry.coffee
+  outdir: src/registry.js
   platform: node
-  targets:
+  target:
     - node20
 
 tests:
-  entrypoints:
+  <<: *default
+
+  entryPoints:
     - tests/**/*.coffee
   outdir: src/tests
-  format: esm
-  platform: browser
-  targets:
-    - es2020
-    - node20

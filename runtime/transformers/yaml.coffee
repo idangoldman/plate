@@ -5,7 +5,7 @@ import { methods } from "#library/prototypes/methods/case-conversion.coffee"
 
 export default transformYaml = (filePath, keyCase = "") ->
   source = await readFile(filePath, "utf8")
-  transformedContent = YAML.parse source.toString()
+  transformedContent = YAML.parse source.toString(), { merge: true }
 
   unless keyCase.isEmpty()
     transformedContent = methods.toCaseKeys.bind(transformedContent)(keyCase)
