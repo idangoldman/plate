@@ -1,0 +1,23 @@
+version: "3"
+
+tasks:
+  clean:
+    desc: "Clean up the bin directory"
+    cmds:
+      - rm -rvf {{.PLATE_PRJ_PATH}}/bin/*.{js,map}
+
+  build:
+    desc: "Build the bin directory from CoffeeScript sources"
+    sources:
+      - "{{.PLATE_PRJ_PATH}}/bin/*.coffee"
+    generates:
+      - "{{.PLATE_PRJ_PATH}}/bin/*.{js,map}"
+    cmds:
+      - |
+        {{.PLATE_BIN_PATH}}/coffee \
+          --bare \
+          --compile \
+          --map \
+          --no-header \
+          --output {{.PLATE_PKG_PATH}}/bin \
+          {{.PLATE_PKG_PATH}}/bin/plate.coffee

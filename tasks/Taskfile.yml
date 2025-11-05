@@ -12,10 +12,10 @@ vars:
 dir: "{{.PLATE_PKG_PATH}}"
 
 includes:
-  binaries:
+  binary:
     dir: "{{.PLATE_PKG_PATH}}"
     optional: false
-    taskfile: ./Taskfile.binaries.yml
+    taskfile: ./Taskfile.binary.yml
 
   dev:
     dir: "{{.PLATE_PKG_PATH}}"
@@ -33,12 +33,6 @@ includes:
     taskfile: ./Taskfile.testing.yml
 
 tasks:
-  default:
-    desc: "Show available tasks across all namespaces"
-    silent: true
-    cmds:
-      - task help
-
   help:
     desc: "Display help information and full task list"
     silent: true

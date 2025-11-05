@@ -38,7 +38,7 @@
   ],
   "scripts": {
     "help": "plate help",
-    "build-binaries": "TASK_TEMP_DIR=../tmp/tasks task --taskfile ./tasks/Taskfile.yml binaries:build"
+    "binary:build": "TASK_TEMP_DIR=../tmp/tasks task --taskfile ./tasks/Taskfile.yml binary:build"
   },
   "dependencies": {
     "@idangoldman/plate": "link:"
