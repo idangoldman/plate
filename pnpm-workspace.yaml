@@ -1,8 +1,5 @@
 gitChecks: false
 
-onlyBuiltDependencies:
-  - esbuild
-
 overrides:
   "@idangoldman/plate": "link:"
 

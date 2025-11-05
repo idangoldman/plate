@@ -13,6 +13,7 @@ node_modules
 
 # Ignore PLATE specific folders and files
 bin/*.js
+bin/*.map
 log/*
 src/*
 tmp/*
