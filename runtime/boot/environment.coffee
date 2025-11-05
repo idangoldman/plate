@@ -1,5 +1,5 @@
 import { deepMergeFreeze } from "#library/utilities/deep.coffee"
-import { importEnvironmentFile } from "#runtime/utilities/import-environment-file.coffee"
+import importEnvironmentFile from "#runtime/utilities/import-environment-file.coffee"
 
 do ->
   configFilePath = "configs/environment.yml"

@@ -1,4 +1,4 @@
-export importEnvironmentFile = (filePath) ->
+export default importEnvironmentFile = (filePath) ->
   environtmentFile = {}
 
   try
