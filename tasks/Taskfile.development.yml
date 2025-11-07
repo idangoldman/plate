@@ -15,8 +15,16 @@ tasks:
       - "{{.PLATE_PRJ_PATH}}/src/library/**/*.js"
       - "{{.PLATE_PRJ_PATH}}/src/runtime/**/*.js"
     cmds:
-      - plate binaries:transpile library
-      - plate binaries:transpile runtime
+      - |
+        {{.PLATE_BIN_PATH}}/coffee \
+          --bare \
+          --compile \
+          --map \
+          --no-header \
+          --output {{.PLATE_PKG_PATH}}/src \
+          --transpile \
+          {{.PLATE_PKG_PATH}}/library \
+          {{.PLATE_PKG_PATH}}/runtime
 
   run:
     desc: "Run the project via Node.js"

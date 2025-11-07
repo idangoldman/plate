@@ -1,0 +1,30 @@
+version: "3"
+
+tasks:
+  clean:
+    desc: "Clean up the project"
+    cmds:
+      - rm -rvf ./bin/*.{js,map}
+      - rm -rvf ./src
+
+  build:
+    desc: "Build the JavaScript from CoffeeScript sources"
+    sources:
+      - "./{bin,library,runtime,tests}/*.coffee"
+    generates:
+      - "./{bin,library,runtime,tests}/*.{js,map}"
+    cmds:
+      - |
+        {{.PLATE_BIN_PATH}}/coffee \
+          --bare \
+          --compile \
+          --map \
+          --no-header \
+          --output ./{{.}}
+
+  plate:
+    desc: "Run the Plate CLI tool"
+    deps: [build]
+    cmds:
+      - |
+        plate transpile:build bin

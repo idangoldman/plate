@@ -1,0 +1,6 @@
+plugins:
+  - module-resolver:
+      alias:
+        "#library": "#{PLATE_PKG_PATH}/src/library"
+        "#runtime": "#{PLATE_PKG_PATH}/src/runtime"
+        "#tests": "#{PLATE_PKG_PATH}/src/tests"

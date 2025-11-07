@@ -4,7 +4,7 @@ tasks:
   clean:
     desc: "Clean up the project"
     cmds:
-      - rm -rvf {{.PLATE_PRJ_PATH}}/src
+      - rm -rvf {{.PLATE_PRJ_PATH}}/src/tests
 
   build:
     desc: "Build test files from CoffeeScript sources"
@@ -14,7 +14,7 @@ tasks:
     generates:
       - "{{.PLATE_PRJ_PATH}}/src/tests/**/*.js"
     cmds:
-      - task binaries:transpile tests
+      - task transpile:build tests
 
   run:
     desc: "Run Cucumber tests"
