@@ -14,7 +14,6 @@ jobs:
     env:
       PLATE_ENV: publish-ci
       PLATE_PKG_PATH: ${{ github.workspace }}
-      PLATE_PRJ_PATH: ${{ github.workspace }}
 
     steps:
       - uses: actions/checkout@v4
@@ -41,10 +40,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build Plate CLI
-        run: task -t ./tasks dev:build-cli
-
-      - name: Build project
-        run: node ./bin/plate.js dev:build
+        run: task -t ./tasks transpile:library
 
       - name: Publish to NPM
         run: pnpm publish

@@ -1,0 +1,36 @@
+version: "3"
+
+tasks:
+  compile:
+    desc: "Build the project from CoffeeScript sources"
+    cmds:
+      - |
+        {{.PLATE_BIN_PATH}}/coffee \
+          --bare \
+          --compile \
+          --map \
+          --no-header \
+          --output {{.PLATE_PKG_PATH}}/... \
+          --transpile \
+          {{.PLATE_PKG_PATH}}/...
+
+  library:
+    desc: "Transpile library CoffeeScript files"
+    sources:
+      - "{{.PLATE_PKG_PATH}}/library/**/*.coffee"
+    generates:
+      - "{{.PLATE_PKG_PATH}}/src/library/**/*.js"
+    cmds:
+      - |
+        task transpile:compile library
+
+  tests:
+    desc: "Transpile tests CoffeeScript files"
+    deps: [transpile:library]
+    sources:
+      - "{{.PLATE_PKG_PATH}}/tests/**/*.coffee"
+    generates:
+      - "{{.PLATE_PKG_PATH}}/src/tests/**/*.js"
+    cmds:
+      - |
+        task transpile:compile tests

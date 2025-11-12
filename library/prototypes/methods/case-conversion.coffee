@@ -1,6 +1,6 @@
-import Prototypes from "#root/patterns/prototypes.js"
-import capitalize from "#root/helpers/capitalize.js"
-import { CASE_SEPARATORS, CASE_WHITESPACE } from "#root/helpers/regex.js"
+import Prototypes from "~/patterns/prototypes.coffee"
+import capitalize from "~/utilities/capitalize.coffee"
+import { CASE_SEPARATORS, CASE_WHITESPACE } from "~/utilities/regex.coffee"
 
 export default class CaseConversion extends Prototypes
   @extends "String", "Object"

@@ -1,0 +1,32 @@
+version: "3"
+
+tasks:
+  clean:
+    desc: "Clean up the project"
+    cmds:
+      - rm -rvf {{.PLATE_PKG_PATH}}/src/tests
+
+  run:
+    desc: "Run Cucumber tests"
+    deps: [transpile:tests]
+    cmds:
+      - |
+        mkdir -p "{{.PLATE_TMP_PATH}}"
+
+        cucumber_yml_relative_path="tmp/cucumber.yml"
+        cucumber_yml_absolute_path="{{.PLATE_TMP_PATH}}/cucumber.yml"
+
+        yq eval --yaml-fix-merge-anchor-to-spec -o=json '.' {{.PLATE_CONF_PATH}}/cucumber.yml | \
+        yq eval -P '.' - > "$cucumber_yml_absolute_path"
+
+        {{.PLATE_BIN_PATH}}/cucumber-js \
+          --config="$cucumber_yml_relative_path" {{.CLI_ARGS}}
+
+        rm -frv "$cucumber_yml_absolute_path"
+
+  report:
+    desc: "Open test report in browser"
+    cmds:
+      - cmd: task test:run {{.CLI_ARGS}}
+        ignore_error: true
+      - open "file://{{.PLATE_TMP_PATH}}/cucumber-report.html"

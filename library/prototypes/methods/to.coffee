@@ -1,4 +1,4 @@
-import Prototypes from "#root/patterns/prototypes.js"
+import Prototypes from "~/patterns/prototypes.coffee"
 
 export default class To extends Prototypes
   @extends "Object"

@@ -1,5 +1,5 @@
-import Prototypes from "#root/patterns/prototypes.js"
-import capitalize from "#root/helpers/capitalize.js"
+import Prototypes from "~/patterns/prototypes.coffee"
+import capitalize from "~/utilities/capitalize.coffee"
 
 export default class Objects extends Prototypes
   @extends "Object"

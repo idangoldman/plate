@@ -6,13 +6,13 @@ tasks:
     ignore_error: true
     cmds:
       - |
-        cat {{.PLATE_PRJ_PATH}}/.gitignore {{.PLATE_CONF_PATH}}/.prettierignore > {{.PLATE_TMP_PATH}}/.prettierignore
+        cat {{.PLATE_PKG_PATH}}/.gitignore {{.PLATE_CONF_PATH}}/.prettierignore > {{.PLATE_TMP_PATH}}/.prettierignore
       - |
         {{.PLATE_BIN_PATH}}/prettier \
           --check \
           --config {{.PLATE_CONF_PATH}}/prettierrc.yml \
           --ignore-path {{.PLATE_TMP_PATH}}/.prettierignore \
-          "{{.PLATE_PRJ_PATH}}/**/*.{feature,md,yml}"
+          "{{.PLATE_PKG_PATH}}/**/*.{feature,md,yml}"
       - |
         rm -frv {{.PLATE_TMP_PATH}}/.prettierignore
 
@@ -21,20 +21,20 @@ tasks:
     ignore_error: true
     cmds:
       - |
-        cat {{.PLATE_PRJ_PATH}}/.gitignore {{.PLATE_CONF_PATH}}/.prettierignore > {{.PLATE_TMP_PATH}}/.prettierignore
+        cat {{.PLATE_PKG_PATH}}/.gitignore {{.PLATE_CONF_PATH}}/.prettierignore > {{.PLATE_TMP_PATH}}/.prettierignore
       - |
         {{.PLATE_BIN_PATH}}/prettier \
           --write \
           --config {{.PLATE_CONF_PATH}}/prettierrc.yml \
           --ignore-path {{.PLATE_TMP_PATH}}/.prettierignore \
-          "{{.PLATE_PRJ_PATH}}/**/*.{feature,md,yml}"
+          "{{.PLATE_PKG_PATH}}/**/*.{feature,md,yml}"
       - |
         rm -frv {{.PLATE_TMP_PATH}}/.prettierignore
 
   lint:
     desc: "Check linting for CoffeeScript files"
     sources:
-      - "{{.PLATE_PRJ_PATH}}/{lib,tests}/**/*.coffee"
+      - "{{.PLATE_PKG_PATH}}/{library,tests}/**/*.coffee"
       - "{{.PLATE_CONF_PATH}}/coffeelint.yml"
     generates:
       - "{{.PLATE_TMP_PATH}}/coffeelint.json"
@@ -42,7 +42,7 @@ tasks:
     cmds:
       - |
         coffeelint_json_tmp="{{.PLATE_TMP_PATH}}/coffeelint.json"
-        coffeelint_files=$(find {{.PLATE_PRJ_PATH}}/{lib,tests} -name "*.coffee" -type f)
+        coffeelint_files=$(find {{.PLATE_PKG_PATH}}/{library,tests} -name "*.coffee" -type f)
 
         yq -o=json {{.PLATE_CONF_PATH}}/coffeelint.yml > "$coffeelint_json_tmp"
 
