@@ -12,6 +12,7 @@ node_modules
 .task
 
 # Ignore PLATE specific folders and files
+.babelrc
 bin/plate.js
 log/*
 src/*

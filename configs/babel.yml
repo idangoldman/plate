@@ -1,8 +1,8 @@
 plugins:
-  - - module-resolver:
+  - - module-resolver
     - alias:
-        "~/": "./library/"
+        "~/": "#src/library/"
 
-  - - replace-import-extension:
+  - - replace-import-extension
     - extMapping:
         ".coffee": ".js"

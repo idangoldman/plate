@@ -7,7 +7,7 @@ tasks:
     vars:
       CUCUMBER_TMP_FILE: tmp/cucumber.yml
     cmds:
-      - task: yaml-to-json
+      - task: :yaml-to-json
         vars:
           SOURCE: configs/cucumber.yml
           TARGET: "{{.CUCUMBER_TMP_FILE}}"
@@ -16,7 +16,7 @@ tasks:
         {{.PLATE_BIN_PATH}}/cucumber-js \
           --config="{{.CUCUMBER_TMP_FILE}}" {{.CLI_ARGS}}
 
-      - task: clean
+      - task: :clean
         vars:
           TARGET: "{{.CUCUMBER_TMP_FILE}}"
 

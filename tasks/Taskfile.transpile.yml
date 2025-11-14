@@ -6,7 +6,7 @@ tasks:
     vars:
       TARGET: '{{.TARGET | default "library"}}'
     cmds:
-      - task: yaml-to-json
+      - task: :yaml-to-json
         vars:
           SOURCE: configs/babel.yml
           TARGET: .babelrc
@@ -21,7 +21,7 @@ tasks:
           --transpile \
           {{.PLATE_PKG_PATH}}/{{.TARGET}}
 
-      - task: clean
+      - task: :clean
         vars:
           TARGET: .babelrc
 

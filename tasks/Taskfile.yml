@@ -29,19 +29,6 @@ tasks:
     desc: "Show available tasks across all namespaces"
     cmd: task --list-all
 
-  help:
-    desc: "Display help information and full task list"
-    cmds:
-      - |
-        echo "PLATE Framework Taskfile"
-        echo "======================="
-        echo ""
-        echo "A web development framework built on principles of joy and readability."
-        echo ""
-        echo "Complete task list:"
-        echo "=================="
-      - task --list-all
-
   environment:
     desc: "Display environment variables"
     cmds:
@@ -59,7 +46,7 @@ tasks:
     desc: "Remove files via a targeted clean-up of files or directories"
     vars:
       TARGET: '{{.TARGET | default "tmp"}}'
-    cmd: rm --force --recursive --verbose {{.PLATE_PKG_PATH}}/{{.TARGET}}
+    cmd: rm -frv {{.PLATE_PKG_PATH}}/{{.TARGET}}
 
   yaml-to-json:
     desc: "Convert YAML file to JSON"

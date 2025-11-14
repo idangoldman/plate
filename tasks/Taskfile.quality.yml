@@ -23,7 +23,7 @@ tasks:
           --ignore-path {{.PLATE_TMP_PATH}}/.prettierignore \
           "{{.PLATE_PKG_PATH}}/**/*.{feature,md,yml}"
 
-      - task: clean
+      - task: :clean
         vars:
           TARGET: tmp/.prettierignore
 
@@ -40,7 +40,7 @@ tasks:
           --ignore-path {{.PLATE_TMP_PATH}}/.prettierignore \
           "{{.PLATE_PKG_PATH}}/**/*.{feature,md,yml}"
 
-      - task: clean
+      - task: :clean
         vars:
           TARGET: tmp/.prettierignore
 
