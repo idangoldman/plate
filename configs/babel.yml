@@ -1,7 +1,7 @@
 plugins:
   - - module-resolver
     - alias:
-        "~/": "#src/library/"
+        "~": "./src/"
 
   - - replace-import-extension
     - extMapping:

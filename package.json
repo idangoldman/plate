@@ -18,9 +18,6 @@
     "provenance": true,
     "registry": "https://registry.npmjs.org/"
   },
-  "imports": {
-    "#src/*": "./src/*"
-  },
   "exports": {
     "./library/*": "./src/library/**/*.js"
   },
