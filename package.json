@@ -18,15 +18,22 @@
     "provenance": true,
     "registry": "https://registry.npmjs.org/"
   },
+  "exports": {
+    "./library/*": "./src/library/**/*.js"
+  },
   "type": "module",
   "files": [
     "library",
     "src"
   ],
   "devDependencies": {
+    "@babel/cli": "7.28.3",
+    "@babel/core": "7.28.5",
     "@coffeelint/cli": "5.2.11",
     "@cucumber/cucumber": "12.2.0",
     "@cucumber/pretty-formatter": "2.4.1",
+    "babel-plugin-module-resolver": "5.0.2",
+    "babel-plugin-replace-import-extension": "1.1.5",
     "chai": "6.2.1",
     "coffeescript": "2.7.0",
     "globals": "16.5.0",

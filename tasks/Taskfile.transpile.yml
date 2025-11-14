@@ -3,16 +3,27 @@ version: "3"
 tasks:
   compile:
     desc: "Build the project from CoffeeScript sources"
+    vars:
+      TARGET: '{{.TARGET | default "library"}}'
     cmds:
+      - task: yaml-to-json
+        vars:
+          SOURCE: configs/babel.yml
+          TARGET: .babelrc
+
       - |
         {{.PLATE_BIN_PATH}}/coffee \
           --bare \
           --compile \
           --map \
           --no-header \
-          --output {{.PLATE_PKG_PATH}}/... \
+          --output {{.PLATE_PKG_PATH}}/src/{{.TARGET}} \
           --transpile \
-          {{.PLATE_PKG_PATH}}/...
+          {{.PLATE_PKG_PATH}}/{{.TARGET}}
+
+      - task: clean
+        vars:
+          TARGET: .babelrc
 
   library:
     desc: "Transpile library CoffeeScript files"
@@ -21,16 +32,18 @@ tasks:
     generates:
       - "{{.PLATE_PKG_PATH}}/src/library/**/*.js"
     cmds:
-      - |
-        task transpile:compile library
+      - task: compile
+        vars:
+          TARGET: library
 
   tests:
     desc: "Transpile tests CoffeeScript files"
-    deps: [transpile:library]
+    deps: [library]
     sources:
       - "{{.PLATE_PKG_PATH}}/tests/**/*.coffee"
     generates:
       - "{{.PLATE_PKG_PATH}}/src/tests/**/*.js"
     cmds:
-      - |
-        task transpile:compile tests
+      - task: compile
+        vars:
+          TARGET: tests

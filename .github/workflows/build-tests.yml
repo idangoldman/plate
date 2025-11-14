@@ -14,6 +14,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Setup yq
+        uses: mikefarah/yq@v4
+
       - name: Setup Taskfile
         uses: arduino/setup-task@v2
         with:
