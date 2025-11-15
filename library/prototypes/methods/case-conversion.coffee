@@ -1,6 +1,6 @@
-import Prototypes from "~/patterns/prototypes.coffee"
-import capitalize from "~/utilities/capitalize.coffee"
-import { CASE_SEPARATORS, CASE_WHITESPACE } from "~/utilities/regex.coffee"
+import Prototypes from "~/library/patterns/prototypes.coffee"
+import capitalize from "~/library/utilities/capitalize.coffee"
+import { CASE_SEPARATORS, CASE_WHITESPACE } from "~/library/utilities/regex.coffee"
 
 export default class CaseConversion extends Prototypes
   @extends "String", "Object"

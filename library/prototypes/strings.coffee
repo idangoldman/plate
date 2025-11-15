@@ -1,5 +1,5 @@
-import Prototypes from "~/patterns/prototypes.coffee"
-import capitalize from "~/utilities/capitalize.coffee"
+import Prototypes from "~/library/patterns/prototypes.coffee"
+import capitalize from "~/library/utilities/capitalize.coffee"
 
 export default class Strings extends Prototypes
   @extends "String"
