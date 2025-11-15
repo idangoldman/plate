@@ -5,25 +5,24 @@ tasks:
     desc: "Compile CoffeeScript to JavaScript (output to tmp)"
     requires:
       vars: [TARGET]
-    cmds:
-      - |
-        {{.PLATE_BIN_PATH}}/coffee \
-          --bare \
-          --compile \
-          --map \
-          --no-header \
-          --output {{.PLATE_PKG_PATH}}/tmp/{{.TARGET}} \
-          {{.PLATE_PKG_PATH}}/{{.TARGET}}
+    cmd: |
+      {{.PLATE_BIN_PATH}}/coffee \
+        --bare \
+        --compile \
+        --map \
+        --no-header \
+        --output {{.PLATE_PKG_PATH}}/tmp/{{.TARGET}} \
+        {{.PLATE_PKG_PATH}}/{{.TARGET}}
 
   transform:
     desc: "Transform JavaScript with Babel (tmp to src)"
     requires:
       vars: [TARGET]
     cmds:
-      - |
-        task utilities:yaml-to-json \
-          SOURCE=configs/babel.yml \
-          TARGET=tmp/.babelrc
+      - task: :utilities:yaml-to-json
+        vars:
+          SOURCE: configs/babel.yml
+          TARGET: tmp/.babelrc
 
       - |
         {{.PLATE_BIN_PATH}}/babel \
@@ -32,12 +31,14 @@ tasks:
           --out-dir {{.PLATE_PKG_PATH}}/src/{{.TARGET}} \
           --source-maps
 
-      - task utilities:clean TARGET=tmp/.babelrc
-
   run:
     desc: "Execute full transpilation pipeline (compile + transform)"
     requires:
       vars: [TARGET]
     cmds:
-      - task compile TARGET='{{.TARGET}}'
-      - task transform TARGET='{{.TARGET}}'
+      - task: compile
+        vars:
+          TARGET: "{{.TARGET}}"
+      - task: transform
+        vars:
+          TARGET: "{{.TARGET}}"

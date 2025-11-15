@@ -24,7 +24,9 @@ tasks:
     generates:
       - "{{.PLATE_PKG_PATH}}/{{.TARGET}}"
     cmds:
-      - task  create_directory TARGET='{{.TARGET}}'
+      - task: create_directory
+        vars:
+          TARGET: '{{.TARGET}}'
       - |
         yq \
           --output-format=json \

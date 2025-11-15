@@ -7,7 +7,10 @@ tasks:
       - "{{.PLATE_PKG_PATH}}/library/**/*.coffee"
     generates:
       - "{{.PLATE_PKG_PATH}}/src/library/**/*.js"
-    cmd: task build:run TARGET=library
+    cmds:
+      - task: :build:run
+        vars:
+          TARGET: library
 
   tests:
     desc: "Transpile tests CoffeeScript files"
@@ -16,4 +19,7 @@ tasks:
       - "{{.PLATE_PKG_PATH}}/tests/**/*.coffee"
     generates:
       - "{{.PLATE_PKG_PATH}}/src/tests/**/*.js"
-    cmd: task build:run TARGET=tests
+    cmds:
+      - task: :build:run
+        vars:
+          TARGET: tests

@@ -16,7 +16,7 @@ tasks:
     requires:
       vars: [ACTION]
     cmds:
-      - task prettier-ignore-generate
+      - task: prettier-ignore-generate
       - |
         {{.PLATE_BIN_PATH}}/prettier \
           --{{.ACTION}} \
@@ -27,21 +27,27 @@ tasks:
   format:
     desc: "Check formatting"
     ignore_error: true
-    cmd: task prettier ACTION=check
+    cmd:
+      task: prettier
+      vars:
+        ACTION: check
 
   format-fix:
     desc: "Fix formatting"
     ignore_error: true
-    cmd: task prettier ACTION=write
+    cmd:
+      task: prettier
+      vars:
+        ACTION: write
 
   lint:
     desc: "Check linting for CoffeeScript files"
     ignore_error: true
     cmds:
-      - |
-        task utilities:yaml-to-json \
-          SOURCE=configs/coffeelint.yml \
-          TARGET=tmp/coffeelint.json
+      - task: :utilities:yaml-to-json
+        vars:
+          SOURCE: configs/coffeelint.yml
+          TARGET: tmp/coffeelint.json
 
       - |
         coffeelint_files=$(find {{.PLATE_PKG_PATH}}/{library,tests} -name "*.coffee" -type f)
