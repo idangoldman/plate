@@ -53,5 +53,5 @@ tasks:
         coffeelint_files=$(find {{.PLATE_PKG_PATH}}/{library,tests} -name "*.coffee" -type f)
 
         {{.PLATE_BIN_PATH}}/coffeelint \
-          --file ./configs/coffeelint.yml \
+          --file ./tmp/coffeelint.json \
           $coffeelint_files

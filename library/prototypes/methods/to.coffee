@@ -14,9 +14,9 @@ export default class To extends Prototypes
     when @isArray() then @reduce ((obj, value, index) -> obj[index] = value; obj), {}
     when @isObject() then Object.assign {}, @
     when @isString()
-      if @length is 0 then {} else {0: @}
+      if @length is 0 then {} else { 0: @ }
     else
-      {0: @}
+      { 0: @ }
 
   toBoolean: -> switch true
     when @isArray()  then @length > 0
