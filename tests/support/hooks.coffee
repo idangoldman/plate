@@ -7,6 +7,3 @@ BeforeAll ->
 
 AfterAll ->
   Prototypes.destroy()
-
-After ->
-  @restoreEnvironmentState()

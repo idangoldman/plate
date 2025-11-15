@@ -3,7 +3,7 @@ version: "3"
 tasks:
   run:
     desc: "Run Cucumber tests"
-    deps: [transpile:tests]
+    deps: [":transpile:tests"]
     vars:
       CUCUMBER_TMP_FILE: tmp/cucumber.yml
     cmds:
