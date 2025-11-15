@@ -4,9 +4,6 @@ vars:
   PLATE_ENV: '{{.ENV.PLATE_ENV | default "development"}}'
   PLATE_PKG_PATH: "{{.ENV.PLATE_PKG_PATH | default .USER_WORKING_DIR}}"
   PLATE_BIN_PATH: "{{.PLATE_PKG_PATH}}/node_modules/.bin"
-  PLATE_CONF_PATH: "{{.PLATE_PKG_PATH}}/configs"
-  PLATE_LOG_PATH: "{{.PLATE_PKG_PATH}}/logs"
-  PLATE_TMP_PATH: "{{.PLATE_PKG_PATH}}/tmp"
 
 dir: "{{.PLATE_PKG_PATH}}"
 
@@ -23,10 +20,14 @@ includes:
     dir: "{{.PLATE_PKG_PATH}}"
     optional: false
     taskfile: ./Taskfile.tests.yml
-  qa:
+  quality:
     dir: "{{.PLATE_PKG_PATH}}"
     optional: false
     taskfile: ./Taskfile.quality.yml
+  utilities:
+    dir: "{{.PLATE_PKG_PATH}}"
+    optional: false
+    taskfile: ./Taskfile.utilities.yml
 
 tasks:
   default:
@@ -42,26 +43,3 @@ tasks:
         echo "PLATE_ENV: {{.PLATE_ENV}}"
         echo "PLATE_PKG_PATH: {{.PLATE_PKG_PATH}}"
         echo "PLATE_BIN_PATH: {{.PLATE_BIN_PATH}}"
-        echo "PLATE_CONF_PATH: {{.PLATE_CONF_PATH}}"
-        echo "PLATE_LOG_PATH: {{.PLATE_LOG_PATH}}"
-        echo "PLATE_TMP_PATH: {{.PLATE_TMP_PATH}}"
-
-  clean:
-    desc: "Remove files via a targeted clean-up of files or directories"
-    vars:
-      TARGET: '{{.TARGET | default "tmp"}}'
-    cmd: rm -frv {{.PLATE_PKG_PATH}}/{{.TARGET}}
-
-  yaml-to-json:
-    desc: "Convert YAML file to JSON"
-    internal: true
-    requires:
-      vars: [SOURCE, TARGET]
-    cmds:
-      - mkdir -p "$(dirname {{.PLATE_PKG_PATH}}/{{.TARGET}})"
-      - |
-        yq \
-          --output-format=json \
-          --prettyPrint \
-          --yaml-fix-merge-anchor-to-spec \
-          {{.PLATE_PKG_PATH}}/{{.SOURCE}} > {{.PLATE_PKG_PATH}}/{{.TARGET}}

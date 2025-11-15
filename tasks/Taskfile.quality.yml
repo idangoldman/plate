@@ -7,56 +7,45 @@ tasks:
     cmd: |
       cat \
         {{.PLATE_PKG_PATH}}/.gitignore \
-        {{.PLATE_CONF_PATH}}/.prettierignore \
-        > {{.PLATE_TMP_PATH}}/.prettierignore
+        {{.PLATE_PKG_PATH}}/configs/.prettierignore \
+        > {{.PLATE_PKG_PATH}}/tmp/.prettierignore
+
+  prettier:
+    desc: "Run Prettier with specified action (check or write)"
+    internal: true
+    requires:
+      vars: [ACTION]
+    cmds:
+      - task prettier-ignore-generate
+      - |
+        {{.PLATE_BIN_PATH}}/prettier \
+          --{{.ACTION}} \
+          --config {{.PLATE_PKG_PATH}}/configs/prettierrc.yml \
+          --ignore-path {{.PLATE_PKG_PATH}}/tmp/.prettierignore \
+          "{{.PLATE_PKG_PATH}}/**/*.{feature,md,yml}"
 
   format:
-    desc: "Check formatting for coffee, css, scss files"
+    desc: "Check formatting"
     ignore_error: true
-    cmds:
-      - task: prettier-ignore-generate
-
-      - |
-        {{.PLATE_BIN_PATH}}/prettier \
-          --check \
-          --config {{.PLATE_CONF_PATH}}/prettierrc.yml \
-          --ignore-path {{.PLATE_TMP_PATH}}/.prettierignore \
-          "{{.PLATE_PKG_PATH}}/**/*.{feature,md,yml}"
-
-      - task: :clean
-        vars:
-          TARGET: tmp/.prettierignore
+    cmd: task prettier ACTION=check
 
   format-fix:
-    desc: "Automatically fix formatting issues in supported files"
+    desc: "Fix formatting"
     ignore_error: true
-    cmds:
-      - task: prettier-ignore-generate
-
-      - |
-        {{.PLATE_BIN_PATH}}/prettier \
-          --write \
-          --config {{.PLATE_CONF_PATH}}/prettierrc.yml \
-          --ignore-path {{.PLATE_TMP_PATH}}/.prettierignore \
-          "{{.PLATE_PKG_PATH}}/**/*.{feature,md,yml}"
-
-      - task: :clean
-        vars:
-          TARGET: tmp/.prettierignore
+    cmd: task prettier ACTION=write
 
   lint:
     desc: "Check linting for CoffeeScript files"
-    sources:
-      - "{{.PLATE_PKG_PATH}}/{library,tests}/**/*.coffee"
-      - "{{.PLATE_CONF_PATH}}/coffeelint.yml"
-    generates:
-      - "{{.PLATE_TMP_PATH}}/coffeelint.json"
-    cmd: |
-      coffeelint_json_tmp="{{.PLATE_TMP_PATH}}/coffeelint.json"
-      coffeelint_files=$(find {{.PLATE_PKG_PATH}}/{library,tests} -name "*.coffee" -type f)
+    ignore_error: true
+    cmds:
+      - |
+        task utilities:yaml-to-json \
+          SOURCE=configs/coffeelint.yml \
+          TARGET=tmp/coffeelint.json
 
-      yq -o=json {{.PLATE_CONF_PATH}}/coffeelint.yml > "$coffeelint_json_tmp"
+      - |
+        coffeelint_files=$(find {{.PLATE_PKG_PATH}}/{library,tests} -name "*.coffee" -type f)
 
-      {{.PLATE_BIN_PATH}}/coffeelint \
-        --file "$coffeelint_json_tmp" \
-        $coffeelint_files
+        {{.PLATE_BIN_PATH}}/coffeelint \
+          --file ./configs/coffeelint.yml \
+          $coffeelint_files

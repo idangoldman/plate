@@ -5,8 +5,6 @@ tasks:
     desc: "Compile CoffeeScript to JavaScript (output to tmp)"
     requires:
       vars: [TARGET]
-    vars:
-      TARGET: '{{.TARGET | default "library"}}'
     cmds:
       - |
         {{.PLATE_BIN_PATH}}/coffee \
@@ -23,7 +21,7 @@ tasks:
       vars: [TARGET]
     cmds:
       - |
-        task :yaml-to-json \
+        task utilities:yaml-to-json \
           SOURCE=configs/babel.yml \
           TARGET=tmp/.babelrc
 
@@ -34,7 +32,7 @@ tasks:
           --out-dir {{.PLATE_PKG_PATH}}/src/{{.TARGET}} \
           --source-maps
 
-      - task :clean TARGET=tmp/.babelrc
+      - task utilities:clean TARGET=tmp/.babelrc
 
   run:
     desc: "Execute full transpilation pipeline (compile + transform)"

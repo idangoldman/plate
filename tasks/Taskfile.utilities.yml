@@ -1,0 +1,33 @@
+version: "3"
+
+tasks:
+  clean:
+    desc: "Remove files via a targeted clean-up of files or directories"
+    vars:
+      TARGET: '{{.TARGET | default "tmp"}}'
+    cmd: rm -frv {{.PLATE_PKG_PATH}}/{{.TARGET}}
+
+  create_directory:
+    desc: "Create a directory"
+    internal: true
+    requires:
+      vars: [TARGET]
+    cmd: mkdir -p "$(dirname {{.PLATE_PKG_PATH}}/{{.TARGET}})"
+
+  yaml-to-json:
+    desc: "Convert YAML file to JSON"
+    internal: true
+    requires:
+      vars: [SOURCE, TARGET]
+    sources:
+      - "{{.PLATE_PKG_PATH}}/{{.SOURCE}}"
+    generates:
+      - "{{.PLATE_PKG_PATH}}/{{.TARGET}}"
+    cmds:
+      - task  create_directory TARGET='{{.TARGET}}'
+      - |
+        yq \
+          --output-format=json \
+          --prettyPrint \
+          --yaml-fix-merge-anchor-to-spec \
+          {{.PLATE_PKG_PATH}}/{{.SOURCE}} > {{.PLATE_PKG_PATH}}/{{.TARGET}}
