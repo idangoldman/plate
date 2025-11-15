@@ -12,10 +12,10 @@ importers:
   .:
     devDependencies:
       '@babel/cli':
-        specifier: ^7.28.3
+        specifier: 7.28.3
         version: 7.28.3(@babel/core@7.28.5)
       '@babel/core':
-        specifier: ^7.28.5
+        specifier: 7.28.5
         version: 7.28.5
       '@coffeelint/cli':
         specifier: 5.2.11
@@ -1080,7 +1080,7 @@ snapshots:
     dependencies:
       '@babel/core': 7.28.5
       '@babel/helper-module-imports': 7.27.1
-      '@babel/helper-validator-identifier': 7.27.1
+      '@babel/helper-validator-identifier': 7.28.5
       '@babel/traverse': 7.28.5
     transitivePeerDependencies:
       - supports-color
