@@ -11,6 +11,10 @@ vars:
 dir: "{{.PLATE_PKG_PATH}}"
 
 includes:
+  build:
+    dir: "{{.PLATE_PKG_PATH}}"
+    optional: false
+    taskfile: ./Taskfile.build.yml
   transpile:
     dir: "{{.PLATE_PKG_PATH}}"
     optional: false
