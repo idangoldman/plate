@@ -12,4 +12,4 @@ See [CHANGELOG.md](CHANGELOG.md) file for what is already done and available for
 - [ ] (?) JSDoc style documentation coverage of 3/4 patterns
 - [ ] Generated or handwritten typescript interfaces and types based on JSDoc documentation
 - [ ] Update package json exports paths, via a cli command?
-- [ ] Update [README.md](http://README.md) with usage example of 3/4 patterns and when to use each
+- [ ] Update [README.md](README.md) with usage example of 3/4 patterns and when to use each
