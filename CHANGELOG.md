@@ -19,7 +19,7 @@
 - Tests taskfile with `run` and `report` tasks.
 - Transpile taskfile with `library` and `tests` tasks.
 - Build taskfile with `compile` (CoffeeScript), `transform` (babel), and `run` (both) tasks.
-- Utilities taskfile with `clean`, `create-folder`, and `yaml-to-json` tasks.
+- Utilities taskfile with `clean`, `create-folder`, `yaml-to-json`, and `validate-target` tasks.
 - `prettier` task quality taskfile, removing code duplication from format and format-fix tasks.
 - `Arrays.flatten` method with tests and all.
 - `toArray(seperator)` parameter to `String.toArray` method to split strings by a custom separator with tests coverage.

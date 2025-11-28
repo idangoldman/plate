@@ -13,7 +13,7 @@ tasks:
           TARGET: "{{.CUCUMBER_TMP_FILE}}"
 
       - |
-        {{.PLATE_BIN_PATH}}/cucumber-js \
+        {{.PLATE_PKG_PATH}}/node_modules/.bin/cucumber-js \
           --config="{{.CUCUMBER_TMP_FILE}}" {{.CLI_ARGS}}
 
   report:

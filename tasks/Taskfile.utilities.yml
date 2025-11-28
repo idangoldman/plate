@@ -5,14 +5,24 @@ tasks:
     desc: "Remove files via a targeted clean-up of files or directories"
     vars:
       TARGET: '{{.TARGET | default "tmp"}}'
-    cmd: rm -frv {{.PLATE_PKG_PATH}}/{{.TARGET}}
+    cmds:
+      - task: validate-target
+        vars:
+          TARGET: "{{.TARGET}}"
 
-  create_directory:
+      - rm -frv {{.PLATE_PKG_PATH}}/{{.TARGET}}
+
+  create-directory:
     desc: "Create a directory"
     internal: true
     requires:
       vars: [TARGET]
-    cmd: mkdir -p "$(dirname {{.PLATE_PKG_PATH}}/{{.TARGET}})"
+    cmds:
+      - task: validate-target
+        vars:
+          TARGET: "{{.TARGET}}"
+
+      - mkdir -p "$(dirname {{.PLATE_PKG_PATH}}/{{.TARGET}})"
 
   yaml-to-json:
     desc: "Convert YAML file to JSON"
@@ -24,7 +34,7 @@ tasks:
     generates:
       - "{{.PLATE_PKG_PATH}}/{{.TARGET}}"
     cmds:
-      - task: create_directory
+      - task: create-directory
         vars:
           TARGET: "{{.TARGET}}"
       - |
@@ -33,3 +43,13 @@ tasks:
           --prettyPrint \
           --yaml-fix-merge-anchor-to-spec \
           {{.PLATE_PKG_PATH}}/{{.SOURCE}} > {{.PLATE_PKG_PATH}}/{{.TARGET}}
+
+  validate-target:
+    desc: "Validate TARGET variable doesn't contain relative path components"
+    internal: true
+    requires:
+      vars: [TARGET]
+    preconditions:
+      - sh: '[ -z "$(echo "{{.TARGET}}" | grep -E "^\\/|\\.\\./|\\.\\.")" ]'
+        msg: "TARGET must be a relative path without ../ components or absolute paths"
+    cmd: echo "TARGET validation passed{{":"}} {{.TARGET}}"

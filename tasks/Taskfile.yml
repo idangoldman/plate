@@ -3,7 +3,6 @@ version: "3"
 vars:
   PLATE_ENV: '{{.ENV.PLATE_ENV | default "development"}}'
   PLATE_PKG_PATH: "{{.ENV.PLATE_PKG_PATH | default .USER_WORKING_DIR}}"
-  PLATE_BIN_PATH: "{{.PLATE_PKG_PATH}}/node_modules/.bin"
 
 dir: "{{.PLATE_PKG_PATH}}"
 
@@ -42,4 +41,3 @@ tasks:
         echo "=========================="
         echo "PLATE_ENV: {{.PLATE_ENV}}"
         echo "PLATE_PKG_PATH: {{.PLATE_PKG_PATH}}"
-        echo "PLATE_BIN_PATH: {{.PLATE_BIN_PATH}}"

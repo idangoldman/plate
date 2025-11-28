@@ -5,27 +5,36 @@ tasks:
     desc: "Compile CoffeeScript to JavaScript (output to tmp)"
     requires:
       vars: [TARGET]
-    cmd: |
-      {{.PLATE_BIN_PATH}}/coffee \
-        --bare \
-        --compile \
-        --map \
-        --no-header \
-        --output {{.PLATE_PKG_PATH}}/tmp/{{.TARGET}} \
-        {{.PLATE_PKG_PATH}}/{{.TARGET}}
+    cmds:
+      - task: :utilities:validate-target
+        vars:
+          TARGET: "{{.TARGET}}"
+
+      - |
+        {{.PLATE_PKG_PATH}}/node_modules/.bin/coffee \
+          --bare \
+          --compile \
+          --map \
+          --no-header \
+          --output {{.PLATE_PKG_PATH}}/tmp/{{.TARGET}} \
+          {{.PLATE_PKG_PATH}}/{{.TARGET}}
 
   transform:
     desc: "Transform JavaScript with Babel (tmp to src)"
     requires:
       vars: [TARGET]
     cmds:
+      - task: :utilities:validate-target
+        vars:
+          TARGET: "{{.TARGET}}"
+
       - task: :utilities:yaml-to-json
         vars:
           SOURCE: configs/babel.yml
           TARGET: tmp/.babelrc
 
       - |
-        {{.PLATE_BIN_PATH}}/babel \
+        {{.PLATE_PKG_PATH}}/node_modules/.bin/babel \
           {{.PLATE_PKG_PATH}}/tmp/{{.TARGET}} \
           --config-file {{.PLATE_PKG_PATH}}/tmp/.babelrc \
           --out-dir {{.PLATE_PKG_PATH}}/src/{{.TARGET}} \
@@ -39,6 +48,7 @@ tasks:
       - task: compile
         vars:
           TARGET: "{{.TARGET}}"
+
       - task: transform
         vars:
           TARGET: "{{.TARGET}}"
