@@ -3,11 +3,14 @@ import Prototypes from "~/library/patterns/prototypes.coffee"
 export default class To extends Prototypes
   @extends "Object"
 
-  toArray: -> switch true
+  toArray: (separator = "") -> switch true
     when @isArray() then @slice()
     when @isObject() then Object.entries(@)
     when @isString()
-      if @length is 0 then [] else [@]
+      if @length is 0
+      then []
+      else unless separator?.isEmpty() then @.trim().split(separator)
+      else [@]
     else [@]
 
   toObject: -> switch true

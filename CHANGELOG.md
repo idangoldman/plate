@@ -9,6 +9,38 @@
   [Security]   in case of vulnerabilities.
 -->
 
+## 0.10.0 - 2025-11-28
+
+### Added
+
+- [ROADMAP.md](ROADMAP.md) file, where I humorously predict the road ahead.
+- Babel package and plugins to help with file paths and file extensions rewrite after CoffeeScript compilation. All configured in `configs/babel.yml`.
+- `yq` support in GitHub workflows.
+- Tests taskfile with `run` and `report` tasks.
+- Transpile taskfile with `library` and `tests` tasks.
+- Build taskfile with `compile` (CoffeeScript), `transform` (babel), and `run` (both) tasks.
+- Utilities taskfile with `clean`, `create-folder`, and `yaml-to-json` tasks.
+- `prettier` task quality taskfile, removing code duplication from format and format-fix tasks.
+- `Arrays.flatten` method with tests and all.
+- `toArray(seperator)` parameter to `String.toArray` method to split strings by a custom separator with tests coverage.
+
+### Changed
+
+- Simplified [README.md](README.md), moving TODOs to [ROADMAP.md](ROADMAP.md), while the file stays work in progress as the project itself.
+- Import paths from `#root/**/*.js` to `~/**/*.coffee`, which removes the cognitive load to remember how paths resolve and point to the actual files.
+- Simplified GitHub workflows with fewer task steps and one path variable.
+- Cucumber format from pretty to progress.
+- Improved common step with `expectedValue` instead of int value
+
+### Removed
+
+- Node runtime loaders, resolvers, transformers, plugins, environment config. Shifting focus to creation of library essentials before expansion towards a full framework.
+- bin/plate command Taskfile wrapper and just use task command.
+- Extra `*_PATH` variables, all paths lead to `PLATE_PKG_PATH/*` or simpler relative paths.
+- Lodash, globals, and yaml dev dependencies.
+- CoffeeScript as a dependency, left as a dev dependency.
+- Development and package task files.
+
 ## [0.9.0] - 2025-08-26
 
 ### Added
