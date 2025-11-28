@@ -30,7 +30,8 @@
 - Import paths from `#root/**/*.js` to `~/**/*.coffee`, which removes the cognitive load to remember how paths resolve and point to the actual files.
 - Simplified GitHub workflows with fewer task steps and one path variable.
 - Cucumber format from pretty to progress.
-- Improved common step with `expectedValue` instead of int value
+- Improved common step with `expectedValue` instead of int value.
+- Updated Github workflows to run build tests only on changes to `library/**` and `tests/**` folders.
 
 ### Removed
 
