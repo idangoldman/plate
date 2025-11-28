@@ -1,2 +1,6 @@
-# .prettierignore
+# Folders
+node_modules
+tmp
+
+# Lock files
 pnpm-lock.yaml

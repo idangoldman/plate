@@ -12,11 +12,10 @@ node_modules
 .task
 
 # Ignore PLATE specific folders and files
-.babelrc
 bin/plate.js
-log/*
-src/*
-tmp/*
+log/
+src/
+tmp/
 
 # Keep the following files for empty directories to be included in the repository
 !/**/.gitkeep
