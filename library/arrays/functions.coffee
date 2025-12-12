@@ -5,7 +5,7 @@ export first = (arr) ->
   arr[0] unless isEmpty(arr)
 
 export flatten = (arr) ->
-  [new Set(arr.flat(Infinity))...]
+  unique(arr.flat(Infinity))
 
 export isEmpty = (arr) ->
   arr.length is 0
