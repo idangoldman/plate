@@ -9,7 +9,7 @@
   [Security]   in case of vulnerabilities.
 -->
 
-## 0.10.0 - 2025-11-28
+## [0.10.0] - 2025-11-28
 
 ### Added
 
@@ -140,6 +140,7 @@ P.S. 120 days later and I forgot the main reason for this branch's initial start
 - Created a `lib/helpers/` folder for better manage supportive functions that being used across the codebase.
 - `BDD` tests are introduced in this version and they are still under `WIP` label, and will be expand and test upon in the next version.
 
+[0.10.0]: https://github.com/idangoldman/plate/compare/0.8.1...0.10.0
 [0.9.0]: https://github.com/idangoldman/plate/compare/0.8.1...0.9.0
 [0.8.1]: https://github.com/idangoldman/plate/compare/0.8.0...0.8.1
 [0.8.0]: https://github.com/idangoldman/plate/compare/0.7.0...0.8.0
