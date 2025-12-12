@@ -1,4 +1,4 @@
-import capitalize from "~/library/utilities/capitalize.coffee"
+import capitalize from "~/library/strings/functions.coffee"
 import isNativeMethod from "~/library/utilities/is-native-method.coffee"
 
 export default class Prototypes
