@@ -13,3 +13,9 @@ export toCaseKeys = (caseType = "") ->
       value
 
   result
+
+export keys = (obj = {}) ->
+  Object.keys(obj)
+
+export values = (obj = {}) ->
+  Object.values(obj)
