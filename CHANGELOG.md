@@ -17,6 +17,7 @@
 - Babel package and plugins to help with file paths and file extensions rewrite after CoffeeScript compilation. All configured in `configs/babel.yml`.
 - `yq` support in GitHub workflows.
 - GitHub workflows updated to use latest versions of actions for Taskfile, PNPM, Node.js, and Checkout.
+- GitHub workflow for build and test on commits to library and tests folders only or on dispatch.
 - Tests taskfile with `run` and `report` tasks.
 - Transpile taskfile with `library` and `tests` tasks.
 - Build taskfile with `compile` (CoffeeScript), `transform` (babel), and `run` (both) tasks.
