@@ -9,7 +9,7 @@ export default class To extends Prototypes
     when @isString()
       if @length is 0
       then []
-      else unless separator?.isEmpty() then @.trim().split(separator)
+      else unless separator.isEmpty() then @.trim().split(separator)
       else [@]
     else [@]
 
