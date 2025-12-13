@@ -9,13 +9,14 @@
   [Security]   in case of vulnerabilities.
 -->
 
-## [0.10.0] - 2025-11-28
+## [0.10.0] - 2025-12-13
 
 ### Added
 
 - [ROADMAP.md](ROADMAP.md) file, where I humorously predict the road ahead.
 - Babel package and plugins to help with file paths and file extensions rewrite after CoffeeScript compilation. All configured in `configs/babel.yml`.
 - `yq` support in GitHub workflows.
+- GitHub workflows updated to use latest versions of actions for Taskfile, PNPM, Node.js, and Checkout.
 - Tests taskfile with `run` and `report` tasks.
 - Transpile taskfile with `library` and `tests` tasks.
 - Build taskfile with `compile` (CoffeeScript), `transform` (babel), and `run` (both) tasks.
