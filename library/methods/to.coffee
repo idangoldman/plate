@@ -25,6 +25,6 @@ export default class To extends Prototypes
     when @isArray()  then @length > 0
     when @isObject() then @keys().length > 0
     when @isString() then @length > 0
-    else !!@
+    else Boolean(@)
 
 export methods = To.methods()
