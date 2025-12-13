@@ -1,0 +1,25 @@
+version: "3"
+
+tasks:
+  library:
+    desc: "Transpile library CoffeeScript files"
+    sources:
+      - "{{.PLATE_PKG_PATH}}/library/**/*.coffee"
+    generates:
+      - "{{.PLATE_PKG_PATH}}/src/library/**/*.js"
+    cmds:
+      - task: :build:run
+        vars:
+          TARGET: library
+
+  tests:
+    desc: "Transpile tests CoffeeScript files"
+    deps: [library]
+    sources:
+      - "{{.PLATE_PKG_PATH}}/tests/**/*.coffee"
+    generates:
+      - "{{.PLATE_PKG_PATH}}/src/tests/**/*.js"
+    cmds:
+      - task: :build:run
+        vars:
+          TARGET: tests

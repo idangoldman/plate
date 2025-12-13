@@ -14,7 +14,8 @@ default: &default
     - src/tests/steps/**/*.js
 
   format:
-    - "pretty"
+    - "progress"
+    - "json:tmp/cucumber-report.json"
     - "html:tmp/cucumber-report.html"
 
   formatOptions:

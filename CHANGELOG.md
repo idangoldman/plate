@@ -9,6 +9,41 @@
   [Security]   in case of vulnerabilities.
 -->
 
+## [0.10.0] - 2025-12-13
+
+### Added
+
+- [ROADMAP.md](ROADMAP.md) file, where I humorously predict the road ahead.
+- Babel package and plugins to help with file paths and file extensions rewrite after CoffeeScript compilation. All configured in `configs/babel.yml`.
+- `yq` support in GitHub workflows.
+- GitHub workflows updated to use latest versions of actions for Taskfile, PNPM, Node.js, and Checkout.
+- GitHub workflow for build and test on commits to library and tests folders only or on dispatch.
+- Tests taskfile with `run` and `report` tasks.
+- Transpile taskfile with `library` and `tests` tasks.
+- Build taskfile with `compile` (CoffeeScript), `transform` (babel), and `run` (both) tasks.
+- Utilities taskfile with `clean`, `create-folder`, `yaml-to-json`, and `validate-target` tasks.
+- `prettier` task quality taskfile, removing code duplication from format and format-fix tasks.
+- `Arrays.flatten` method with tests and all.
+- `toArray(seperator)` parameter to `String.toArray` method to split strings by a custom separator with tests coverage.
+
+### Changed
+
+- Simplified [README.md](README.md), moving TODOs to [ROADMAP.md](ROADMAP.md), while the file stays work in progress as the project itself.
+- Import paths from `#root/**/*.js` to `~/**/*.coffee`, which removes the cognitive load to remember how paths resolve and point to the actual files.
+- Simplified GitHub workflows with fewer task steps and one path variable.
+- Cucumber format from pretty to progress.
+- Improved common step with `expectedValue` instead of int value.
+- Updated Github workflows to run build tests only on changes to `library/**` and `tests/**` folders.
+
+### Removed
+
+- Node runtime loaders, resolvers, transformers, plugins, environment config. Shifting focus to creation of library essentials before expansion towards a full framework.
+- bin/plate command Taskfile wrapper and just use task command.
+- Extra `*_PATH` variables, all paths lead to `PLATE_PKG_PATH/*` or simpler relative paths.
+- Lodash, globals, and yaml dev dependencies.
+- CoffeeScript as a dependency, left as a dev dependency.
+- Development and package task files.
+
 ## [0.9.0] - 2025-08-26
 
 ### Added
@@ -107,6 +142,7 @@ P.S. 120 days later and I forgot the main reason for this branch's initial start
 - Created a `lib/helpers/` folder for better manage supportive functions that being used across the codebase.
 - `BDD` tests are introduced in this version and they are still under `WIP` label, and will be expand and test upon in the next version.
 
+[0.10.0]: https://github.com/idangoldman/plate/compare/0.9.0...0.10.0
 [0.9.0]: https://github.com/idangoldman/plate/compare/0.8.1...0.9.0
 [0.8.1]: https://github.com/idangoldman/plate/compare/0.8.0...0.8.1
 [0.8.0]: https://github.com/idangoldman/plate/compare/0.7.0...0.8.0

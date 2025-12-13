@@ -1,6 +1,6 @@
 import { Given, When, Then } from "@cucumber/cucumber"
 import { expect } from "chai"
-import expectedValueParser from "#root/tests/support/expected-value-parser.js"
+import expectedValueParser from "~/tests/support/expected-value-parser.coffee"
 
 Given "the following inputs:", (table) ->
   @input = {}
@@ -16,9 +16,11 @@ When "{word} method is called on {word}", (method, name) ->
     @error = err
     @result = null
 
-When "{word} method is called on {word} with {int}", (method, name, argument) ->
+When "{word} method is called on {word} with {expectedValue}", (method, name, argument) ->
+  { type, value } = argument
+
   try
-    @result = @input[name][method](argument)
+    @result = @input[name][method](value)
     @error = null
   catch err
     @error = err

@@ -1,4 +1,6 @@
 gitChecks: false
+
 overrides:
   "@idangoldman/plate": "link:"
+
 publishBranch: main

@@ -1,12 +1,12 @@
 # Native Prototypes
-import Arrays from "#root/prototypes/arrays.js"
-import Objects from "#root/prototypes/objects.js"
-import Strings from "#root/prototypes/strings.js"
+import Arrays from "~/library/prototypes/arrays.coffee"
+import Objects from "~/library/prototypes/objects.coffee"
+import Strings from "~/library/prototypes/strings.coffee"
 
 # Method Prototypes
-import IsMethods from "#root/prototypes/methods/is.js"
-import CaseConversionMethods from "#root/prototypes/methods/case-conversion.js"
-import ToMethods from "#root/prototypes/methods/to.js"
+import IsMethods from "~/library/prototypes/methods/is.coffee"
+import CaseConversionMethods from "~/library/prototypes/methods/case-conversion.coffee"
+import ToMethods from "~/library/prototypes/methods/to.coffee"
 
 export initialize = ->
   Arrays.apply()

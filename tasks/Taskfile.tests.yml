@@ -1,0 +1,27 @@
+version: "3"
+
+tasks:
+  run:
+    desc: "Run Cucumber tests"
+    deps: [":transpile:tests"]
+    vars:
+      CUCUMBER_TMP_FILE: tmp/cucumber.yml
+    cmds:
+      - task: :utilities:yaml-to-json
+        vars:
+          SOURCE: configs/cucumber.yml
+          TARGET: "{{.CUCUMBER_TMP_FILE}}"
+
+      - |
+        {{.PLATE_PKG_PATH}}/node_modules/.bin/cucumber-js \
+          --config="{{.CUCUMBER_TMP_FILE}}" {{.CLI_ARGS}}
+
+  report:
+    desc: "Open test report in browser"
+    cmds:
+      - task: run
+        vars:
+          CLI_ARGS: "{{.CLI_ARGS}}"
+        ignore_error: true
+
+      - open "file://{{.PLATE_PKG_PATH}}/tmp/cucumber-report.html"

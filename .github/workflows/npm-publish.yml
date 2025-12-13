@@ -1,6 +1,7 @@
 name: Publish Package to NPM
 on:
   workflow_dispatch:
+
   release:
     types: [published]
 
@@ -14,24 +15,26 @@ jobs:
     env:
       PLATE_ENV: publish-ci
       PLATE_PKG_PATH: ${{ github.workspace }}
-      PLATE_PRJ_PATH: ${{ github.workspace }}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6.0.1
+
+      - name: Setup yq
+        uses: mikefarah/yq@v4.49.2
 
       - name: Setup Taskfile
-        uses: arduino/setup-task@v2
+        uses: arduino/setup-task@v2.0.0
         with:
           version: 3.x
 
       - name: Setup PNPM
-        uses: pnpm/action-setup@v3
+        uses: pnpm/action-setup@v4.2.0
         with:
           version: latest
           run_install: false
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6.1.0
         with:
           node-version-file: ".node-version"
           registry-url: "https://registry.npmjs.org"
@@ -41,10 +44,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build Plate CLI
-        run: task -t ./tasks dev:build-cli
-
-      - name: Build project
-        run: node ./bin/plate.js dev:build
+        run: task --taskfile ./tasks transpile:library
 
       - name: Publish to NPM
         run: pnpm publish

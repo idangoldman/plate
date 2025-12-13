@@ -1,0 +1,8 @@
+plugins:
+  - - module-resolver
+    - alias:
+        "~": "./src/"
+
+  - - replace-import-extension
+    - extMapping:
+        ".coffee": ".js"
