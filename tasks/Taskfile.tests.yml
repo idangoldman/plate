@@ -22,6 +22,18 @@ tasks:
       - task: run
         vars:
           CLI_ARGS: "{{.CLI_ARGS}}"
-        ignore_error: true
 
-      - open "file://{{.PLATE_PKG_PATH}}/tmp/cucumber-report.html"
+      - defer: open "file://{{.PLATE_PKG_PATH}}/tmp/cucumber-report.html"
+
+  prototypes:
+    desc: "Run all patterns in parallel"
+    deps:
+      - task: run
+        env:
+          TEST_PATTERN: functional
+      - task: run
+        env:
+          TEST_PATTERN: class
+      - task: run
+        env:
+          TEST_PATTERN: prototype
