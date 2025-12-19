@@ -1,8 +1,8 @@
-import * as methods from "~/library/arrays/functions.coffee"
+import * as methods from "~/library/arrays/functions/index.coffee"
+import { applyFunctions } from "~/library/utilities/prototypes.coffee"
 
 class Arrays extends Array
 
-for name, method of methods
-  Arrays::[name] = (args...) -> method(@, args...)
+applyFunctions methods, "Arrays"
 
 export default Arrays

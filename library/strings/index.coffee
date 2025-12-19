@@ -1,5 +1,5 @@
 import Strings from "~/library/strings/class.coffee"
-import * as functions from "~/library/strings/functions.coffee"
+import * as functions from "~/library/strings/functions/index.coffee"
 import Prototypes from "~/library/utilities/prototypes.coffee"
 
 export { Strings, functions... }

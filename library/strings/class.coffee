@@ -1,8 +1,8 @@
-import * as methods from "~/library/strings/functions.coffee"
+import * as methods from "~/library/strings/functions/index.coffee"
+import { applyFunctions } from "~/library/utilities/prototypes.coffee"
 
 class Strings extends String
 
-for name, method of methods
-  Strings::[name] = (args...) -> method(@, args...)
+applyFunctions methods, "Strings"
 
 export default Strings
