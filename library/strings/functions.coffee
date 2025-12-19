@@ -1,10 +1,10 @@
-import { CASE_SEPARATORS, CASE_WHITESPACE } from "~/library/utilities/regex.coffee"
+import { CASE_SEPARATORS_UNICODE, CASE_WHITESPACE } from "~/library/utilities/regex.coffee"
 
 export capitalize = (str = "") ->
   unless str.length > 0 then "" else str.charAt(0).toUpperCase() + str.slice(1).toLowerCase()
 
 export toCase(value = "")
-  @replace(CASE_SEPARATORS, " $1").trim().toLowerCase().split(CASE_WHITESPACE)
+  @replace(CASE_SEPARATORS_UNICODE, " ").trim().toLowerCase().split(CASE_WHITESPACE)
 
 export toCamelCase(value = "")
   @toCase().first().toLowerCase() + @toCase().slice(1).map(capitalize).join('')
