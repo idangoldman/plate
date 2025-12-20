@@ -1,4 +1,8 @@
-import isNativeFunction from "~/library/utilities/is-native-function.coffee"
+export default isNativeFunction = (method) ->
+  try
+    Function.prototype.toString.call(method).includes "[native code]"
+  catch error
+    false
 
 export applyFunctions = (functions, prototypeName) ->
   prototype = globalThis[prototypeName]?.prototype

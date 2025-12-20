@@ -1,8 +1,8 @@
-import * as methods from "~/library/arrays/functions/index.coffee"
+import * as functions from "~/library/arrays/functions"
 import { applyFunctions } from "~/library/utilities/prototypes.coffee"
 
 class Arrays extends Array
 
-applyFunctions methods, "Arrays"
+applyFunctions functions, "Arrays"
 
 export default Arrays

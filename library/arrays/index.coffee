@@ -1,9 +1,10 @@
 import Arrays from "~/library/arrays/class.coffee"
-import functions from "~/library/arrays/functions/*.coffee"
+import * as functions from "~/library/arrays/functions"
 import Prototypes from "~/library/utilities/prototypes.coffee"
 
-export default Arrays
-export { functions... }
-
-export apply = -> Prototypes.applyFunctions(functions, "Array")
-export remove = -> Prototypes.removeFunctions(Object.keys(functions), "Array")
+export default {
+  Arrays,
+  apply: -> Prototypes.applyFunctions(functions, "Array"),
+  remove: -> Prototypes.removeFunctions(Object.keys(functions), "Array")
+  functions...
+}

@@ -1,8 +1,8 @@
-import * as methods from "~/library/objects/functions/index.coffee"
-import capitalize from '~/library/strings/functions/capitalize.coffee'
+import * as functions from "~/library/objects/functions"
+import { applyFunctions } from "~/library/utilities/prototypes.coffee"
 
 class Objects extends Object
 
-applyFunctions methods, "Object"
+applyFunctions functions, "Object"
 
 export default Objects
