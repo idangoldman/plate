@@ -1,5 +1,5 @@
 import Arrays from "~/library/arrays/class.coffee"
-import * as functions from "~/library/arrays/functions/index.coffee"
+import functions from "~/library/arrays/functions/*.coffee"
 import Prototypes from "~/library/utilities/prototypes.coffee"
 
 export default Arrays
