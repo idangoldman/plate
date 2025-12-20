@@ -1,7 +1,0 @@
-export { default as excludes } from '~/library/arrays/functions/excludes.coffee'
-export { default as first } from '~/library/arrays/functions/first.coffee'
-export { default as flatten } from '~/library/arrays/functions/flatten.coffee'
-export { default as isEmpty } from '~/library/arrays/functions/is-empty.coffee'
-export { default as isNotEmpty } from '~/library/arrays/functions/is-not-empty.coffee'
-export { default as last } from '~/library/arrays/functions/last.coffee'
-export { default as unique } from '~/library/arrays/functions/unique.coffee'
