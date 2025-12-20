@@ -34,6 +34,7 @@
     "@cucumber/pretty-formatter": "2.4.1",
     "babel-plugin-module-resolver": "5.0.2",
     "babel-plugin-replace-import-extension": "1.1.5",
+    "babel-plugin-wildcard": "7.0.0",
     "chai": "6.2.1",
     "coffeescript": "2.7.0",
     "prettier": "3.7.1",
