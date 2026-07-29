@@ -1,4 +1,4 @@
-import toCase from '~/library/strings/functions/to-case';
+import toCase from '../../strings/functions/to-case';
 
 export default function toKebabCase(value: string = ""): string {
   const parts = toCase(value);

@@ -1,5 +1,5 @@
 import { Given, When } from "@cucumber/cucumber";
-import capitalize from "../../library/strings/functions/capitalize";
+import capitalize from "../../../library/strings/functions/capitalize";
 
 Given("I have a {string} string", function (input: string) {
   this.input = input;

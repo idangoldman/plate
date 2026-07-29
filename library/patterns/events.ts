@@ -1,20 +1,20 @@
-// import eventNamesValidation from '#root/src/helpers/event-names-validation.js'
-// import findReverseBranch from '#root/src/helpers/find-reverse-branch.js'
+import eventNamesValidation from '../events/helpers/event-names-validation';
+import findReverseBranch from '../events/helpers/find-reverse-branch';
 
 type EventCallback = (...args: any[]) => void;
 
 export default class Events {
-  protected EVENTS_LIST: string[];
+  protected EVENTS_LIST: any[];
   public namespace: string;
   protected listeners: Map<string, Set<EventCallback>>;
 
-  constructor(eventsList: string[] | string = [], namespace: string = '') {
+  constructor(eventsList: any[] | string = [], namespace: string = '') {
     this.EVENTS_LIST = [].concat(eventsList as any);
     this.namespace = namespace;
     this.listeners = new Map();
   }
 
-  on(eventNames: string | string[], callback: EventCallback, once: boolean = false): this {
+  on(eventNames: string, callback: EventCallback, once: boolean = false): this {
     const validEventNames = this._validateEventNames(eventNames);
 
     for (const eventName of validEventNames) {
@@ -24,7 +24,7 @@ export default class Events {
     return this;
   }
 
-  off(eventNames?: string | string[], callback?: EventCallback): this {
+  off(eventNames?: string, callback?: EventCallback): this {
     if (eventNames) {
       const validEventNames = this._validateEventNames(eventNames);
 
@@ -38,14 +38,17 @@ export default class Events {
     return this;
   }
 
-  once(eventNames: string | string[], callback: EventCallback): this {
+  once(eventNames: string, callback: EventCallback): this {
     return this.on(eventNames, callback, true);
   }
 
-  emit(eventNames: string | string[], data?: any[]): this {
+  emit(eventNames: string, data?: any[]): this {
     const validEventNames = this._validateEventNames(eventNames);
-    // const eventsList = findReverseBranch(validEventNames, this.EVENTS_LIST);
-    const eventsList = validEventNames; // Placeholder until we port findReverseBranch
+
+    // Assuming you can pass multiple eventNames, in the original CoffeeScript emit
+    // it was finding reverse branch based on the validated list.
+    // However, findReverseBranch takes a single leaf, so we map over the validEventNames.
+    const eventsList = validEventNames.flatMap(eventName => findReverseBranch(eventName, this.EVENTS_LIST));
 
     for (let storedEvent of eventsList) {
       storedEvent = this._createNamespacedEvent(storedEvent);
@@ -65,7 +68,7 @@ export default class Events {
     return this;
   }
 
-  has(eventNames: string | string[]): boolean | this {
+  has(eventNames: string): boolean | this {
     const validEventNames = this._validateEventNames(eventNames);
 
     for (const eventName of validEventNames) {
@@ -85,9 +88,8 @@ export default class Events {
     return this;
   }
 
-  protected _validateEventNames(eventNames: string | string[]): string[] {
-    // return eventNamesValidation(eventNames, this.EVENTS_LIST);
-    return Array.isArray(eventNames) ? eventNames : [eventNames]; // Placeholder
+  protected _validateEventNames(eventNames: string): string[] {
+    return eventNamesValidation(eventNames, this.EVENTS_LIST);
   }
 
   protected _createNamespacedEvent(eventName: string = ''): string {

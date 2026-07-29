@@ -1,5 +1,5 @@
-import * as functions from "~/library/arrays/functions";
-import { applyFunctions } from "~/library/utilities/prototypes";
+import * as functions from "../../arrays/functions";
+import { applyFunctions } from "../../utilities/prototypes";
 
 class Arrays extends Array {}
 

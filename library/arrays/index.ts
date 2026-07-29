@@ -1,6 +1,6 @@
-import Arrays from "~/library/arrays/class";
-import * as functions from "~/library/arrays/functions";
-import * as Prototypes from "~/library/utilities/prototypes";
+import Arrays from "../../arrays/class";
+import * as functions from "../../arrays/functions";
+import * as Prototypes from "../../utilities/prototypes";
 
 const apply = () => Prototypes.applyFunctions(functions, "Array");
 const remove = () => Prototypes.removeFunctions(Object.keys(functions), "Array");

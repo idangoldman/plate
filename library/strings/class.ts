@@ -1,5 +1,5 @@
-import * as functions from "~/library/strings/functions";
-import { applyFunctions } from "~/library/utilities/prototypes";
+import * as functions from "../../strings/functions";
+import { applyFunctions } from "../../utilities/prototypes";
 
 class Strings extends String {}
 

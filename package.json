@@ -44,6 +44,11 @@
     "typescript": "^5.9.3"
   },
   "scripts": {
-    "test": "NODE_OPTIONS=\"--import tsx\" cucumber-js"
+    "test": "NODE_OPTIONS=\"--import tsx\" cucumber-js -c configs/cucumber.yml"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
   }
 }

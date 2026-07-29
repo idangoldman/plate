@@ -1,9 +1,9 @@
-import isArray from '~/library/objects/functions/is-array';
-import isObject from '~/library/objects/functions/is-object';
-import isString from '~/library/objects/functions/is-string';
-import isEmptyString from '~/library/strings/functions/is-empty';
-import isEmptyArray from '~/library/arrays/functions/is-empty';
-import isEmptyObject from '~/library/objects/functions/is-empty';
+import isArray from '../../objects/functions/is-array';
+import isObject from '../../objects/functions/is-object';
+import isString from '../../objects/functions/is-string';
+import isEmptyString from '../../strings/functions/is-empty';
+import isEmptyArray from '../../arrays/functions/is-empty';
+import isEmptyObject from '../../objects/functions/is-empty';
 
 export default function toBoolean(value: any): boolean {
   if (isArray(value)) {

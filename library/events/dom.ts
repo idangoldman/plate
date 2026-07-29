@@ -1,7 +1,5 @@
-import Events from '~/library/patterns/events';
-// import { DOM_EVENTS_LIST } from '#root/src/events/lists.json'
-
-const DOM_EVENTS_LIST: string[] = ['click', 'hover']; // Placeholder
+import Events from '../patterns/events';
+import { DOM_EVENTS_LIST } from './lists';
 
 export default class DOMEvents extends Events {
   private element: { raw: HTMLElement };

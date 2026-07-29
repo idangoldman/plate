@@ -1,6 +1,6 @@
-import isArray from '~/library/objects/functions/is-array';
-import isObject from '~/library/objects/functions/is-object';
-import isString from '~/library/objects/functions/is-string';
+import isArray from '../../objects/functions/is-array';
+import isObject from '../../objects/functions/is-object';
+import isString from '../../objects/functions/is-string';
 
 export default function toObject(value: any): Record<string, any> {
   if (isArray(value)) {
