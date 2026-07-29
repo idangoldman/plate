@@ -77,9 +77,10 @@ export default class Hooks
               result
 
           when 'around'
-            methods[methodName] = (args...) ->
-              boundOriginal = originalMethod.bind(@)
-              hookDef.handler.call(@, boundOriginal, args...)
+            do (originalMethodLocal = originalMethod) ->
+              methods[methodName] = (args...) ->
+                boundOriginal = originalMethodLocal.bind(@)
+                hookDef.handler.call(@, boundOriginal, args...)
 
     methods
 

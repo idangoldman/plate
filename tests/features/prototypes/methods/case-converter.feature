@@ -6,19 +6,19 @@ Feature: Case Conversions
 
   @strings
   Scenario Outline: Converting strings to different case formats
-    Given I have a string "<input>"
-    When I convert it to "<caseType>" case
+    Given the string "<input>"
+    When I call the "<methodName>" method on the string
     Then I should get "<expected>" as the result
 
     Examples:
-      | input       | caseType | expected    |
-      | hello_World | camel    | helloWorld  |
-      | helloWorld  | constant | HELLO_WORLD |
-      | HelloWorld  | kebab    | hello-world |
-      | helloWorld  | pascal   | HelloWorld  |
-      | helloWorld  | snake    | hello_world |
-      | hello.World | title    | Hello World |
-      | HELLO_WORLD | dot      | hello.world |
+      | input       | methodName      | expected    |
+      | hello_World | toCamelCase     | helloWorld  |
+      | helloWorld  | toConstantCase  | HELLO_WORLD |
+      | HelloWorld  | toKebabCase     | hello-world |
+      | helloWorld  | toPascalCase    | HelloWorld  |
+      | helloWorld  | toSnakeCase     | hello_world |
+      | hello.World | toTitleCase     | Hello World |
+      | HELLO_WORLD | toDotCase       | hello.world |
 
   @objects
   Scenario: Converting nested object keys from different case formats to PascalCase

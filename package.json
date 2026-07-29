@@ -36,7 +36,16 @@
     "src"
   ],
   "scripts": {
-    "help": "plate help"
+    "help": "plate help",
+    "build:lib": "coffee --bare --compile --no-header --output src lib",
+    "build:tests": "coffee --bare --compile --no-header --output src/tests tests",
+    "build": "npm run build:lib && npm run build:tests",
+    "test:run": "cucumber-js --config=configs/cucumber.yml",
+    "test": "npm run build && npm run test:run",
+    "lint:prettier": "prettier --check --config configs/prettierrc.yml --ignore-path configs/.prettierignore \"{lib,tests}/**/*.coffee\"",
+    "lint:coffeelint": "coffeelint --file configs/coffeelint.yml lib tests",
+    "lint": "npm run lint:prettier && npm run lint:coffeelint",
+    "format:prettier": "prettier --write --config configs/prettierrc.yml --ignore-path configs/.prettierignore \"{lib,tests}/**/*.coffee\""
   },
   "dependencies": {
     "@coffeelint/cli": "5.2.11",
