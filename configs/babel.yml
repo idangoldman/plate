@@ -6,3 +6,7 @@ plugins:
   - - replace-import-extension
     - extMapping:
         ".coffee": ".js"
+
+  - - wildcard
+    - useCamelCase: true
+      nostrip: true
