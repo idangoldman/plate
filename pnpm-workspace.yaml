@@ -1,6 +1,8 @@
 gitChecks: false
 
+onlyBuiltDependencies: '[''esbuild'']'
+
 overrides:
-  "@idangoldman/plate": "link:"
+  '@idangoldman/plate': 'link:'
 
 publishBranch: main
