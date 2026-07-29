@@ -1,3 +1,3 @@
-import { apply } from '../../objects/index';
+import { apply } from '~/library/objects/index';
 
 apply();

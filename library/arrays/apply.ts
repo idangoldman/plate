@@ -1,3 +1,3 @@
-import { apply } from '../../arrays/index';
+import { apply } from '~/library/arrays/index';
 
 apply();

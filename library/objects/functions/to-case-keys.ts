@@ -1,11 +1,11 @@
-import capitalize from '../../strings/functions/capitalize';
-import toCamelCase from '../../strings/functions/to-camel-case';
-import toConstantCase from '../../strings/functions/to-constant-case';
-import toDotCase from '../../strings/functions/to-dot-case';
-import toKebabCase from '../../strings/functions/to-kebab-case';
-import toPascalCase from '../../strings/functions/to-pascal-case';
-import toSnakeCase from '../../strings/functions/to-snake-case';
-import toTitleCase from '../../strings/functions/to-title-case';
+import capitalize from '~/library/strings/functions/capitalize';
+import toCamelCase from '~/library/strings/functions/to-camel-case';
+import toConstantCase from '~/library/strings/functions/to-constant-case';
+import toDotCase from '~/library/strings/functions/to-dot-case';
+import toKebabCase from '~/library/strings/functions/to-kebab-case';
+import toPascalCase from '~/library/strings/functions/to-pascal-case';
+import toSnakeCase from '~/library/strings/functions/to-snake-case';
+import toTitleCase from '~/library/strings/functions/to-title-case';
 
 const formatters: Record<string, (v: string) => string> = {
   toCamelCase,

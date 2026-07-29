@@ -1,6 +1,6 @@
-import Strings from "../../strings/class";
-import * as functions from "../../strings/functions";
-import * as Prototypes from "../../utilities/prototypes";
+import Strings from "~/library/strings/class";
+import * as functions from "~/library/strings/functions";
+import * as Prototypes from "~/library/utilities/prototypes";
 
 const apply = () => Prototypes.applyFunctions(functions, "String");
 const remove = () => Prototypes.removeFunctions(Object.keys(functions), "String");

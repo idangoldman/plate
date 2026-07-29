@@ -1,3 +1,3 @@
-import { apply } from '../../strings/index';
+import { apply } from '~/library/strings/index';
 
 apply();

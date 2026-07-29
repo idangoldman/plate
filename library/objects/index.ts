@@ -1,6 +1,6 @@
-import Objects from "../../objects/class";
-import * as functions from "../../objects/functions";
-import * as Prototypes from "../../utilities/prototypes";
+import Objects from "~/library/objects/class";
+import * as functions from "~/library/objects/functions";
+import * as Prototypes from "~/library/utilities/prototypes";
 
 // Objects cannot iterate over Object properties normally if they are non-enumerable
 // but the functions imported are simple properties on the object literal, so applyFunctions works

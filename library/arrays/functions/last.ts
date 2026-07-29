@@ -1,4 +1,4 @@
-import isEmpty from '../../arrays/functions/is-empty';
+import isEmpty from '~/library/arrays/functions/is-empty';
 
 export default function last<T>(arr: T[]): T | undefined {
   if (!isEmpty(arr)) {

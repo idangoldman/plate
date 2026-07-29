@@ -11,10 +11,6 @@ includes:
     dir: "{{.PLATE_PKG_PATH}}"
     optional: false
     taskfile: ./Taskfile.build.yml
-  transpile:
-    dir: "{{.PLATE_PKG_PATH}}"
-    optional: false
-    taskfile: ./Taskfile.transpile.yml
   tests:
     dir: "{{.PLATE_PKG_PATH}}"
     optional: false

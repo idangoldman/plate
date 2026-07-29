@@ -1,5 +1,5 @@
-import * as functions from "../../objects/functions";
-import { applyFunctions } from "../../utilities/prototypes";
+import * as functions from "~/library/objects/functions";
+import { applyFunctions } from "~/library/utilities/prototypes";
 
 class Objects extends Object {}
 

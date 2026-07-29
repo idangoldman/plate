@@ -1,4 +1,4 @@
-import './global.d.ts';
+// import './global.d.ts';
 
 // Arrays
 import * as ArrayFunctions from './arrays/functions';

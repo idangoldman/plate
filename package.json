@@ -21,34 +21,32 @@
   "exports": {
     "./library/*": "./src/library/**/*.js"
   },
-  "type": "module",
   "files": [
     "library",
     "src"
   ],
   "devDependencies": {
-    "@babel/cli": "7.28.3",
-    "@babel/core": "7.28.5",
     "@cucumber/cucumber": "12.2.0",
     "@cucumber/pretty-formatter": "2.4.1",
     "@types/node": "^26.1.2",
-    "babel-plugin-module-resolver": "5.0.2",
-    "babel-plugin-replace-import-extension": "1.1.5",
-    "babel-plugin-wildcard": "7.0.0",
     "chai": "4.5.0",
     "prettier": "3.7.1",
     "prettier-plugin-gherkin": "3.1.3",
     "ts-node": "10.9.2",
+    "tsc-alias": "^1.9.1",
     "tslib": "^2.8.1",
     "tsx": "^4.23.1",
     "typescript": "^5.9.3"
   },
   "scripts": {
-    "test": "NODE_OPTIONS=\"--import tsx\" cucumber-js -c configs/cucumber.yml"
+    "test": "NODE_OPTIONS=\"--import tsx\" cucumber-js -c configs/cucumber.yml",
+    "build": "tsc && tsc-alias"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
       "esbuild"
     ]
-  }
+  },
+  "main": "./dist/library/index.js",
+  "types": "./dist/library/index.d.ts"
 }

@@ -1,7 +1,7 @@
-import isArray from '../../objects/functions/is-array';
-import isObject from '../../objects/functions/is-object';
-import isString from '../../objects/functions/is-string';
-import isEmpty from '../../strings/functions/is-empty';
+import isArray from '~/library/objects/functions/is-array';
+import isObject from '~/library/objects/functions/is-object';
+import isString from '~/library/objects/functions/is-string';
+import isEmpty from '~/library/strings/functions/is-empty';
 
 export default function toArray(value: any, separator: string | RegExp = ""): any[] {
   if (isArray(value)) {
