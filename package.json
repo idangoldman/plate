@@ -19,7 +19,9 @@
     "registry": "https://registry.npmjs.org/"
   },
   "exports": {
-    "./library/*": "./src/library/**/*.js"
+    "./library/*": "./src/library/**/*.js",
+    "./dom": "./dist/library/dom/index.js",
+    "./stores": "./dist/library/stores/index.js"
   },
   "files": [
     "library",
@@ -28,8 +30,10 @@
   "devDependencies": {
     "@cucumber/cucumber": "13.2.0",
     "@cucumber/pretty-formatter": "4.0.0",
+    "@types/jsdom": "^28.0.3",
     "@types/node": "26.1.2",
     "chai": "6.2.2",
+    "jsdom": "^29.1.1",
     "prettier": "3.9.6",
     "prettier-plugin-gherkin": "4.0.0",
     "ts-node": "10.9.2",
