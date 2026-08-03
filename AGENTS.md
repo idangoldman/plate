@@ -25,7 +25,7 @@
 ## 🛠️ Build & Package Management
 
 - **Package Manager:** We use **pnpm**.
-  - _Requirement:_ Node.js >= v22.13.0 (specified in `.node-version`).
+  - _Requirement:_ Node.js >= as specified in `.node-version`.
 - **Build Tools:** The library is built using `tsc && tsc-alias`.
 - **Task Runner:** We use `go-task` (Taskfile). Configurations are located in the `tasks/` directory (e.g., `Taskfile.build.yml`, `Taskfile.tests.yml`).
 
