@@ -1,13 +1,9 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "module": "CommonJS",
-    "moduleResolution": "node",
-    "lib": [
-      "ESNext",
-      "DOM",
-      "DOM.Iterable"
-    ],
+    "module": "NodeNext", // 👈 Update this
+    "moduleResolution": "NodeNext", // 👈 Update this
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "outDir": "./dist",
     "rootDir": ".",
     "strict": true,
@@ -15,18 +11,10 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "paths": {
-      "~/*": [
-        "./*"
-      ]
+      "~/*": ["./*"]
     },
     "declaration": true
   },
-  "include": [
-    "library/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "tests"
-  ]
+  "include": ["library/**/*.ts"],
+  "exclude": ["node_modules", "dist", "tests"]
 }

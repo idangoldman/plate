@@ -6,28 +6,28 @@
 
 ## 🏗️ Architecture & Code Style
 
-*   **TypeScript Only:** This project is entirely written in TypeScript (migrated from CoffeeScript). **Do not use or introduce CoffeeScript.**
-*   **Module System:** The project compiles to **CommonJS**.
-*   **Imports:** We use standard extensionless imports and utilize `~/` for absolute path aliases.
-*   **Design Pattern:**
-    *   The project extends native prototypes (`Array`, `Object`, `String`).
-    *   **Keep pure functions strictly separate from mutation logic.**
-    *   Global typings are used alongside an `applyAll()` hook.
+- **TypeScript Only:** This project is entirely written in TypeScript (migrated from CoffeeScript). **Do not use or introduce CoffeeScript.**
+- **Module System:** The project compiles to **CommonJS**.
+- **Imports:** We use standard extensionless imports and utilize `~/` for absolute path aliases.
+- **Design Pattern:**
+  - The project extends native prototypes (`Array`, `Object`, `String`).
+  - **Keep pure functions strictly separate from mutation logic.**
+  - Global typings are used alongside an `applyAll()` hook.
 
 ## 🧪 Testing Guidelines
 
-*   **BDD with Cucumber:** Tests are written in Behavior-Driven Development (BDD) style using **Cucumber**.
-*   **Test Location:** All tests are located in `.feature` files within the `tests/features` directory.
-*   **Execution Runtime:** Tests run TypeScript using `tsx`.
-    *   *Configuration:* Located at `configs/cucumber.yml`.
-    *   *Under the hood command:* `NODE_OPTIONS="--import tsx" cucumber-js`
+- **BDD with Cucumber:** Tests are written in Behavior-Driven Development (BDD) style using **Cucumber**.
+- **Test Location:** All tests are located in `.feature` files within the `tests/features` directory.
+- **Execution Runtime:** Tests run TypeScript using `tsx`.
+  - _Configuration:_ Located at `configs/cucumber.yml`.
+  - _Under the hood command:_ `NODE_OPTIONS="--import tsx" cucumber-js`
 
 ## 🛠️ Build & Package Management
 
-*   **Package Manager:** We use **pnpm**.
-    *   *Requirement:* Node.js >= v22.13.0 (specified in `.node-version`).
-*   **Build Tools:** The library is built using `tsc && tsc-alias`.
-*   **Task Runner:** We use `go-task` (Taskfile). Configurations are located in the `tasks/` directory (e.g., `Taskfile.build.yml`, `Taskfile.tests.yml`).
+- **Package Manager:** We use **pnpm**.
+  - _Requirement:_ Node.js >= v22.13.0 (specified in `.node-version`).
+- **Build Tools:** The library is built using `tsc && tsc-alias`.
+- **Task Runner:** We use `go-task` (Taskfile). Configurations are located in the `tasks/` directory (e.g., `Taskfile.build.yml`, `Taskfile.tests.yml`).
 
 ## 🛑 Mandatory Pre-Commit Checks
 
