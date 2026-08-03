@@ -1,0 +1,43 @@
+name: Prepare Release
+
+on:
+  pull_request:
+    types: [labeled]
+
+jobs:
+  prepare-release:
+    if: github.event.label.name == 'prepare-release'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".node-version"
+
+      - name: Bump minor version
+        run: |
+          npm version minor --no-git-tag-version
+
+      - name: Generate Changelog
+        uses: orhun/git-cliff-action@v4
+        id: git-cliff
+        with:
+          config: cliff.toml
+          args: --unreleased --tag $(node -p "require('./package.json').version") --prepend CHANGELOG.md
+
+      - name: Commit files
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore(release): bump version and update changelog [skip ci]"
+          file_pattern: "package.json CHANGELOG.md"
+          branch: ${{ github.head_ref }}
