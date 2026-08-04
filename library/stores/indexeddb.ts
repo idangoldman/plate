@@ -1,19 +1,12 @@
-import Events from '../patterns/events';
-import { STORE_EVENTS_LIST } from './constants';
-import { StoreInterface } from './interface';
-import Storage from './local';
+import BaseStore from './base';
 
-export default class IndexedDBStorage extends Events implements StoreInterface {
-  private prefix: string;
-  private separator: string;
+export default class IndexedDBStore extends BaseStore {
   private dbName: string;
   private storeName: string;
   private dbPromise: Promise<IDBDatabase>;
 
   constructor(dbName: string = 'app-db', storeName: string = 'keyval', prefix: string = '', separator: string = '') {
-    super(STORE_EVENTS_LIST);
-    this.prefix = prefix;
-    this.separator = separator;
+    super(prefix, separator);
     this.dbName = dbName;
     this.storeName = storeName;
 
@@ -40,18 +33,6 @@ export default class IndexedDBStorage extends Events implements StoreInterface {
         reject((event.target as IDBOpenDBRequest).error);
       };
     });
-  }
-
-  getPrefix(): string {
-    return this.prefix;
-  }
-
-  getSeparator(): string {
-    return this.separator;
-  }
-
-  getFullKey(key: string = ''): string {
-    return `${this.prefix}${this.separator}${key}`;
   }
 
   async get<T>(key: string = ''): Promise<T | null> {
@@ -151,15 +132,5 @@ export default class IndexedDBStorage extends Events implements StoreInterface {
 
       request.onerror = () => reject(request.error);
     });
-  }
-
-  async empty(key: string): Promise<void> {
-    const oldValue = await this.get<any>(key);
-    let newValue = Storage.getDefaultEmptyValue(oldValue);
-
-    if (newValue !== undefined) {
-      await this.set(key, newValue);
-      this.emit('empty', [key, newValue]);
-    }
   }
 }

@@ -1,30 +1,11 @@
-import Events from '../patterns/events';
-import { STORE_EVENTS_LIST } from './constants';
-import { StoreInterface } from './interface';
-import Storage from './local'; // To reuse getDefaultEmptyValue
+import BaseStore from './base';
 
-export default class MemoryStorage extends Events implements StoreInterface {
-  private prefix: string;
-  private separator: string;
+export default class MemoryStore extends BaseStore {
   private store: Map<string, any>;
 
   constructor(prefix: string = '', separator: string = '') {
-    super(STORE_EVENTS_LIST);
-    this.prefix = prefix;
-    this.separator = separator;
+    super(prefix, separator);
     this.store = new Map();
-  }
-
-  getPrefix(): string {
-    return this.prefix;
-  }
-
-  getSeparator(): string {
-    return this.separator;
-  }
-
-  getFullKey(key: string = ''): string {
-    return `${this.prefix}${this.separator}${key}`;
   }
 
   get<T>(key: string = ''): T | null {
@@ -41,6 +22,7 @@ export default class MemoryStorage extends Events implements StoreInterface {
     this.emit('set', [key, value]);
   }
 
+  // @ts-ignore
   has(key: string = ''): boolean {
     const fullKey = this.getFullKey(key);
     const hasValue = this.store.has(fullKey);
@@ -54,19 +36,10 @@ export default class MemoryStorage extends Events implements StoreInterface {
     this.emit('remove', [key, null]);
   }
 
+  // @ts-ignore
   clear(): this {
     this.store.clear();
     this.emit('clear');
     return this;
-  }
-
-  empty(key: string): void {
-    const oldValue = this.get<any>(key);
-    let newValue = Storage.getDefaultEmptyValue(oldValue);
-
-    if (newValue !== undefined) {
-      this.set(key, newValue);
-      this.emit('empty', [key, newValue]);
-    }
   }
 }

@@ -1,14 +1,14 @@
 import { When, Then, BeforeAll } from "@cucumber/cucumber";
 import { expect } from "chai";
 import { indexedDB, IDBKeyRange } from "fake-indexeddb";
-import { IndexedDBStorage } from "../../../library/stores";
+import { IndexedDBStore } from "../../../library/stores";
 
 // Set globals for JSDOM or fake environments
 (globalThis as any).indexedDB = indexedDB;
 (globalThis as any).IDBKeyRange = IDBKeyRange;
 
 When("I set {string} to {string} in indexeddb storage", async function (key: string, value: string) {
-  this.idbStore = new IndexedDBStorage();
+  this.idbStore = new IndexedDBStore();
   await this.idbStore.set(key, value);
 });
 
@@ -18,7 +18,7 @@ Then("getting {string} from indexeddb storage should return {string}", async fun
 });
 
 When("I set {string} to object in indexeddb storage", async function (key: string) {
-  this.idbStore = new IndexedDBStorage();
+  this.idbStore = new IndexedDBStore();
   this.testObj = { hello: "world" };
   await this.idbStore.set(key, this.testObj);
 });
