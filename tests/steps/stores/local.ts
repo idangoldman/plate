@@ -1,6 +1,6 @@
 import { Given, When, Then } from "@cucumber/cucumber";
 import { expect } from "chai";
-import { LocalStorage, CookieStore } from "../../../library/stores";
+import { LocalStore, CookieStore } from "../../../library/stores";
 import { JSDOM } from "jsdom";
 
 const dom = new JSDOM('<!DOCTYPE html><html><body></body></html>', { url: "http://localhost" });
@@ -10,7 +10,7 @@ const dom = new JSDOM('<!DOCTYPE html><html><body></body></html>', { url: "http:
 (global as any).sessionStorage = dom.window.sessionStorage;
 
 When("I set {string} to {string} in local storage", function (key: string, value: string) {
-  this.localStore = new LocalStorage('local');
+  this.localStore = new LocalStore('local');
   this.localStore.set(key, value);
 });
 
@@ -20,7 +20,7 @@ Then("getting {string} from local storage should return {string}", function (key
 });
 
 When("I set {string} to object in local storage", function (key: string) {
-  this.localStore = new LocalStorage('local');
+  this.localStore = new LocalStore('local');
   this.testObj = { hello: "world" };
   this.localStore.set(key, this.testObj);
 });

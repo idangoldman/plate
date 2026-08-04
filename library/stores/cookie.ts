@@ -1,26 +1,8 @@
-import Events from '../patterns/events';
-import { STORE_EVENTS_LIST } from './constants';
+import BaseStore from './base';
 
-export default class CookieStore extends Events {
-  private prefix: string;
-  private separator: string;
-
+export default class CookieStore extends BaseStore {
   constructor(prefix: string = '', separator: string = '') {
-    super(STORE_EVENTS_LIST);
-    this.prefix = prefix;
-    this.separator = separator;
-  }
-
-  getPrefix(): string {
-    return this.prefix;
-  }
-
-  getSeparator(): string {
-    return this.separator;
-  }
-
-  getFullKey(key: string = ''): string {
-    return `${this.prefix}${this.separator}${key}`;
+    super(prefix, separator);
   }
 
   get<T>(key: string = ''): T | null {
@@ -32,7 +14,6 @@ export default class CookieStore extends Events {
       while (c.charAt(0) === ' ') c = c.substring(1, c.length);
       if (c.indexOf(nameEQ) === 0) {
         const rawValue = c.substring(nameEQ.length, c.length);
-        // Fix bug by using decodeURIComponent instead of split('=')
         try {
           const value = JSON.parse(decodeURIComponent(rawValue)) as T;
           this.emit('get', [key, value]);
@@ -67,6 +48,7 @@ export default class CookieStore extends Events {
     this.emit('set', [key, value]);
   }
 
+  // @ts-ignore
   has(key: string = ''): boolean {
     const hasValue = this.get(key) !== null;
     this.emit('has', [key, hasValue]);
@@ -78,6 +60,7 @@ export default class CookieStore extends Events {
     this.emit('remove', [key, null]);
   }
 
+  // @ts-ignore
   clear(): this {
     const cookies = document.cookie.split(";");
     for (let i = 0; i < cookies.length; i++) {

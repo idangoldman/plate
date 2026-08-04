@@ -1,16 +1,10 @@
-import Events from '../patterns/events';
-import { STORE_EVENTS_LIST } from './constants';
+import BaseStore from './base';
 
-export default class Storage extends Events {
-  private prefix: string;
-  private separator: string;
+export default class LocalStore extends BaseStore {
   private store: globalThis.Storage;
 
   constructor(type: 'local' | 'session' = 'local', prefix: string = '', separator: string = '') {
-    super(STORE_EVENTS_LIST);
-
-    this.prefix = prefix;
-    this.separator = separator;
+    super(prefix, separator);
 
     if (type === 'local') {
       this.store = window.localStorage;
@@ -19,18 +13,6 @@ export default class Storage extends Events {
     } else {
       throw new Error(`Unsupported storage type "${type}"`);
     }
-  }
-
-  getPrefix(): string {
-    return this.prefix;
-  }
-
-  getSeparator(): string {
-    return this.separator;
-  }
-
-  getFullKey(key: string = ''): string {
-    return `${this.prefix}${this.separator}${key}`;
   }
 
   get<T>(key: string = ''): T | null {
@@ -58,6 +40,7 @@ export default class Storage extends Events {
     }
   }
 
+  // @ts-ignore
   has(key: string = ''): boolean {
     try {
       const fullKey = this.getFullKey(key);
@@ -76,36 +59,10 @@ export default class Storage extends Events {
     this.emit('remove', [key, null]);
   }
 
+  // @ts-ignore
   clear(): this {
     this.store.clear();
     this.emit('clear');
     return this;
-  }
-
-  empty(key: string): void {
-    const oldValue = this.get<any>(key);
-    let newValue = (this.constructor as typeof Storage).getDefaultEmptyValue(oldValue);
-
-    if (newValue !== undefined) {
-      this.set(key, newValue);
-      this.emit('empty', [key, newValue]);
-    }
-  }
-
-  static getDefaultEmptyValue(value: any): any {
-    switch (typeof value) {
-      case 'string':
-        return '';
-      case 'number':
-        return 0;
-      case 'boolean':
-        return false;
-      case 'object':
-        if (value === null) return null;
-        if (Array.isArray(value)) return [];
-        return {};
-      default:
-        return null;
-    }
   }
 }
