@@ -1,7 +1,9 @@
 import Events from '../patterns/events';
 import { STORE_EVENTS_LIST } from './constants';
 
-export default class Storage extends Events {
+import { StoreInterface } from "./interface";
+
+export default class Storage extends Events implements StoreInterface {
   private prefix: string;
   private separator: string;
   private store: globalThis.Storage;
