@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+
+    // Authoring stays extensionless. tsc emits ESM, then
+    // `tsc-alias --resolve-full-paths` rewrites `~/` aliases AND appends
+    // `.js` to relative specifiers so Node can load the output directly.
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "isolatedModules": true,
+
+    "outDir": "./dist",
+    "rootDir": ".",
+
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+
+    "paths": {
+      "~/*": ["./*"]
+    },
+
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true
+  },
+  "include": ["library/**/*.ts"],
+  "exclude": ["node_modules", "dist", "tests"]
+}
