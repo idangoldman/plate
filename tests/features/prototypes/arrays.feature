@@ -44,10 +44,10 @@ Feature: Array Prototype Methods
     Then I should get <expected> as the result
 
     Examples:
-      | array     | expected           |
-      | deep      | [1, 2, 3, 4, 5]    |
-      | duplicate | [1, 2, 3]          |
-      | empty     | []                 |
-      | mixed     | [1, 2, 3, 4, 5, 6] |
-      | nested    | [1, 2, 3, 4]       |
-      | standard  | [1, 2, 3]          |
+      | array     | expected              |
+      | deep      | [1, 2, 3, 4, 5]       |
+      | duplicate | [1, 2, 2, 3, 3, 3]    |
+      | empty     | []                    |
+      | mixed     | [1, 2, 3, 4, 4, 5, 6] |
+      | nested    | [1, 2, 3, 4]          |
+      | standard  | [1, 2, 3]             |

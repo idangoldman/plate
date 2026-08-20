@@ -1,15 +1,15 @@
-import eventNamesValidation from '../events/helpers/event-names-validation';
-import findReverseBranch from '../events/helpers/find-reverse-branch';
+import eventNamesValidation from "~/library/events/helpers/event-names-validation";
+import findReverseBranch from "~/library/events/helpers/find-reverse-branch";
 
-type EventCallback = (...args: any[]) => void;
+export type EventCallback = (...args: any[]) => void;
 
 export default class Events {
   protected EVENTS_LIST: any[];
   public namespace: string;
   protected listeners: Map<string, Set<EventCallback>>;
 
-  constructor(eventsList: any[] | string = [], namespace: string = '') {
-    this.EVENTS_LIST = [].concat(eventsList as any);
+  constructor(eventsList: any[] | string = [], namespace: string = "") {
+    this.EVENTS_LIST = ([] as any[]).concat(eventsList as any);
     this.namespace = namespace;
     this.listeners = new Map();
   }
@@ -45,10 +45,9 @@ export default class Events {
   emit(eventNames: string, data?: any[]): this {
     const validEventNames = this._validateEventNames(eventNames);
 
-    // Assuming you can pass multiple eventNames, in the original CoffeeScript emit
-    // it was finding reverse branch based on the validated list.
-    // However, findReverseBranch takes a single leaf, so we map over the validEventNames.
-    const eventsList = validEventNames.flatMap(eventName => findReverseBranch(eventName, this.EVENTS_LIST));
+    const eventsList = validEventNames.flatMap((eventName) =>
+      findReverseBranch(eventName, this.EVENTS_LIST),
+    );
 
     for (let storedEvent of eventsList) {
       storedEvent = this._createNamespacedEvent(storedEvent);
@@ -57,7 +56,7 @@ export default class Events {
       if (callbacks && callbacks.size > 0) {
         for (const callback of callbacks) {
           if (data) {
-            callback.apply(null, data);
+            callback(...data);
           } else {
             callback();
           }
@@ -92,19 +91,24 @@ export default class Events {
     return eventNamesValidation(eventNames, this.EVENTS_LIST);
   }
 
-  protected _createNamespacedEvent(eventName: string = ''): string {
+  protected _createNamespacedEvent(eventName: string = ""): string {
     return this.namespace ? `${this.namespace}:${eventName}` : eventName;
   }
 
-  protected _bind(eventName: string, callback: EventCallback, once: boolean = false): void {
+  protected _bind(
+    eventName: string,
+    callback: EventCallback,
+    once: boolean = false,
+  ): void {
     const namespacedEventName = this._createNamespacedEvent(eventName);
-    const callbacks = this.listeners.get(namespacedEventName) || new Set<EventCallback>();
+    const callbacks =
+      this.listeners.get(namespacedEventName) || new Set<EventCallback>();
 
     if (!callbacks.has(callback)) {
       if (once) {
         const callbackOnce = (...args: any[]) => {
           callback(...args);
-          this._unbind(eventName, callbackOnce); // Need to use original eventName for _unbind
+          this._unbind(eventName, callbackOnce);
         };
         callbacks.add(callbackOnce);
       } else {
@@ -123,14 +127,13 @@ export default class Events {
 
     const namespacedEventName = this._createNamespacedEvent(eventName);
 
-    if (namespacedEventName && callback) {
+    if (callback) {
       const callbacks = this.listeners.get(namespacedEventName);
 
       if (callbacks && callbacks.has(callback)) {
         callbacks.delete(callback);
-        this.listeners.set(namespacedEventName, callbacks);
       }
-    } else if (namespacedEventName && !callback) {
+    } else {
       this.listeners.set(namespacedEventName, new Set<EventCallback>());
     }
   }
