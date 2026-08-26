@@ -1,0 +1,56 @@
+name: Create Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".node-version"
+
+      - name: Get current version
+        id: get_version
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Check if tag exists
+        id: check_tag
+        run: |
+          if git ls-remote --tags origin refs/tags/v${{ steps.get_version.outputs.version }} | grep -q 'refs/tags/'; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create Release
+        if: steps.check_tag.outputs.exists == 'false'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create v${{ steps.get_version.outputs.version }} \
+            --title "Release v${{ steps.get_version.outputs.version }}" \
+            --generate-notes \
+            --target main
+
+  publish:
+    needs: create-release
+    # Note: If the create-release job creates the release via GH action (using GITHUB_TOKEN),
+    # the normal "release: [published]" trigger might NOT fire due to GitHub's recursive action prevention.
+    # Therefore, we call the publish workflow directly.
+    uses: ./.github/workflows/npm-publish.yml
+    secrets: inherit
