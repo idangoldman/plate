@@ -75,7 +75,6 @@ export default class IndexedDBStore extends BaseStore {
     });
   }
 
-  // @ts-ignore
   async has(key: string = ''): Promise<boolean> {
     try {
       const db = await this.dbPromise;
@@ -117,7 +116,6 @@ export default class IndexedDBStore extends BaseStore {
     });
   }
 
-  // @ts-ignore
   async clear(): Promise<this> {
     const db = await this.dbPromise;
     return new Promise((resolve, reject) => {

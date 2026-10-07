@@ -30,8 +30,8 @@ Then("the Element raw property should be the DOM element", function () {
   expect(this.elementInstance.raw).to.equal(this.domElement);
 });
 
-Then("the Element toString property should be {string}", function (expectedString: string) {
-  expect(this.elementInstance.toString).to.equal(expectedString);
+Then("calling toString on the Element should return {string}", function (expectedString: string) {
+  expect(this.elementInstance.toString()).to.equal(expectedString);
 });
 
 Then("it should throw an error {string}", function (errorMessage: string) {

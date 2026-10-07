@@ -22,7 +22,6 @@ export default class MemoryStore extends BaseStore {
     this.emit('set', [key, value]);
   }
 
-  // @ts-ignore
   has(key: string = ''): boolean {
     const fullKey = this.getFullKey(key);
     const hasValue = this.store.has(fullKey);
@@ -36,7 +35,6 @@ export default class MemoryStore extends BaseStore {
     this.emit('remove', [key, null]);
   }
 
-  // @ts-ignore
   clear(): this {
     this.store.clear();
     this.emit('clear');

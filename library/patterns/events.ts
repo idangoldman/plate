@@ -67,7 +67,7 @@ export default class Events {
     return this;
   }
 
-  has(eventNames: string): boolean | this {
+  has(eventNames: string): boolean {
     const validEventNames = this._validateEventNames(eventNames);
 
     for (const eventName of validEventNames) {
@@ -75,7 +75,7 @@ export default class Events {
       const callbacks = this.listeners.get(storedEvent);
 
       if (callbacks && callbacks.size > 0) {
-        return this;
+        return true;
       }
     }
 

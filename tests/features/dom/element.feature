@@ -4,7 +4,7 @@ Feature: DOM Element Wrapper
     Given a DOM element with id "test-element" exists
     When I create an Element instance with selector "#test-element"
     Then the Element raw property should be the DOM element
-    And the Element toString property should be "#test-element"
+    And calling toString on the Element should return "#test-element"
 
   Scenario: Creating an element with an invalid selector
     When I create an Element instance with selector "#non-existent"

@@ -48,7 +48,6 @@ export default class CookieStore extends BaseStore {
     this.emit('set', [key, value]);
   }
 
-  // @ts-ignore
   has(key: string = ''): boolean {
     const hasValue = this.get(key) !== null;
     this.emit('has', [key, hasValue]);
@@ -60,7 +59,6 @@ export default class CookieStore extends BaseStore {
     this.emit('remove', [key, null]);
   }
 
-  // @ts-ignore
   clear(): this {
     const cookies = document.cookie.split(";");
     for (let i = 0; i < cookies.length; i++) {

@@ -19,7 +19,7 @@ export default class Element {
     return this.element as HTMLElement;
   }
 
-  get toString(): string {
+  toString(): string {
     return this.selector;
   }
 }
