@@ -44,7 +44,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build Plate CLI
-        run: task --taskfile ./tasks transpile:library
+        run: task --taskfile ./tasks build:run
 
       - name: Publish to NPM
         run: pnpm publish
